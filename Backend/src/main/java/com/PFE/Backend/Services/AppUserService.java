@@ -13,6 +13,7 @@ import com.PFE.Backend.entities.AppUser;
 import com.PFE.Backend.entities.ConfirmationToken;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -44,8 +45,19 @@ public class AppUserService implements UserDetailsService  {
 	                                             .isPresent();
 
 	        if (userExists) {
-	            // TODO check of attributes are the same and
-	            // TODO if email not confirmed send confirmation email.
+	            //  check of attributes are the same and
+	            // if email not confirmed send confirmation email.
+	        	  AppUser appUserOld = appUserRepository.findByEmail(appUser.getEmail()).get();
+	              Boolean enabled = appUserOld.getEnabled();
+
+	              if (!enabled) {
+
+	                  String token = UUID.randomUUID().toString();
+
+	                  saveConfirmationToken(appUserOld, token);
+
+	                  return token;
+	              }
 
 	            throw new IllegalStateException("email already taken");
 	        }
@@ -54,8 +66,15 @@ public class AppUserService implements UserDetailsService  {
 	                .encode(appUser.getPassword());
 	        appUser.setPassword(encodedPassword);
 	        appUserRepository.save(appUser);
+	        
             //Send Confirmation Token to user
             String token = UUID.randomUUID().toString();
+            saveConfirmationToken(appUser, token);
+
+            return token;
+        }
+
+        private void saveConfirmationToken(AppUser appUser, String token) {
 
             ConfirmationToken confirmationToken = new ConfirmationToken(
                     token,
@@ -65,12 +84,19 @@ public class AppUserService implements UserDetailsService  {
             );
             
             confirmationTokenService.saveConfirmationToken(confirmationToken);
-            return token;
+           
 	  }
 	  
 	  public int enableAppUser(String email) {
 	        return appUserRepository.enableAppUser(email);
 	    }
+
+
+	public Optional<AppUser> findByEmail(String email) {
+		// TODO Auto-generated method stub
+		return appUserRepository.findByEmail(email);
+	}
+	  
 	  
 	  
 }
