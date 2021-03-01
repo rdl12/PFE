@@ -3,9 +3,10 @@ import { View,Text } from 'react-native'
 import {createBottomTabNavigator , BottomTabBar} from '@react-navigation/bottom-tabs'
 import {HomeScreen} from '../Screens/HomeScreen'
 
-import { Colors, icons} from '../Constantes'
+import { COLORS, Colors, icons,images} from '../Constantes'
 
 const Tab = createBottomTabNavigator()
+
 const Tabs = () => {
     return (
       <View>
@@ -15,7 +16,15 @@ const Tabs = () => {
             component = {HomeScreen}
             options = {{
                 tabBarIcon: ({focused}) => {
-                    <Image/>
+                    <Image
+                      source = {images.Home_image}
+                      resizeMode  ="contain"
+                      style = {{
+                        width: 25,
+                        height:25,
+                        tintColor: focused ? COLORS.primary : COLORS.secondary
+                      }}
+                    />
                 }
             }}
             />
