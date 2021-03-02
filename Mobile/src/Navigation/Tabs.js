@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs"
 import Svg, { Path } from 'react-native-svg';
+import { isIphoneX } from 'react-native-iphone-x-helper';
 
 import {HomeScreen,LoginScreen,MapScreen,AddDefibScreen} from '../Screens'
 import { COLORS, Colors, icons,images} from '../Constantes'
@@ -68,6 +69,35 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
       )
   }
 }
+
+const CustomTabBar = (props) => {
+  if (isIphoneX()) {
+      return (
+          <View>
+              <View
+                  style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      height: 30,
+                      backgroundColor: COLORS.white
+                  }}
+              ></View>
+              <BottomTabBar
+                  {...props.props}
+              />
+          </View>
+      )
+  } else {
+      return (
+          <BottomTabBar
+              {...props.props}
+          />
+      )
+  }
+
+}
 const Tabs = () => {
     return (
         <Tab.Navigator
@@ -78,115 +108,102 @@ const Tabs = () => {
             backgroundColor : "transparent",
             elevation : 0
           }
-        }}>
+          
+        }}
+        tabBar={(props) => (
+          <CustomTabBar
+              props={props}
+          />
+      )}
+        >
             <Tab.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
-                    tabBarIcon: ({ focused }) => {
-                      return(
+                    tabBarIcon: ({ focused }) => (
                         <Image
-                        source={icons.cutlery}
+                        source={images.Home_image}
                         resizeMode="contain"
                         style={{
-                            width: 25,
-                            height: 25,
+                            width: 30,
+                            height: 30,
                             tintColor: focused ? COLORS.primary : COLORS.secondary
                         }}
-                    />     
-                      )
-                                    
-                      },
-                    tabBarButton: (props) => {
-                      return(
+                    />                  
+                    ),
+                    tabBarButton: (props) => (
                         <TabBarCustomButton
                             {...props}
                         />
-                      )
-                    }
+                    )
                 }}
             />
               <Tab.Screen
                 name="Maps"
                 component={MapScreen}
                 options={{
-                  tabBarIcon: ({ focused }) => {
-                    return(
-                      <Image
-                      source={icons.cutlery}
-                      resizeMode="contain"
-                      style={{
-                          width: 25,
-                          height: 25,
-                          tintColor: focused ? COLORS.primary : COLORS.secondary
-                      }}
-                  />     
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={images.Home_image}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? COLORS.primary : COLORS.secondary
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
                     )
-                                  
-                    },
-                  tabBarButton: (props) => {
-                    return(
-                      <TabBarCustomButton
-                          {...props}
-                      />
-                    )
-                  }
-              }}
-          />
+                }}
+            />
            <Tab.Screen
                 name="Login"
                 component={LoginScreen}
                 options={{
-                  tabBarIcon: ({ focused }) => {
-                    return(
-                      <Image
-                      source={icons.cutlery}
-                      resizeMode="contain"
-                      style={{
-                          width: 25,
-                          height: 25,
-                          tintColor: focused ? COLORS.primary : COLORS.secondary
-                      }}
-                  />     
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={images.Home_image}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? COLORS.primary : COLORS.secondary
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
                     )
-                                  
-                    },
-                  tabBarButton: (props) => {
-                    return(
-                      <TabBarCustomButton
-                          {...props}
-                      />
-                    )
-                  }
-              }}
-          />
+                }}
+            />
             <Tab.Screen
                 name="AddDefib"
                 component={AddDefibScreen}
                 options={{
-                  tabBarIcon: ({ focused }) => {
-                    return(
-                      <Image
-                      source={icons.cutlery}
-                      resizeMode="contain"
-                      style={{
-                          width: 25,
-                          height: 25,
-                          tintColor: focused ? COLORS.primary : COLORS.secondary
-                      }}
-                  />     
+                    tabBarIcon: ({ focused }) => (
+                        <Image
+                            source={images.Home_image}
+                            resizeMode="contain"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? COLORS.primary : COLORS.secondary
+                            }}
+                        />
+                    ),
+                    tabBarButton: (props) => (
+                        <TabBarCustomButton
+                            {...props}
+                        />
                     )
-                                  
-                    },
-                  tabBarButton: (props) => {
-                    return(
-                      <TabBarCustomButton
-                          {...props}
-                      />
-                    )
-                  }
-              }}
-          />
+                }}
+            />
         </Tab.Navigator>
       
     )
