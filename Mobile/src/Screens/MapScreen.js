@@ -1,7 +1,7 @@
 import { View,Text,Image,TouchableOpacity } from 'react-native'
 import React,{useState} from 'react'
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import BaseMapSwitcher from '../components/BaseMapSwitcher';
+import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
 import LivePosition from '../components/LivePosition';
 import SearchMap from '../components/SearchMap'
 
