@@ -7,6 +7,7 @@ import com.PFE.Backend.Services.RegistrationService;
 import com.PFE.Backend.entities.RegistrationRequest;
 
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api/v1/registration")
 @AllArgsConstructor

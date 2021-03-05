@@ -6,7 +6,7 @@ import { withTheme } from 'react-native-paper';
 const styles = StyleSheet.create({
    container:
    {
-     marginTop:"10%",
+   
      marginRight:10,
      backgroundColor:'white',
      alignSelf:'center',

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import com.PFE.Backend.entities.Province;
 
 import lombok.AllArgsConstructor;
 
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "Defibrillateur")
 @AllArgsConstructor
 @RestController

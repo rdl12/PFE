@@ -5,6 +5,7 @@ const Earth_map_image  = require("../../assets/images/Earth-Google_image.png")
 const edit_icon  = require("../../assets/images/edit_icon.png")
 const add_photo  = require("../../assets/images/add_photo.png")
 const add_to_photo = require("../../assets/images/add_to_photo.png")
+const menu_icon = require('../../assets/images/menu_icon.png')
 export default {
     Home_image,
     close_Button_icon,
@@ -12,6 +13,7 @@ export default {
     Earth_map_image,
     edit_icon,
     add_photo,
-    add_to_photo
+    add_to_photo,
+    menu_icon
 
 }
