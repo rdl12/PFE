@@ -1,8 +1,8 @@
 export const initialState = {
     isLoggedIn: false,
     userId: '',
-    token: '',
-    refreshToken: '',
-    expiresOn: '',
-    data: '',
+    // token: '',
+    // refreshToken: '',
+    // expiresOn: '',
+    // data: '',
   };

@@ -8,7 +8,7 @@ import {name as appName} from './app.json';
 
 
 import { Provider } from 'react-redux';
-import {store} from '../Mobile/src/redux/store';
+import {store} from './src/redux/store';
 
 
 const Redux = () =>
