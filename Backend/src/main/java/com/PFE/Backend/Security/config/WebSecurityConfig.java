@@ -30,7 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .permitAll()
 	                .anyRequest()
 	                .authenticated().and()
-	                .formLogin();
+	                .formLogin()
+	                .defaultSuccessUrl("/success_login",true)
+	                .permitAll();
+	                
 	    }
 
 	    @Override

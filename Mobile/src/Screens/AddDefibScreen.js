@@ -6,6 +6,8 @@ import PhotoPicker from '../components/ImagePicker/PhotoPicker'
 import Header from '../components/Header'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Geolocation from '@react-native-community/geolocation';
+import {connect} from 'react-redux'
+import {AddDefibUrl} from '../utils/constants/Api'
 
 const AddDefibScreen = () => {
     const [Nom, setNom] = useState("")
@@ -13,6 +15,7 @@ const AddDefibScreen = () => {
     const [imageSource, setImageSource] = useState(null);
     const [lat, setLat] = useState(0);
     const [long, setLong] = useState(0);
+    
      
 
     Geolocation.getCurrentPosition(data => {
@@ -25,7 +28,8 @@ const AddDefibScreen = () => {
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })
   
     const submit = () =>{
-      fetch('http://192.168.43.156:9090/Defibrillateur/add', {
+      
+      fetch(AddDefibUrl, {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -49,6 +53,8 @@ const AddDefibScreen = () => {
             )
         })
         .done();
+       
+     
     }
 
    
@@ -143,5 +149,8 @@ const AddDefibScreen = () => {
       </View>
     )
 }
+
+
+
 
 export default AddDefibScreen

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View,Text } from 'react-native'
 
-function SignupScreen() {
+const SignupScreen = () => {
     return (
         <View>
         <Text>SignupScreen</Text>

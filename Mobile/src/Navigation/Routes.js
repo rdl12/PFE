@@ -1,13 +1,11 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import AppStack from './AppStack';
+import DrawerNavigator from './DrawerNavigator'
 
 const Routes = () => {
- 
-
   return (
     <NavigationContainer>
-       <AppStack />
+       <DrawerNavigator />
     </NavigationContainer>
   );
 };

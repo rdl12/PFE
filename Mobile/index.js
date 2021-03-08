@@ -8,9 +8,8 @@ import {name as appName} from './app.json';
 
 
 import { Provider } from 'react-redux';
-import configureStore from './src/store';
+import {store} from '../Mobile/src/redux/store';
 
-const store = configureStore();
 
 const Redux = () =>
   <Provider store={store}>
