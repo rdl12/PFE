@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,} from 'react'
 import { View,Text,Alert } from 'react-native'
 import Input from '../components/Input/Input'
 import Card from '../components/Card/Card'
@@ -6,8 +6,11 @@ import PhotoPicker from '../components/ImagePicker/PhotoPicker'
 import Header from '../components/Header'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Geolocation from '@react-native-community/geolocation';
-import {connect} from 'react-redux'
+import {connect,useSelector} from 'react-redux'
 import {AddDefibUrl} from '../utils/constants/Api'
+import {store} from '../redux/store'
+import { Adress } from '../redux/actions'
+
 
 const AddDefibScreen = () => {
     const [Nom, setNom] = useState("")
@@ -15,9 +18,10 @@ const AddDefibScreen = () => {
     const [imageSource, setImageSource] = useState(null);
     const [lat, setLat] = useState(0);
     const [long, setLong] = useState(0);
+    const Adresse = useSelector(state => state.AdresseReducer);
     
      
-
+    
     Geolocation.getCurrentPosition(data => {
       setLong(data.coords.longitude)
     }, (error) => alert(error.message),
@@ -27,6 +31,10 @@ const AddDefibScreen = () => {
     }, (error) => alert(error.message),
     { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })
   
+    useEffect(() => {
+      console.log("adress:"+Adresse)
+      }, [Adresse])
+
     const submit = () =>{
       
       fetch(AddDefibUrl, {
@@ -144,7 +152,7 @@ const AddDefibScreen = () => {
            autoCorrect={false}
           />
           <PhotoPicker imageSource = {imageSource} press= {openThreeButtonAlert}/>
-          <Card />        
+          <Card ADRESSE = {Adresse.addrese} PAYS = {Adresse.pays} PROVINCE = {Adresse.province}/>        
          
       </View>
     )

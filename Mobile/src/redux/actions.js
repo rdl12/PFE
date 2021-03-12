@@ -54,14 +54,20 @@ export const login = (loginInput) => {
 export const Adress = (coords) =>{
   const {lat ,long} = coords
   return (dispatch) => {
-    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=%${long}2C${lat}&lang=en-US&apikey=`+Here_API_Key , {
+    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${long}&lang=en-US&`+Here_API_Key , {
       method : 'GET'
     })
     .then ((response) =>{
-      //dispatch(Fetch_Adress())
-      console.log("lat from action:::"+lat)
-      console.log("long from action:::"+long)
-      console.log(response.url)
+     
+      response.json().then((data) => {
+        let arr = data.items[0].address
+        let arr1 = data.items[0].position
+        dispatch(Fetch_Adress({ addrese: arr.label , pays: arr.countryName , ville: arr.city , province: arr.state ,codePostal: arr.postalCode , lat:arr1.lat ,long:arr1.long  }))
+    });
     })
+    .catch((err) => {
+      Alert.alert('Login Failed', 'Some error occured, please retry');
+      console.log(err);
+    });
   }
 }

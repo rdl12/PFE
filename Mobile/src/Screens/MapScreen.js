@@ -52,21 +52,20 @@ class MapScreen extends Component{
           })
         
     }
+
+    dispatchDefibAdress = (coords) => {
+        this.props.Adress(coords);
+        this.props.navigation.navigate("Add defib")
+    }
     getMarkerCordinate = (e) => {
        
-       // e.persist();
-        // this.setState((previousState) => {
-        //     const coords = previousState.coords
-        //     return {...coords, lat: e.nativeEvent.coordinate.latitude,long:e.nativeEvent.coordinate.longitude}
-        //   })
-        this.setState({
-            coords: {
-              lat: e.nativeEvent.coordinate.latitude,
-              long:e.nativeEvent.coordinate.longitude,
-            }
-          });
-        console.log(e.nativeEvent.coordinate.latitude,e.nativeEvent.coordinate.longitude)
-        console.log(this.state.coords)
+        e.persist();
+        this.setState(prevState => {
+            let coords = Object.assign({}, prevState.coords); 
+            coords.lat = e.nativeEvent.coordinate.latitude; 
+            coords.long = e.nativeEvent.coordinate.longitude;                             
+            return { coords };                                
+          })
         
     }
    
@@ -103,7 +102,7 @@ class MapScreen extends Component{
                         resizeMode="contain"
                         style={styles.image_icon}
                     />       
-              </TouchableOpacity>) : <Button title="Envoyer" color="#841584" onPress = {() =>{this.props.Adress(this.state.coords)}}  />
+              </TouchableOpacity>) : <Button title="Envoyer" color="#841584" onPress = {() => this.dispatchDefibAdress(this.state.coords)}  />
            }
            
             </View>

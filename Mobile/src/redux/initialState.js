@@ -15,5 +15,7 @@ export const AdresseState = {
   ville : '',
   province : '',
   codePostal : '',
+  lat : '',
+  long: ''
 
 }
