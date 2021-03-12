@@ -2,9 +2,10 @@ import { View,Text, SafeAreaView ,Button } from 'react-native'
 import React ,{useState}  from 'react'
 import { login } from '../redux/actions';
 import { useDispatch } from 'react-redux';
+import {SignupScreen} from './SignupScreen'
 
 import Input from '../components/Input/Input'
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch()
@@ -24,6 +25,10 @@ const LoginScreen = (props) => {
         onPress={() => dispatch(login({'username': username, 'password': password }))}  
         title="Envoyer"
         color="#841584" />
+         <Button
+        title="S'inscrire"
+        onPress={() => navigation.navigate("S'inscrire")}
+        />
         </SafeAreaView>
      )
 }

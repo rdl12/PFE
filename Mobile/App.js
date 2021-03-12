@@ -3,6 +3,7 @@ import Providers from './src/Navigation';
 import React from 'react'
 
 const App = () => {
+ 
   return <Providers />;
 }
 

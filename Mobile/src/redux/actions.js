@@ -1,7 +1,7 @@
 import * as t from './actionTypes';
-import { LoginUrl } from '../utils/constants/Api';
+import { LoginUrl, LoginSuccess , Here_API_Key } from '../utils/constants/Api';
 import { Alert } from 'react-native';
-
+import {store} from './store'
 // this is what our action should look like which dispatches the "payload" to reducer
 const setLoginState = (loginData) => {
   return {
@@ -10,8 +10,18 @@ const setLoginState = (loginData) => {
   };
 };
 
+const Fetch_Adress = (coords) => {
+  return {
+    type: t.FETCH_ADRESS,
+    payload: coords
+ }
+}
+
+
+
 export const login = (loginInput) => {
   const { username, password } = loginInput;
+  console.log(store.getState())
   let formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
@@ -26,8 +36,9 @@ export const login = (loginInput) => {
       body: formData,
     })
     .then((response) =>
-    {if (response.url=== 'http://192.168.11.108:9090/success_login') { // response success checking logic could differ
-      dispatch(setLoginState({ userId: username })); // our action is called here
+    {if (response.url === LoginSuccess) { // response success checking logic could differ
+      dispatch(setLoginState({ userId: username }));
+      console.log(store.getState()) // our action is called here
       Alert.alert('logged in', username);
     } else {
       Alert.alert('Login Failed', 'Username or Password is incorrect');
@@ -39,3 +50,18 @@ export const login = (loginInput) => {
     });
   };
 };
+
+export const Adress = (coords) =>{
+  const {lat ,long} = coords
+  return (dispatch) => {
+    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=%${long}2C${lat}&lang=en-US&apikey=`+Here_API_Key , {
+      method : 'GET'
+    })
+    .then ((response) =>{
+      //dispatch(Fetch_Adress())
+      console.log("lat from action:::"+lat)
+      console.log("long from action:::"+long)
+      console.log(response.url)
+    })
+  }
+}
