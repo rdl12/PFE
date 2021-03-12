@@ -5,7 +5,6 @@ import Card from '../components/Card/Card'
 import PhotoPicker from '../components/ImagePicker/PhotoPicker'
 import Header from '../components/Header'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import Geolocation from '@react-native-community/geolocation';
 import {connect,useSelector} from 'react-redux'
 import {AddDefibUrl} from '../utils/constants/Api'
 import {store} from '../redux/store'
@@ -16,20 +15,10 @@ const AddDefibScreen = () => {
     const [Nom, setNom] = useState("")
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
-    const [lat, setLat] = useState(0);
-    const [long, setLong] = useState(0);
     const Adresse = useSelector(state => state.AdresseReducer);
     
      
-    
-    Geolocation.getCurrentPosition(data => {
-      setLong(data.coords.longitude)
-    }, (error) => alert(error.message),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })
-    Geolocation.getCurrentPosition(data => {
-      setLat(data.coords.latitude)
-    }, (error) => alert(error.message),
-    { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })
+
   
     useEffect(() => {
       console.log("adress:"+Adresse)
@@ -46,8 +35,8 @@ const AddDefibScreen = () => {
             body:  JSON.stringify({
               "id": 10,
               "description" : Description,
-              "latitude" : lat,
-              "longitude" : long,
+              "latitude" : Adresse.lat,
+              "longitude" : Adresse.long,
               "photo" : imageSource,
               "motif" : "from_mobile",
               "marque_defib" : Nom

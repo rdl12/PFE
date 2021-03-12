@@ -1,10 +1,6 @@
 import React from 'react';
 import {View, TouchableOpacity, Text,Image} from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS,images} from '../Constantes'
 import HomeScreen from '../Screens/HomeScreen';
 import AddDefibScreen from '../Screens/AddDefibScreen';
@@ -82,13 +78,16 @@ const AppStack = () => {
             name="Login"
             component={LoginScreen}
             options={{
-                tabBarIcon: ({color, size}) => (
-                    <MaterialCommunityIcons
-                    name="home-circle-outline"
-                    color={color}
-                    size={size}
-                  
-                  />
+                tabBarIcon: ({ focused }) => (
+                    <Image
+                    source={images.Home_image}
+                    resizeMode="contain"
+                    style={{
+                        width: 25,
+                        height: 25,
+                        tintColor: focused ? COLORS.primary : COLORS.secondary
+                    }}
+                />
                 ),
                 tabBarButton: (props) => (
                     <TabBarCustomButton

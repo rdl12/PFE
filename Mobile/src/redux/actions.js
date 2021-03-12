@@ -52,9 +52,9 @@ export const login = (loginInput) => {
 };
 
 export const Adress = (coords) =>{
-  const {lat ,long} = coords
+  const {latitude ,longitude} = coords
   return (dispatch) => {
-    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${long}&lang=en-US&`+Here_API_Key , {
+    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=${latitude}%2C${longitude}&lang=en-US&`+Here_API_Key , {
       method : 'GET'
     })
     .then ((response) =>{

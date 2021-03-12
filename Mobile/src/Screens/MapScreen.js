@@ -14,28 +14,42 @@ import { Adress } from '../redux/actions'
 class MapScreen extends Component{
     constructor(props){
         super(props);
+
+       
+
         this.state = {
             initialregion:{
-                latitude:33.7444613,
-                longitude : -118.35846,
-                latitudeDelta : 0.0122,
+                latitude:33.5731104,
+                longitude : -7.589843,
+                latitudeDelta : 100,
                 longitudeDelta : windowWidth/windowHeight
                
             },
             marginBottom : 1,
             coords :{
-                lat:33.7444613,
-                long:-118.35846,
+                latitude:33.7444613,
+                longitude:-118.35846,
             },
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight
         }
+
+        Geolocation.getCurrentPosition(data => {
+            this.setState(prevState => {
+                let coords = Object.assign({}, prevState.coords); 
+                coords.latitude = data.coords.latitude; 
+                coords.longitude = data.coords.longitude;                             
+                return { coords };                                
+              })
+          }, (error) => alert(error.message),
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })
+        
        
     }
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        console.log('hello')
+        
       
     }
     
@@ -45,8 +59,8 @@ class MapScreen extends Component{
         this.setState({btn_add_state:!this.state.btn_add_state})
         this.setState({longitudeDelta:windowWidth/windowHeight + 10})
         this.map.animateToRegion({
-            latitude:33.7444613,
-            longitude : -118.35846,
+            latitude:this.state.coords.latitude,
+            longitude : this.state.coords.longitude,
             latitudeDelta : 0.008,
             longitudeDelta : 0.016
           })
@@ -62,8 +76,8 @@ class MapScreen extends Component{
         e.persist();
         this.setState(prevState => {
             let coords = Object.assign({}, prevState.coords); 
-            coords.lat = e.nativeEvent.coordinate.latitude; 
-            coords.long = e.nativeEvent.coordinate.longitude;                             
+            coords.latitude = e.nativeEvent.coordinate.latitude; 
+            coords.longitude = e.nativeEvent.coordinate.longitude;                             
             return { coords };                                
           })
         
@@ -75,6 +89,14 @@ class MapScreen extends Component{
            <BaseMapSwitcher/>
            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
              ref={(map) => { this.map = map; }}
+             onMapReady = {()=>
+                setTimeout(()=>this.map.animateToRegion({
+                    latitude:this.state.coords.latitude,
+                    longitude : this.state.coords.longitude,
+                    latitudeDelta : 0.008,
+                    longitudeDelta : 0.016
+                  },2000),3000)
+             }
              mapType = "standard"
              showsUserLocation = {true}
              showsMyLocationButton = {true}
@@ -87,7 +109,7 @@ class MapScreen extends Component{
             {this.state.btn_add_state ? (<Marker
                 draggable
                 onDragEnd={(e) => this.getMarkerCordinate(e)}
-                coordinate = {{latitude:33.7444613,longitude:-118.35846}}
+                coordinate = {this.state.coords}
                  
             />) : null }
            </MapView>

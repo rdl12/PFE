@@ -23,7 +23,7 @@ export default function Header({ title, navigation,onPress }) {
           {title = 'ajouter un defibrilateur' ? (<Button
               onPress={onPress}
               title="Envoyer"
-              color="#841584" />)
+               />)
               :null}
         </SafeAreaView>
       );
@@ -32,8 +32,11 @@ export default function Header({ title, navigation,onPress }) {
 const styles = StyleSheet.create({ 
     header: {
     width: '100%',
+    height:60,
+    zIndex:1,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor:'#3D61E1',
     justifyContent: 'space-evenly',
     
     top: 0,
@@ -42,11 +45,12 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: '#333',
+    color: '#ffff',
     letterSpacing: 1,
   },
   icon: {
     position: 'absolute',
     left: 16,
+    color:"#ffff"
   }
 })
