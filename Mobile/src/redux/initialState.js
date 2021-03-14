@@ -19,3 +19,8 @@ export const AdresseState = {
   long: ''
 
 }
+
+export const MapState = {
+  maptype : 'standard',
+ 
+}

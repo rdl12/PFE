@@ -65,6 +65,7 @@ public class DefibrillateurController {
 	        defibrillateur.setEtat(s);
 	        defibrillateurService.save(defibrillateur);
 	    }
+	
 	 
 	 
 }

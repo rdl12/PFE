@@ -16,6 +16,12 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+const SetMapState = (maptype) => {
+  return {
+    type: t.SET_MAP_TYPE,
+    payload: maptype
+ }
+}
 
 
 
@@ -52,9 +58,9 @@ export const login = (loginInput) => {
 };
 
 export const Adress = (coords) =>{
-  const {lat ,long} = coords
+  const {latitude ,longitude} = coords
   return (dispatch) => {
-    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=${lat}%2C${long}&lang=en-US&`+Here_API_Key , {
+    return fetch(`https://revgeocode.search.hereapi.com/v1/revgeocode?at=${latitude}%2C${longitude}&lang=en-US&`+Here_API_Key , {
       method : 'GET'
     })
     .then ((response) =>{
@@ -62,12 +68,22 @@ export const Adress = (coords) =>{
       response.json().then((data) => {
         let arr = data.items[0].address
         let arr1 = data.items[0].position
-        dispatch(Fetch_Adress({ addrese: arr.label , pays: arr.countryName , ville: arr.city , province: arr.state ,codePostal: arr.postalCode , lat:arr1.lat ,long:arr1.long  }))
+        console.log(arr1)
+        dispatch(Fetch_Adress({ addrese: arr.label , pays: arr.countryName , ville: arr.city , province: arr.state ,codePostal: arr.postalCode , lat:arr1.lat ,long:arr1.lng  }))
     });
     })
     .catch((err) => {
-      Alert.alert('Login Failed', 'Some error occured, please retry');
+      Alert.alert('Some error occured, please retry');
       console.log(err);
     });
   }
 }
+
+
+export const MapState = (mapstate) =>{
+  return (dispatch) => {
+    return dispatch(SetMapState(mapstate))
+  }
+}
+
+

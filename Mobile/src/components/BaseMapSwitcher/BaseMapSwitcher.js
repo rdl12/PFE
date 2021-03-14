@@ -3,10 +3,12 @@ import React,{useState} from 'react'
 import Svg, { Path } from 'react-native-svg';
 import { COLORS, Colors, icons,images} from '../../Constantes'
 import style from './style'
-
+import { useDispatch } from 'react-redux';
+import {MapState} from '../../redux/actions'
 
 const BaseMapSwitcher = () => {
     const [shouldShow, setShouldShow] = useState(false);
+    const dispatch = useDispatch()
     return (
         <View>
             {shouldShow ? (
@@ -25,16 +27,27 @@ const BaseMapSwitcher = () => {
                    
                      
                     <Text style={{ width: 150, height: 50, position:'absolute',zIndex:2,right:65,top:10, fontWeight: "bold" }} >TYPE DE CARTE</Text> 
+                    <TouchableOpacity
+                             style={{ width: 80, height: 50, position:'absolute',zIndex:1,right:75,top:50 }} 
+                             onPress={() => dispatch(MapState({ maptype : 'standard'}))}
+                            >
                     <Image
                         source={ images.default_map_image }
-                         style={{ width: 80, height: 50, position:'absolute',zIndex:2,right:75,top:50 }} 
+                         style={{ width: 80, height: 50, position:'absolute',justifyContent: 'center', }} 
                      />
-                     <Text style={{ width: 100, height: 50, position:'absolute',zIndex:2,right:35,top:105 }}>Satellite</Text>
+                    </TouchableOpacity>
+                     <Text style={{ width: 100, height: 50, position:'absolute',zIndex:2,right:35,top:105 }}>Défaut</Text>
+
+                     <TouchableOpacity
+                           style={{ width: 80, height: 50, position:'absolute',zIndex:2,right:75,top:150 }} 
+                           onPress={() => dispatch(MapState({ maptype : 'satellite'}))}
+                            >
                      <Image
                         source={images.Earth_map_image}
-                         style={{ width: 80, height: 50, position:'absolute',zIndex:2,right:75,top:150 }} 
+                         style={{ width: 80, height: 50,  position:'absolute',justifyContent: 'center', }} 
                      />
-                     <Text style={{ width: 100, height: 50, position:'absolute',zIndex:2,right:35,top:205 }} >Défaut</Text>
+                     </TouchableOpacity>
+                     <Text style={{ width: 100, height: 50, position:'absolute',zIndex:2,right:35,top:205 }} >Satellite</Text>
                 </View>
 
           
@@ -65,5 +78,3 @@ const BaseMapSwitcher = () => {
 }
 
 export default BaseMapSwitcher
-
-

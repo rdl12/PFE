@@ -36,6 +36,10 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         backgroundColor: COLORS.white,
         zIndex:2
+    },
+    image:{
+        height:80,
+        
     }
 });
 

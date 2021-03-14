@@ -84,10 +84,9 @@ const AppStack = () => {
             options={{
                 tabBarIcon: ({color, size}) => (
                     <MaterialCommunityIcons
-                    name="home-circle-outline"
+                    name="home-outline"
                     color={color}
                     size={size}
-                  
                   />
                 ),
                 tabBarButton: (props) => (

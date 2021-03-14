@@ -1,4 +1,4 @@
-import { initialState ,AdresseState } from './initialState';
+import { initialState ,AdresseState,MapState } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -21,6 +21,19 @@ export const AdresseReducer = (state = AdresseState , action) => {
       return {
         ...state,
         ...action.payload,
+
+      };
+    default:
+      return state;
+  }
+};
+
+export const MapReducer = (state = MapState , action) => {
+  switch (action.type) {
+    case t.SET_MAP_TYPE:
+      return {
+        ...state,
+        ...action.payload
 
       };
     default:

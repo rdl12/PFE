@@ -3,7 +3,7 @@ import {SafeAreaView ,View, Text, TouchableOpacity,Image} from 'react-native';
 import styles from './styles'
 import { COLORS, Colors, icons,images} from '../../Constantes'
 
-const Card = ({ADRESSE,PAYS,PROVINCE,LAT}) => {
+const Card = ({ADRESSE,PAYS,PROVINCE}) => {
     return (
        <View style ={styles.container}>
          <View style = {styles.cardHeader}>
@@ -23,7 +23,7 @@ const Card = ({ADRESSE,PAYS,PROVINCE,LAT}) => {
              <Text style ={styles.textHeader} >   ADRESSE : {ADRESSE}</Text>
              <Text style ={styles.textHeader} >   PAYS : {PAYS}</Text>
              <Text style ={styles.textHeader} >   PROVINCE : {PROVINCE}</Text>
-             <Text style ={styles.textHeader} >   LAT : {LAT}</Text>
+       
                
        </View>
     )
