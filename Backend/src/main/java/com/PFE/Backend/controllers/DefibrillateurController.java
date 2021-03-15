@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import org.locationtech.jts.geom.Point;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,10 +63,18 @@ public class DefibrillateurController {
 	        
 		    defibrillateur.setDate(LocalDateTime.now());
 	        Etat s = new Etat(1,"signalé");
+	        Float lat= (Float) defibrillateur.getLatitude();
+	        Float lng= (Float) defibrillateur.getLongitude();
+	        String geom = defibrillateurService.getGeom(lat,lng);
+	        System.out.println(""+geom);
+	        defibrillateur.setGeom(geom);
 	        defibrillateur.setEtat(s);
 	        defibrillateurService.save(defibrillateur);
 	    }
 	
-	 
+	 @GetMapping(value = "/findDefibIn100/lat={lat}&lng={lng}")
+	 public List<Defibrillateur> findDefibin100(@PathVariable Float lat,@PathVariable Float lng ){
+		 return defibrillateurService.findDefibwithin100(lat,lng);
+	 }
 	 
 }

@@ -3,6 +3,7 @@ package com.PFE.Backend.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.locationtech.jts.geom.Point;
 import org.springframework.stereotype.Service;
 
 import com.PFE.Backend.Repository.DefibrillateurRepository;
@@ -42,6 +43,14 @@ public class DefibrillateurService {
     public void save(Defibrillateur defibrillateur) {
         defibrillateurRepository.save(defibrillateur);
 
+    }
+    
+    public String getGeom(Float lat,Float lng) {
+    	return defibrillateurRepository.getGeom(lat,lng);
+    }
+    
+    public List<Defibrillateur> findDefibwithin100(Float lat,Float lng) {
+    	return defibrillateurRepository.findDefibWithin100(lat,lng);
     }
 
 }

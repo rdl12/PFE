@@ -45,7 +45,9 @@ public class Defibrillateur {
     private String motif;
 	@Column(name = "marque_defib")
     private String marque_defib;
-    
+	@Column(name = "geom")
+    private String geom;
+	
     @ManyToOne
     private Etat etat;
     

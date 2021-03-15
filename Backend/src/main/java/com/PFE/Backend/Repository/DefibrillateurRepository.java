@@ -3,7 +3,10 @@ package com.PFE.Backend.Repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.locationtech.jts.geom.Point;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.PFE.Backend.entities.AppUser;
 import com.PFE.Backend.entities.Defibrillateur;
@@ -15,6 +18,12 @@ public interface DefibrillateurRepository extends JpaRepository<Defibrillateur,L
 	List<Defibrillateur> findByEtat(Etat etat);
     List<Defibrillateur> findByProvince(Province province);
     List<Defibrillateur> findByUser(Optional<AppUser> user);
+    
+    @Query( value="Select CAST (ST_MakePoint(?2,?1) AS varchar(255))", nativeQuery = true)
+	public String  getGeom(@Param("lat") Float lat,@Param("lon") Float lon); 
+    
+    @Query( value="SELECT * FROM defib\r\n" + "WHERE ST_DWithin(defib.geom,ST_MakePoint(?2,?1), 100.0);", nativeQuery = true)
+    public List<Defibrillateur> findDefibWithin100(@Param("lat") Float lat,@Param("lon") Float lon);
     
 
 }
