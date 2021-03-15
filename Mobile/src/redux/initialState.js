@@ -24,3 +24,8 @@ export const MapState = {
   maptype : 'standard',
  
 }
+
+
+export const defibMarkers = {
+  markers :[],
+}

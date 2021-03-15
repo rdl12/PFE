@@ -1,5 +1,5 @@
 import * as t from './actionTypes';
-import { LoginUrl, LoginSuccess , Here_API_Key } from '../utils/constants/Api';
+import { LoginUrl, LoginSuccess , Here_API_Key ,FecthDefib} from '../utils/constants/Api';
 import { Alert } from 'react-native';
 import {store} from './store'
 // this is what our action should look like which dispatches the "payload" to reducer
@@ -16,6 +16,14 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+
+const Fetch_DefibIn100 = (coords) => {
+  return {
+    type: t.FETCH_DEFIB_IN_100M,
+    payload: coords
+ }
+}
+
 const SetMapState = (maptype) => {
   return {
     type: t.SET_MAP_TYPE,
@@ -86,4 +94,22 @@ export const MapState = (mapstate) =>{
   }
 }
 
+export const Fecth_Defib = (coords) => {
+  const {latitude ,longitude} = coords
+  return (dispatch) => {
+    return fetch(`http://192.168.1.6:9090/Defibrillateur/findDefibIn100/lat=${latitude}&lng=${longitude}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Fetch_DefibIn100({markers:data}))}
+              
+              )
+             //dispatch(FecthDefib({markers:['hello mother fucker']}))
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
+  }
+}
 

@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -40,3 +40,17 @@ export const MapReducer = (state = MapState , action) => {
       return state;
   }
 };
+
+
+export const Fecth_Defib_in_100 = (state = defibMarkers , action) => {
+  switch (action.type) {
+    case t.FETCH_DEFIB_IN_100M:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+}

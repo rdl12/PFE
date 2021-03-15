@@ -7,7 +7,7 @@ import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
-import { Adress } from '../redux/actions'
+import { Adress ,Fecth_Defib} from '../redux/actions'
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 
 class MapScreen extends Component{
@@ -28,8 +28,7 @@ class MapScreen extends Component{
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
-           
-
+            
            
         }
 
@@ -44,9 +43,9 @@ class MapScreen extends Component{
           { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })    
     }
     componentDidMount(){
-        console.log('hello')
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        
+        this.props.Fecth_Defib(this.state.coords)
+     
       
     }
     
@@ -106,6 +105,17 @@ class MapScreen extends Component{
          
            >
 
+            {this.props.markers && this.props.markers.map(marker => (
+                    
+                    <Marker
+                        key={marker.id}
+                        coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
+                        title={`Point$`}
+                        description={marker.description}
+                    />
+                    
+                ))}
+
             {this.state.btn_add_state ? (<Marker
                 draggable
                 onDragEnd={(e) => this.getMarkerCordinate(e)}
@@ -136,13 +146,14 @@ class MapScreen extends Component{
 
 const mapStateToProps = (state) => {
     const { MapReducer } = state
-    return { maptype: MapReducer.maptype }
+    const { Fecth_Defib_in_100 } = state
+    return { maptype: MapReducer.maptype , markers:Fecth_Defib_in_100.markers }
   }
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        Adress: (state) => dispatch(Adress(state))
-        
+        Adress: (state) => dispatch(Adress(state)),
+        Fecth_Defib: (coords) => dispatch(Fecth_Defib(coords))
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapScreen)
