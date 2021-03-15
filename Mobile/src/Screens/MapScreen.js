@@ -2,13 +2,14 @@ import { View,Image,TouchableOpacity, Button} from 'react-native'
 import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
+import Header from '../components/Header'
 import Geolocation from '@react-native-community/geolocation';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
-import { createIconSetFromFontello } from 'react-native-vector-icons';
+
 
 class MapScreen extends Component{
     constructor(props){
@@ -44,7 +45,8 @@ class MapScreen extends Component{
     }
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        this.props.Fecth_Defib(this.state.coords)
+        setTimeout(()=>this.props.Fecth_Defib(this.state.coords),100)
+        
      
       
     }
@@ -85,6 +87,7 @@ class MapScreen extends Component{
     render(){
     return (
         <View style = {{flex:1}}>
+         {this.state.btn_add_state ? (<Header title = "ajout d'un nouveau DAE" Submit = {() => this.dispatchDefibAdress(this.state.coords)} isRetour ={true} onPress= {()=>{  this.setState({btn_add_state:false})} } />): null}
            <BaseMapSwitcher  />
            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
              ref={(map) => { this.map = map; }}
@@ -134,7 +137,7 @@ class MapScreen extends Component{
                         resizeMode="contain"
                         style={styles.image_icon}
                     />       
-              </TouchableOpacity>) : <Button title="Envoyer" color="#841584" onPress = {() => this.dispatchDefibAdress(this.state.coords)}  />
+              </TouchableOpacity>) : null 
            }
            
             </View>

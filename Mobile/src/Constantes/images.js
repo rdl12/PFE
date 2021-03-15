@@ -7,6 +7,8 @@ const add_photo  = require("../../assets/images/add_photo.png")
 const add_to_photo = require("../../assets/images/add_to_photo.png")
 const menu_icon = require("../../assets/images/menu_icon.png")
 const add_defib = require("../../assets/images/add_defib.png")
+const back_arrow = require("../../assets/images/Back_arrow.png")
+
 export default {
     Home_image,
     close_Button_icon,
@@ -17,5 +19,6 @@ export default {
     add_to_photo,
     menu_icon,
     add_defib,
+    back_arrow
 
 }

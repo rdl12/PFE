@@ -19,10 +19,10 @@ public interface DefibrillateurRepository extends JpaRepository<Defibrillateur,L
     List<Defibrillateur> findByProvince(Province province);
     List<Defibrillateur> findByUser(Optional<AppUser> user);
     
-    @Query( value="Select CAST (ST_MakePoint(?2,?1) AS varchar(255))", nativeQuery = true)
-	public String  getGeom(@Param("lat") Float lat,@Param("lon") Float lon); 
+    @Query( value="Select CAST (ST_SetSRID(ST_MakePoint(?2,?1),4326) AS varchar(255))", nativeQuery = true)
+  	public String  getGeom(@Param("lat") Float lat,@Param("lon") Float lon); 
     
-    @Query( value="SELECT * FROM defib\r\n" + "WHERE ST_DWithin(defib.geom,ST_MakePoint(?2,?1), 100.0);", nativeQuery = true)
+    @Query( value="SELECT * FROM defib\r\n" + "WHERE ST_DWithin(geom,ST_SetSRID(ST_MakePoint(?2,?1),4326), 0.01);", nativeQuery = true)
     public List<Defibrillateur> findDefibWithin100(@Param("lat") Float lat,@Param("lon") Float lon);
     
 

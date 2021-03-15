@@ -138,7 +138,7 @@ const AddDefibScreen = () => {
            autoCorrect={false}
           />
           <PhotoPicker imageSource = {imageSource} press= {openThreeButtonAlert}/>
-          <Card ADRESSE = {Adresse.addrese} PAYS = {Adresse.pays} PROVINCE = {Adresse.long} />        
+          <Card ADRESSE = {Adresse.addrese} PAYS = {Adresse.pays} PROVINCE = {Adresse.province} />        
          
       </View>
     )
