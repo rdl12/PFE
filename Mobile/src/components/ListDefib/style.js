@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
         backgroundColor: COLORS.white,
         zIndex:2
     },
-    BaseMapSwitcher:{
-        top: 60,
+    ListDefib:{
+        top: 120,
         right:11,
         position:'absolute',
         justifyContent:'center',

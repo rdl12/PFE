@@ -9,6 +9,7 @@ import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
+import ListDefib from '../components/ListDefib/ListDefib';
 
 
 class MapScreen extends Component{
@@ -46,12 +47,19 @@ class MapScreen extends Component{
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords),100)
-        
-     
       
     }
     
-  
+    ReturnState = () => {
+        this.setState({btn_add_state:false})
+           this.map.animateToRegion({
+            latitude:this.state.coords.latitude,
+            longitude : this.state.coords.longitude,
+            latitudeDelta : 0.008,
+            longitudeDelta : 0.016
+          })
+
+    }
     
     Pressed_Icon = () => {
         this.setState({btn_add_state:!this.state.btn_add_state})
@@ -87,8 +95,9 @@ class MapScreen extends Component{
     render(){
     return (
         <View style = {{flex:1}}>
-         {this.state.btn_add_state ? (<Header title = "ajout d'un nouveau DAE" Submit = {() => this.dispatchDefibAdress(this.state.coords)} isRetour ={true} onPress= {()=>{  this.setState({btn_add_state:false})} } />): null}
-           <BaseMapSwitcher  />
+         {this.state.btn_add_state ? (<Header title = "Ajout d'un nouveau DAE" Submit = {() => this.dispatchDefibAdress(this.state.coords)} isRetour ={true} onPress= {()=> this.ReturnState()} />): null}
+         {!this.state.btn_add_state ? ( <BaseMapSwitcher  /> ) : null}
+         {!this.state.btn_add_state ? ( <ListDefib  /> ) : null}
            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
              ref={(map) => { this.map = map; }}
              onMapReady = {()=>
@@ -100,7 +109,7 @@ class MapScreen extends Component{
                   },2000),3000)
              }
              mapType = {this.props.maptype}
-             showsUserLocation = {true}
+             showsUserLocation = {!this.state.btn_add_state}
              showsMyLocationButton = {true}
              initialRegion={this.state.initialregion}
              loadingEnabled = {true}
@@ -109,7 +118,6 @@ class MapScreen extends Component{
            >
 
             {this.props.markers && this.props.markers.map(marker => (
-                    
                     <Marker
                         key={marker.id}
                         coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
@@ -145,7 +153,6 @@ class MapScreen extends Component{
         </View>
     )}
 }
-
 
 const mapStateToProps = (state) => {
     const { MapReducer } = state

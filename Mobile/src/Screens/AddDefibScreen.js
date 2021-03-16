@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux'
 import {AddDefibUrl} from '../utils/constants/Api'
 
 
-const AddDefibScreen = () => {
+const AddDefibScreen = ({navigation}) => {
     const [Nom, setNom] = useState("")
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
@@ -19,6 +19,7 @@ const AddDefibScreen = () => {
   
     useEffect(() => {
       console.log("adress:"+Adresse)
+      
       }, [Adresse])
 
     const submit = () =>{
@@ -121,8 +122,10 @@ const AddDefibScreen = () => {
           }
     
     return (
-      <View>
-          <Header title = "ajouter un defibrilateur" onPress={submit}/>
+      <View >
+          <Header title = "ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
+          <View >
+
           <Input
             
             labelValue={Nom}
@@ -138,7 +141,9 @@ const AddDefibScreen = () => {
            autoCorrect={false}
           />
           <PhotoPicker imageSource = {imageSource} press= {openThreeButtonAlert}/>
-          <Card ADRESSE = {Adresse.addrese} PAYS = {Adresse.pays} PROVINCE = {Adresse.province} />        
+          <Card ADRESSE = {Adresse.addrese} PAYS = {Adresse.pays} PROVINCE = {Adresse.province} />    
+          </View>
+            
          
       </View>
     )

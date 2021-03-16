@@ -13,6 +13,7 @@ import ProductsScreen from "../Screens/ProductsScreen";
 import FormationScreen from "../Screens/FormationScreen";
 import AboutScreen from "../Screens/AboutScreen";
 import TutorialScreen from "../Screens/TutorialScreen";
+import MapScreen from "../Screens/MapScreen";
 
 
 const Drawer = createDrawerNavigator();
@@ -22,7 +23,7 @@ const DrawerNavigator = () => {
     <Drawer.Navigator>
       <Drawer.Screen name="Home" component={AppStack} />
       <Drawer.Screen name="Add defib" component={AddDefibScreen} />
-      <Drawer.Screen name="Entrernir" component={EntretenirScreen} />
+      <Drawer.Screen name="Entrernir" component={MapScreen} />
       <Drawer.Screen name="Statistique" component={StatistiqueScreen} />
       <Drawer.Screen name="Nos Produits" component={ProductsScreen} />
       <Drawer.Screen name="Formations" component={FormationScreen} />

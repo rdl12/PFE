@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
        width:100,
       marginLeft:15,
       bottom:10,
+      tintColor : COLORS.red
       
      
      

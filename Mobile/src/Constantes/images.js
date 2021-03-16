@@ -8,6 +8,8 @@ const add_to_photo = require("../../assets/images/add_to_photo.png")
 const menu_icon = require("../../assets/images/menu_icon.png")
 const add_defib = require("../../assets/images/add_defib.png")
 const back_arrow = require("../../assets/images/Back_arrow.png")
+const layer_icon = require("../../assets/images/layer_icon.png")
+const list_icon = require("../../assets/images/list_icon.png")
 
 export default {
     Home_image,
@@ -19,6 +21,8 @@ export default {
     add_to_photo,
     menu_icon,
     add_defib,
-    back_arrow
+    back_arrow,
+    layer_icon,
+    list_icon
 
 }

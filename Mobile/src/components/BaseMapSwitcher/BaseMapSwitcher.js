@@ -10,7 +10,7 @@ const BaseMapSwitcher = () => {
     const [shouldShow, setShouldShow] = useState(false);
     const dispatch = useDispatch()
     return (
-        <View>
+        <View style = {style.layerswitcher}>
             {shouldShow ? (
                 <View style={style.container}>
                     <TouchableOpacity
@@ -57,7 +57,7 @@ const BaseMapSwitcher = () => {
                   onPress={() => setShouldShow(!shouldShow)}
               >
                   <Image
-                        source={images.Home_image}
+                        source={images.layer_icon}
                         resizeMode="contain"
                         style={{
 
