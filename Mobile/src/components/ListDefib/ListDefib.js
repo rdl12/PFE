@@ -3,11 +3,11 @@ import { View, Text,TouchableOpacity,Image } from 'react-native'
 import { COLORS, Colors, icons,images} from '../../Constantes'
 import style from './style'
 
-const ListDefib = () => {
+const ListDefib = ({navigation}) => {
     return (
         <View style={style.ListDefib}>
              <TouchableOpacity
-                 
+                 onPress = {() => navigation.navigate('ListDefib')}
               >
                   <Image
                         source={images.list_icon}

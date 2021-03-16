@@ -12,10 +12,26 @@ import MapScreen from '../Screens/MapScreen';
 import LoginScreen from '../Screens/LoginScreen';
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
+import ListDefibScreen from '../Screens/ListDefibScreen'
 
 
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+const FeedStack = ({navigation}) => (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Map Screen"
+        component={MapScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ListDefib"
+        component={ListDefibScreen}
+        options={{headerShown: false}}
+      />
 
+    </Stack.Navigator>
+  );
 const AppStack = () => {
   return (
     <Tab.Navigator
@@ -58,7 +74,7 @@ const AppStack = () => {
         />
           <Tab.Screen
             name="Maps"
-            component={MapScreen}
+            component={FeedStack}
             options={{
                 tabBarIcon: ({ focused }) => (
                     <Image
