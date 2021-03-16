@@ -52,15 +52,28 @@ class ListDefibScreen extends Component {
       
     }
 
+    ZoomTodefib(lat,long){
+        setTimeout(()=>this.map.animateToRegion({
+            latitude:lat,
+            longitude : long,
+            latitudeDelta : 0.0008,
+            longitudeDelta : 0.0016
+          },2000),300)
+
+    }
+
     renderItem = ({ item }) => (
-       <Text>{item.description}</Text>
+        <TouchableOpacity style={{ padding : 15, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee"}}
+                          onPress={() => this.ZoomTodefib(item.latitude,item.longitude) }>
+                  <Text>{item.description}</Text>
+        </TouchableOpacity>
         );
     
     render (){
         return (
             <View style = {{flex:1}}>
             <BaseMapSwitcher  /> 
-            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
+            <MapView style = {{flex:5, marginBottom : this.state.marginBottom}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
                     setTimeout(()=>this.map.animateToRegion({
@@ -77,6 +90,15 @@ class ListDefibScreen extends Component {
                  loadingIndicatorColor = {COLORS.blue}
              
                >
+            {this.props.markers && this.props.markers.map(marker => (
+                    <Marker
+                        key={marker.id}
+                        coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
+                        title={`Point$`}
+                        description={marker.description}
+                    />
+                    
+                ))}
             </MapView>
             <FlatList
                data = {this.props.markers}
