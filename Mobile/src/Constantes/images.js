@@ -10,6 +10,7 @@ const add_defib = require("../../assets/images/add_defib.png")
 const back_arrow = require("../../assets/images/Back_arrow.png")
 const layer_icon = require("../../assets/images/layer_icon.png")
 const list_icon = require("../../assets/images/list_icon.png")
+const direction_icon = require("../../assets/images/direction_icon.png")
 
 export default {
     Home_image,
@@ -23,6 +24,7 @@ export default {
     add_defib,
     back_arrow,
     layer_icon,
-    list_icon
+    list_icon,
+    direction_icon
 
 }

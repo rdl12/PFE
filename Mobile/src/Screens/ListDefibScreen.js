@@ -8,7 +8,8 @@ import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
-
+import MapViewDirections from 'react-native-maps-directions';
+import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -28,7 +29,12 @@ class ListDefibScreen extends Component {
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
-            
+            clicked:{},
+            showDirections: false,
+            destination :{
+                latitude:0,
+                longitude:0
+            }
            
         }
 
@@ -52,28 +58,54 @@ class ListDefibScreen extends Component {
       
     }
 
-    ZoomTodefib(lat,long){
+    ZoomTodefib(lat,long,id){
         setTimeout(()=>this.map.animateToRegion({
             latitude:lat,
             longitude : long,
             latitudeDelta : 0.0008,
             longitudeDelta : 0.0016
           },2000),300)
+          this.setState(prevState => {
+            let destination = Object.assign({}, prevState.destination); 
+            destination.latitude = lat; 
+            destination.longitude = long;                            
+            return { destination };                                
+          })
 
+
+        let newClick = {...this.state.clicked}
+        newClick[id] = !Boolean(newClick[id])
+        this.setState({
+            clicked:newClick,
+            
+          });
     }
+    
 
     renderItem = ({ item }) => (
+        <View>
         <TouchableOpacity style={{ padding : 15, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee"}}
-                          onPress={() => this.ZoomTodefib(item.latitude,item.longitude) }>
-                  <Text>{item.description}</Text>
+                                onPress={() => this.ZoomTodefib(item.latitude,item.longitude,item.id) }>
+                        <Text>{item.description}</Text>
         </TouchableOpacity>
+       { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 15,borderBottomWidth : 1, borderColor : "#eee"}}>
+           <TouchableOpacity
+             onPress={() => this.setState({ showDirections : !this.state.showDirections})}>
+           <Image
+                source={ images.direction_icon }
+                style={{ width: 80, height: 50,justifyContent: 'center', }} 
+            />
+           </TouchableOpacity>
+       </View>):null}
+        </View>
+       
         );
     
     render (){
         return (
             <View style = {{flex:1}}>
             <BaseMapSwitcher  /> 
-            <MapView style = {{flex:5, marginBottom : this.state.marginBottom}}
+            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
                     setTimeout(()=>this.map.animateToRegion({
@@ -99,11 +131,17 @@ class ListDefibScreen extends Component {
                     />
                     
                 ))}
+                 <MapViewDirections
+                    origin={this.state.coords}
+                    destination={this.state.destination}
+                    apikey={GOOGLE_MAPS_APIKEY}
+                 />
             </MapView>
             <FlatList
                data = {this.props.markers}
                renderItem={this.renderItem}
-               keyExtractor={item => item.id}
+               keyExtractor={item => item.id.toString()}
+               style={{flex: 0.5}}
             />
 
             </View>
