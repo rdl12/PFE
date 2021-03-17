@@ -7,7 +7,7 @@ import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
-import { Adress ,Fecth_Defib} from '../redux/actions'
+import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
 
@@ -58,6 +58,13 @@ class ListDefibScreen extends Component {
       
     }
 
+    getDetails(id) {
+        this.props.navigation.navigate('Details')
+        this.props.Fecth_DefiById(id);
+    
+
+    }
+
     ZoomTodefib(lat,long,id){
         setTimeout(()=>this.map.animateToRegion({
             latitude:lat,
@@ -89,13 +96,25 @@ class ListDefibScreen extends Component {
                         <Text>{item.description}</Text>
         </TouchableOpacity>
        { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 15,borderBottomWidth : 1, borderColor : "#eee"}}>
-           <TouchableOpacity
-             onPress={() => this.setState({ showDirections : !this.state.showDirections})}>
-           <Image
-                source={ images.direction_icon }
-                style={{ width: 80, height: 50,justifyContent: 'center', }} 
-            />
-           </TouchableOpacity>
+           <View style = {{display:'flex',justifyContent:'flex-end',flexDirection:'row'}}>
+                <TouchableOpacity
+                    onPress={() => this.setState({ showDirections : !this.state.showDirections})}>
+                <Image
+                        source={ images.direction_icon }
+                        style={{ width: 50, height: 30,justifyContent: 'center', }} 
+                        resizeMode = "contain"
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => this.getDetails(item.id)}>
+                <Image
+                        source={ images.details_icon}
+                        style={{ width: 50, height: 30,justifyContent: 'center', }} 
+                        resizeMode = "contain"
+                    />
+                </TouchableOpacity>
+           </View>
+         
        </View>):null}
         </View>
        
@@ -131,11 +150,11 @@ class ListDefibScreen extends Component {
                     />
                     
                 ))}
-                 <MapViewDirections
+                 {/* <MapViewDirections
                     origin={this.state.coords}
                     destination={this.state.destination}
                     apikey={GOOGLE_MAPS_APIKEY}
-                 />
+                 /> */}
             </MapView>
             <FlatList
                data = {this.props.markers}
@@ -153,13 +172,16 @@ class ListDefibScreen extends Component {
 const mapStateToProps = (state) => {
     const { MapReducer } = state
     const { Fecth_Defib_in_100 } = state
+    const { Fecth_DefiById } = state
     return { maptype: MapReducer.maptype , markers:Fecth_Defib_in_100.markers }
   }
 const mapDispatchToProps = (dispatch) => {
 
     return {
         Adress: (state) => dispatch(Adress(state)),
-        Fecth_Defib: (coords) => dispatch(Fecth_Defib(coords))
+        Fecth_Defib: (coords) => dispatch(Fecth_Defib(coords)),
+        Fecth_DefiById : (id) => dispatch(Fecth_DefiById(id))
+
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ListDefibScreen)

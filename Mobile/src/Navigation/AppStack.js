@@ -13,6 +13,7 @@ import LoginScreen from '../Screens/LoginScreen';
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import ListDefibScreen from '../Screens/ListDefibScreen'
+import { DetailsScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -28,6 +29,11 @@ const FeedStack = ({navigation}) => (
         name="ListDefib"
         component={ListDefibScreen}
         options={{headerShown: false}}
+      />
+        <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: true}}
       />
 
     </Stack.Navigator>

@@ -29,3 +29,9 @@ export const MapState = {
 export const defibMarkers = {
   markers :[],
 }
+
+export const defib = {
+  
+  Defibrilatteur: []
+
+}

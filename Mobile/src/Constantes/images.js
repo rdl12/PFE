@@ -11,6 +11,7 @@ const back_arrow = require("../../assets/images/Back_arrow.png")
 const layer_icon = require("../../assets/images/layer_icon.png")
 const list_icon = require("../../assets/images/list_icon.png")
 const direction_icon = require("../../assets/images/direction_icon.png")
+const details_icon = require("../../assets/images/details_icon.png")
 
 export default {
     Home_image,
@@ -25,6 +26,7 @@ export default {
     back_arrow,
     layer_icon,
     list_icon,
-    direction_icon
+    direction_icon,
+    details_icon
 
 }

@@ -1,5 +1,5 @@
 import * as t from './actionTypes';
-import { LoginUrl, LoginSuccess , Here_API_Key ,FecthDefib} from '../utils/constants/Api';
+import {  Here_API_Key ,API_URI} from '../utils/constants/Api';
 import { Alert } from 'react-native';
 import {store} from './store'
 // this is what our action should look like which dispatches the "payload" to reducer
@@ -24,6 +24,13 @@ const Fetch_DefibIn100 = (coords) => {
  }
 }
 
+const Fetch_defib_byId = (id) => {
+  return {
+    type: t.FETCH_DEFIB_DETAILS,
+    payload: id
+ }
+}
+
 const SetMapState = (maptype) => {
   return {
     type: t.SET_MAP_TYPE,
@@ -41,7 +48,7 @@ export const login = (loginInput) => {
     formData.append('password', password);
   return (dispatch) => {  
     //console.log(dispatch)// don't forget to use dispatch here!
-    return fetch(LoginUrl, {
+    return fetch(`${API_URI}/login`, {
       method: 'POST',
       headers: {  // these could be different for your API call
         Accept: "application/json",
@@ -50,7 +57,7 @@ export const login = (loginInput) => {
       body: formData,
     })
     .then((response) =>
-    {if (response.url === LoginSuccess) { // response success checking logic could differ
+    {if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
       dispatch(setLoginState({ userId: username }));
       console.log(store.getState()) // our action is called here
       Alert.alert('logged in', username);
@@ -97,7 +104,7 @@ export const MapState = (mapstate) =>{
 export const Fecth_Defib = (coords) => {
   const {latitude ,longitude} = coords
   return (dispatch) => {
-    return fetch(`http://192.168.1.7:9090/Defibrillateur/findDefibIn100/lat=${latitude}&lng=${longitude}`,{method: 'GET'})
+    return fetch(`${API_URI}/Defibrillateur/findDefibIn100/lat=${latitude}&lng=${longitude}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
               console.log(data)
@@ -113,3 +120,24 @@ export const Fecth_Defib = (coords) => {
   }
 }
 
+
+
+export const Fecth_DefiById = (id) => {
+
+  return (dispatch) => {
+    return fetch(`${API_URI}/Defibrillateur/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Fetch_defib_byId({Defibrilatteur : data}))
+            }
+              
+              )
+             //dispatch(FecthDefib({markers:['hello mother fucker']}))
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
+  }
+}

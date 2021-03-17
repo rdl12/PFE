@@ -4,7 +4,7 @@ import MapScreen from './MapScreen'
 import AddDefibScreen from './AddDefibScreen'
 import SignupScreen from './SignupScreen'
 import ListDefibScreen from './ListDefibScreen'
-import MapScreen from './MapScreen'
+import DetailsScreen from './DetailsScreen'
 
 export {
     HomeScreen,
@@ -12,5 +12,6 @@ export {
     MapScreen,
     AddDefibScreen,
     SignupScreen,
-    ListDefibScreen
+    ListDefibScreen,
+    DetailsScreen,
 }

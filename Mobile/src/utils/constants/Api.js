@@ -1,14 +1,12 @@
-export const LoginUrl = "http://192.168.1.7:9090/login";
-export const AddDefibUrl = "http://192.168.1.7:9090/Defibrillateur/add"
-export const LoginSuccess = "http://192.168.1.7:9090/success_login"
-export const FecthDefib = "http://192.168.1.7:9090/Defibrillateur/findDefibIn100/"
+export const AddDefibUrl = "http://192.168.1.5:9090/Defibrillateur/add"
 export const Here_API_Key = "apikey=8fLhY-ltCJAFZHIWODTiBGDxDZ9oOicnTYHyi-SbJQo"
 export const GOOGLE_MAPS_APIKEY = "AIzaSyC8drf5LBydUKkwusrLEllcXFOqVBni1mY"
+export const API_URI = "http://192.168.1.5:9090"
 export default{
 
-    LoginUrl,
+   
     AddDefibUrl,
-    LoginSuccess,
     Here_API_Key,
-    GOOGLE_MAPS_APIKEY
+    GOOGLE_MAPS_APIKEY,
+    API_URI
 }

@@ -31,7 +31,7 @@ const DrawerNavigator = () => {
       <Drawer.Screen name="Tutorial" component={TutorialScreen} />
       <Drawer.Screen name="Se Connecter" component={StatistiqueScreen} />
       <Drawer.Screen name="S'inscrire" component={SignupScreen} />
-
+     
     </Drawer.Navigator>
   );
 }
