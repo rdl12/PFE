@@ -47,6 +47,10 @@ public class Defibrillateur {
     private String marque_defib;
 	@Column(name = "geom")
     private String geom;
+	@Column(name = "type_electrode")
+    private String type_electrode;
+	@Column(name = "accesibillité")
+    private String accesibillité;
 	
     @ManyToOne
     private Etat etat;

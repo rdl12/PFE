@@ -3,7 +3,7 @@ import {SafeAreaView ,View, Text, TouchableOpacity,Image} from 'react-native';
 import styles from './styles'
 import { COLORS, Colors, icons,images} from '../../Constantes'
 
-const Card = ({ADRESSE,PAYS,PROVINCE}) => {
+const Cards = ({ADRESSE,PAYS,PROVINCE}) => {
     return (
        <View style ={styles.container}>
          <View style = {styles.cardHeader}>
@@ -29,4 +29,4 @@ const Card = ({ADRESSE,PAYS,PROVINCE}) => {
     )
 }
 
-export default Card
+export default Cards
