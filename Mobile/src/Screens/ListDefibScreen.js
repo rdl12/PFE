@@ -58,9 +58,12 @@ class ListDefibScreen extends Component {
       
     }
 
-    getDetails(id) {
+    getDetails(id,lat,long) {
         this.props.navigation.navigate('Details')
         this.props.Fecth_DefiById(id);
+        let coords={ latitude:lat,
+                    longitude:long,}
+        this.props.Adress(coords);
     
 
     }
@@ -106,7 +109,7 @@ class ListDefibScreen extends Component {
                     />
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => this.getDetails(item.id)}>
+                    onPress={() => this.getDetails(item.id,item.latitude,item.longitude)}>
                 <Image
                         source={ images.details_icon}
                         style={{ width: 50, height: 30,justifyContent: 'center', }} 

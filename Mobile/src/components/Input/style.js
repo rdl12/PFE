@@ -5,9 +5,8 @@ import {windowHeight, windowWidth} from '../../utils/Dimentions';
 const styles = StyleSheet.create({
     inputContainer: {
         marginTop: 5,
-        marginLeft:17,
         marginBottom: 10,
-        width: '90%',
+        width: 10,
         height: windowHeight / 12,
         borderColor: '#ccc',
         borderRadius: 7,
@@ -27,7 +26,7 @@ const styles = StyleSheet.create({
         width: 50,
       },
       input: {
-        padding: 10,
+        padding: 1,
         flex: 1,
         fontSize: 16,
         fontFamily: 'Lato-Regular',
@@ -40,7 +39,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 5,
         marginBottom: 10,
-        width: windowWidth / 1.15 ,
+        width: windowWidth / 1.5 ,
         height: windowHeight / 12,
         fontSize: 20,
         backgroundColor:'white'

@@ -6,18 +6,7 @@ import {images} from '../../Constantes'
 const PhotoPicker = ({imageSource,press}) => {
 
     return (
-        <View style ={styles.container}>
-         <View style = {styles.cardHeader}>
-             <Text style ={styles.textHeader} > Photo</Text>
-             <Image
-                source={images.add_photo}
-                style={{
-                    width: 30,
-                    height: 30,
-                  
-                }}
-             />    
-             </View>
+        <View >
              {imageSource === null ? (
              <TouchableOpacity
                   onPress={press}

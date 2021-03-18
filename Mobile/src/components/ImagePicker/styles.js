@@ -43,9 +43,8 @@ const styles = StyleSheet.create({
    add_to_photo:{
        height:100 ,
        width:100,
-      marginLeft:15,
+      marginTop:15,
       bottom:10,
-      tintColor : COLORS.red
       
      
      
