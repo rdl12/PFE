@@ -1,17 +1,28 @@
 import { StyleSheet } from "react-native";
+import { COLORS } from "../../Constantes";
 
 
 const styles = StyleSheet.create({
     drawerContent: {
       flex: 1,
     },
+    titleDrawer:{
+      fontSize: 13,
+      marginTop: 3,
+      fontWeight: 'bold',
+      letterSpacing:1,
+      color: COLORS.black
+    
+    },
     userInfoSection: {
       paddingLeft: 20,
     },
     title: {
-      fontSize: 16,
+      fontSize: 13,
       marginTop: 3,
       fontWeight: 'bold',
+      letterSpacing:1,
+      color: COLORS.darkgray
     },
     caption: {
       fontSize: 14,
@@ -32,7 +43,7 @@ const styles = StyleSheet.create({
       marginRight: 3,
     },
     drawerSection: {
-      marginTop: 15,
+      marginTop: 0,
     },
     bottomDrawerSection: {
         marginBottom: 5,
