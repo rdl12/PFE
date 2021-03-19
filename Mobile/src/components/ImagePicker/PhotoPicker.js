@@ -28,6 +28,7 @@ const PhotoPicker = ({imageSource,press}) => {
                   source={{ uri: imageSource }}
                   style = {styles.add_to_photo}  
                   resizeMode='contain'
+                  
                 />
               )}
 

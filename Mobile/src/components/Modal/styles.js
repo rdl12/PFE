@@ -11,9 +11,10 @@ const styles = StyleSheet.create({
      
     },
     modalView: {
-      margin: 20,
+      margin: 10,
       backgroundColor: "white",
       borderRadius: 20,
+      paddingTop:30,
       padding: 50,
       alignItems: "center",
       shadowColor: "#000",
@@ -26,7 +27,10 @@ const styles = StyleSheet.create({
       elevation: 5
     },
     button: {
-      borderRadius: 20,
+      marginTop:15,
+      marginBottom:-25,
+      borderRadius:10,
+      width:80,
       padding: 10,
       elevation: 2
     },
@@ -44,7 +48,8 @@ const styles = StyleSheet.create({
     modalText: {
       marginBottom: 15,
       textAlign: "center"
-    }
+    },
+    text:{fontSize:18, fontFamily:'cochin'}
   });
 
   export default styles;
