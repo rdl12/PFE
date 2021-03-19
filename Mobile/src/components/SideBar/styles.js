@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
       marginTop: 15,
     },
     bottomDrawerSection: {
-        marginBottom: 15,
+        marginBottom: 5,
         borderTopColor: '#f4f4f4',
         borderTopWidth: 1
     },

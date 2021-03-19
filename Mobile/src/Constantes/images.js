@@ -13,6 +13,16 @@ const list_icon = require("../../assets/images/list_icon.png")
 const direction_icon = require("../../assets/images/direction_icon.png")
 const details_icon = require("../../assets/images/details_icon.png")
 const close_icon = require("../../assets/images/close_icon.png")
+const entretenir_icon = require("../../assets/images/entretenir_icon.png")
+const search_icon = require("../../assets/images/search_icon.png")
+const stats_icon = require("../../assets/images/stats_icon.png")
+const signaler_icon = require("../../assets/images/signaler_icon.png")
+const tutos_icon = require("../../assets/images/tutos_icon.png")
+const about_us_icon = require("../../assets/images/about_us_icon.png")
+const product_icon = require("../../assets/images/product_icon.png")
+const formation_icon = require("../../assets/images/formation_icon.png")
+const login_icon = require("../../assets/images/login_icon.png")
+const sign_icon = require("../../assets/images/sign_icon.png")
 
 export default {
     Home_image,
@@ -29,6 +39,16 @@ export default {
     list_icon,
     direction_icon,
     details_icon,
-    close_icon
+    close_icon,
+    entretenir_icon,
+    search_icon,
+    stats_icon,
+    signaler_icon,
+    tutos_icon,
+    about_us_icon,
+    product_icon,
+    formation_icon,
+    login_icon,
+    sign_icon
 
 }
