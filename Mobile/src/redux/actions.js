@@ -38,6 +38,25 @@ const SetMapState = (maptype) => {
  }
 }
 
+const SetModalState = (modalState) => {
+  return {
+    type: t.SET_MODEL_STATE,
+    payload: modalState
+ }
+}
+const AccessibilityState = (state) => {
+  return {
+    type: t.SET_ACCESSIBILITE,
+    payload: state
+ }
+}
+const AddDefibPosted = (defib) => {
+  return {
+    type: t.ADD_DEFIB,
+    payload: defib
+ }
+}
+
 
 
 export const login = (loginInput) => {
@@ -139,5 +158,40 @@ export const Fecth_DefiById = (id) => {
             Alert.alert("couldn't fetch defib ,please retry");
             console.log(err);
           });
+  }
+}
+
+export const ModalState = (modalstate) =>{
+  return (dispatch) => {
+    return dispatch(SetModalState(modalstate))
+  }
+}
+
+export const Add_Defib_Posted = (defib) => {
+
+  return (dispatch) => {
+    return  fetch(`${API_URI}/Defibrillateur/add`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(defib)
+    })
+  .then((response) => response.text())
+  .then((responseData) => {
+      console.log(
+          "POST Response",
+          "Response Body -> " + JSON.stringify(responseData)
+      )
+      dispatch(AddDefibPosted(defib))
+  })
+  .done();
+  }
+}
+
+export const AccessibiliteState = (state) =>{
+  return (dispatch) => {
+    return dispatch(AccessibilityState(state))
   }
 }

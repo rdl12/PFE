@@ -12,6 +12,7 @@ const layer_icon = require("../../assets/images/layer_icon.png")
 const list_icon = require("../../assets/images/list_icon.png")
 const direction_icon = require("../../assets/images/direction_icon.png")
 const details_icon = require("../../assets/images/details_icon.png")
+const close_icon = require("../../assets/images/close_icon.png")
 
 export default {
     Home_image,
@@ -27,6 +28,7 @@ export default {
     layer_icon,
     list_icon,
     direction_icon,
-    details_icon
+    details_icon,
+    close_icon
 
 }

@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState,defibMarkers,defib } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -58,6 +58,46 @@ export const Fecth_Defib_in_100 = (state = defibMarkers , action) => {
 export const Get_Defib = (state = defib , action) => {
   switch (action.type) {
     case t.FETCH_DEFIB_DETAILS:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+}
+
+export const Modal_State = (state = ModalState , action) => {
+  switch (action.type) {
+    case t.SET_MODEL_STATE:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+}
+
+export const Add_Defib = (state = DefibPosted , action) => {
+  switch (action.type) {
+    case t.ADD_DEFIB:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+}
+
+
+export const get_Accessibilite = (state = accessibilite , action) => {
+  switch (action.type) {
+    case t.SET_ACCESSIBILITE:
       return {
         ...state,
         ...action.payload

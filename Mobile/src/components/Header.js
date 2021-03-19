@@ -29,10 +29,10 @@ export default function Header({ title, navigation,Submit,onPress ,isRetour}) {
             <Text style={styles.headerText}>{title}</Text>
           </View>
 
-          {title = 'ajouter un defibrilateur' ? (<Button
-              onPress={Submit}
-              title="Envoyer"
-                />)
+          {title = 'ajouter un defibrilateur' ? (
+          <TouchableOpacity onPress={Submit}>
+            <Text style = {styles.submit}> Envoyer</Text>
+          </TouchableOpacity>)
               :null}
         </SafeAreaView>
       );
@@ -63,5 +63,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 16,
     elevation:2,
+  },
+  submit:{
+    color:COLORS.white,
+    fontSize: 15,
+    fontFamily: FONTS.h1.fontFamily,
+    letterSpacing: 1,
+    fontWeight: 'bold',
+
+
   }
 })

@@ -11,7 +11,7 @@ const Input = ({labelValue ,placeholderText, iconType, ...rest}) => {
     
        <SafeAreaView>
          <View style = {styles.NameInput}>
-        
+            <Text style = {styles.label}> {placeholderText}</Text>
             <TextInput
             value={labelValue}
             placeholder = {placeholderText}

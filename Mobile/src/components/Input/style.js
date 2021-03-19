@@ -1,4 +1,4 @@
-import { COLORS, Colors, icons,images} from '../../Constantes'
+import { COLORS, Colors, icons,images,FONTS} from '../../Constantes'
 import { StyleSheet } from "react-native";
 import {windowHeight, windowWidth} from '../../utils/Dimentions';
 
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
         borderRadius: 100
       },
       inputField: {
-        marginLeft: 20,
+        marginLeft: 27,
         marginTop: 5,
         marginBottom: 10,
-        width: windowWidth / 1.5 ,
+        width: windowWidth / 1.17 ,
         height: windowHeight / 12,
         fontSize: 20,
         backgroundColor:'white'
@@ -48,6 +48,13 @@ const styles = StyleSheet.create({
       NameInput:{
         alignItems:'flex-start'
 
+      },
+      label:{
+        fontSize: 15,
+        fontFamily: FONTS.h1.fontFamily,
+        letterSpacing: 1,
+        marginLeft:27,
+        color:COLORS.primary
       }
 });
 

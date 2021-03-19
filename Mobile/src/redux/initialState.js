@@ -25,6 +25,11 @@ export const MapState = {
  
 }
 
+export const ModalState = {
+  isModalOpen : false,
+  isElectrode: false,
+}
+
 
 export const defibMarkers = {
   markers :[],
@@ -34,4 +39,13 @@ export const defib = {
   
   Defibrilatteur: []
 
+}
+
+export const DefibPosted = {
+   defibPosted:[]
+}
+
+export const accessibilite = {
+  checked:'null',
+  isPediatrique: 'null'
 }

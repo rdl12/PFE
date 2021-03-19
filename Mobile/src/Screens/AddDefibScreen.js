@@ -1,7 +1,7 @@
 import React,{useState,useEffect,} from 'react'
-import { View,StyleSheet,Alert,ScrollView,Image } from 'react-native'
+import { View,StyleSheet,Alert,ScrollView,Image,Modal,Text,Pressable } from 'react-native'
 import Input from '../components/Input/Input'
-import Cards from '../components/Card/Cards'
+import Modals from '../components/Modal/Modals'
 import PhotoPicker from '../components/ImagePicker/PhotoPicker'
 import Header from '../components/Header'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
@@ -9,48 +9,39 @@ import {useSelector} from 'react-redux'
 import {AddDefibUrl} from '../utils/constants/Api'
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
+import { useDispatch } from 'react-redux';
+import {ModalState,Add_Defib_Posted,AccessibiliteState} from '../redux/actions'
+
 
 const AddDefibScreen = ({navigation}) => {
     const [Nom, setNom] = useState("")
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
     const Adresse = useSelector(state => state.AdresseReducer);
-    
-     
+    const Modal_State = useSelector(state => state.Modal_State);
+    const AccessibiliteState = useSelector(state => state.get_Accessibilite);
+    const dispatch = useDispatch();
+   
   
     useEffect(() => {
-      console.log("adress:"+Adresse)
+      console.log("adress:"+Modal_State)
+    
       
-      }, [Adresse])
+      }, [Modal_State])
 
     const submit = () =>{
-      
-      fetch(AddDefibUrl, {
-            method: 'POST',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body:  JSON.stringify({
-              "id": 10,
-              "description" : Description,
-              "latitude" : Adresse.lat,
-              "longitude" : Adresse.long,
-              "photo" : imageSource,
-              "motif" : "from_mobile",
-              "marque_defib" : Nom
-            })
-          })
-        .then((response) => response.text())
-        .then((responseData) => {
-            console.log(
-                "POST Response",
-                "Response Body -> " + JSON.stringify(responseData)
-            )
-        })
-        .done();
-       
-     
+     let defib = {  
+        "description" : Description,
+        "latitude" : Adresse.lat,
+        "longitude" : Adresse.long,
+        "photo" : imageSource,
+        "motif" : "from_mobile",
+        "marque_defib" : Nom,
+        "accesibillité": AccessibiliteState.checked,
+        "electrode" : AccessibiliteState.isPediatrique
+        
+      }
+       dispatch(Add_Defib_Posted(defib))
     }
 
    
@@ -113,7 +104,6 @@ const AddDefibScreen = ({navigation}) => {
                     console.log('User tapped custom button: ', response.customButton);
                   } else {
                     let source = { uri: response.uri };
-            
                     // ADD THIS
                     setImageSource(source.uri);
                   }
@@ -123,38 +113,27 @@ const AddDefibScreen = ({navigation}) => {
           }
     
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1,justifyContent:'center'}}>
+          <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
           <Header title = "ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
           <ScrollView style={{flex:1}}>
-
-          
-          <Card style={styles.card} >
-                <Card.Title title="photo" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                             left={(props) => <Avatar.Icon {...props} icon="folder" />}
-                             right={(props) => <IconButton {...props} icon="folder" onPress={() => {openThreeButtonAlert}} />}/>
-                <Card.Content >
-                <Input
-            
+      
+          <Input
             labelValue={Nom}
             placeholderText="Nom"
             onChangeText={(Nom) => setNom(Nom)}
             autoCorrect={false}
           />
-                <Input
-          
-          labelValue={Description}
-          placeholderText="Description"
-          onChangeText={(description) => setDescription(description)}
-          autoCorrect={false}
+            <Input
+            labelValue={Description}
+            placeholderText="Description"
+            onChangeText={(description) => setDescription(description)}
+            autoCorrect={false}
          />
-               </Card.Content>
-            </Card>
-          
 
            <Card style={styles.card} >
-                <Card.Title title="photo" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                             left={(props) => <Avatar.Icon {...props} icon="folder" />}
-                             right={(props) => <IconButton {...props} icon="folder" onPress={() => {openThreeButtonAlert}} />}/>
+                <Card.Title title="Photo" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                             right={(props) => <IconButton {...props} icon={images.add_photo} style = {{marginRight:5}} />}/>
                 <Card.Content >
                     <PhotoPicker imageSource={imageSource} press={openThreeButtonAlert} ></PhotoPicker>
                </Card.Content>
@@ -162,7 +141,7 @@ const AddDefibScreen = ({navigation}) => {
 
             <Card style={styles.card}>
                 <Card.Title title="Adresse" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                            left={(props) => <Avatar.Icon {...props} icon="folder" />}/>
+                           right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,}} />}/>
                 <Card.Content>
                 <View style = {{display:'flex',flexDirection:'row'}}>
                     <View style={{flex:1}}>
@@ -196,19 +175,23 @@ const AddDefibScreen = ({navigation}) => {
              </Card>
 
           <Card style={styles.card} >
-                <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                   right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,}}  onPress={() =>  dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))}/>}/>
                 <Card.Content>
-                    <View>
-                      <Paragraph style={styles.para}>ffffffffff</Paragraph>
-                    </View>
+                <View style = {{display:'flex',flexDirection:'row',alignItems:'center'}} >
+                  <Title Text style={styles.Title}>Acces:</Title>
+                  <Paragraph Text style = {{right:-20,}} >{AccessibiliteState.checked}</Paragraph>
+                </View>
                </Card.Content>
              </Card>
 
              <Card style={styles.card} >
-                <Card.Title title="Type d'electrode" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Type d'electrode" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                 right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,}}  onPress={() =>  dispatch(ModalState({"isModalOpen": true,"isElectrode":true}))}/>}/>
                 <Card.Content>
-                    <View>
-                      <Paragraph style={styles.para}>ffffffffff</Paragraph>
+                    <View style = {{display:'flex',flexDirection:'row',alignItems:'center'}} >
+                    <Title Text style={styles.Title}>Electrode Pediatriques:</Title>
+                      <Paragraph Text style = {{right:-20,}} >{AccessibiliteState.isPediatrique}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
@@ -236,9 +219,9 @@ card :{
      shadowOpacity: 0.43,
      shadowRadius: 9.51,
      
-    elevation: 15,},
+    elevation: 5,},
 
-cardTitle : {borderBottomWidth:0.45},
+cardTitle : {borderBottomWidth:0.5},
 
 Title :{color:COLORS.primary, fontSize:15, fontFamily: "Cochin"},
 
@@ -250,7 +233,48 @@ add_to_photo:{
    margin:15,
    tintColor : '#0000FF'},
 
-icon:{width: 20,  height: 10, padding:0}
+icon:{width: 20,  height: 10, padding:0},
+centeredView: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
+  marginTop: 22
+},
+modalView: {
+  margin: 20,
+  backgroundColor: "white",
+  borderRadius: 20,
+  padding: 35,
+  alignItems: "center",
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 0,
+    height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 4,
+  elevation: 5
+},
+button: {
+  borderRadius: 20,
+  padding: 10,
+  elevation: 2
+},
+buttonOpen: {
+  backgroundColor: "#F194FF",
+},
+buttonClose: {
+  backgroundColor: "#2196F3",
+},
+textStyle: {
+  color: "white",
+  fontWeight: "bold",
+  textAlign: "center"
+},
+modalText: {
+  marginBottom: 15,
+  textAlign: "center"
+}
 
 })
 
