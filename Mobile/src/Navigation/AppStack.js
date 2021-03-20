@@ -6,19 +6,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS,images} from '../Constantes'
-import HomeScreen from '../Screens/HomeScreen';
-import AddDefibScreen from '../Screens/AddDefibScreen';
-import MapScreen from '../Screens/MapScreen';
-import LoginScreen from '../Screens/LoginScreen';
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import ListDefibScreen from '../Screens/ListDefibScreen'
-import { DetailsScreen } from '../Screens';
+import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen, } from '../Screens';
 
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-const FeedStack = ({navigation}) => (
+const MapStack = ({navigation}) => (
     <Stack.Navigator>
       <Stack.Screen
         name="Map Screen"
@@ -38,6 +33,17 @@ const FeedStack = ({navigation}) => (
 
     </Stack.Navigator>
   );
+
+  const UrgenceStack = ({navigation})=>(
+    <Stack.Navigator>
+        <Stack.Screen
+        name="Urgence Screen"
+        component={UrgenceScreen}
+        options={{headerShown: true}}
+      />
+    </Stack.Navigator>
+  );
+
 const AppStack = () => {
   return (
     <Tab.Navigator
@@ -67,7 +73,8 @@ const AppStack = () => {
                     style={{
                         width: 30,
                         height: 30,
-                        tintColor: focused ? COLORS.primary : COLORS.secondary
+                        bottom: focused ? 0 : 5,
+                        tintColor: focused ? COLORS.white: COLORS.primary
                     }}
                 />                  
                 ),
@@ -80,16 +87,17 @@ const AppStack = () => {
         />
           <Tab.Screen
             name="Maps"
-            component={FeedStack}
+            component={MapStack}
             options={{
                 tabBarIcon: ({ focused }) => (
                     <Image
-                        source={images.Home_image}
+                        source={images.map_icon}
                         resizeMode="contain"
                         style={{
-                            width: 25,
-                            height: 25,
-                            tintColor: focused ? COLORS.primary : COLORS.secondary
+                            width: 30,
+                            height: 30,
+                            bottom: focused ? 0 : 5,
+                            tintColor: focused ? COLORS.white: COLORS.primary
                         }}
                     />
                 ),
@@ -100,36 +108,20 @@ const AppStack = () => {
                 )
             }}
         />
-       <Tab.Screen
-            name="Login"
-            component={LoginScreen}
-            options={{
-                tabBarIcon: ({color, size}) => (
-                    <MaterialCommunityIcons
-                    name="home-outline"
-                    color={color}
-                    size={size}
-                  />
-                ),
-                tabBarButton: (props) => (
-                    <TabBarCustomButton
-                        {...props}
-                    />
-                )
-            }}
-        />
+      
         <Tab.Screen
-            name="AddDefib"
-            component={AddDefibScreen}
+            name="UrgenceScreen"
+            component={UrgenceStack}
             options={{
                 tabBarIcon: ({ focused }) => (
                     <Image
-                        source={images.Home_image}
+                        source={images.phone_icon}
                         resizeMode="contain"
                         style={{
-                            width: 25,
-                            height: 25,
-                            tintColor: focused ? COLORS.primary : COLORS.secondary
+                            width: 30,
+                            height: 30,
+                            bottom: focused ? 0 : 5,
+                            tintColor: focused ? COLORS.white: COLORS.primary
                         }}
                     />
                 ),
@@ -140,6 +132,30 @@ const AppStack = () => {
                 
                 ),
                
+            }}
+        />
+
+         <Tab.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+                tabBarIcon: ({ focused }) => (
+                    <Image
+                        source={images.user_icon}
+                        resizeMode="contain"
+                        style={{
+                            width: 30,
+                            height: 30,
+                            bottom: focused ? 0 : 5,
+                            tintColor: focused ? COLORS.white: COLORS.primary
+                        }}
+                    />
+                ),
+                tabBarButton: (props) => (
+                    <TabBarCustomButton
+                        {...props}
+                    />
+                )
             }}
         />
     </Tab.Navigator>

@@ -23,8 +23,8 @@ export function SideBar(props) {
 
    
     return (
-        <View style={{flex:1}}>
-        <DrawerContentScrollView {...props}>
+        <View style={{flex:1,}}>
+        <DrawerContentScrollView {...props} >
             <View style={styles.drawerContent}>
                 <View style={styles.userInfoSection}>
                     <View style={{flexDirection:'row',marginTop: 10}}>
@@ -36,8 +36,8 @@ export function SideBar(props) {
                         />
                         <View style={{marginLeft:15, flexDirection:'column',marginTop:-8}}>
                             <Title style={styles.titleDrawer}>HearthSave</Title>
-                            <Caption style={styles.caption}>L'application qui sauve </Caption>
-                            <Caption style={styles.caption}>des vies </Caption>
+                            <Caption style={styles.caption}>L'application qui </Caption>
+                            <Caption style={styles.caption}>sauve des vies </Caption>
                         </View>
                     </View>
                 </View>
@@ -104,7 +104,7 @@ export function SideBar(props) {
                             <Title style={styles.title}>Information</Title>
                         </View>
                     <DrawerItem 
-                        style={{marginBottom:-5,}}
+                        style={{marginBottom:-5,marginTop:10}}
                         icon={() => (
                             <Image 
                             style={{backgroundColor: 'rgba(0,0,177,0.23)',width: 25,height: 25,borderRadius:50}}
@@ -148,7 +148,6 @@ export function SideBar(props) {
                             <Image 
                             style={{backgroundColor:"rgba(74,0,224,0.16)",width: 25,height: 25,borderRadius:50}}
                             source={images.tutos_icon}
-                            resizeMode = 'center'
                             size={25}
                             tintColor="#800080"/> 
                              )}
@@ -157,14 +156,12 @@ export function SideBar(props) {
                         onPress={() => {props.navigation.navigate('SettingsScreen')}}
                     />
                 </Drawer.Section>
-              
-            </View>
-        </DrawerContentScrollView>
-        <View style={{marginLeft:15, flexDirection:'column'}}>
+                <Drawer.Section style={styles.drawerSection}>
+                        <View style={{marginLeft:15, flexDirection:'column'}}>
                             <Title style={styles.title}>Compte</Title>
                         </View>
              <DrawerItem 
-                        style={{marginBottom:0,}}
+                        style={{marginBottom:-5,}}
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#ececec",width: 25,height: 25,}}
@@ -178,7 +175,7 @@ export function SideBar(props) {
                     />
 
              <DrawerItem 
-                        style={{marginBottom:0,}}
+                        style={{marginBottom:10,}}
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#ececec",width: 25,height: 25,}}
@@ -190,6 +187,14 @@ export function SideBar(props) {
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate("S'inscrire")}}
                     />
+
+        </Drawer.Section>
+              
+            </View>
+
+        </DrawerContentScrollView>
+        
+        
    
     </View>)
      

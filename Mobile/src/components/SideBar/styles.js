@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
       marginRight: 3,
     },
     drawerSection: {
-      marginTop: 0,
+      marginTop: 10,
     },
     bottomDrawerSection: {
         marginBottom: 5,

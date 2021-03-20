@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Modal,Text, Pressable, View  } from 'react-native'
+import { Alert, Modal,Text, Pressable, View,Title  } from 'react-native'
 import { useDispatch,useSelector } from 'react-redux';
 import {ModalState,AccessibiliteState} from '../../redux/actions'
 import { RadioButton } from 'react-native-paper';
@@ -24,6 +24,9 @@ const Modals = ({modalOpen,isElectrode}) => {
        
          <View style={styles.centeredView}>
           { isElectrode ? (<View style={styles.modalView}>
+            <View style={styles.Header}>
+                  <Text style={styles.TextHeader}>Electrode pediatrique ?</Text>
+                </View>
                 <View style = {{display:'flex', flexDirection:'row', alignItems:'center',alignItems:'center',right:33}} >
                   <RadioButton
                       value="Inconnue"
@@ -56,7 +59,7 @@ const Modals = ({modalOpen,isElectrode}) => {
                   </View>
             
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={[styles.button,]}
                 onPress={() => dispatchAccessibility()}
               >
                 <Text style={styles.textStyle}>OK</Text>
@@ -64,6 +67,9 @@ const Modals = ({modalOpen,isElectrode}) => {
             </View>) : 
             <View>
               <View style={styles.modalView}>
+                <View style={styles.Header}>
+                  <Text style={styles.TextHeader}>Accessibilité             ?</Text>
+                </View>
                 <View style = {{display:'flex', flexDirection:'row', alignItems:'center',alignItems:'center',right:34.5}} >
                   <RadioButton
                       value="Inconnue"
@@ -96,7 +102,7 @@ const Modals = ({modalOpen,isElectrode}) => {
                   </View>
             
               <Pressable
-                style={[styles.button, styles.buttonClose]}
+                style={[styles.button,]}
                 onPress={() => dispatchAccessibility()}
               >
                 <Text style={styles.textStyle}>OK</Text>

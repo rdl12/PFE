@@ -22,7 +22,10 @@ const about_us_icon = require("../../assets/images/about_us_icon.png")
 const product_icon = require("../../assets/images/product_icon.png")
 const formation_icon = require("../../assets/images/formation_icon.png")
 const login_icon = require("../../assets/images/login_icon.png")
+const user_icon = require("../../assets/images/user_icon.png")
 const sign_icon = require("../../assets/images/sign_icon.png")
+const phone_icon = require("../../assets/images/phone_icon.png")
+const map_icon = require("../../assets/images/map_icon.png")
 
 export default {
     Home_image,
@@ -49,6 +52,9 @@ export default {
     product_icon,
     formation_icon,
     login_icon,
-    sign_icon
+    sign_icon,
+    map_icon,
+    user_icon,
+    phone_icon
 
 }
