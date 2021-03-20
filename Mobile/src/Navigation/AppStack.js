@@ -37,7 +37,7 @@ const MapStack = ({navigation}) => (
   const UrgenceStack = ({navigation})=>(
     <Stack.Navigator>
         <Stack.Screen
-        name="Urgence Screen"
+        name="Urgence "
         component={UrgenceScreen}
         options={{headerShown: true}}
       />

@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         marginBottom: 10,
         width: windowWidth / 1.17 ,
-        height: windowHeight / 12,
+        height: windowHeight / 13.5,
         fontSize: 20,
         backgroundColor:'white'
        

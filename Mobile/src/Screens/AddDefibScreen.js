@@ -1,5 +1,5 @@
 import React,{useState,useEffect,} from 'react'
-import { View,StyleSheet,Alert,ScrollView,Image,Modal,Text,Pressable } from 'react-native'
+import { View,StyleSheet,Alert,ScrollView,Image,Modal,Text,Pressable, SafeAreaView } from 'react-native'
 import Input from '../components/Input/Input'
 import Modals from '../components/Modal/Modals'
 import PhotoPicker from '../components/ImagePicker/PhotoPicker'
@@ -113,7 +113,7 @@ const AddDefibScreen = ({navigation}) => {
           }
     
     return (
-      <View style={{flex:1,justifyContent:'center'}}>
+      <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
           <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
           <Header title = "ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
           <ScrollView style={{flex:1}}>
@@ -199,7 +199,7 @@ const AddDefibScreen = ({navigation}) => {
           </ScrollView>
             
          
-      </View>
+      </SafeAreaView>
     )
 }
 

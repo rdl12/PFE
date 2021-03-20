@@ -6,7 +6,7 @@ import {windowWidth, windowHeight} from '../utils/Dimentions'
 
 const UrgenceScreen = () => {
     return (
-        <View>
+        <SafeAreaView style = {{backgroundColor:COLORS.white,flex:1}}>
             <Card style={styles.card}>
                 <Card.Title title="Appelez" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
                 <Card.Content>
@@ -28,7 +28,7 @@ const UrgenceScreen = () => {
                 
                </Card.Content>
              </Card>
-        </View>
+        </SafeAreaView>
     )
 }
 
