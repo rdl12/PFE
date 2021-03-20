@@ -1,6 +1,5 @@
-
 import { StyleSheet } from "react-native";
-
+import { COLORS } from "../../Constantes";
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -11,11 +10,10 @@ const styles = StyleSheet.create({
      
     },
     modalView: {
-      margin: 10,
       backgroundColor: "white",
       borderRadius: 20,
-      paddingTop:30,
-      padding: 50,
+      padding:15,
+      paddingTop:10,
       alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
@@ -27,21 +25,19 @@ const styles = StyleSheet.create({
       elevation: 5
     },
     button: {
-      marginTop:15,
-      marginBottom:-25,
-      borderRadius:10,
+      marginTop:10,
       width:80,
+      left:70,
       padding: 10,
       elevation: 2
     },
     buttonOpen: {
       backgroundColor: "#F194FF",
     },
-    buttonClose: {
-      backgroundColor: "#2196F3",
-    },
     textStyle: {
-      color: "white",
+      fontSize:15,
+      fontFamily:'cochin',
+      color: COLORS.primary,
       fontWeight: "bold",
       textAlign: "center"
     },
@@ -49,7 +45,29 @@ const styles = StyleSheet.create({
       marginBottom: 15,
       textAlign: "center"
     },
-    text:{fontSize:18, fontFamily:'cochin'}
+    text:{fontSize:18, fontFamily:'cochin'},
+    
+    Header:{
+        width:'113%',
+        borderTopLeftRadius:20,
+        borderTopRightRadius:20,
+        backgroundColor:COLORS.primary,
+        marginTop: -10,
+        marginBottom:15,
+        marginRight : -15,
+        marginLeft:-15,
+        paddingTop:20,
+        paddingBottom:20,
+        padding: 30,
+    }, 
+
+    TextHeader:{
+      fontSize: 18,
+      fontWeight: 'bold',
+      letterSpacing:1,
+      color: COLORS.white
+    
+    },
   });
 
   export default styles;

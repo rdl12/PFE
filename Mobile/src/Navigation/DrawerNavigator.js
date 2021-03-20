@@ -15,13 +15,13 @@ import AboutScreen from "../Screens/AboutScreen";
 import TutorialScreen from "../Screens/TutorialScreen";
 import MapScreen from "../Screens/MapScreen";
 import SideBar from "../components/SideBar/SideBar";
-
+import {windowWidth} from '../utils/Dimentions'
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigator = () => {
   return (
-    <Drawer.Navigator drawerContent = {props => <SideBar {...props}/>}>
+    <Drawer.Navigator drawerStyle={{width:windowWidth*3/4.5}} drawerContent = {props => <SideBar {...props}/>}>
       <Drawer.Screen name="Home" component={AppStack} />
       <Drawer.Screen name="Add defib" component={AddDefibScreen} />
       <Drawer.Screen name="Entrernir" component={MapScreen} />

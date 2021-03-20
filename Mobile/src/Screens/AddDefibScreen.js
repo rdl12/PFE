@@ -133,7 +133,7 @@ const AddDefibScreen = ({navigation}) => {
 
            <Card style={styles.card} >
                 <Card.Title title="Photo" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                             right={(props) => <IconButton {...props} icon={images.add_photo} style = {{marginRight:5}} />}/>
+                             right={(props) => <IconButton {...props} icon={images.add_photo} style = {{marginRight:5,}} />}/>
                 <Card.Content >
                     <PhotoPicker imageSource={imageSource} press={openThreeButtonAlert} ></PhotoPicker>
                </Card.Content>
@@ -176,7 +176,7 @@ const AddDefibScreen = ({navigation}) => {
 
           <Card style={styles.card} >
                 <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                   right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,}}  onPress={() =>  dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))}/>}/>
+                   right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,marginBottom:0}}  onPress={() =>  dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))}/>}/>
                 <Card.Content>
                 <View style = {{display:'flex',flexDirection:'row',alignItems:'center'}} >
                   <Title Text style={styles.Title}>Acces:</Title>
@@ -206,11 +206,11 @@ const AddDefibScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
 card :{
-  width: '87%',
      borderRadius:40,
      marginLeft:25,
-     marginTop:"5%",
-     marginBottom:10,
+     marginRight:30,
+     marginTop:5,
+     marginBottom:15,
      shadowColor: "#000",
      shadowOffset: {
        width: 0,
@@ -221,7 +221,7 @@ card :{
      
     elevation: 5,},
 
-cardTitle : {borderBottomWidth:0.5},
+cardTitle : {borderBottomWidth:0.5,marginTop:-10},
 
 Title :{color:COLORS.primary, fontSize:15, fontFamily: "Cochin"},
 
