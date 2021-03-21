@@ -68,7 +68,7 @@ const Modals = ({modalOpen,isElectrode}) => {
             <View>
               <View style={styles.modalView}>
                 <View style={styles.Header}>
-                  <Text style={styles.TextHeader}>Accessibilité             ?</Text>
+                  <Text style={styles.TextHeader}>Accessibilité           ?</Text>
                 </View>
                 <View style = {{display:'flex', flexDirection:'row', alignItems:'center',alignItems:'center',right:34.5}} >
                   <RadioButton

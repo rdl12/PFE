@@ -1,4 +1,4 @@
-import { View,Text, SafeAreaView ,Button,Image, ImageBackground} from 'react-native'
+import { View,Text, SafeAreaView ,KeyboardAvoidingView, ImageBackground} from 'react-native'
 import React ,{useState}  from 'react'
 import { login } from '../redux/actions';
 import { useDispatch } from 'react-redux';
@@ -18,8 +18,8 @@ const LoginScreen = ({navigation}) => {
     const dispatch = useDispatch()
     return (
         <SafeAreaView style = {{backgroundColor : COLORS.white,flex:1,justifyContent:'space-between',display:'flex'}}>
+        <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
         
-        <ImageBackground source = {images.login_background}  style={styles.background_image}>
         <View style = {styles.login}>
         <Text style = {styles.title}> Login</Text>
           <Input
@@ -34,23 +34,32 @@ const LoginScreen = ({navigation}) => {
         />
        
           </View>
-        
+          
+          
+        </ImageBackground> 
+        <ImageBackground source= {images.login_background_footer} resizeMode='cover' style = {styles.image_footer}>
+
+          <View style = {styles.Register}>
+             <TouchableOpacity >
+               <Text style = {styles.RegisterText}>S'inscrire</Text>
+             </TouchableOpacity>
+          </View>
+
+          <View style={styles.loginButton}>
+            <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password }))}>
+              <Text style = {styles.text}>Login</Text>
+            </TouchableOpacity>
+          </View>
+           
          
-        </ImageBackground>
       
-         <ImageBackground source= {images.login_background_footer} style = {styles.image_footer}>
-         <TouchableOpacity style = {styles.Register}>
-            <Text style = {styles.RegisterText}>S'inscrire</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => dispatch(login({'username': username, 'password': password }))}
-            style = {styles.loginButton}
-          >
-            
-            <Text style = {styles.text}>Login</Text>
-          </TouchableOpacity>
+         </ImageBackground>  
+
          
-         </ImageBackground>
+
+         
+         
+        
         </SafeAreaView>
      )
 }
@@ -58,6 +67,12 @@ const LoginScreen = ({navigation}) => {
 export default LoginScreen
 
 const styles = StyleSheet.create({
+
+  login:{
+    flex:2,
+    marginTop:windowHeight/3.1
+  },
+
   title:{
     color:COLORS.primary,
     fontSize:30,
@@ -66,61 +81,50 @@ const styles = StyleSheet.create({
     fontFamily:'Nunito',
     marginBottom:10,
     marginLeft: 20,
+  },
+ 
+  background_image:{
+    flex:1,
+    width:windowWidth,
+    height:windowHeight/2
+  },
+
+  image_footer:{
+    flex:0.35,
+    width:windowWidth,
+    height:windowHeight/4
+  },
 
 
+  loginButton:{
+    top:40,
+    left:windowWidth/1.7,
+    width:windowWidth/2.7,
+    borderColor:COLORS.white,
+    borderWidth:2  
+  },
+
+  text:{
+    color:Colors.white,
+    padding:18,
+    fontSize:20,
+    marginLeft:23,
+    fontFamily:'Nunito',
 
   },
+
   Register:{
-    top:19,
-    marginLeft:20,
+    top:80,
+    width:windowWidth/5.5,
+    left:windowWidth/12,
+    borderBottomWidth:2
  
   },
+  
   RegisterText:{
     fontSize:15,
     fontFamily:'Nunito',
     color:COLORS.primary
   },
-  login:{
-    
-    alignContent:'center',
-    top:windowWidth/2,
-    marginBottom:20,
-    
-
-  },
- 
-  background_image:{
-    flex: 0.5,
-    resizeMode: "cover",
-    justifyContent: "center"
-   
-
-  },
-  image_footer:{
-    bottom:0,
-    resizeMode: "cover",
-    justifyContent: "center",
-    flex:0.25
-
-  },
-  loginButton:{
-  
-    left:windowWidth/1.77,
-    marginTop:35,
-    borderWidth: 1,
-    borderColor:COLORS.white,
-    width:windowWidth/2.5,
-    borderRadius:7
-    
-    
-  },
-
-  text:{
-    color:Colors.white,
-    padding:20,
-    fontSize:20,
-    fontFamily:'Nunito',
-
-  }
 });
 
