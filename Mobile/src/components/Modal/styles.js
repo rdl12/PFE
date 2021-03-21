@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     text:{fontSize:18, fontFamily:'cochin'},
     
     Header:{
-        width:'113%',
+        width:'114%',
         borderTopLeftRadius:20,
         borderTopRightRadius:20,
         backgroundColor:COLORS.primary,
