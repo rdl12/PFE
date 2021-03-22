@@ -37,11 +37,17 @@ const MapStack = ({navigation}) => (
   const UrgenceStack = ({navigation})=>(
     <Stack.Navigator>
         <Stack.Screen
-        name="Urgence "
+        name="Urgence"
         component={UrgenceScreen}
         options={{headerShown: true}}
       />
+      <Stack.Screen
+        name="ListDefib"
+        component={ListDefibScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
+    
   );
 
 const AppStack = () => {

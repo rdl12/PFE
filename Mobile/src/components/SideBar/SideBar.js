@@ -46,15 +46,27 @@ export function SideBar(props) {
                          <View style={{marginLeft:15, flexDirection:'column'}}>
                             <Title style={styles.title}>DAE</Title>
                         </View>
+                     <DrawerItem 
+                        style={{marginBottom:-5,}}
+                        icon={() => (
+                            <Avatar.Image 
+                            style={{backgroundColor:'red',width: 28,height: 25}}
+                            source={images.phone_icon}
+                            size={25}/> 
+                             )}
+                        label="Urgence"
+                        labelStyle={{color:"#a30000", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
+                        onPress={() => {props.navigation.navigate('UrgenceScreen')}}
+                    /> 
                     <DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:COLORS.primary,width: 28,height: 25}}
-                            source={images.search_icon}
+                            source={images.location_icon}
                             size={25}/> 
                              )}
-                        label="Rechercher"
+                        label="Geolocaliser"
                         labelStyle={{color:"#0000CD", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('Maps')}}
                     />
@@ -63,11 +75,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#008000",width: 25,height: 25}}
-                            source={images.signaler_icon}
+                            source={images.tutos_icon}
                             resizeMode='center' 
                             size={25}/> 
                              )}
-                        label="Signaler"
+                        label="Sauver"
                         labelStyle={{color:"#228B22", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('AddDefib')}}
                     />
@@ -76,11 +88,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#FF8C00",width: 25,height: 25,}}
-                            source={images.entretenir_icon}
+                            source={images.help_icon}
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="Entretenir"
+                        label="Help"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('BookmarkScreen')}}
                     />
@@ -89,11 +101,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#9932CC",width: 25,height: 25,}}
-                            source={images.stats_icon}
+                            source={images.signaler_icon}
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="Statistiques"
+                        label="Signaler"
                         labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('SettingsScreen')}}
                     />
@@ -147,11 +159,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Image 
                             style={{backgroundColor:"rgba(74,0,224,0.16)",width: 25,height: 25,borderRadius:50}}
-                            source={images.tutos_icon}
+                            source={images.stats_icon}
                             size={25}
                             tintColor="#800080"/> 
                              )}
-                        label="Sauver"
+                        label="Statistique"
                         labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('SettingsScreen')}}
                     />

@@ -1,20 +1,32 @@
-import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView,Image, ActivityIndicator, TouchableOpacity, Linking } from 'react-native'
+import React,{useState,useEffect,} from 'react'
+import { View, Text, StyleSheet, SafeAreaView,Image, TouchableOpacity, Linking } from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph,IconButton } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import {windowWidth, windowHeight} from '../utils/Dimentions'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const UrgenceScreen = () => {
+const UrgenceScreen = ({navigation}) => {
+
+    const [next, setNext] = useState(true); 
+
     return (
         <SafeAreaView style = {{backgroundColor:COLORS.white,flex:1}}>
+     {next ? (  
             <Card style={styles.card}>
-                <Card.Title title="Appelez" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Appelez" titleStyle={{color:COLORS.primary,fontFamily: "Cochin",fontWeight: 'bold',fontSize:23}} style={styles.cardTitle}
+                            right={(props) => <IconButton {...props} icon={images.next_icon} size={25}  onPress={() => {setNext(false)}} />}/>
                 <Card.Content>
                 <View>
-                    <View style={{marginLeft:15, flexDirection:'column',marginTop:-8}}>
+                    <View style={{ flexDirection:'column',marginTop:-8}}>
                         <Title style={styles.titleDrawer}>Applez les service d'urgence</Title>
                     </View>
                 </View>
+
+                <Image 
+                      style={{width:150,height:150,marginLeft:95,marginTop:10,borderWidth:2}}
+                       source={images.urgence}
+                            />
 
                 <TouchableOpacity onPress={()=>{Linking.openURL('tel:15');} }>
                   <View style = {styles.button}>
@@ -28,6 +40,26 @@ const UrgenceScreen = () => {
                 
                </Card.Content>
              </Card>
+         ) : 
+             <Card style={styles.card}>
+                <Card.Title title="Massage cardiaque" titleStyle={{color:COLORS.primary,fontFamily: "Cochin",fontWeight: 'bold',fontSize:20,marginLeft:10}} style={styles.cardTitle}
+                            left={(props) => <IconButton {...props} icon={images.next_icon} size={25} style={{transform: [{rotateY: '180deg'}]}}  onPress={() => {setNext(true)}} />}
+                            right={(props) => <IconButton {...props} icon={images.next_icon} size={25} style={{marginRight:20}} onPress={() => navigation.navigate('ListDefib')} />}/>
+                <Card.Content>
+                <View>
+                    <View style={{marginLeft:15, flexDirection:'column',marginTop:-8}}>
+                        <Title style={styles.titleDrawer}>Masser la victime a 100/120 min par minute</Title>
+                    </View>
+                </View>
+
+                        <Image 
+                            style={{width:280,height:290,marginLeft:15,marginTop:30,borderWidth:2}}
+                            source={images.massage_icon}
+                            />
+                
+               </Card.Content>
+             </Card>
+        }
         </SafeAreaView>
     )
 }
@@ -51,7 +83,7 @@ const styles = StyleSheet.create({
     
     cardTitle : {borderBottomWidth:0.45},
     
-    Title :{color:COLORS.primary, fontSize:15, fontFamily: "Cochin"},
+    Title :{color:COLORS.primary, fontSize:15, fontFamily: "Cochin",},
     
     para : {marginTop:10},
     
@@ -78,6 +110,7 @@ const styles = StyleSheet.create({
     },
     
     title: {
+        
         fontSize: 13,
         marginTop: 3,
         fontWeight: 'bold',
@@ -93,8 +126,9 @@ const styles = StyleSheet.create({
     icon:{width: 20,  height: 10, padding:0},
 
     titleDrawer:{
+        textAlign: 'center',
         fontSize: 15,
-        margin: 30,
+        alignContent:'center',
         marginTop : 20,
         fontWeight: 'bold',
         letterSpacing:1,

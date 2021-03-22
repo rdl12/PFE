@@ -32,6 +32,9 @@ const location_icon = require("../../assets/images/location_icon.png")
 const help_icon = require("../../assets/images/help_icon.png")
 const instruction_icon = require("../../assets/images/instruction_icon.png")
 const logo_icon = require('../../assets/images/logo.png')
+const next_icon = require('../../assets/images/next_icon.png')
+const massage_icon = require('../../assets/images/massage_icon.png')
+const urgence = require('../../assets/images/urgence.png')
 
 export default {
     Home_image,
@@ -67,7 +70,10 @@ export default {
     location_icon,
     help_icon,
     instruction_icon,
-    logo_icon
+    logo_icon,
+    next_icon,
+    massage_icon,
+    urgence
 
 
 }
