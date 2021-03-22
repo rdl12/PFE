@@ -28,6 +28,10 @@ const phone_icon = require("../../assets/images/phone_icon.png")
 const map_icon = require("../../assets/images/map_icon.png")
 const login_background = require("../../assets/images/login_background.png")
 const login_background_footer = require("../../assets/images/login_background_footer.png")
+const location_icon = require("../../assets/images/location_icon.png")
+const help_icon = require("../../assets/images/help_icon.png")
+const instruction_icon = require("../../assets/images/instruction_icon.png")
+const logo_icon = require('../../assets/images/logo.png')
 
 export default {
     Home_image,
@@ -59,6 +63,11 @@ export default {
     user_icon,
     phone_icon,
     login_background,
-    login_background_footer
+    login_background_footer,
+    location_icon,
+    help_icon,
+    instruction_icon,
+    logo_icon
+
 
 }

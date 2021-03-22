@@ -1,15 +1,132 @@
 import React from 'react'
-import { View,Text,Image } from 'react-native'
+import { View,StyleSheet,Text,Image,SafeAreaView, Alert } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
     return (
-       <View>
-           <Text>HomeScreen</Text>
+       <SafeAreaView style = {styles.view}>
+           <View style = {styles.menuConatiner}>
+                <View>
+               <TouchableOpacity onPress = {() => navigation.openDrawer()}>
+               <Image 
+                style={styles.menu}
+                source={images.menu_icon}
+                resizeMode ='contain'
+                tintColor='red'/>
+                </TouchableOpacity>
+               </View>
+               <Image 
+                source={images.logo_icon}
+                style={{width:55,height:55}}
+             
+                />
+             
+           </View>
+           <View style = {styles.container}>
+               <View style = {styles.imageContainer}>
+               <TouchableOpacity onPress = {() => navigation.navigate('Urgence')}>
+                <Image 
+                    style={{width:77,height:77}}
+                    source={images.phone_icon}
+                    resizeMode ='contain'
+                    tintColor='red'/>
+                <Text style = {styles.text}> Urgence </Text>
+               </TouchableOpacity>
+               </View>
+            <View style = {styles.imageContainer}>
+            <TouchableOpacity onPress = {() => navigation.navigate('Maps')} >
+           <Image 
+            style={{width:77,height:77,marginLeft:29}}
+            source={images.location_icon}
+            tintColor='red'/>
+             <Text style = {styles.text}> Se Localiser </Text>
+           </TouchableOpacity>
+            </View>
+         
+           </View>
+           
+           <View style = {styles.container}>
+               <View style = {styles.imageContainer}>
+               <TouchableOpacity onPress = {() => navigation.navigate('')} >
+                <Image 
+                    style={{width:77,height:77,marginLeft:20}}
+                    source={images.instruction_icon}
+                    tintColor='red'/>
+                <Text style = {styles.text}> Instruction </Text>
+           </TouchableOpacity>
+               </View>
+            <View style = {styles.imageContainer}>
+            <TouchableOpacity onPress = {() => navigation.navigate('Login')} >
+           <Image 
+            style={{width:77,height:77,marginRight:10}}
+            source={images.help_icon}
+            tintColor='red'/>
+              <Text style = {styles.text}> Help </Text>
+           </TouchableOpacity>
+            </View>
+         
+           </View>
         
-       </View>
+       </SafeAreaView>
     )
 }
 
 export default HomeScreen
+
+const styles = StyleSheet.create({
+    logo:{
+      flex:1
+      
+    },
+    menuConatiner:{
+        //display:'flex',
+        flexDirection:'row',
+        padding:20,
+        //alignItems:'center',
+        //marginTop:-150,
+        justifyContent:'space-between'
+        
+      
+    },
+    view :{
+      display:'flex',
+      //justifyContent:'center',
+      backgroundColor:COLORS.white,
+      flex:1,
+
+    },
+    
+    container:{
+        display:'flex',
+        alignItems:'center',
+        alignContent:'center',
+        flexDirection:'row',
+        justifyContent:'space-between'
+    },
+    imageContainer:{
+        flex:0.75,
+        borderWidth:1,
+        borderColor:COLORS.primary,
+        display:'flex',
+        alignItems:'center',
+        elevation:2,
+        marginTop:20,
+        padding:25,
+        margin:10,
+        borderRadius:10
+    },
+    text:{
+      
+        letterSpacing:1,
+        fontFamily:'ninchio',
+        fontWeight:'bold',
+        color:'red',
+        fontSize:20,
+        borderTopWidth:1,
+        marginTop:20
+
+    }
+     
+    })

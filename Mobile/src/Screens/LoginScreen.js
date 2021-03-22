@@ -41,7 +41,7 @@ const LoginScreen = ({navigation}) => {
 
           <View style = {styles.Register}>
              <TouchableOpacity >
-               <Text style = {styles.RegisterText}>S'inscrire</Text>
+               <Text style = {styles.RegisterText}>S'inscrire ?</Text>
              </TouchableOpacity>
           </View>
 
@@ -114,14 +114,18 @@ const styles = StyleSheet.create({
   },
 
   Register:{
+    
     top:80,
     width:windowWidth/5.5,
     left:windowWidth/12,
-    borderBottomWidth:2
+    borderBottomColor:COLORS.primary,
+    borderBottomWidth:0.5
+  
  
   },
   
   RegisterText:{
+   
     fontSize:15,
     fontFamily:'Nunito',
     color:COLORS.primary

@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, SafeAreaView,Image, ActivityIndicator, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView,Image, ActivityIndicator, TouchableOpacity, Linking } from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph,IconButton } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import {windowWidth, windowHeight} from '../utils/Dimentions'
@@ -16,7 +16,7 @@ const UrgenceScreen = () => {
                     </View>
                 </View>
 
-                <TouchableOpacity onPress={() => alert("pressed") }>
+                <TouchableOpacity onPress={()=>{Linking.openURL('tel:15');} }>
                   <View style = {styles.button}>
                         <Image 
                             style={{width:55,height:55,marginLeft:15}}
