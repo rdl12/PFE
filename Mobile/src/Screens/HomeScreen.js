@@ -14,7 +14,7 @@ const HomeScreen = ({navigation}) => {
                 style={styles.menu}
                 source={images.menu_icon}
                 resizeMode ='contain'
-                tintColor='red'/>
+                tintColor={COLORS.black}/>
                 </TouchableOpacity>
                </View>
                <Image 
@@ -26,7 +26,7 @@ const HomeScreen = ({navigation}) => {
            </View>
            <View style = {styles.container}>
                <View style = {styles.imageContainer}>
-               <TouchableOpacity onPress = {() => navigation.navigate('Urgence')}>
+               <TouchableOpacity onPress = {() => navigation.navigate('UrgenceScreen')}>
                 <Image 
                     style={{width:77,height:77}}
                     source={images.phone_icon}
@@ -112,9 +112,9 @@ const styles = StyleSheet.create({
         display:'flex',
         alignItems:'center',
         elevation:2,
-        marginTop:20,
-        padding:25,
-        margin:10,
+        marginTop:30,
+        padding:20,
+        margin:15,
         borderRadius:10
     },
     text:{

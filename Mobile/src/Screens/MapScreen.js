@@ -114,7 +114,6 @@ class MapScreen extends Component{
              initialRegion={this.state.initialregion}
              loadingEnabled = {true}
              loadingIndicatorColor = {COLORS.blue}
-         
            >
 
             {this.props.markers && this.props.markers.map(marker => (
