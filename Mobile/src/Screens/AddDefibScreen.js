@@ -15,6 +15,7 @@ import {ModalState,Add_Defib_Posted,AccessibiliteState} from '../redux/actions'
 
 const AddDefibScreen = ({navigation}) => {
     const [Nom, setNom] = useState("")
+    const [Telephone, setTel] = useState("")
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
     const Adresse = useSelector(state => state.AdresseReducer);
@@ -38,7 +39,6 @@ const AddDefibScreen = ({navigation}) => {
         "motif" : "from_mobile",
         "marque_defib" : Nom,
         "accesibillité": AccessibiliteState.checked,
-        "electrode" : AccessibiliteState.isPediatrique
         
       }
        dispatch(Add_Defib_Posted(defib))
@@ -131,6 +131,13 @@ const AddDefibScreen = ({navigation}) => {
             autoCorrect={false}
          />
 
+         <Input
+            labelValue={Telephone}
+            placeholderText="Telephone"
+            onChangeText={(Telephone) => setTel(Telephone)}
+            autoCorrect={false}
+         />
+
            <Card style={styles.card} >
                 <Card.Title title="Photo" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
                              right={(props) => <IconButton {...props} icon={images.add_photo} style = {{marginRight:5,}} />}/>
@@ -185,16 +192,7 @@ const AddDefibScreen = ({navigation}) => {
                </Card.Content>
              </Card>
 
-             <Card style={styles.card} >
-                <Card.Title title="Type d'electrode" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                 right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,}}  onPress={() =>  dispatch(ModalState({"isModalOpen": true,"isElectrode":true}))}/>}/>
-                <Card.Content>
-                    <View style = {{display:'flex',flexDirection:'row',alignItems:'center'}} >
-                    <Title Text style={styles.Title}>Electrode Pediatriques:</Title>
-                      <Paragraph Text style = {{right:-20,}} >{AccessibiliteState.isPediatrique}</Paragraph>
-                    </View>
-               </Card.Content>
-             </Card>
+            
               
           </ScrollView>
             

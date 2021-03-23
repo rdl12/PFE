@@ -38,7 +38,7 @@ const HomeScreen = ({navigation}) => {
             <View style = {styles.imageContainer}>
             <TouchableOpacity onPress = {() => navigation.navigate('Maps')} >
            <Image 
-            style={{width:77,height:77,marginLeft:29}}
+            style={{width:77,height:77,marginLeft:15}}
             source={images.location_icon}
             tintColor='red'/>
              <Text style = {styles.text}> Se Localiser </Text>
@@ -51,7 +51,7 @@ const HomeScreen = ({navigation}) => {
                <View style = {styles.imageContainer}>
                <TouchableOpacity onPress = {() => navigation.navigate('')} >
                 <Image 
-                    style={{width:77,height:77,marginLeft:20}}
+                    style={{width:77,height:77,marginLeft:7}}
                     source={images.instruction_icon}
                     tintColor='red'/>
                 <Text style = {styles.text}> Instruction </Text>
@@ -60,7 +60,7 @@ const HomeScreen = ({navigation}) => {
             <View style = {styles.imageContainer}>
             <TouchableOpacity onPress = {() => navigation.navigate('Login')} >
            <Image 
-            style={{width:77,height:77,marginRight:10}}
+            style={{width:77,height:77}}
             source={images.help_icon}
             tintColor='red'/>
               <Text style = {styles.text}> Help </Text>
@@ -81,18 +81,13 @@ const styles = StyleSheet.create({
       
     },
     menuConatiner:{
-        //display:'flex',
         flexDirection:'row',
         padding:20,
-        //alignItems:'center',
-        //marginTop:-150,
-        justifyContent:'space-between'
-        
-      
+        justifyContent:'space-between',
     },
+
     view :{
       display:'flex',
-      //justifyContent:'center',
       backgroundColor:COLORS.white,
       flex:1,
 
@@ -111,19 +106,18 @@ const styles = StyleSheet.create({
         borderColor:COLORS.primary,
         display:'flex',
         alignItems:'center',
-        elevation:2,
         marginTop:30,
         padding:20,
         margin:15,
         borderRadius:10
     },
     text:{
-      
+        textAlign: 'center',
         letterSpacing:1,
         fontFamily:'ninchio',
         fontWeight:'bold',
         color:'red',
-        fontSize:20,
+        fontSize:15,
         borderTopWidth:1,
         marginTop:20
 
