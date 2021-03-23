@@ -11,6 +11,7 @@ import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
 import { AdresseReducer } from '../redux/reducer';
+import ListDefib from '../components/ListDefib/ListDefib';
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -31,6 +32,7 @@ class ListDefibScreen extends Component {
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
             clicked:{},
+            isList:true,
             showDirections: false,
             destination :{
                 latitude:0,
@@ -53,14 +55,14 @@ class ListDefibScreen extends Component {
 
    
     componentDidMount(){
-        //setTimeout(()=>this.setState({marginBottom : 0}),10)
+        setTimeout(()=>this.setState({marginBottom : 0}),10)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords),50)
         console.log(this.props.markers)
-        const camera =  this.map.getCamera()
         this.map.setCamera(10,10,10,10)
         this.map.setCamera({
             
            });
+        const camera =  this.map.getCamera()
         console.log(camera)
       
     }
@@ -135,9 +137,10 @@ class ListDefibScreen extends Component {
     
     render (){
         return (
-            <View style = {{flex:1}}>
-            <BaseMapSwitcher  /> 
-            <MapView style = {{flex:1.8, marginBottom : this.state.marginBottom}}
+            <View style = {{flex:2}}>
+            <BaseMapSwitcher  />
+            <ListDefib  press = {()=>this.setState({isList:!this.state.isList})} isList={this.state.isList} /> 
+            <MapView style = {{flex:1.9, marginBottom : this.state.marginBottom}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
                     setTimeout(()=>this.map.animateToRegion({
@@ -170,12 +173,14 @@ class ListDefibScreen extends Component {
                     apikey={GOOGLE_MAPS_APIKEY}
                  /> */}
             </MapView>
+
+            {this.state.isList ?(
             <FlatList
                data = {this.props.markers}
                renderItem={this.renderItem}
                keyExtractor={item => item.id.toString()}
                style={{flex: 0.5}}
-            />
+            />  ):null}
 
             </View>
         )

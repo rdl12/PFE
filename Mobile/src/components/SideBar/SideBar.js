@@ -75,11 +75,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#008000",width: 25,height: 25}}
-                            source={images.tutos_icon}
+                            source={images.help_icon}
                             resizeMode='center' 
                             size={25}/> 
                              )}
-                        label="Sauver"
+                        label="Help"
                         labelStyle={{color:"#228B22", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('AddDefib')}}
                     />
@@ -88,11 +88,11 @@ export function SideBar(props) {
                         icon={() => (
                             <Avatar.Image 
                             style={{backgroundColor:"#FF8C00",width: 25,height: 25,}}
-                            source={images.help_icon}
+                            source={images.instruction_menu_icon}
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="Help"
+                        label="Instruction"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('BookmarkScreen')}}
                     />
@@ -107,7 +107,7 @@ export function SideBar(props) {
                              )}
                         label="Signaler"
                         labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('SettingsScreen')}}
+                        onPress={() => {props.navigation.navigate('MapScreen')}}
                     />
                 </Drawer.Section>
 

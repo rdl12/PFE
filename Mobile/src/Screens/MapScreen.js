@@ -97,7 +97,7 @@ class MapScreen extends Component{
         <View style = {{flex:1}}>
          {this.state.btn_add_state ? (<Header title = "Ajout d'un nouveau DAE" Submit = {() => this.dispatchDefibAdress(this.state.coords)} isRetour ={true} onPress= {()=> this.ReturnState()} />): null}
          {!this.state.btn_add_state ? ( <BaseMapSwitcher  /> ) : null}
-         {!this.state.btn_add_state ? ( <ListDefib  navigation = {this.props.navigation} /> ) : null}
+         {!this.state.btn_add_state ? ( <ListDefib  navigation = {this.props.navigation} isList={false} /> ) : null}
            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
              ref={(map) => { this.map = map; }}
              onMapReady = {()=>
