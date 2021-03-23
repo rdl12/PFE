@@ -26,6 +26,12 @@ const MapStack = ({navigation}) => (
         options={{headerShown: true}}
       />
 
+      <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{headerShown: false}}
+      />
+
     </Stack.Navigator>
   );
 
