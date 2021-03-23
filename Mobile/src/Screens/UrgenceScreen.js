@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 const UrgenceScreen = ({navigation}) => {
 
     const [next, setNext] = useState(true); 
+    const numStyle = {fontSize:30,color:'red'}
 
     return (
         <SafeAreaView style = {{backgroundColor:COLORS.white,flex:1}}>
@@ -19,12 +20,13 @@ const UrgenceScreen = ({navigation}) => {
                 <Card.Content>
                 <View>
                     <View style={{ flexDirection:'column',marginTop:-8}}>
-                        <Title style={styles.titleDrawer}>Applez les service d'urgence</Title>
+                        <Title style={styles.titleDrawer}>Applez les service d'urgence au :</Title>
+                        <Title style={[styles.titleDrawer,{...numStyle}]}>15</Title>
                     </View>
                 </View>
 
                 <Image 
-                      style={{width:150,height:150,marginLeft:95,marginTop:10,borderWidth:2}}
+                      style={{width:150,height:150,marginLeft:75,marginTop:10,borderWidth:2}}
                        source={images.urgence}
                             />
 
@@ -53,7 +55,7 @@ const UrgenceScreen = ({navigation}) => {
                 </View>
 
                         <Image 
-                            style={{width:280,height:290,marginLeft:15,marginTop:30,borderWidth:2}}
+                            style={{width:280,height:240,marginLeft:15,marginTop:80,borderWidth:2}}
                             source={images.massage_icon}
                             />
                 
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
     textButton:{
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft:40,
+        marginLeft:20,
         color:'red',
         fontSize:25,
         fontFamily:'cochin',
@@ -135,6 +137,7 @@ const styles = StyleSheet.create({
         color: COLORS.black
       
       },
+
     
     })
 

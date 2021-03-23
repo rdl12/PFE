@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
+import { AdresseReducer } from '../redux/reducer';
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -55,6 +56,12 @@ class ListDefibScreen extends Component {
         //setTimeout(()=>this.setState({marginBottom : 0}),10)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords),50)
         console.log(this.props.markers)
+        const camera =  this.map.getCamera()
+        this.map.setCamera(10,10,10,10)
+        this.map.setCamera({
+            
+           });
+        console.log(camera)
       
     }
 
@@ -67,6 +74,8 @@ class ListDefibScreen extends Component {
     
 
     }
+
+    
 
     ZoomTodefib(lat,long,id){
         setTimeout(()=>this.map.animateToRegion({
@@ -97,6 +106,7 @@ class ListDefibScreen extends Component {
         <TouchableOpacity style={{ padding : 15, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee"}}
                                 onPress={() => this.ZoomTodefib(item.latitude,item.longitude,item.id) }>
                         <Text>{item.description}</Text>
+                        <Text>hhhhhhhhhhhhh</Text>
         </TouchableOpacity>
        { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 15,borderBottomWidth : 1, borderColor : "#eee"}}>
            <View style = {{display:'flex',justifyContent:'flex-end',flexDirection:'row'}}>
@@ -127,7 +137,7 @@ class ListDefibScreen extends Component {
         return (
             <View style = {{flex:1}}>
             <BaseMapSwitcher  /> 
-            <MapView style = {{flex:1, marginBottom : this.state.marginBottom}}
+            <MapView style = {{flex:1.8, marginBottom : this.state.marginBottom}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
                     setTimeout(()=>this.map.animateToRegion({
@@ -137,6 +147,7 @@ class ListDefibScreen extends Component {
                         longitudeDelta : 0.016
                       },2000),3000)
                  }
+                 
                  mapType = {this.props.maptype}
                  showsUserLocation = {!this.state.btn_add_state}
                  initialRegion={this.state.initialregion}

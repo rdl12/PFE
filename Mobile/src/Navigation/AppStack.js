@@ -16,11 +16,6 @@ const Tab = createBottomTabNavigator();
 const MapStack = ({navigation}) => (
     <Stack.Navigator>
       <Stack.Screen
-        name="Map Screen"
-        component={MapScreen}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
         name="ListDefib"
         component={ListDefibScreen}
         options={{headerShown: false}}
