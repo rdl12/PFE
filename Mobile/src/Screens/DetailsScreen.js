@@ -97,11 +97,12 @@ const DetailsScreen = () => {
                       <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:300,height:200,marginTop:5}}
                         mapType = 'standard'
                         scrollEnabled = {false}
+                        showsTraffic ={true}
                         initialRegion={{
                             latitude:Get_Defib.Defibrilatteur.latitude,
                             longitude :Get_Defib.Defibrilatteur.longitude,
-                            latitudeDelta : 0.008,
-                            longitudeDelta : 0.016
+                            latitudeDelta : 0.0008,
+                            longitudeDelta : 0.0016
                            }}
                       >
                       <Marker

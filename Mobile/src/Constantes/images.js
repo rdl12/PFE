@@ -36,6 +36,8 @@ const next_icon = require('../../assets/images/next_icon.png')
 const massage_icon = require('../../assets/images/massage_icon.png')
 const urgence = require('../../assets/images/urgence.png')
 const instruction_menu_icon = require('../../assets/images/instruction_menu_icon.png')
+const arrow_down = require('../../assets/images/arrow_down.png')
+const defib_list_icon = require('../../assets/images/defib_list_icon.png')
 
 export default {
     Home_image,
@@ -76,6 +78,8 @@ export default {
     massage_icon,
     urgence,
     instruction_menu_icon,
+    arrow_down,
+    defib_list_icon
 
 
 }
