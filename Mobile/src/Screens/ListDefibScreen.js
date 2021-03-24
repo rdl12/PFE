@@ -5,7 +5,6 @@ import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
 import Geolocation from '@react-native-community/geolocation';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
-import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
@@ -37,7 +36,9 @@ class ListDefibScreen extends Component {
             destination :{
                 latitude:0,
                 longitude:0
-            }
+            },
+            timeTravel : 0,
+            distanceTravel : 0
            
         }
 
@@ -58,13 +59,7 @@ class ListDefibScreen extends Component {
         setTimeout(()=>this.setState({marginBottom : 0}),10)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords),50)
         console.log(this.props.markers)
-        this.map.setCamera(10,10,10,10)
-        this.map.setCamera({
-            
-           });
-        const camera =  this.map.getCamera()
-        console.log(camera)
-      
+        
     }
 
     getDetails(id,lat,long) {
@@ -77,15 +72,13 @@ class ListDefibScreen extends Component {
 
     }
 
-    
-
     ZoomTodefib(lat,long,id){
         setTimeout(()=>this.map.animateToRegion({
             latitude:lat,
             longitude : long,
-            latitudeDelta : 0.0008,
-            longitudeDelta : 0.0016
-          },2000),300)
+            latitudeDelta : 0.0004,
+            longitudeDelta : 0.0008
+          },1000),300)
           this.setState(prevState => {
             let destination = Object.assign({}, prevState.destination); 
             destination.latitude = lat; 
@@ -105,18 +98,51 @@ class ListDefibScreen extends Component {
 
     renderItem = ({ item }) => (
         <View>
-        <TouchableOpacity style={{ padding : 15, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee"}}
+        <TouchableOpacity style={{ padding : 10, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee",elevation:3,flexDirection:'row',justifyContent:'space-between'}}
                                 onPress={() => this.ZoomTodefib(item.latitude,item.longitude,item.id) }>
-                        <Text>{item.description}</Text>
-                        <Text>hhhhhhhhhhhhh</Text>
+                    <View>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <View style={{flexDirection:'row'}}>
+                            <Image
+                              source={images.defib_list_icon}
+                              style={{ width: 20, height: 25,margin:5, tintColor:'grey' }} 
+                              resizeMode = "contain" />
+                            <Text style={{marginTop:7,fontWeight: "bold",}} >{item.description}</Text>
+                        </View>
+                         
+   
+                    </View>
+                    <Text style={{}} >Adreese...................</Text>
+                    </View>
+                    
+                    <View style={{}}>
+                    { this.state.clicked[item.id] ? ( <Text style={{marginTop:7,fontWeight: "bold",}} >{Math.round(this.state.timeTravel)} min</Text>) : null}
+                    { !this.state.clicked[item.id] ? (
+                         <Image
+                              source={ images.arrow_down }
+                              style={{ width: 30, height: 30, tintColor:COLORS.primary }} 
+                              resizeMode = "contain" />
+                              ):
+                            
+                         <Image
+                              source={ images.arrow_down }
+                              style={{ width: 30, height: 30, tintColor:COLORS.primary,transform: [{rotateX: '180deg'}] }} 
+                              resizeMode = "contain" />
+                              }
+                    </View>
+                        
         </TouchableOpacity>
-       { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 15,borderBottomWidth : 1, borderColor : "#eee"}}>
+       { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 7,borderBottomWidth : 1, borderColor : "#eee",flexDirection:'row',justifyContent:'space-between'}}>
+           <View style = {{display:'flex',justifyContent:'flex-start',marginTop:7,flexDirection:'row'}}>
+               <Text style={{fontSize:13, fontFamily: "Cochin", fontWeight: "bold"}}>  Accessibilité : </Text>
+               <Text style={{fontSize:13, fontFamily: "Cochin", fontWeight: "bold"}}>{item.accesibillité}</Text>
+           </View>
            <View style = {{display:'flex',justifyContent:'flex-end',flexDirection:'row'}}>
                 <TouchableOpacity
                     onPress={() => this.setState({ showDirections : !this.state.showDirections})}>
                 <Image
                         source={ images.direction_icon }
-                        style={{ width: 50, height: 30,justifyContent: 'center', }} 
+                        style={{ width: 50, height: 30,justifyContent: 'center', tintColor:'red' }} 
                         resizeMode = "contain"
                     />
                 </TouchableOpacity>
@@ -124,7 +150,7 @@ class ListDefibScreen extends Component {
                     onPress={() => this.getDetails(item.id,item.latitude,item.longitude)}>
                 <Image
                         source={ images.details_icon}
-                        style={{ width: 50, height: 30,justifyContent: 'center', }} 
+                        style={{ width: 50, height: 30,justifyContent: 'center', tintColor:COLORS.primary }} 
                         resizeMode = "contain"
                     />
                 </TouchableOpacity>
@@ -140,15 +166,15 @@ class ListDefibScreen extends Component {
             <View style = {{flex:2}}>
             <BaseMapSwitcher  />
             <ListDefib  press = {()=>this.setState({isList:!this.state.isList})} isList={this.state.isList} /> 
-            <MapView style = {{flex:1.9, marginBottom : this.state.marginBottom}}
+            <MapView style = {{flex:1.9, marginBottom : this.state.marginBottom,}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
                     setTimeout(()=>this.map.animateToRegion({
                         latitude:this.state.coords.latitude,
                         longitude : this.state.coords.longitude,
-                        latitudeDelta : 0.008,
-                        longitudeDelta : 0.016
-                      },2000),3000)
+                        latitudeDelta : 0.002,
+                        longitudeDelta : 0.004
+                      },2000),2000)
                  }
                  
                  mapType = {this.props.maptype}
@@ -156,8 +182,34 @@ class ListDefibScreen extends Component {
                  initialRegion={this.state.initialregion}
                  loadingEnabled = {true}
                  loadingIndicatorColor = {COLORS.blue}
+                 showsTraffic ={true}
+                 
              
                >
+{this.state.showDirections ?( <MapViewDirections
+                    origin={this.state.coords}
+                    destination={this.state.destination}
+                    apikey={GOOGLE_MAPS_APIKEY}
+                    strokeWidth={3}
+                    strokeColor={COLORS.primary}
+                    onReady={result => {
+                        this.setState({timeTravel:result.duration})
+                        this.setState({distanceTravel:result.distance})
+                        console.log(`Distance: ${result.distance} km`)
+                        console.log(`Duration: ${result.duration} min.`)}}
+                 /> ): 
+                 <MapViewDirections
+                    origin={this.state.coords}
+                    destination={this.state.destination}
+                    apikey={GOOGLE_MAPS_APIKEY}
+                    strokeWidth={0}
+                    strokeColor={COLORS.primary}
+                    onReady={result => {
+                        this.setState({timeTravel:result.duration})
+                        this.setState({distanceTravel:result.distance})
+                        console.log(`Distance: ${result.distance} km`)
+                        console.log(`Duration: ${result.duration} min.`)}}
+                 />}
             {this.props.markers && this.props.markers.map(marker => (
                     <Marker
                         key={marker.id}
@@ -167,11 +219,7 @@ class ListDefibScreen extends Component {
                     />
                     
                 ))}
-                 {/* <MapViewDirections
-                    origin={this.state.coords}
-                    destination={this.state.destination}
-                    apikey={GOOGLE_MAPS_APIKEY}
-                 /> */}
+                
             </MapView>
 
             {this.state.isList ?(

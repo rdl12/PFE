@@ -33,7 +33,7 @@ const HomeScreen = ({navigation}) => {
                     source={images.phone_icon}
                     resizeMode ='contain'
                     tintColor='red'/>
-                <Text style = {styles.text}> Urgence </Text>
+                <Text style = {styles.text}> URGENCE </Text>
                </TouchableOpacity>
                </View>
             <View style = {styles.imageContainer}>
@@ -64,7 +64,7 @@ const HomeScreen = ({navigation}) => {
             style={{width:77,height:77}}
             source={images.help_icon}
             tintColor='green'/>
-              <Text style = {styles.text}> Help </Text>
+              <Text style = {styles.text}> HELP </Text>
            </TouchableOpacity>
             </View>
          
