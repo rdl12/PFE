@@ -146,14 +146,7 @@ export default {
                     ]
                 },
 
-                {
-                    id: 'sample-page',
-                    title: 'Sample Page',
-                    type: 'item',
-                    url: '/sample-page',
-                    classes: 'nav-item',
-                    icon: 'feather icon-sidebar'
-                },
+              
                 {
                     id: 'docs',
                     title: 'Documentation',

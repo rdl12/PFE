@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.locationtech.jts.geom.Point;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,10 +25,11 @@ import com.PFE.Backend.entities.Province;
 
 import lombok.AllArgsConstructor;
 
-@CrossOrigin(origins = "*")
+
 @RequestMapping(value = "Defibrillateur")
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 public class DefibrillateurController {
 	
 	private final DefibrillateurService defibrillateurService;
@@ -70,6 +72,12 @@ public class DefibrillateurController {
 	        defibrillateur.setGeom(geom);
 	        defibrillateur.setEtat(s);
 	        defibrillateurService.save(defibrillateur);
+	    }
+	
+	  @PatchMapping("/update")//replace an existing Resource entirely  // @PatchMapping partial update
+	    public String update(@RequestBody Defibrillateur defibrillateur) {
+            defibrillateurService.save(defibrillateur);
+	        return "updated  success";
 	    }
 	
 	 @GetMapping(value = "/findDefibIn100/lat={lat}&lng={lng}")

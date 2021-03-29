@@ -91,6 +91,18 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
 
         };
+    case actionTypes.FETCH_DEFIB_DETAILS:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
+    case actionTypes.MODIFY_DEFIB:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
         default:
             return state;
     }

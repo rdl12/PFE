@@ -1,6 +1,9 @@
 package com.PFE.Backend.Security.config;
 
 import lombok.AllArgsConstructor;
+
+import java.util.Arrays;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -9,6 +12,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.PFE.Backend.Services.AppUserService;
 
@@ -23,10 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-	        http
+	        http    
+	                .cors().and()
 	                .csrf().disable()
 	                .authorizeRequests()
-	                .antMatchers("/api/v*/registration/**","/Defibrillateur/add","/Defibrillateur/findDefibIn100/**","/Defibrillateur/find/**")
+	                .antMatchers("/api/v*/registration/**","/Defibrillateur/add","/Defibrillateur/findDefibIn100/**","/Defibrillateur/find/**","/Defibrillateur/update")
 	                .permitAll()
 	                .anyRequest()
 	                .authenticated().and()
@@ -34,7 +42,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .defaultSuccessUrl("/success_login",true)
 	                .permitAll();
 	                
+	                
 	    }
+	    @Bean
+		CorsConfigurationSource corsConfigurationSource() {
+			CorsConfiguration configuration = new CorsConfiguration();
+			configuration.setAllowedOrigins(Arrays.asList("*"));
+			configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH"));
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", configuration);
+			return source;
+		}
 
 	    @Override
 	    protected void configure(AuthenticationManagerBuilder auth) throws Exception {

@@ -13,7 +13,7 @@ import com.PFE.Backend.entities.AppUser;
 import lombok.AllArgsConstructor;
 
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @AllArgsConstructor
 @RestController
 public class LoginController {

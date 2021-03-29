@@ -1,124 +1,59 @@
 import React from 'react';
-import {Row, Col, Card, Table} from 'react-bootstrap';
+import {Row, Col, Card, Table,Button,} from 'react-bootstrap';
+import {NavLink} from 'react-router-dom';
 
 import Aux from "../../hoc/_Aux";
+import DEMO from "../../store/constant";
+import { connect } from 'react-redux';
+import {Fetch_Defib} from '../../store/actions'
+
+
 
 class BootstrapTable extends React.Component {
+     
+     
+    componentDidMount(){
+        this.props.Fetch_Defib()
+        console.log(this.props)
+       
+    }
+  
     render() {
+        const { 
+             Defib,
+          } = this.props;
+         
         return (
             <Aux>
                 <Row>
                     <Col>
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Basic Table</Card.Title>
-                                <span className="d-block m-t-5">use bootstrap <code>Table</code> component</span>
-                            </Card.Header>
-                            <Card.Body>
-                                <Table responsive>
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Hover Table</Card.Title>
-                                <span className="d-block m-t-5">use props <code>hover</code> with <code>Table</code> component</span>
-                            </Card.Header>
-                            <Card.Body>
-                                <Table responsive hover>
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Striped Table</Card.Title>
+                                <Card.Title as="h5">Table</Card.Title>
                                 <span className="d-block m-t-5">use props <code>striped</code> with <code>Table</code> component</span>
                             </Card.Header>
                             <Card.Body>
                                 <Table striped responsive>
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>id</th>
+                                        <th>Nom</th>
+                                        <th>Date</th>
+                                        <th>Ville</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+                             {typeof Defib !== "undefined" &&  Defib.map(item => 
+                              <tr key = {item.id}>
+                              <th scope="row">{item.id}</th>
+                              <td>{item.marque_defib}</td>
+                              <td>{item.date}</td>
+                              <td>{item.latitude}</td>
+                              <td><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12" ><NavLink to={`/sample-page/${item.id}`}>Details</NavLink></a></td>
+                          </tr>)
+                             }
+                                  
                                     </tbody>
                                 </Table>
                             </Card.Body>
@@ -130,4 +65,18 @@ class BootstrapTable extends React.Component {
     }
 }
 
-export default BootstrapTable;
+
+
+const mapStateToProps = (state) => {
+    const { defib } = state
+    return { Defib: defib  }
+  }
+
+ const mapDispatchToProps = (dispatch) => {
+
+    return {
+        Fetch_Defib: () => dispatch(Fetch_Defib())
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(BootstrapTable)

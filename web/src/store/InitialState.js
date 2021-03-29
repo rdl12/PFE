@@ -11,6 +11,7 @@ export const initialState = {
     refreshToken: '',
     expiresOn: '',
     data: '',
-    defib:[]
+    defib:[],
+    defibDetails:[]
 };
 
