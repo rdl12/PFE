@@ -39,6 +39,11 @@ const AddDefibScreen = ({navigation}) => {
         "motif" : "from_mobile",
         "marque_defib" : Nom,
         "accesibillité": AccessibiliteState.checked,
+        "nom": Nom,
+        "telephone" : Telephone,
+        "adresse" : Adresse.addrese,
+        "ville" : Adresse.ville,
+        "province" : Adresse.province
         
       }
        dispatch(Add_Defib_Posted(defib))

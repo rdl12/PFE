@@ -25,7 +25,7 @@ const DetailsScreen = () => {
                 <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>0707072629</Paragraph>
+                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.telephone}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
@@ -51,7 +51,7 @@ const DetailsScreen = () => {
                 <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.description}</Paragraph>
+                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.nom}</Paragraph>
                     </View>
                </Card.Content>
              </Card>

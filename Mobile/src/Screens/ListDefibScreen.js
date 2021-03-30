@@ -109,27 +109,27 @@ class ListDefibScreen extends Component {
                               resizeMode = "contain" />
                             <Text style={{marginTop:7,fontWeight: "bold",}} >{item.description}</Text>
                         </View>
-                         
-   
-                    </View>
-                    <Text style={{}} >Adreese...................</Text>
-                    </View>
-                    
-                    <View style={{}}>
-                    { this.state.clicked[item.id] ? ( <Text style={{marginTop:7,fontWeight: "bold",}} >{Math.round(this.state.timeTravel)} min</Text>) : null}
-                    { !this.state.clicked[item.id] ? (
-                         <Image
+                        <View style={{flexDirection:'row',justifyContent:"space-between"}}>
+                             { this.state.clicked[item.id] ? ( <Text style={{marginTop:7,fontWeight: "bold",}} >{Math.round(this.state.timeTravel)} min</Text>) : null}
+                             { !this.state.clicked[item.id] ? (
+                            <Image
                               source={ images.arrow_down }
                               style={{ width: 30, height: 30, tintColor:COLORS.primary }} 
                               resizeMode = "contain" />
                               ):
                             
-                         <Image
+                            <Image
                               source={ images.arrow_down }
                               style={{ width: 30, height: 30, tintColor:COLORS.primary,transform: [{rotateX: '180deg'}] }} 
                               resizeMode = "contain" />
                               }
+                        </View>
                     </View>
+
+                    <Text style={{}} >{item.adresse}</Text>
+                    </View>
+                    
+                    
                         
         </TouchableOpacity>
        { this.state.clicked[item.id] ? (<View style = {{backgroundColor: COLORS.lightGray, padding : 7,borderBottomWidth : 1, borderColor : "#eee",flexDirection:'row',justifyContent:'space-between'}}>
