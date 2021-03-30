@@ -9,6 +9,7 @@ import config from './config';
 import {store} from './store/store'
 
 
+
 const app = (
     <Provider store={store}>
         <BrowserRouter basename={config.basename}>

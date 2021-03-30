@@ -1,6 +1,6 @@
 {
   "name": "datta-able-rv18.0.4",
-  "proxy" : "http://localhost:9090",
+  "proxy": "http://localhost:9090",
   "version": "0.1.0",
   "private": true,
   "homepage": "http://lite.codedthemes.com/datta-able/react/default/",

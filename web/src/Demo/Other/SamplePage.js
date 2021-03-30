@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col,Card,Button,FormControl,Form} from 'react-bootstrap';
+import {Row, Col,Card,Button,FormControl,Form,ListGroup,Image } from 'react-bootstrap';
 import {Map, Marker, GoogleApiWrapper, InfoWindow,}  from 'google-maps-react';
 import { connect } from 'react-redux';
 
@@ -25,7 +25,7 @@ class SamplePage extends React.Component {
     Approuve = () => {
         this.props.Defib.etat.id = 2
         this.props.Defib.etat.etat = 'validé'
-        //console.log(this.props.Defib)
+        console.log(this.props.Defib)
         this.props.Modify_defib(this.props.Defib)
     }
     onMarkerClick = (props, marker) =>
@@ -54,30 +54,66 @@ class SamplePage extends React.Component {
 
         return (
             <Aux>
-                <Row>
-                    <Col xl={6}>
-                        <Card title='Details' >
+                      <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Carte</Card.Title>
+                                <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : nom et prenom (valider ou rejeter ce defib en changeant son etat au dessous))</Card.Title>
+                                <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Valider</Button>
+                            </Card.Header>
+                            
+                        </Card>
+                <Row>
+                <Col xl={4}>
+                        <Card title='Details' isOption>
+                            <Card.Header>
+                                <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
+                                <div style={{height: '450px', width: '100%'}}>
+                                <ListGroup variant="flush">
+                                <ListGroup.Item>
+                                          <Row>
+                                             <Col>
+                                                <Image src={this.props.Defib.photo} style={{height: '150px', width: '100%', borderWidth:1}}></Image>
+                                             </Col>
+                                             <Col>
+                                                <Card.Title>Tel</Card.Title>
+                                                <Card.Text>0{this.props.Defib.telephone}</Card.Text>
+                                                <Card.Title>Marque</Card.Title>
+                                                 <Card.Text>{this.props.Defib.marque_defib}</Card.Text>
+                                             </Col>
+                                          </Row>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                             <Card.Title>Nom</Card.Title>
+                                             <Card.Text>{this.props.Defib.nom}</Card.Text>   
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                         <Card.Title>Description</Card.Title>
+                                         <Card.Text>{this.props.Defib.description}</Card.Text>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                        <Card.Title>Accessibilité</Card.Title>
+                                        <Card.Text>{this.props.Defib.accesibillité}</Card.Text>
+                                </ListGroup.Item>
+                                </ListGroup>
+                                
+                                </div>
+                            </Card.Body>
+                        </Card>
+                   
+                    </Col>
+                    <Col xl={4}>
+                        <Card title='Details' >
+                                <div style={{height: '575px', width: '100%'}}>
                                     <Map
-                                        centerAroundCurrentLocation
+                                        
                                         className="map"
                                         google={this.props.google}
                                         onClick={this.onMapClicked}
                                         zoom={12}>
-
                                         <Marker
-                                            name="Codedthemes"
-                                            position={{ lat: 21.2335163, lng: 72.8643298 }}
-                                            onClick={this.onMarkerClick}
-                                        />
-
-                                        <Marker
-                                            name="Roman Point"
-                                            position={{ lat: 21.2148165, lng: 72.8627243 }}
+                                            name="ali"
+                                            position={{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }}
                                             onClick={this.onMarkerClick}
                                         />
 
@@ -93,18 +129,51 @@ class SamplePage extends React.Component {
                                         </InfoWindow>
                                     </Map>
                                 </div>
-                            </Card.Body>
                         </Card>
                    
                     </Col>
-                    <Col xl={6}>
+                    <Col xl={4}>
                         <Card title='Details' isOption>
                             <Card.Header>
-                                <Card.Title as="h5">Carte</Card.Title>
+                                <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
-                                    
+                                <div style={{height: '450px', width: '100%'}}>
+                                <ListGroup variant="flush">
+                                <ListGroup.Item>
+                                         <Card.Title>Adresse</Card.Title>
+                                         <Card.Text>{this.props.Defib.adresse}</Card.Text>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                         <Card.Title>Ville</Card.Title>
+                                         <Card.Text>{this.props.Defib.ville}</Card.Text>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                         <Card.Title>Province</Card.Title>
+                                         <Card.Text>{this.props.Defib.province}</Card.Text>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                         <Row>
+                                             <Col>
+                                             <Card.Title>latitude</Card.Title>
+                                             <Card.Text>{this.props.Defib.latitude}</Card.Text>
+                                             </Col>
+                                             <Col>
+                                             <Card.Title>longitude</Card.Title>
+                                             <Card.Text>{this.props.Defib.longitude}</Card.Text>
+                                             </Col>
+                                          </Row>   
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                            <Card.Title>Etat</Card.Title>
+                                            <Form.Control as="select" className="mb-3"  value = {this.state.Etat} onChange={e => this.setState({Etat:e.target.value})}>
+                                               <option>Etat</option>
+                                               <option>Valide</option>
+                                               <option>Rejete</option>
+                                               <option>En cours de traitement</option>
+                                            </Form.Control>
+                                </ListGroup.Item>
+                                </ListGroup>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -113,15 +182,7 @@ class SamplePage extends React.Component {
                 </Row>
 
                 <Row>
-                <Form.Control as="select" className="mb-3"  value = {this.state.Etat} onChange={e => this.setState({Etat:e.target.value})}>
-                    <option>Etat</option>
-                    <option>Valide</option>
-                    <option>Rejete</option>
-                    <option>En cours de traitement</option>
-                </Form.Control>
-                </Row>
-                <Row>
-                <Button variant={'outline-info'} onClick = {this.Approuve}>Valider</Button>
+                
                 </Row>
             </Aux>
         );
