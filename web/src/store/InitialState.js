@@ -12,6 +12,14 @@ export const initialState = {
     expiresOn: '',
     data: '',
     defib:[],
-    defibDetails:[]
+    defibDetails:[],
+    addrese: '',
+    pays :'' ,
+    ville : '',
+    province : '',
+    codePostal : '',
+    lat : '',
+    long: '',
+    defibPosted:[],
 };
 

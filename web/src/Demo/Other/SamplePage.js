@@ -14,18 +14,34 @@ class SamplePage extends React.Component {
         showingInfoWindow: false,
         position: null,
         Etat:"",
+        center:{ lat: 0, lng: 0 }
+        
         
     };
     componentDidMount() {
 
        this.props.Fecth_DefiById(this.props.match.params.id)
         console.log(this.props.Defib)
+        setTimeout(() => {this.setState({
+            center:{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }
+        })},200) 
+
+      
     }
 
     Approuve = () => {
-        this.props.Defib.etat.id = 2
-        this.props.Defib.etat.etat = 'validé'
-        console.log(this.props.Defib)
+        if(this.state.Etat === "Valide"){
+            this.props.Defib.etat.id = 2
+            this.props.Defib.etat.etat = 'validé'
+        }
+        else if(this.state.Etat === "Rejete"){
+            this.props.Defib.etat.id = 3
+            this.props.Defib.etat.etat = 'rejete'
+        }
+        else if(this.state.Etat === "En cours de traitement"){
+            this.props.Defib.etat.id = 5
+            this.props.Defib.etat.etat = 'en cours de traitement'
+        }
         this.props.Modify_defib(this.props.Defib)
     }
     onMarkerClick = (props, marker) =>
@@ -57,13 +73,13 @@ class SamplePage extends React.Component {
                       <Card>
                             <Card.Header>
                                 <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : nom et prenom (valider ou rejeter ce defib en changeant son etat au dessous))</Card.Title>
-                                <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Valider</Button>
+                                <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Submit</Button>
                             </Card.Header>
                             
                         </Card>
                 <Row>
                 <Col xl={4}>
-                        <Card title='Details' isOption>
+                        <Card title='Details' >
                             <Card.Header>
                                 <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>
@@ -105,19 +121,19 @@ class SamplePage extends React.Component {
                     <Col xl={4}>
                         <Card title='Details' >
                                 <div style={{height: '575px', width: '100%'}}>
-                                    <Map
-                                        
+                                    <Map  
                                         className="map"
+                                        center={this.state.center}
                                         google={this.props.google}
                                         onClick={this.onMapClicked}
-                                        zoom={12}>
+                                        zoom={20}>
                                         <Marker
                                             name="ali"
                                             position={{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }}
                                             onClick={this.onMarkerClick}
                                         />
 
-                                        <Marker name="Current Location" onClick={this.onMarkerClick} />
+                                        {/* <Marker name="Current Location" onClick={this.onMarkerClick} /> */}
 
                                         <InfoWindow
                                             marker={this.state.activeMarker}
@@ -133,7 +149,7 @@ class SamplePage extends React.Component {
                    
                     </Col>
                     <Col xl={4}>
-                        <Card title='Details' isOption>
+                        <Card title='Details' >
                             <Card.Header>
                                 <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>

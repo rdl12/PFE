@@ -9,3 +9,5 @@ export const SET_LOGIN_STATE = 'SET_LOGIN_STATE'
 export const FETCH_DEFIB = "FETCH_DEFIB"
 export const FETCH_DEFIB_DETAILS = "FETCH_DEFIB_DETAILS"
 export const MODIFY_DEFIB = "MODIFY_DEFIB"
+export const FETCH_ADRESS = "FETCH_ADRESS"
+export const ADD_DEFIB = "ADD_DEFIB"

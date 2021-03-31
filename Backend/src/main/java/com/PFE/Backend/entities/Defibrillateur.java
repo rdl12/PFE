@@ -51,6 +51,16 @@ public class Defibrillateur {
     private String type_electrode;
 	@Column(name = "accesibillité")
     private String accesibillité;
+	@Column(name = "nom")
+    private String nom;
+	@Column(name = "telephone")
+    private Integer telephone;
+	@Column(name = "adresse")
+    private String adresse;
+	@Column(name = "ville")
+    private String ville;
+	@Column(name = "province")
+    private String province;
 	
     @ManyToOne
     private Etat etat;
@@ -59,5 +69,5 @@ public class Defibrillateur {
     private AppUser user;
 
     @ManyToOne
-    private Province province;
+    private Province prov;
 }

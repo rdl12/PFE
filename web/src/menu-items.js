@@ -81,6 +81,13 @@ export default {
                     icon: 'feather icon-file-text'
                 },
                 {
+                    id: 'Add-defib',
+                    title: 'Ajouter un defibrilateur',
+                    type: 'item',
+                    url: '/Ajout',
+                    icon: 'feather icon-file-text'
+                },
+                {
                     id: 'bootstrap',
                     title: 'Table',
                     type: 'item',

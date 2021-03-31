@@ -103,6 +103,18 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
     
         };
+    case actionTypes.FETCH_ADRESS:
+        return {
+            ...state,
+            ...action.payload,
+         };
+
+    case actionTypes.ADD_DEFIB:
+    return {
+        ...state,
+        ...action.payload
+
+    };
         default:
             return state;
     }

@@ -1,0 +1,205 @@
+import React, { Component } from 'react'
+import {Row, Col,Card,Button,FormControl,Form,ListGroup,Image } from 'react-bootstrap';
+import {Map, Marker, GoogleApiWrapper, InfoWindow,}  from 'google-maps-react';
+import { connect } from 'react-redux';
+
+import Aux from "../../hoc/_Aux";
+
+export class Etape2 extends Component {
+    constructor(props){
+        super(props)
+        console.log(this.props)
+    }
+    state = {
+        activeMarker: {},
+        selectedPlace: {},
+        showingInfoWindow: false,
+        position: null,
+        Etat:"",
+        center:{ lat: 0, lng: 0 }
+        
+        
+    };
+    componentDidMount() {
+
+        console.log(this.props)
+        // console.log(this.props.Defib)
+         setTimeout(() => {this.setState({
+             center:{ lat: this.props.coords.lat, lng: this.props.coords.lng }
+         })},200) 
+     }
+    
+    onMarkerClick = (props, marker) =>
+    this.setState({
+        activeMarker: marker,
+        selectedPlace: props,
+        showingInfoWindow: true
+    });
+    onInfoWindowClose = () =>
+    this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+    });
+
+    onMapClicked = () => {
+        if (this.state.showingInfoWindow)
+            this.setState({
+                activeMarker: null,
+                showingInfoWindow: false
+            });
+    };
+     submit = () =>{
+        let defib = {  
+            "description" : this.props.Description,
+            "latitude" :this.props.coords.lat,
+            "longitude" : this.props.coords.lng,
+            "photo" : "photo",
+            "motif" : "motif",
+            "marque_defib" :"defib2000",
+            "accesibillité": this.props.Access,
+            "nom": this.props.Nom,
+            "telephone" : this.props.Telephone,
+            "adresse" :this.props.Adresse,
+            "ville" : this.props.Ville,
+            "province" : this.props.Province
+            
+          }
+       this.props.dispatch(defib)
+      
+     }
+    render() {
+            return (
+                <Aux>  
+                       <Card>
+                            <Card.Header>
+                                <Card.Title as="h5">Ajout de defib</Card.Title>
+                                <Button variant={'outline-info'} onClick = {this.submit} style={{float: 'right'}}>Submit</Button>
+                            </Card.Header>
+                            
+                        </Card>  
+                    <Row>
+                    <Col xl={4}>
+                            <Card title='Etape 2' >
+                                <Card.Header>
+                                    <Card.Title as="h5">Details</Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    <div style={{height: '450px', width: '100%'}}>
+                                    <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                              <Row>
+                                                 <Col>
+                                                    <Image src={this.props.photo} style={{height: '150px', width: '100%', borderWidth:1}}></Image>
+                                                 </Col>
+                                                 <Col>
+                                                    <Card.Title>Tel</Card.Title>
+                                                    <Card.Text>0{this.props.Telephone}</Card.Text>
+                                                    <Card.Title>Marque</Card.Title>
+                                                     <Card.Text>{this.props.Marque}</Card.Text>
+                                                 </Col>
+                                              </Row>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                                 <Card.Title>Nom</Card.Title>
+                                                 <Card.Text>{this.props.Nom}</Card.Text>   
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                             <Card.Title>Description</Card.Title>
+                                             <Card.Text>{this.props.Description}</Card.Text>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                            <Card.Title>Accessibilité</Card.Title>
+                                            <Card.Text>{this.props.Access}</Card.Text>
+                                    </ListGroup.Item>
+                                    </ListGroup>
+                                    
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                       
+                        </Col>
+                        <Col xl={4}>
+                            <Card title='Details' >
+                                    <div style={{height: '575px', width: '100%'}}>
+                                        <Map  
+                                            className="map"
+                                            center={this.state.center}
+                                            google={this.props.google}
+                                            onClick={this.onMapClicked}
+                                            zoom={20}>
+                                            <Marker
+                                                name="ali"
+                                                position={{ lat: this.props.coords.lat, lng: this.props.coords.lng }}
+                                                onClick={this.onMarkerClick}
+                                            />
+    
+                                            {/* <Marker name="Current Location" onClick={this.onMarkerClick} /> */}
+    
+                                            <InfoWindow
+                                                marker={this.state.activeMarker}
+                                                onClose={this.onInfoWindowClose}
+                                                visible={this.state.showingInfoWindow}>
+                                                <div>
+                                                    <h3>{this.state.selectedPlace.name}</h3>
+                                                </div>
+                                            </InfoWindow>
+                                        </Map>
+                                    </div>
+                            </Card>
+                       
+                        </Col>
+                        <Col xl={4}>
+                            <Card title='Adresse' >
+                                <Card.Header>
+                                    <Card.Title as="h5">Adresse</Card.Title>
+                                </Card.Header>
+                                <Card.Body>
+                                    <div style={{height: '450px', width: '100%'}}>
+                                    <ListGroup variant="flush">
+                                    <ListGroup.Item>
+                                             <Card.Title>Adresse</Card.Title>
+                                            <Card.Text>{this.props.Adresse}</Card.Text>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                             <Card.Title>Ville</Card.Title>
+                                             <Card.Text>{this.props.Ville}</Card.Text>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                             <Card.Title>Province</Card.Title>
+                                             <Card.Text>{this.props.Province}</Card.Text>
+                                    </ListGroup.Item>
+                                    <ListGroup.Item>
+                                             <Row>
+                                                 <Col>
+                                                 <Card.Title>latitude</Card.Title>
+                                                 <Card.Text>{this.props.coords.lat}</Card.Text>
+                                                 </Col>
+                                                 <Col>
+                                                 <Card.Title>longitude</Card.Title>
+                                                 <Card.Text>{this.props.coords.lng}</Card.Text>
+                                                 </Col>
+                                              </Row>   
+                                    </ListGroup.Item>
+                                  
+                                    </ListGroup>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                       
+                        </Col>
+                    </Row>
+    
+                    <Row>
+                    
+                    </Row>
+                </Aux>
+            );
+        
+    }
+}
+
+
+
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'
+})(Etape2);
