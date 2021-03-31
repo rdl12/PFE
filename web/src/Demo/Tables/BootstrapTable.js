@@ -29,8 +29,8 @@ class BootstrapTable extends React.Component {
                     <Col>
                         <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Table</Card.Title>
-                                <span className="d-block m-t-5">use props <code>striped</code> with <code>Table</code> component</span>
+                                <Card.Title as="h5">Defibrillateurs ajoutés</Card.Title>
+                                <span className="d-block m-t-5">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
                             </Card.Header>
                             <Card.Body>
                                 <Table striped responsive>

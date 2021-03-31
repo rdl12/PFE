@@ -75,18 +75,14 @@ class Dashboard extends React.Component {
                     <Col md={6} xl={4}>
                         <Card>
                             <Card.Body>
-                                <h6 className='mb-4'>Daily Sales</h6>
+                                <h6 className='mb-4'>defibrillateurs recemment signalé</h6>
                                 <div className="row d-flex align-items-center">
                                     <div className="col-9">
-                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-arrow-up text-c-green f-30 m-r-5"/> $249.95</h3>
-                                    </div>
-
-                                    <div className="col-3 text-right">
-                                        <p className="m-b-0">50%</p>
-                                    </div>
+                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 20 defibrillateurs</h3>
+                                    </div> 
                                 </div>
                                 <div className="progress m-t-30" style={{height: '7px'}}>
-                                    <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '50%'}} aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"/>
+                                    <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -94,18 +90,14 @@ class Dashboard extends React.Component {
                     <Col md={6} xl={4}>
                         <Card>
                             <Card.Body>
-                                <h6 className='mb-4'>Monthly Sales</h6>
+                                <h6 className='mb-4'>defibrillateurs en cours de traitement</h6>
                                 <div className="row d-flex align-items-center">
                                     <div className="col-9">
-                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-arrow-down text-c-red f-30 m-r-5"/> $2.942.32</h3>
-                                    </div>
-
-                                    <div className="col-3 text-right">
-                                        <p className="m-b-0">36%</p>
+                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/>44 defibrillateurs</h3>
                                     </div>
                                 </div>
                                 <div className="progress m-t-30" style={{height: '7px'}}>
-                                    <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '35%'}} aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"/>
+                                    <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -113,18 +105,14 @@ class Dashboard extends React.Component {
                     <Col xl={4}>
                         <Card>
                             <Card.Body>
-                                <h6 className='mb-4'>Yearly Sales</h6>
+                                <h6 className='mb-4'>defibrillateurs modifiés</h6>
                                 <div className="row d-flex align-items-center">
                                     <div className="col-9">
-                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-arrow-up text-c-green f-30 m-r-5"/> $8.638.32</h3>
-                                    </div>
-
-                                    <div className="col-3 text-right">
-                                        <p className="m-b-0">70%</p>
+                                        <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> 4 defibrillateurs</h3>
                                     </div>
                                 </div>
                                 <div className="progress m-t-30" style={{height: '7px'}}>
-                                    <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '70%'}} aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"/>
+                                    <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
                                 </div>
                             </Card.Body>
                         </Card>
@@ -132,66 +120,34 @@ class Dashboard extends React.Component {
                     <Col md={6} xl={8}>
                         <Card className='Recent-Users'>
                             <Card.Header>
-                                <Card.Title as='h5'>Recent Users</Card.Title>
+                                <Card.Title as='h5'>Utilisateurs recemment inscrit</Card.Title>
                             </Card.Header>
                             <Card.Body className='px-0 py-2'>
                                 <Table responsive hover>
                                     <tbody>
                                     <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
+                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                         <td>
-                                            <h6 className="mb-1">Isabella Christensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                            <h6 className="mb-1">Soualy ali</h6>
+                                            <p className="m-0">Casablablanca</p>
                                         </td>
                                         <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>11 MAY 12:56</h6>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-red f-10 m-r-15"/>30 MAR 2021</h6>
                                         </td>
-                                        <td><a href={DEMO.BLANK_LINK} className="label theme-bg2 text-white f-12">Reject</a><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12">Approve</a></td>
+                                       
                                     </tr>
                                     <tr className="unread">
                                         <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
                                         <td>
-                                            <h6 className="mb-1">Mathilde Andersen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
+                                            <h6 className="mb-1">Rami Rachid</h6>
+                                            <p className="m-0">CasaBlanca</p>
                                         </td>
                                         <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-red f-10 m-r-15"/>11 MAY 10:35</h6>
+                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>31 MAR 2021</h6>
                                         </td>
-                                        <td><a href={DEMO.BLANK_LINK} className="label theme-bg2 text-white f-12">Reject</a><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12">Approve</a></td>
+                                        
                                     </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar3} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Karla Sorensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>9 MAY 17:38</h6>
-                                        </td>
-                                        <td><a href={DEMO.BLANK_LINK} className="label theme-bg2 text-white f-12">Reject</a><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12">Approve</a></td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Ida Jorgensen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted f-w-300"><i className="fa fa-circle text-c-red f-10 m-r-15"/>19 MAY 12:56</h6>
-                                        </td>
-                                        <td><a href={DEMO.BLANK_LINK} className="label theme-bg2 text-white f-12">Reject</a><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12">Approve</a></td>
-                                    </tr>
-                                    <tr className="unread">
-                                        <td><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></td>
-                                        <td>
-                                            <h6 className="mb-1">Albert Andersen</h6>
-                                            <p className="m-0">Lorem Ipsum is simply dummy text of…</p>
-                                        </td>
-                                        <td>
-                                            <h6 className="text-muted"><i className="fa fa-circle text-c-green f-10 m-r-15"/>21 July 12:56</h6>
-                                        </td>
-                                        <td><a href={DEMO.BLANK_LINK} className="label theme-bg2 text-white f-12">Reject</a><a href={DEMO.BLANK_LINK} className="label theme-bg text-white f-12">Approve</a></td>
-                                    </tr>
+                                    
                                     </tbody>
                                 </Table>
                             </Card.Body>
@@ -202,14 +158,14 @@ class Dashboard extends React.Component {
                             <Card.Body>
                                 <div className="row align-items-center justify-content-center">
                                     <div className="col">
-                                        <h5 className="m-0">Upcoming Event</h5>
+                                        <h5 className="m-0">formations à venir</h5>
                                     </div>
                                     <div className="col-auto">
                                         <label className="label theme-bg2 text-white f-14 f-w-400 float-right">34%</label>
                                     </div>
                                 </div>
-                                <h2 className="mt-2 f-w-300">45<sub className="text-muted f-14">Competitors</sub></h2>
-                                <h6 className="text-muted mt-3 mb-0">You can participate in event </h6>
+                                <h2 className="mt-2 f-w-300">24<sub className="text-muted f-14"> inscrits</sub></h2>
+                                <h6 className="text-muted mt-3 mb-0">Voir</h6>
                                 <i className="fa fa-angellist text-c-purple f-50"/>
                             </Card.Body>
                         </Card>
@@ -221,7 +177,7 @@ class Dashboard extends React.Component {
                                     </div>
                                     <div className="col">
                                         <h3 className="f-w-300">235</h3>
-                                        <span className="d-block text-uppercase">total ideas</span>
+                                        <span className="d-block text-uppercase">nombre de defib </span>
                                     </div>
                                 </div>
                             </Card.Body>
@@ -232,7 +188,7 @@ class Dashboard extends React.Component {
                                     </div>
                                     <div className="col">
                                         <h3 className="f-w-300">26</h3>
-                                        <span className="d-block text-uppercase">total locations</span>
+                                        <span className="d-block text-uppercase">nombre de villes</span>
                                     </div>
                                 </div>
                             </Card.Body>

@@ -48,32 +48,15 @@ export class Etape2 extends Component {
                 showingInfoWindow: false
             });
     };
-     submit = () =>{
-        let defib = {  
-            "description" : this.props.Description,
-            "latitude" :this.props.coords.lat,
-            "longitude" : this.props.coords.lng,
-            "photo" : "photo",
-            "motif" : "motif",
-            "marque_defib" :"defib2000",
-            "accesibillité": this.props.Access,
-            "nom": this.props.Nom,
-            "telephone" : this.props.Telephone,
-            "adresse" :this.props.Adresse,
-            "ville" : this.props.Ville,
-            "province" : this.props.Province
-            
-          }
-       this.props.dispatch(defib)
-      
-     }
+     
     render() {
             return (
                 <Aux>  
                        <Card>
                             <Card.Header>
+                                <Button variant={'outline-info'} onClick = {this.props.precedent} style={{float: 'right'}}>Precedent</Button>
                                 <Card.Title as="h5">Ajout de defib</Card.Title>
-                                <Button variant={'outline-info'} onClick = {this.submit} style={{float: 'right'}}>Submit</Button>
+                                <Button variant={'outline-info'} onClick = {this.props.click} style={{float: 'right'}}>Submit</Button>
                             </Card.Header>
                             
                         </Card>  

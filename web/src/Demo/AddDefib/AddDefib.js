@@ -17,8 +17,8 @@ export class AddDefib extends Component {
         Description:'',
         Marque:'',
         coords:{
-            lat:0,
-            lng:0
+            lat:'',
+            lng:''
         },
         Access:'Inconnue'
 
@@ -31,6 +31,37 @@ export class AddDefib extends Component {
              isActive:false
          })   
     }
+
+    Precedent = () => {
+      
+         this.setState({
+             isActive:true
+         })   
+    }
+
+    submit = () =>{
+        let defib = {  
+            "description" : this.state.Description,
+            "latitude" :this.state.coords.lat,
+            "longitude" : this.state.coords.lng,
+            "photo" : "photo",
+            "motif" : "motif",
+            "marque_defib" :this.state.Marque,
+            "etat":{
+                id : 2,
+                etat : 'validé'
+            },
+            "accesibillité": this.state.Access,
+            "nom": this.state.Nom,
+            "telephone" : this.state.Telephone,
+            "adresse" :this.props.Adresse,
+            "ville" : this.props.Ville,
+            "province" : this.props.Province
+            
+          }
+          this.props.Add_Defib_Posted(defib)
+      
+     }
     render() {
         return (
             <Aux>
@@ -38,32 +69,33 @@ export class AddDefib extends Component {
                     <Col>
                     { this.state.isActive ? ( <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Basic Component</Card.Title>
+                                <Card.Title as="h5">Ajouter un defibrillateur</Card.Title>
+                                <span className="d-block m-t-8">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
                             </Card.Header>
                             <Card.Body>
-                                <h5>Form controls</h5>
-                                <hr/>
+                                
+                                
                                 <Row>
                                     <Col md={6}>
                                         <Form>
                                             <Form.Group controlId="formBasicNom">
                                             <Form.Label>Nom</Form.Label>
-                                            <Form.Control type="email" placeholder="Text"  onChange={e => this.setState({Nom:e.target.value})}/>
+                                            <Form.Control type="email" placeholder="Nom du proprietaire" value={this.state.Nom}  onChange={e => this.setState({Nom:e.target.value})}/>
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicTelephone">
                                             <Form.Label>Telephone</Form.Label>
-                                            <Form.Control type="email" placeholder="Text" onChange={e => this.setState({Telephone:e.target.value})}/>
+                                            <Form.Control type="email" placeholder="Telephone" value={this.state.Telephone} onChange={e => this.setState({Telephone:e.target.value})}/>
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicDescription">
                                             <Form.Label>Description</Form.Label>
-                                            <Form.Control type="email" placeholder="Text" onChange={e => this.setState({Description:e.target.value})}/>
+                                            <Form.Control type="email" placeholder="description" value={this.state.Description} onChange={e => this.setState({Description:e.target.value})}/>
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicMarque">
                                             <Form.Label>Marque</Form.Label>
-                                            <Form.Control type="email" placeholder="Text" onChange={e => this.setState({Marque:e.target.value})} />
+                                            <Form.Control type="email" placeholder="marque du defib" value={this.state.Marque} onChange={e => this.setState({Marque:e.target.value})} />
                                             </Form.Group>
                                          
                                         </Form>
@@ -71,11 +103,11 @@ export class AddDefib extends Component {
                                     <Col md={6}>
                                         <Form.Group controlId="exampleForm.Latitude">
                                             <Form.Label>Latitude</Form.Label>
-                                            <Form.Control type="email" placeholder="Text" onChange={e => this.setState({coords:{lat:e.target.value}})}/>
+                                            <Form.Control type="email" placeholder="0" value={this.state.coords.lat} required onChange={e => this.setState({coords:{lat:e.target.value}})}/>
                                         </Form.Group>
                                         <Form.Group controlId="exampleForm.Longitude">
                                             <Form.Label>Longitude</Form.Label>
-                                            <Form.Control type="email" placeholder="Text"  onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
+                                            <Form.Control type="email" placeholder="0"  value={this.state.coords.lng} onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
                                         </Form.Group>
                                         <Form.Group>
                                         <Form.Label >Accessibilite</Form.Label>
@@ -84,7 +116,7 @@ export class AddDefib extends Component {
                                                 type="radio"
                                                 label="Privee"
                                                 name="supportedRadios"
-                                                value = 'Privee'
+                                                value = 'Privée'
                                                 id="prive"
                                                 onChange={e => this.setState({Access:e.target.value})}
                                             />
@@ -101,7 +133,7 @@ export class AddDefib extends Component {
                                                 custom
                                                 type="radio"
                                                 label="Inconnue"
-                                                value = 'Inconuue'
+                                                value = 'Inconnue'
                                                 name="supportedRadios"
                                                 id="inconnue"
                                                 onChange={e => this.setState({Access:e.target.value})}
@@ -121,7 +153,7 @@ export class AddDefib extends Component {
                     Nom = {this.state.Nom} 
                     Telephone = {this.state.Telephone} 
                     Description = {this.state.Description}
-                    Marque = {this.state.marque}
+                    Marque = {this.state.Marque}
                     coords = {this.state.coords}
                     Access = {this.state.Access}
                     photo = {this.state.image}
@@ -130,7 +162,8 @@ export class AddDefib extends Component {
                     Pays = {this.props.Pays}
                     Ville = {this.props.Ville}
                     Province = {this.props.Province}
-                    dispatch = {(e) =>{this.props.Add_Defib_Posted(e)}}
+                    click = {this.submit}
+                    precedent = {this.Precedent}
                     />}
                        
                 </Col>
