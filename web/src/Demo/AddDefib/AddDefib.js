@@ -190,5 +190,5 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default  connect(mapStateToProps,mapDispatchToProps)(GoogleApiWrapper({
-    apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'
+    apiKey: 'AIzaSyDqu6YcU_kt61cA0mKh2dCBe4KO8-Aq6a8'
 })(AddDefib));

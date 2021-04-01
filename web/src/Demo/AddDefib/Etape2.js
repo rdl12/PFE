@@ -4,7 +4,7 @@ import {Map, Marker, GoogleApiWrapper, InfoWindow,}  from 'google-maps-react';
 import { connect } from 'react-redux';
 
 import Aux from "../../hoc/_Aux";
-
+import defib_icon from '../../assets/images/pin/medical.png';
 export class Etape2 extends Component {
     constructor(props){
         super(props)
@@ -111,9 +111,10 @@ export class Etape2 extends Component {
                                             onClick={this.onMapClicked}
                                             zoom={20}>
                                             <Marker
-                                                name="ali"
+                                                name={this.props.Nom}
                                                 position={{ lat: this.props.coords.lat, lng: this.props.coords.lng }}
                                                 onClick={this.onMarkerClick}
+                                                icon={defib_icon}
                                             />
     
                                             {/* <Marker name="Current Location" onClick={this.onMarkerClick} /> */}

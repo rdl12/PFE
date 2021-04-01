@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import Aux from "../../hoc/_Aux";
 import { Fecth_DefiById,Modify_defib } from '../../store/actions';
-
+import defib_icon from '../../assets/images/pin/medical.png';
 class SamplePage extends React.Component {
    
     state = {
@@ -14,6 +14,7 @@ class SamplePage extends React.Component {
         showingInfoWindow: false,
         position: null,
         Etat:"",
+        Motif:"",
         center:{ lat: 0, lng: 0 }
         
         
@@ -30,13 +31,14 @@ class SamplePage extends React.Component {
     }
 
     Approuve = () => {
-        if(this.state.Etat === "Valide"){
+        if(this.state.Etat === "Validé"){
             this.props.Defib.etat.id = 2
             this.props.Defib.etat.etat = 'validé'
         }
-        else if(this.state.Etat === "Rejete"){
+        else if(this.state.Etat === "Rejeté"){
             this.props.Defib.etat.id = 3
             this.props.Defib.etat.etat = 'rejete'
+            this.props.Defib.motif = this.state.Motif
         }
         else if(this.state.Etat === "En cours de traitement"){
             this.props.Defib.etat.id = 5
@@ -72,8 +74,9 @@ class SamplePage extends React.Component {
             <Aux>
                       <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : nom et prenom (valider ou rejeter ce defib en changeant son etat au dessous))</Card.Title>
+                                <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : nom et prenom </Card.Title>
                                 <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Submit</Button>
+                                <span className="d-block mt-0">valider ou rejeter ce defib en changeant son etat au dessous</span>
                             </Card.Header>
                             
                         </Card>
@@ -84,7 +87,7 @@ class SamplePage extends React.Component {
                                 <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <div style={{height: '450px', width: '100%'}}>
+                                <div style={{height: 'fit-content'+50, width: '100%'}}>
                                 <ListGroup variant="flush">
                                 <ListGroup.Item>
                                           <Row>
@@ -128,9 +131,10 @@ class SamplePage extends React.Component {
                                         onClick={this.onMapClicked}
                                         zoom={20}>
                                         <Marker
-                                            name="ali"
+                                            name={this.props.Defib.nom}
                                             position={{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }}
                                             onClick={this.onMarkerClick}
+                                            icon={defib_icon}
                                         />
 
                                         {/* <Marker name="Current Location" onClick={this.onMarkerClick} /> */}
@@ -154,7 +158,7 @@ class SamplePage extends React.Component {
                                 <Card.Title as="h5">Details</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <div style={{height: '450px', width: '100%'}}>
+                                <div style={{height: 'fit-content', width: '100%'}}>
                                 <ListGroup variant="flush">
                                 <ListGroup.Item>
                                          <Card.Title>Adresse</Card.Title>
@@ -184,12 +188,20 @@ class SamplePage extends React.Component {
                                             <Card.Title>Etat</Card.Title>
                                             <Form.Control as="select" className="mb-3"  value = {this.state.Etat} onChange={e => this.setState({Etat:e.target.value})}>
                                                <option>Etat</option>
-                                               <option>Valide</option>
-                                               <option>Rejete</option>
+                                               <option>Validé</option>
+                                               <option>Rejeté</option>
                                                <option>En cours de traitement</option>
                                             </Form.Control>
+                                            {this.state.Etat === "Rejeté" ?(
+                                                <Form.Group controlId="formBasicMarque">
+                                                   <Form.Label>Motif</Form.Label>
+                                                   <Form.Control type="email" placeholder="motif du rejet" value={this.state.Motif} onChange={e => this.setState({Motif:e.target.value})} />
+                                                </Form.Group>
+                                            ) : null}
+                                            
                                 </ListGroup.Item>
                                 </ListGroup>
+                                
                                 </div>
                             </Card.Body>
                         </Card>
@@ -222,5 +234,5 @@ const mapStateToProps = (state) => {
 
 
 export default  connect(mapStateToProps,mapDispatchToProps)(GoogleApiWrapper({
-    apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'
+    apiKey: 'AIzaSyDqu6YcU_kt61cA0mKh2dCBe4KO8-Aq6a8'
 })(SamplePage));
