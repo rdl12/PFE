@@ -1,8 +1,10 @@
 import React from 'react';
 import {Row, Col, Card, Form, InputGroup, Button} from 'react-bootstrap';
 import {Map, Marker, GoogleApiWrapper, InfoWindow, Polyline, Polygon}  from 'google-maps-react';
+import {connect} from 'react-redux';
 
 import Aux from "../../../hoc/_Aux";
+import {Fetch_Defib_Valide} from "../../../store/actions";
 
 const polygon = [
     { lat: 21.2105052, lng: 72.8653491 },
@@ -42,6 +44,9 @@ class GoogleMap extends React.Component {
 
     componentDidMount() {
         this.renderAutoComplete();
+        this.props.Fetch_Defib_Valide(2)
+        console.log(this.props.Defib)
+      
     }
 
     componentDidUpdate(prevProps) {
@@ -81,59 +86,13 @@ class GoogleMap extends React.Component {
 
         return (
             <Aux>
-                <Row>
-                    <Col xl={6}>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Basic</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
-                                    <Map
-                                        centerAroundCurrentLocation
-                                        className="map"
-                                        google={this.props.google}
-                                        zoom={14}
-                                    />
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xl={6}>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Simple Markers</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
-                                    <Map
-                                        centerAroundCurrentLocation
-                                        google={this.props.google}
-                                        className="map"
-                                        zoom={13}>
-                                        <Marker
-                                            name="Codedthemes"
-                                            position={{ lat: 21.2335163, lng: 72.8643298 }}
-                                        />
-
-                                        <Marker
-                                            name="Roman Point"
-                                            position={{ lat: 21.2148165, lng: 72.8627243 }}
-                                        />
-
-                                        <Marker />
-                                    </Map>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xl={6}>
+          
                         <Card>
                             <Card.Header>
                                 <Card.Title as="h5">Click-Able Markers</Card.Title>
                             </Card.Header>
                             <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
+                                <div style={{height: '350px', width: '100%'}}>
                                     <Map
                                         centerAroundCurrentLocation
                                         className="map"
@@ -141,21 +100,17 @@ class GoogleMap extends React.Component {
                                         onClick={this.onMapClicked}
                                         zoom={12}>
 
+                           {this.props.Defib && this.props.Defib.map(marker => (
                                         <Marker
-                                            name="Codedthemes"
-                                            position={{ lat: 21.2335163, lng: 72.8643298 }}
+                                            key={marker.id}
+                                            name={marker.nom}
+                                            position={{ lat: marker.latitude, lng: marker.longitude }}
                                             onClick={this.onMarkerClick}
                                         />
+                                        
+                                        ))}
 
-                                        <Marker
-                                            name="Roman Point"
-                                            position={{ lat: 21.2148165, lng: 72.8627243 }}
-                                            onClick={this.onMarkerClick}
-                                        />
-
-                                        <Marker name="Current Location" onClick={this.onMarkerClick} />
-
-                                        <InfoWindow
+                                       <InfoWindow
                                             marker={this.state.activeMarker}
                                             onClose={this.onInfoWindowClose}
                                             visible={this.state.showingInfoWindow}>
@@ -167,8 +122,8 @@ class GoogleMap extends React.Component {
                                 </div>
                             </Card.Body>
                         </Card>
-                    </Col>
-                    <Col xl={6}>
+                   
+                    {/* <Col xl={6}>
                         <Card>
                             <Card.Header>
                                 <Card.Title as="h5">Geo-Coding</Card.Title>
@@ -193,63 +148,29 @@ class GoogleMap extends React.Component {
                                 </div>
                             </Card.Body>
                         </Card>
-                    </Col>
-                    <Col xl={6}>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Polygon</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
-                                    <Map
-                                        centerAroundCurrentLocation
-                                        google={this.props.google}
-                                        className="map"
-                                        zoom={14}>
-                                        <Polygon
-                                            fillColor="#dc3545"
-                                            fillOpacity={0.35}
-                                            paths={[polygon]}
-                                            strokeColor="#dc3545"
-                                            strokeOpacity={0.8}
-                                            strokeWeight={2}
-                                        />
-                                    </Map>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col xl={6}>
-                        <Card>
-                            <Card.Header>
-                                <Card.Title as="h5">Polyline</Card.Title>
-                            </Card.Header>
-                            <Card.Body>
-                                <div style={{height: '300px', width: '100%'}}>
-                                    <Map
-                                        centerAroundCurrentLocation
-                                        google={this.props.google}
-                                        className="map"
-                                        zoom={14}>
-                                        <Polyline
-                                            fillColor="#dc3545"
-                                            fillOpacity={0.35}
-                                            path={polygon}
-                                            strokeColor="#dc3545"
-                                            strokeOpacity={0.8}
-                                            strokeWeight={5}
-                                        />
-                                    </Map>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                    </Col> */}
+                 
+                  
+              
             </Aux>
         );
     }
 }
 
-export default GoogleApiWrapper({
+
+const mapStateToProps = (state) => {
+    const { defib } = state
+    
+    return { Defib: defib  }
+  }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        Fetch_Defib_Valide: (state) => dispatch(Fetch_Defib_Valide(state)),
+    }
+};
+
+export default  connect(mapStateToProps, mapDispatchToProps) (GoogleApiWrapper({
     apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'
-})(GoogleMap);
+})(GoogleMap));
+

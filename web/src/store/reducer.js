@@ -78,6 +78,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 layout: action.layout
             };
+        case actionTypes.SHOW_HEADER:
+            return {
+                ...state,
+                showHeader: false
+            };
       case actionTypes.SET_LOGIN_STATE:
         return {
           ...state,
@@ -115,6 +120,12 @@ export const reducer = (state = initialState, action) => {
         ...action.payload
 
     };
+    case actionTypes.FIND_DEFIB_VALIDE:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
         default:
             return state;
     }

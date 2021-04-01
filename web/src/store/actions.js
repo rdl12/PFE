@@ -15,6 +15,13 @@ const Set_Defib_State = (defib) => {
     };
   };
 
+const Defib_valide = (defib) => {
+  return {
+    type: t.FETCH_DEFIB,
+    payload: defib,
+  };
+};
+
 const Fetch_defib_byId = (data) => {
   return {
     type: t.FETCH_DEFIB_DETAILS,
@@ -185,5 +192,23 @@ export const Add_Defib_Posted = (defib) => {
       )
       dispatch(AddDefibPosted({defibPosted : defib}))
   })
+  }
+}
+
+export const Fetch_Defib_Valide = (id) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Defibrillateur/find/etat/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Defib_valide({defib : data}))
+            }
+              )
+             //dispatch(FecthDefib({markers:['hello mother fucker']}))
+           })
+           .catch((err) => {
+            alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
   }
 }

@@ -21,5 +21,7 @@ export const initialState = {
     lat : '',
     long: '',
     defibPosted:[],
+    showHeader:true,
+    defibValide:[]
 };
 
