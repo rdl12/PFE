@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Card, Table,Button,Dropdown,DropdownButton,Form} from 'react-bootstrap';
+import {Row, Col, Card, Table,Badge,Dropdown,DropdownButton,Form} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
 import Aux from "../../hoc/_Aux";
@@ -21,6 +21,11 @@ class BootstrapTable extends React.Component {
         this.props.Fetch_Defib()
         console.log(this.props)
        
+    }
+
+    remove_filter = () =>{
+        this.props.Fetch_Defib()
+        this.setState({etat:null})
     }
       
    
@@ -90,11 +95,11 @@ class BootstrapTable extends React.Component {
                                  /></Dropdown.Item>
                                 <Dropdown.Divider />
                             </DropdownButton>
-                            <span className="d-block m-t-5">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
+                            <span className="d-block mt-0">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
 
-                            {this.state.etat !== null ? ( <span className="d-block m-t-5"></span>): null }
                             </Card.Header>
                             <Card.Body>
+                                {this.state.etat !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.etat}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter}/></Badge>): null }
                                 <Table striped responsive>
                                     <thead>
                                     <tr>
@@ -111,7 +116,7 @@ class BootstrapTable extends React.Component {
                               <tr key = {item.id}>
                               <td>{item.nom}</td>
                               <td>{item.date}</td>
-                              <td>{item.etat.etat}</td>
+                              <td className="f-16">{item.etat.etat}</td>
                               <td>{item.ville}</td>
                               <td><NavLink to={`/sample-page/${item.id}`}>Details</NavLink></td>
                           </tr>)
