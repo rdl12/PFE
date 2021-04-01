@@ -70,7 +70,7 @@ public class DefibrillateurController {
 	        String geom = defibrillateurService.getGeom(lat,lng);
 	        System.out.println(""+geom);
 	        defibrillateur.setGeom(geom);
-	        defibrillateur.setEtat(s);
+	        //defibrillateur.setEtat(s);
 	        defibrillateurService.save(defibrillateur);
 	    }
 	

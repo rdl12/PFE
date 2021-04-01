@@ -36,6 +36,10 @@ const AddDefibScreen = ({navigation}) => {
         "latitude" : Adresse.lat,
         "longitude" : Adresse.long,
         "photo" : imageSource,
+        "etat":{
+          id : 1,
+          etat : 'signalé'
+         },
         "motif" : "from_mobile",
         "marque_defib" : Nom,
         "accesibillité": AccessibiliteState.checked,

@@ -178,14 +178,12 @@ export const Add_Defib_Posted = (defib) => {
       },
       body:  JSON.stringify(defib)
     })
-  .then((response) => response.text())
   .then((responseData) => {
       console.log(
           "POST Response",
           "Response Body -> " + JSON.stringify(responseData)
       )
-      dispatch(AddDefibPosted(defib))
+      dispatch(AddDefibPosted({defibPosted : defib}))
   })
-  .done();
   }
 }
