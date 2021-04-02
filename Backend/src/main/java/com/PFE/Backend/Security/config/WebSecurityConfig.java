@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                .cors().and()
 	                .csrf().disable()
 	                .authorizeRequests()
-	                .antMatchers("/api/v*/registration/**","/Defibrillateur/add","/Defibrillateur/findDefibIn100/**","/Defibrillateur/find/**","/Defibrillateur/update")
+	                .antMatchers("/api/v*/registration/**","/Defibrillateur/**")
 	                .permitAll()
 	                .anyRequest()
 	                .authenticated().and()

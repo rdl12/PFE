@@ -126,6 +126,12 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
     
         };
+    case actionTypes.FETCH_STATS_DEFIB:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
         default:
             return state;
     }

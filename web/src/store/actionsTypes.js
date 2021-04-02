@@ -13,3 +13,4 @@ export const FETCH_ADRESS = "FETCH_ADRESS"
 export const ADD_DEFIB = "ADD_DEFIB"
 export const SHOW_HEADER = 'SHOW_HEADER'
 export const FIND_DEFIB_VALIDE = 'FIND_DEFIB_VALIDE'
+export const FETCH_STATS_DEFIB = 'FETCH_STATS_DEFIB'

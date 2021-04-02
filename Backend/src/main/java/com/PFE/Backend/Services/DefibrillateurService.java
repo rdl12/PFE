@@ -53,4 +53,7 @@ public class DefibrillateurService {
     	return defibrillateurRepository.findDefibWithin100(lat,lng);
     }
 
+    public List Defib_stat_etat() {
+        return defibrillateurRepository.Defib_etat_stat();
+    }
 }
