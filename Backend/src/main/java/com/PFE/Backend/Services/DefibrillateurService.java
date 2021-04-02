@@ -56,4 +56,8 @@ public class DefibrillateurService {
     public List Defib_stat_etat() {
         return defibrillateurRepository.Defib_etat_stat();
     }
+    
+    public List Defib_stat_province() {
+        return defibrillateurRepository.Defib_province_stat();
+    }
 }
