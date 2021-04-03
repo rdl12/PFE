@@ -25,7 +25,9 @@ public interface DefibrillateurRepository extends JpaRepository<Defibrillateur,L
     @Query( value="SELECT * FROM defib\r\n" + "WHERE ST_DWithin(geom,ST_SetSRID(ST_MakePoint(?2,?1),4326), 1000);", nativeQuery = true)
     public List<Defibrillateur> findDefibWithin100(@Param("lat") Float lat,@Param("lon") Float lon);
     
-    @Query(value="select etat ,count(*) from defib i \r\n" + 
-    		"join etat e  on i.etat_id = e.id group by etat",nativeQuery = true)
+    @Query(value="select etat ,count(*) from defib i join etat e  on i.etat_id = e.id group by etat",nativeQuery = true)
     List  Defib_etat_stat();
+    
+    @Query(value="select ville ,count(*) from defib group by ville",nativeQuery = true)
+    List  Defib_province_stat();
 }

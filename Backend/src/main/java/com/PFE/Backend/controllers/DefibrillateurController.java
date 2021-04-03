@@ -84,8 +84,14 @@ public class DefibrillateurController {
 	 public List<Defibrillateur> findDefibin100(@PathVariable Float lat,@PathVariable Float lng ){
 		 return defibrillateurService.findDefibwithin100(lat,lng);
 	 }
-	  @GetMapping(value = "/etat/Statistique")
+	 
+	 @GetMapping(value = "/etat/Statistique")
 	    public List findIncidentsStatut () {
 	        return defibrillateurService.Defib_stat_etat();
+	    }
+	 
+	 @GetMapping(value = "/province/Statistique")
+	    public List findIncidentsProvince () {
+	        return defibrillateurService.Defib_stat_province();
 	    }
 }

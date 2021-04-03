@@ -23,6 +23,7 @@ export const initialState = {
     defibPosted:[],
     showHeader:true,
     defibValide:[],
-    stat_etat_defib : []
+    stat_etat_defib : [],
+    stat_prov_defib : []
 };
 
