@@ -1,6 +1,10 @@
 import {store} from './store'
 import * as t from './actionsTypes';
 import {API_URI,Here_API_Key} from '../utils/Api';
+import {NavLink,useHistory} from 'react-router-dom';
+
+
+
 
 const setLoginState = (loginData) => {
     return {
@@ -56,7 +60,7 @@ const AddDefibPosted = (defib) => {
 }
 
 
-export const login = (loginInput) => {
+export const login = (loginInput,history) => {
 const { username ,password} = loginInput;
 console.log(loginInput)
 var formBody = [];
@@ -71,7 +75,6 @@ return  (dispatch) => {
     return  fetch(`${API_URI}/login`, {
     method: 'POST', 
     headers: {  // these could be different for your API call
-        Accept: "application/json",
         'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: formBody,
@@ -79,23 +82,23 @@ return  (dispatch) => {
   
     )
     .then((response) =>
-    {  console.log(response)
+    { 
       response.text().then((data) => {
         console.log(data)})
-      //  if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
-      //   dispatch(setLoginState({ userId: username }));
-      //   console.log(store.getState()) // our action is called here
-      //   alert('logged in', username);
-      // } else {
-      // alert('Login Failed', 'Username or Password is incorrect');
-     
-      // }
+       if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
+        dispatch(setLoginState({ userId: username })); // our action is called here
+        //alert('logged in', username);
+        history.push('/dashboard/default')
+        localStorage.setItem('username',username)
+      } else {
+         alert('Login Failed', 'Username or Password is incorrect');
+      }
     })
       
-      // .catch((err) => {
-      // alert('Login Failed', 'Some error occured, please retry');
-      // console.log(err);
-      // });
+      .catch((err) => {
+      alert('Login Failed', 'Some error occured, please retry');
+      console.log(err);
+      });
 };
 };
 

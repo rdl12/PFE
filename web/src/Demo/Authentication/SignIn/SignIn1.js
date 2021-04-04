@@ -1,16 +1,33 @@
-import React ,{useState} from 'react';
-import {NavLink} from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React ,{useState,useEffect} from 'react';
+import {NavLink,useHistory,Redirect} from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
 
 import './../../../assets/scss/style.scss';
 import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
 import { login,FectchDefb } from '../../../store/actions';
 
-const SignUp1 = () => {
+const Signin1 = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleSubmit = () => {
+        dispatch(login({'username': username, 'password': password },history))
+    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            let username = localStorage.getItem('username');
+            if (username !== null){
+                history.push('/dashboard/default')
+            }
+        }, 50);
+       
+        
+    }, [])
+  
     
        return(
             <Aux>
@@ -41,7 +58,7 @@ const SignUp1 = () => {
                                             <label htmlFor="checkbox-fill-a1" className="cr"> Save credentials</label>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary shadow-2 mb-4" onClick = {() => dispatch(login({'username': username, 'password': password }))} >Login</button>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick = {() => handleSubmit()} >Login</button>
                                 <p className="mb-2 text-muted">Forgot password? <NavLink to="/auth/reset-password-1">Reset</NavLink></p>
                                 <p className="mb-0 text-muted">Don’t have an account? <NavLink to="/auth/signup-1">Signup</NavLink></p>
                             </div>
@@ -53,4 +70,4 @@ const SignUp1 = () => {
     }
 
 
-export default SignUp1;
+export default Signin1;

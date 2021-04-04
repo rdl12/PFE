@@ -15,12 +15,25 @@ import * as actionTypes from "../../../store/actionsTypes";
 import './app.scss';
 
 class AdminLayout extends Component {
-
+    state = {
+       
+        user:null
+    };
     fullScreenExitHandler = () => {
         if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
             this.props.onFullScreenExit();
         }
     };
+
+    componentDidMount() {
+        setTimeout( () =>{ let username = localStorage.getItem('username')
+        if (username !== null){
+            this.setState({ user:username.substring(0,10) });
+        }
+        console.log(this.state.user)
+    },200) 
+    
+      }
 
     componentWillMount() {
         if (this.props.windowWidth > 992 && this.props.windowWidth <= 1024 && this.props.layout !== 'horizontal') {
