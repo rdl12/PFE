@@ -120,10 +120,11 @@ export const MapState = (mapstate) =>{
   }
 }
 
-export const Fecth_Defib = (coords) => {
+export const Fecth_Defib = (coords,d) => {
   const {latitude ,longitude} = coords
+  const rayon = parseFloat(d)
   return (dispatch) => {
-    return fetch(`${API_URI}/Defibrillateur/findDefibIn100/lat=${latitude}&lng=${longitude}`,{method: 'GET'})
+    return fetch(`${API_URI}/Defibrillateur/findDefibIn100/lat=${latitude}&lng=${longitude}&d=${rayon}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
               console.log(data)

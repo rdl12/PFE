@@ -49,8 +49,8 @@ public class DefibrillateurService {
     	return defibrillateurRepository.getGeom(lat,lng);
     }
     
-    public List<Defibrillateur> findDefibwithin100(Float lat,Float lng) {
-    	return defibrillateurRepository.findDefibWithin100(lat,lng);
+    public List<Defibrillateur> findDefibwithin100(Float lat,Float lng,Float d) {
+    	return defibrillateurRepository.findDefibWithin100(lat,lng,d);
     }
 
     public List Defib_stat_etat() {
