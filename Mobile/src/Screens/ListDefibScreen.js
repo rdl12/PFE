@@ -1,4 +1,4 @@
-import { View,Image,TouchableOpacity, Button, FlatList,TouchableHighlight,Text} from 'react-native'
+import { View,Image,TouchableOpacity, Button, FlatList,Text} from 'react-native'
 import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
@@ -11,6 +11,7 @@ import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
 import { AdresseReducer } from '../redux/reducer';
 import ListDefib from '../components/ListDefib/ListDefib';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -27,6 +28,7 @@ class ListDefibScreen extends Component {
                 latitude:33.7444613,
                 longitude:-118.35846,
             },
+            rayon : 100000,
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
@@ -38,7 +40,8 @@ class ListDefibScreen extends Component {
                 longitude:0
             },
             timeTravel : 0,
-            distanceTravel : 0
+            distanceTravel : 0,
+            country: 'uk'
            
         }
 
@@ -57,8 +60,8 @@ class ListDefibScreen extends Component {
    
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        setTimeout(()=>this.props.Fecth_Defib(this.state.coords),50)
-        console.log(this.props.markers)
+        
+        setTimeout(()=>this.props.Fecth_Defib(this.state.coords,100000),100)
         
     }
 
@@ -70,6 +73,12 @@ class ListDefibScreen extends Component {
         this.props.Adress(coords);
     
 
+    }
+
+    ReFetchDefib(d){
+        this.setState({rayon : d})
+        setTimeout(()=> this.props.Fecth_Defib(this.state.coords,this.state.rayon),1000)
+        
     }
 
     ZoomTodefib(lat,long,id){
@@ -166,6 +175,24 @@ class ListDefibScreen extends Component {
             <View style = {{flex:2}}>
             <BaseMapSwitcher  />
             <ListDefib  press = {()=>this.setState({isList:!this.state.isList})} isList={this.state.isList} /> 
+            
+            <DropDownPicker
+    items={[
+        {label: 'R = 100Km', value: 100},
+        {label: 'R = 10Km', value: 10},
+        {label: 'R = 1Km', value: 100000},
+        {label: 'Tout', value: 10000},
+    ]}
+    defaultValue={this.state.rayon}
+    containerStyle={{height: 40}}
+    style={{backgroundColor: '#fafafa'}}
+    itemStyle={{
+        justifyContent: 'flex-start'
+    }}
+    dropDownStyle={{backgroundColor: '#fafafa'}}
+    onChangeItem={item => this.ReFetchDefib(item.value)}
+/>
+
             <MapView style = {{flex:1.9, marginBottom : this.state.marginBottom,}}
                  ref={(map) => { this.map = map; }}
                  onMapReady = {()=>
