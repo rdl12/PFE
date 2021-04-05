@@ -1,6 +1,6 @@
 import React from 'react';
 import NVD3Chart from 'react-nvd3';
-
+import {Spinner } from 'react-bootstrap';
 const datum = [];
 
 class PieDonutChart extends React.Component {
@@ -36,7 +36,11 @@ class PieDonutChart extends React.Component {
        
 
         return (
-            <NVD3Chart id="chart" height={400} type="pieChart" datum={this.state.arr} x="key" y="y" donut labelType='percent' />
+
+            <div>
+            { this.state.arr.length === 0 ? (<Spinner animation="border" variant="primary" />): (  <NVD3Chart id="chart" height={400} type="pieChart" datum={this.state.arr} x="key" y="y" donut labelType='percent' />)}
+             </div>
+           
         )
        
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import NVD3Chart from 'react-nvd3';
+import {Spinner } from 'react-bootstrap';
 
 
 const datum = [
@@ -30,8 +31,16 @@ class BarDiscreteChart extends React.Component {
    }
 
     render() {
-        return <NVD3Chart tooltip={{enabled: true}} type="discreteBarChart" datum={this.state.arr} x="label" y="value" height={300} showValues />
+        return (
+            <div>
+            { this.state.arr.length === 0 ? (<Spinner animation="border" variant="primary" />): (  <NVD3Chart tooltip={{enabled: true}} type="discreteBarChart" datum={this.state.arr} x="label" y="value" height={300} showValues />)}
+             </div>
+        )
+      
+      
     }
+
+  
 }
 
 export default BarDiscreteChart;
