@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet,Image } from 'react-native';
+import {useSelector} from 'react-redux'
 import {
     useTheme,
     Avatar,
@@ -20,14 +21,26 @@ import { COLORS, images} from '../../Constantes'
 import styles from './styles'
 
 export function SideBar(props) {
-
+ 
+    const LoginInfo = useSelector(state => state.loginReducer);
    
     return (
         <View style={{flex:1,}}>
         <DrawerContentScrollView {...props} >
             <View style={styles.drawerContent}>
                 <View style={styles.userInfoSection}>
-                    <View style={{flexDirection:'row',marginTop: 10}}>
+                   { LoginInfo.isLoggedIn ? ( <View style={{flexDirection:'row',marginTop: 10}}>
+                        <Avatar.Image 
+                            source={{
+                                uri: 'https://www.clipartmax.com/png/middle/365-3654572_heart-cpr-save-a-life.png'
+                            }}
+                            size={50}
+                        />
+                        <View style={{marginLeft:15, flexDirection:'column',marginTop:-8}}>
+                            <Title style={styles.titleDrawer}>Bonjour </Title> 
+                            <Caption>{LoginInfo.userId}</Caption>
+                        </View>
+                    </View>) : ( <View style={{flexDirection:'row',marginTop: 10}}>
                         <Avatar.Image 
                             source={{
                                 uri: 'https://www.clipartmax.com/png/middle/365-3654572_heart-cpr-save-a-life.png'
@@ -39,7 +52,7 @@ export function SideBar(props) {
                             <Caption style={styles.caption}>L'application qui </Caption>
                             <Caption style={styles.caption}>sauve des vies </Caption>
                         </View>
-                    </View>
+                    </View>)}
                 </View>
 
                 <Drawer.Section style={styles.drawerSection}>
@@ -172,7 +185,7 @@ export function SideBar(props) {
                         <View style={{marginLeft:15, flexDirection:'column'}}>
                             <Title style={styles.title}>Compte</Title>
                         </View>
-             <DrawerItem 
+         { LoginInfo.isLoggedIn ?  (<DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
                             <Avatar.Image 
@@ -181,12 +194,24 @@ export function SideBar(props) {
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="Se connecter"
+                        label="Profile"
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('Login')}}
-                    />
-
-             <DrawerItem 
+                        onPress={() => {props.navigation.navigate('Profile')}}
+                    />):(<DrawerItem 
+                        style={{marginBottom:-5,}}
+                        icon={() => (
+                            <Avatar.Image 
+                            style={{backgroundColor:"#ececec",width: 25,height: 25,}}
+                            source={images.login_icon}
+                            resizeMode='contain' 
+                            size={25}/> 
+                             )}
+                        label="Se Connecter"
+                        labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
+                        onPress={() => {props.navigation.navigate('Se Connecter')}}
+                    />)
+}
+            {LoginInfo.isLoggedIn ? ( <DrawerItem 
                         style={{marginBottom:10,}}
                         icon={() => (
                             <Avatar.Image 
@@ -195,10 +220,22 @@ export function SideBar(props) {
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="S'inscrire"
+                        label="Logout"
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate("S'inscrire")}}
-                    />
+                        onPress={() => {props.navigation.navigate("")}}
+                    />):(<DrawerItem 
+                    style={{marginBottom:10,}}
+                    icon={() => (
+                        <Avatar.Image 
+                        style={{backgroundColor:"#ececec",width: 25,height: 25,}}
+                        source={images.sign_icon}
+                        resizeMode='contain' 
+                        size={25}/> 
+                         )}
+                    label="S'inscrire"
+                    labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
+                    onPress={() => {props.navigation.navigate("")}}
+                />)}
 
         </Drawer.Section>
               

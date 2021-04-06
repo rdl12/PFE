@@ -46,7 +46,7 @@ const LoginScreen = ({navigation}) => {
           </View>
 
           <View style={styles.loginButton}>
-            <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password }))}>
+            <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
               <Text style = {styles.text}>Login</Text>
             </TouchableOpacity>
           </View>

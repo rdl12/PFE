@@ -49,3 +49,7 @@ export const accessibilite = {
   checked:'null',
   isPediatrique: 'null'
 }
+
+export const user = {
+  user : {}
+}

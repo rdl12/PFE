@@ -23,16 +23,6 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerStyle={{width:windowWidth*3/4.5}} drawerContent = {props => <SideBar {...props}/>}>
       <Drawer.Screen name="Home" component={AppStack} />
-      <Drawer.Screen name="Add defib" component={AddDefibScreen} />
-      <Drawer.Screen name="Entrernir" component={MapScreen} />
-      <Drawer.Screen name="Statistique" component={StatistiqueScreen} />
-      <Drawer.Screen name="Nos Produits" component={ProductsScreen} />
-      <Drawer.Screen name="Formations" component={FormationScreen} />
-      <Drawer.Screen name="A propos" component={AboutScreen} />
-      <Drawer.Screen name="Tutorial" component={TutorialScreen} />
-      <Drawer.Screen name="Se Connecter" component={StatistiqueScreen} />
-      <Drawer.Screen name="S'inscrire" component={SignupScreen} />
-     
     </Drawer.Navigator>
   );
 }

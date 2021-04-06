@@ -10,7 +10,7 @@ import {AddDefibUrl} from '../utils/constants/Api'
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import { useDispatch } from 'react-redux';
-import {ModalState,Add_Defib_Posted,AccessibiliteState} from '../redux/actions'
+import {ModalState,Add_Defib_Posted,AccessibiliteState,} from '../redux/actions'
 
 
 const AddDefibScreen = ({navigation}) => {
@@ -21,13 +21,14 @@ const AddDefibScreen = ({navigation}) => {
     const Adresse = useSelector(state => state.AdresseReducer);
     const Modal_State = useSelector(state => state.Modal_State);
     const AccessibiliteState = useSelector(state => state.get_Accessibilite);
+    const LoginInfo = useSelector(state => state.loginReducer);
+    
     const dispatch = useDispatch();
    
   
     useEffect(() => {
       console.log("adress:"+Modal_State)
-    
-      
+      dispatch(LoginInfo.userId)
       }, [Modal_State])
 
     const submit = () =>{
@@ -47,7 +48,8 @@ const AddDefibScreen = ({navigation}) => {
         "telephone" : Telephone,
         "adresse" : Adresse.addrese,
         "ville" : Adresse.ville,
-        "province" : Adresse.province
+        "province" : Adresse.province,
+        
         
       }
        dispatch(Add_Defib_Posted(defib))

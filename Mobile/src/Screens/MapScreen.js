@@ -46,7 +46,7 @@ class MapScreen extends Component{
     }
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        setTimeout(()=>this.props.Fecth_Defib(this.state.coords),100)
+        setTimeout(()=>this.props.Fecth_Defib(this.state.coords,1),100)
       
     }
     
@@ -162,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         Adress: (state) => dispatch(Adress(state)),
-        Fecth_Defib: (coords) => dispatch(Fecth_Defib(coords))
+        Fecth_Defib: (coords,d) => dispatch(Fecth_Defib(coords,d))
     }
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapScreen)
