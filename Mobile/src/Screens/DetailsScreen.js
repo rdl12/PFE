@@ -1,7 +1,7 @@
 import React,{useState,useEffect,} from 'react'
-import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image } from 'react-native'
 import {useSelector} from 'react-redux'
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, ActivityIndicator} from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import MapView, { Marker } from 'react-native-maps';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -16,12 +16,11 @@ const DetailsScreen = () => {
        
     }, [Get_Defib])
     return (
-        <SafeAreaView style = {{backgroundColor:Colors.white}}>
+        <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
           {Get_Defib.Defibrilatteur.latitude === undefined ? (
-             <ActivityIndicator size="large" />
+             <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />
           ):(
             <ScrollView>
-               
             <Card style={styles.card}>
                 <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
                 <Card.Content>

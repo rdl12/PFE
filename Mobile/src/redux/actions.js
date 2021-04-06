@@ -16,6 +16,13 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+const Fecth_User = (data) => {
+  return {
+    type: t.Fetch_User,
+    payload: data
+ }
+}
+
 
 const Fetch_DefibIn100 = (coords) => {
   return {
@@ -59,7 +66,7 @@ const AddDefibPosted = (defib) => {
 
 
 
-export const login = (loginInput) => {
+export const login = (loginInput,navigation) => {
   const { username, password } = loginInput;
   console.log(store.getState())
   let formData = new FormData();
@@ -78,7 +85,7 @@ export const login = (loginInput) => {
     .then((response) =>
     {if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
       dispatch(setLoginState({ userId: username }));
-      console.log(store.getState()) // our action is called here
+       navigation.navigate('Home')
       Alert.alert('logged in', username);
     } else {
       Alert.alert('Login Failed', 'Username or Password is incorrect');
@@ -195,3 +202,24 @@ export const AccessibiliteState = (state) =>{
     return dispatch(AccessibilityState(state))
   }
 }
+
+
+export const Fetch_User = (email) => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/User/find/${email}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Fetch_User({user:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch user ,please retry");
+            console.log(err);
+          });
+  }
+}
+

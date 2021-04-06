@@ -20,12 +20,7 @@ const MapStack = ({navigation}) => (
         component={ListDefibScreen}
         options={{headerShown: true}}
       />
-        <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{headerShown: true}}
-      />
-
+      
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
@@ -47,38 +42,15 @@ const MapStack = ({navigation}) => (
         component={ListDefibScreen}
         options={{headerShown: false}}
       />
+        <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: true}}
+      />
     </Stack.Navigator>
     
   );
- const HomeStack = ({navigation}) => (
-    <Stack.Navigator>
-    <Stack.Screen
-    name="Home"
-    component={HomeScreen}
-    options={{headerShown: false}}
-    />
-    <Stack.Screen
-        name="Urgence"
-        component={UrgenceScreen}
-        options={{headerShown: true}}
-      />
-     <Stack.Screen
-        name="ListDefib"
-        component={ListDefibScreen}
-        options={{headerShown: false}}
-      />
-    <Stack.Screen
-      name="MapScreen"
-      component={MapScreen}
-      options={{headerShown: true}}
-    />
-    <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{headerShown: false}}
-      />  
-  </Stack.Navigator>
- );
+
 const AppStack = () => {
   return (
     <Tab.Navigator
@@ -99,7 +71,7 @@ const AppStack = () => {
     >
         <Tab.Screen
             name="Home"
-            component={HomeStack}
+            component={HomeScreen}
             options={{
                 
                 tabBarIcon: ({ focused }) => (
@@ -194,7 +166,7 @@ const AppStack = () => {
                     />
                 ),
                 tabBarButton: (props) => (
-                    <TabBarCustomButton
+                    <TabBarCustomButton visible
                         {...props}
                     />
                 )
