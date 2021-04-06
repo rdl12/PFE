@@ -72,7 +72,7 @@ class Breadcrumb extends Component {
                             <div className="row align-items-center">
                                 <div className="col-md-12">
                                     <div className="page-header-title">
-                                        <h5 className="m-b-10">{title}</h5>
+                                        <h5 className="m-b-10">Defib Tech | LifeSaving</h5>
                                     </div>
                                     <ul className="breadcrumb">
                                         <li className="breadcrumb-item">

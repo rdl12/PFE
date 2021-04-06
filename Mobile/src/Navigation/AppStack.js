@@ -18,7 +18,7 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="ListDefib"
         component={ListDefibScreen}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
         <Stack.Screen
         name="Details"
@@ -29,7 +29,7 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
 
     </Stack.Navigator>
@@ -50,7 +50,35 @@ const MapStack = ({navigation}) => (
     </Stack.Navigator>
     
   );
-
+ const HomeStack = ({navigation}) => (
+    <Stack.Navigator>
+    <Stack.Screen
+    name="Home"
+    component={HomeScreen}
+    options={{headerShown: false}}
+    />
+    <Stack.Screen
+        name="Urgence"
+        component={UrgenceScreen}
+        options={{headerShown: true}}
+      />
+     <Stack.Screen
+        name="ListDefib"
+        component={ListDefibScreen}
+        options={{headerShown: false}}
+      />
+    <Stack.Screen
+      name="MapScreen"
+      component={MapScreen}
+      options={{headerShown: true}}
+    />
+    <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />  
+  </Stack.Navigator>
+ );
 const AppStack = () => {
   return (
     <Tab.Navigator
@@ -71,8 +99,9 @@ const AppStack = () => {
     >
         <Tab.Screen
             name="Home"
-            component={HomeScreen}
+            component={HomeStack}
             options={{
+                
                 tabBarIcon: ({ focused }) => (
                     <Image
                     source={images.Home_image}
@@ -89,13 +118,15 @@ const AppStack = () => {
                     <TabBarCustomButton
                         {...props}
                     />
-                )
+                ),
+                
             }}
         />
           <Tab.Screen
             name="Maps"
             component={MapStack}
             options={{
+                tabBarVisible: false,
                 tabBarIcon: ({ focused }) => (
                     <Image
                         source={images.map_icon}
@@ -109,10 +140,11 @@ const AppStack = () => {
                     />
                 ),
                 tabBarButton: (props) => (
-                    <TabBarCustomButton
+                    <TabBarCustomButton visible
                         {...props}
                     />
-                )
+                ),
+         
             }}
         />
       
@@ -120,6 +152,7 @@ const AppStack = () => {
             name="UrgenceScreen"
             component={UrgenceStack}
             options={{
+                tabBarVisible: false,
                 tabBarIcon: ({ focused }) => (
                     <Image
                         source={images.phone_icon}
@@ -133,19 +166,21 @@ const AppStack = () => {
                     />
                 ),
                 tabBarButton: (props) => (
-                    <TabBarCustomButton
+                    <TabBarCustomButton visible 
                         {...props}
                     />
                 
                 ),
-               
+              
             }}
         />
 
          <Tab.Screen
             name="Login"
+
             component={LoginScreen}
             options={{
+                tabBarVisible: false,
                 tabBarIcon: ({ focused }) => (
                     <Image
                         source={images.user_icon}

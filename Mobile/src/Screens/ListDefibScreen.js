@@ -28,7 +28,7 @@ class ListDefibScreen extends Component {
                 latitude:33.7444613,
                 longitude:-118.35846,
             },
-            rayon : 100000,
+            rayon : 1,
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
@@ -60,8 +60,8 @@ class ListDefibScreen extends Component {
    
     componentDidMount(){
         setTimeout(()=>this.setState({marginBottom : 0}),10)
-        
-        setTimeout(()=>this.props.Fecth_Defib(this.state.coords,100000),100)
+        console.log(this.state.rayon)
+        this.props.Fecth_Defib(this.state.coords,this.state.rayon)
         
     }
 
@@ -71,13 +71,12 @@ class ListDefibScreen extends Component {
         let coords={ latitude:lat,
                     longitude:long,}
         this.props.Adress(coords);
-    
-
+ 
     }
 
     ReFetchDefib(d){
-        this.setState({rayon : d})
-        setTimeout(()=> this.props.Fecth_Defib(this.state.coords,this.state.rayon),1000)
+      
+       this.props.Fecth_Defib(this.state.coords,d)
         
     }
 
@@ -177,21 +176,21 @@ class ListDefibScreen extends Component {
             <ListDefib  press = {()=>this.setState({isList:!this.state.isList})} isList={this.state.isList} /> 
             
             <DropDownPicker
-    items={[
-        {label: 'R = 100Km', value: 100},
-        {label: 'R = 10Km', value: 10},
-        {label: 'R = 1Km', value: 100000},
-        {label: 'Tout', value: 10000},
-    ]}
-    defaultValue={this.state.rayon}
-    containerStyle={{height: 40}}
-    style={{backgroundColor: '#fafafa'}}
-    itemStyle={{
-        justifyContent: 'flex-start'
-    }}
-    dropDownStyle={{backgroundColor: '#fafafa'}}
-    onChangeItem={item => this.ReFetchDefib(item.value)}
-/>
+                items={[
+                    {label: 'R = 100Km', value: 100},
+                    {label: 'R = 10Km', value: 10},
+                    {label: 'R = 1Km', value: 1},
+                    {label: 'Tout', value: 100000},
+                ]}
+                defaultValue={this.state.rayon}
+                containerStyle={{height: 0,width:120}}
+                style={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:240,top:9, height:40,width:110}}
+                itemStyle={{
+                    justifyContent: 'flex-start'
+                }}
+                dropDownStyle={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:240,top:20}}
+                onChangeItem={item => this.ReFetchDefib(item.value)}
+            />
 
             <MapView style = {{flex:1.9, marginBottom : this.state.marginBottom,}}
                  ref={(map) => { this.map = map; }}
@@ -273,7 +272,7 @@ const mapDispatchToProps = (dispatch) => {
 
     return {
         Adress: (state) => dispatch(Adress(state)),
-        Fecth_Defib: (coords) => dispatch(Fecth_Defib(coords)),
+        Fecth_Defib: (coords,d) => dispatch(Fecth_Defib(coords,d)),
         Fecth_DefiById : (id) => dispatch(Fecth_DefiById(id))
 
     }
