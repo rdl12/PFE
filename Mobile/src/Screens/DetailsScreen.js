@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import MapView, { Marker } from 'react-native-maps';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const DetailsScreen = () => {
 
@@ -15,7 +16,7 @@ const DetailsScreen = () => {
        
     }, [Get_Defib])
     return (
-        <SafeAreaView>
+        <SafeAreaView style = {{backgroundColor:Colors.white}}>
           {Get_Defib.Defibrilatteur.latitude === undefined ? (
              <ActivityIndicator size="large" />
           ):(
@@ -161,7 +162,7 @@ card :{
      shadowOpacity: 0.43,
      shadowRadius: 9.51,
      
-     elevation: 15,
+     elevation: 3,
     margin:15,
     
     marginTop:10},

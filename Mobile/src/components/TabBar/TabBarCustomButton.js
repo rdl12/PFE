@@ -10,7 +10,7 @@ import { isIphoneX } from 'react-native-iphone-x-helper';
 
 import { COLORS} from '../../Constantes'
 
-const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
+const TabBarCustomButton = ({ accessibilityState, children, onPress,visible }) => {
 
 
     var isSelected = accessibilityState.selected
@@ -41,7 +41,9 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }) => {
                         width: 50,
                         height: 50,
                         borderRadius: 25,
-                        backgroundColor: COLORS.primary
+                        backgroundColor: COLORS.primary,
+                        marginTop:visible ? 25:0
+
                     }}
                     onPress={onPress}
                 >
