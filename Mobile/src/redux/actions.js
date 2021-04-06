@@ -16,9 +16,9 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
-const Fecth_User = (data) => {
+const Set_User = (data) => {
   return {
-    type: t.Fetch_User,
+    type: t.FETCH_USER,
     payload: data
  }
 }
@@ -210,8 +210,9 @@ export const Fetch_User = (email) => {
     return fetch(`${API_URI}/User/find/${email}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
+              delete data.authorities
               console.log(data)
-              dispatch(Fetch_User({user:data}))
+              dispatch(Set_User({user:data}))
             }
               
               )

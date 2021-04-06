@@ -109,7 +109,7 @@ export const get_Accessibilite = (state = accessibilite , action) => {
 }
 export const Fetch_User = (state = user , action) => {
   switch (action.type) {
-    case t.Fetch_User:
+    case t.FETCH_USER:
       return {
         ...state,
         ...action.payload
