@@ -249,3 +249,33 @@ export const Fetch_Defib_User = (email) => {
           });
   }
 }
+export const Singup = (firstName,lastName,email,password) => {
+  const SingupData = {firstName,lastName,email,password}
+  console.log(SingupData)
+  return (dispatch) => {
+    return fetch(`${API_URI}/api/v1/registration`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(SingupData)
+    })
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              //dispatch(Set_Defib_user({Defibrilatteur_user:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch user ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+
+
+

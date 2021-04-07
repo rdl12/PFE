@@ -40,7 +40,7 @@ const LoginScreen = ({navigation}) => {
         <ImageBackground source= {images.login_background_footer} resizeMode='cover' style = {styles.image_footer}>
 
           <View style = {styles.Register}>
-             <TouchableOpacity >
+             <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
                <Text style = {styles.RegisterText}>S'inscrire ?</Text>
              </TouchableOpacity>
           </View>

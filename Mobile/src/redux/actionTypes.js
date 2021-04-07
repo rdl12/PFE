@@ -8,3 +8,4 @@ export const ADD_DEFIB = "ADD_DEFIB"
 export const SET_ACCESSIBILITE = "SET_ACCESSIBILITE"
 export const FETCH_USER = "FETCH_USER"
 export const FETCH_DEFIB_USER = "FETCH_DEFIB_USER"
+export const REGISTER = 'REGISTER'

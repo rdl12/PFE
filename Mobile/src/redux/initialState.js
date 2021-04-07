@@ -59,3 +59,7 @@ export const defib_user = {
   Defibrilatteur_user: []
 
 }
+
+export const token_registration = {
+  token:''
+}

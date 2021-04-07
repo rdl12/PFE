@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -123,6 +123,18 @@ export const Fetch_User = (state = user , action) => {
 export const Fetch_Defib_User = (state = defib_user , action) => {
   switch (action.type) {
     case t.FETCH_DEFIB_USER:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+}
+export const Register = (state = token_registration , action) => {
+  switch (action.type) {
+    case t.REGISTER:
       return {
         ...state,
         ...action.payload
