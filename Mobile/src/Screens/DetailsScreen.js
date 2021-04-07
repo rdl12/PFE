@@ -94,7 +94,7 @@ const DetailsScreen = () => {
                 <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
                 <Card.Content style = {{flex:1}}>
                     <View style = {{flex:1}}>
-                      <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:300,height:200,marginTop:5}}
+                      <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:350,height:200,marginTop:5}}
                         mapType = 'standard'
                         scrollEnabled = {false}
                         showsTraffic ={true}

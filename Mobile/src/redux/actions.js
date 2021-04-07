@@ -23,6 +23,13 @@ const Set_User = (data) => {
  }
 }
 
+const Set_Defib_user = (email) => {
+  return {
+    type: t.FETCH_DEFIB_USER,
+    payload: email
+ }
+}
+
 
 const Fetch_DefibIn100 = (coords) => {
   return {
@@ -224,3 +231,21 @@ export const Fetch_User = (email) => {
   }
 }
 
+export const Fetch_Defib_User = (email) => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/Defibrillateur/find/user/${email}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Set_Defib_user({Defibrilatteur_user:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch user ,please retry");
+            console.log(err);
+          });
+  }
+}
