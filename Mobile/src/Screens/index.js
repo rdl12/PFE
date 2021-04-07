@@ -6,6 +6,9 @@ import SignupScreen from './SignupScreen'
 import ListDefibScreen from './ListDefibScreen'
 import DetailsScreen from './DetailsScreen'
 import UrgenceScreen from './UrgenceScreen'
+import MyDefibsScreen from './MyDefibsScreen'
+import ProfilScreen from './ProfilScreen'
+
 
 export {
     HomeScreen,
@@ -16,4 +19,6 @@ export {
     ListDefibScreen,
     DetailsScreen,
     UrgenceScreen,
+    MyDefibsScreen,
+    ProfilScreen
 }

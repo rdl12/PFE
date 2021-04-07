@@ -53,3 +53,9 @@ export const accessibilite = {
 export const user = {
   user : {}
 }
+
+export const defib_user = {
+  
+  Defibrilatteur_user: []
+
+}

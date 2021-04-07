@@ -105,18 +105,18 @@ class ListDefibScreen extends Component {
 
     renderItem = ({ item }) => (
         <View>
-        <TouchableOpacity style={{ padding : 10, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee",elevation:3,flexDirection:'row',justifyContent:'space-between'}}
+        <TouchableOpacity style={{ padding : 10, backgroundColor : '#ffff',borderBottomWidth : 1, borderColor : "#eee",elevation:3,justifyContent:'space-between'}}
                                 onPress={() => this.ZoomTodefib(item.latitude,item.longitude,item.id) }>
-                    <View>
+                    <View style={{flexDirection:'column'}}>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                        <View style={{flexDirection:'row'}}>
+                        <View style={{display:'flex',justifyContent:'flex-start',flexDirection:'row'}}>
                             <Image
                               source={images.defib_list_icon}
                               style={{ width: 20, height: 25,margin:5, tintColor:'grey' }} 
                               resizeMode = "contain" />
-                            <Text style={{marginTop:7,fontWeight: "bold",}} >{item.description}</Text>
+                            <Text style={{marginTop:7,fontWeight: "bold",}} >{item.nom}</Text>
                         </View>
-                        <View style={{flexDirection:'row',justifyContent:"space-between"}}>
+                        <View style={{display:'flex',justifyContent:'flex-end',flexDirection:'row'}}>
                              { this.state.clicked[item.id] ? ( <Text style={{marginTop:7,fontWeight: "bold",}} >{Math.round(this.state.timeTravel)} min</Text>) : null}
                              { !this.state.clicked[item.id] ? (
                             <Image
@@ -133,7 +133,7 @@ class ListDefibScreen extends Component {
                         </View>
                     </View>
 
-                    <Text style={{}} >{item.adresse}</Text>
+                       <Text style={{}} >{item.adresse}</Text> 
                     </View>
                     
                     
