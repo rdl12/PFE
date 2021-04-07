@@ -78,7 +78,7 @@ class MapScreen extends Component{
 
     dispatchDefibAdress = (coords) => {
         this.props.Adress(coords);
-        this.props.navigation.navigate("Add defib")
+        this.props.navigation.navigate('AddDefib')
     }
 
     getMarkerCordinate = (e) => {

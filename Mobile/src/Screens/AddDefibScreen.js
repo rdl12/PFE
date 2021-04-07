@@ -10,7 +10,7 @@ import {AddDefibUrl} from '../utils/constants/Api'
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import { useDispatch } from 'react-redux';
-import {ModalState,Add_Defib_Posted,AccessibiliteState,} from '../redux/actions'
+import {ModalState,Add_Defib_Posted,AccessibiliteState,Fetch_User} from '../redux/actions'
 
 
 const AddDefibScreen = ({navigation}) => {
@@ -22,13 +22,15 @@ const AddDefibScreen = ({navigation}) => {
     const Modal_State = useSelector(state => state.Modal_State);
     const AccessibiliteState = useSelector(state => state.get_Accessibilite);
     const LoginInfo = useSelector(state => state.loginReducer);
-    
+    const user = useSelector(state => state.Fetch_User)
     const dispatch = useDispatch();
    
-  
     useEffect(() => {
+      dispatch(Fetch_User(LoginInfo.userId))
       console.log("adress:"+Modal_State)
-      dispatch(LoginInfo.userId)
+      console.log(LoginInfo.userId)
+      console.log(user)
+      
       }, [Modal_State])
 
     const submit = () =>{
@@ -49,6 +51,7 @@ const AddDefibScreen = ({navigation}) => {
         "adresse" : Adresse.addrese,
         "ville" : Adresse.ville,
         "province" : Adresse.province,
+        "user" : user.user
         
         
       }
