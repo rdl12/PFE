@@ -63,3 +63,5 @@ export const defib_user = {
 export const token_registration = {
   token:''
 }
+
+export const modified_defib = {}

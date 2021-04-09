@@ -71,6 +71,12 @@ const AddDefibPosted = (defib) => {
  }
 }
 
+const Set_Defib_modif = (defib) => {
+  return {
+    type: t.MODIFY_DEFIB,
+    payload: defib
+ }
+}
 
 
 export const login = (loginInput,navigation) => {
@@ -277,22 +283,25 @@ export const Singup = (firstName,lastName,email,password) => {
 }
 
 export const Modify_defib = (defib) => {
+  
+  delete defib.user.authorities
   console.log(defib)
  return (dispatch) => {
+  console.log("gggggg")
    return  fetch(`${API_URI}/Defibrillateur/update`, {
      method: 'PATCH', 
      headers: {  // these could be different for your API call
        Accept: 'application/json',
        'Content-Type': 'application/json'
-
+ 
      },
-     body: JSON.stringify(defib),
+     body: defib,
      },
    )
    .then((response) => {
      response.text().then((data) => {
        console.log(data)
-       //dispatch(Set_Defib_State({defib : data}))
+       dispatch(Set_Defib_modif({defib : data}))
       }
       )
      //dispatch(FecthDefib({markers:['hello mother fucker']}))

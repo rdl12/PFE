@@ -8,8 +8,10 @@ import Modals from '../components/Modal/Modals'
 import Dialog from "react-native-dialog";
 import {useSelector,useDispatch} from 'react-redux'
 import {ModalState,Modify_defib} from '../redux/actions'
+import {windowWidth,windowHeight} from '../utils/Dimentions'
 
-const DetailsScreen = ({navigation}) => {
+const DetailsScreen = ({route,navigation}) => {
+    const {isEdit} = route.params;
     const Modal_State = useSelector(state => state.Modal_State);
     const Get_Defib = useSelector(state => state.Get_Defib);
     const Adresse = useSelector(state => state.AdresseReducer);
@@ -53,18 +55,43 @@ const DetailsScreen = ({navigation}) => {
       setVisible(false);
     };
 
+    const modify = (tel,mar,n,desc,adr,prov,vil,acc) => {
+      console.log(tel)
+      if(AccessibiliteState.checked === 'Non mentionne'){
+        let access = Get_Defib.Defibrilatteur.accesibillité
+      } else {Get_Defib.Defibrilatteur.accesibillité = acc }
+      Get_Defib.Defibrilatteur.telephone = tel
+      Get_Defib.Defibrilatteur.marque_defib = mar
+      Get_Defib.Defibrilatteur.description = desc
+      Get_Defib.Defibrilatteur.nom = n
+      Get_Defib.Defibrilatteur.addrese = adr 
+      Get_Defib.Defibrilatteur.province =  prov 
+      Get_Defib.Defibrilatteur.ville = vil 
+      
+      
+      
+
+      Get_Defib.Defibrilatteur.etat.etat = 'modifié'
+      Get_Defib.Defibrilatteur.etat.id = 4
+
+      
+      setTimeout(() =>  Modify_defib(Get_Defib.Defibrilatteur),1000)
+     
+
+    }
+
   
     useEffect(() => {
-      navigation.setOptions({
-        headerRight : props => (
-          <TouchableOpacity {...props} onPress={() => console.log('easy a si ali')} >
-              <Image
-                source={ images.close_icon }
-                resizeMode='contain'
-                  /> 
-          </TouchableOpacity>
-       )
-      })
+      if(isEdit){
+        navigation.setOptions({
+          headerRight : props => (
+            <TouchableOpacity {...props} onPress={() => modify(Telephone,Marque,Nom,Description,Adresse.addrese,Adresse.province,Adresse.ville,AccessibiliteState.checked)} >
+                <Text style={{marginRight:15, fontSize:20}}>modifier</Text>
+            </TouchableOpacity>
+         )
+        })
+      }
+      
       setid(Get_Defib.Defibrilatteur.id)
       setNom(Get_Defib.Defibrilatteur.nom)
       setTel(Get_Defib.Defibrilatteur.telephone)
@@ -85,7 +112,7 @@ const DetailsScreen = ({navigation}) => {
       console.log(Accessibilite)
      
       
-    }, [Get_Defib,Accessibilite])
+    }, [Accessibilite])
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
           {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
@@ -94,18 +121,48 @@ const DetailsScreen = ({navigation}) => {
             
             <ScrollView>
                <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
-          <Dialog.Container visible={visible}>
-              <Dialog.Title>{title}</Dialog.Title>
+
+
+          <Dialog.Container visible={visible} contentStyle={{padding:-10, paddingTop:-20}}>
+              <View style={{backgroundColor:COLORS.primary,padding:15,marginTop:-25, marginBottom:30}}>
+              <Dialog.Title  Text style={{color : COLORS.white, fontSize:22}}>{title}</Dialog.Title>
+              </View>
+              
+              {title === "Specification" ?(
+                 <Dialog.Input 
+                     label = "Marque"
+                     style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10,}}
+                     placeholder = {Get_Defib.Defibrilatteur.description}
+                     mode = 'outlined'
+                     onChangeText={(modif) => setDescription(title,modif)}/>
+              ):
               <Dialog.Input 
-              style={{borderColor:COLORS.black, borderWidth:1}}
+                  style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
                   placeholder = {value}
                   mode = 'outlined'
-                  onChangeText={(modif) => setmodif(title,modif)}/>
-              <Dialog.Button label="OK" onPress={handleCancel} />
+                  onChangeText={(modif) => setmodif(title,modif)}/>}
+              
+              {title === "Specification" ?(
+                 <Dialog.Input 
+                     label = "Description"
+                     style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
+                     placeholder = {Get_Defib.Defibrilatteur.description}
+                     mode = 'outlined'
+                     onChangeText={(modif) => setDescription(title,modif)}/>
+              ):null}
+              <Dialog.Button label="OK" onPress={handleCancel} style={{color:COLORS.primary , marginRight:10}}  />
+              
           </Dialog.Container>
+
+
             <Card style={styles.card}>
+              {isEdit ?(
                 <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
                             right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Telephone",Get_Defib.Defibrilatteur.telephone)} />}/>
+              ):(
+                <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                
+              )}
                 <Card.Content>
                     <View>
                       <Paragraph style={styles.para}>{Telephone}</Paragraph>
@@ -114,9 +171,14 @@ const DetailsScreen = ({navigation}) => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                           right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("marque",Get_Defib.Defibrilatteur.marque_defib)} />}/>
-                <Card.Content>
+               {isEdit?(
+                  <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                              right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Specification",Get_Defib.Defibrilatteur.marque_defib)} />}/>
+                ):(
+                  <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+       
+                )}
+               <Card.Content>
                 <View style = {{display:'flex',flexDirection:'row'}}>
                     <View style={{flex:1}}>
                       <Title Text style={styles.Title}>Marque</Title>
@@ -130,8 +192,13 @@ const DetailsScreen = ({navigation}) => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                             right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Nom",Get_Defib.Defibrilatteur.nom)} />}/>
+               {isEdit?(
+                 <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                 right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Nom",Get_Defib.Defibrilatteur.nom)} />}/>
+                 ):(
+                  <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+     
+                 )}
                 <Card.Content>
                     <View>
                       <Paragraph style={styles.para}>{Nom}</Paragraph>
@@ -174,11 +241,16 @@ const DetailsScreen = ({navigation}) => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+               {isEdit?(
+                 <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
                  right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => navigation.navigate('MapDetails',{titre:'choisissez un emplacement',Defib:Get_Defib.Defibrilatteur})} />}/>
+               ):(
+                <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+               
+               )}
                 <Card.Content style = {{flex:1}}>
                     <View style = {{flex:1}}>
-                      <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:350,height:200,marginTop:5}}
+                      <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:windowWidth*0.85 ,height:200,marginTop:5}}
                         ref={mapView}
                         mapType = 'standard'
                         scrollEnabled = {false}
@@ -189,12 +261,12 @@ const DetailsScreen = ({navigation}) => {
                             latitudeDelta : 0.0008,
                             longitudeDelta : 0.0016
                            }}
-                      >
+                       >
                       <Marker
                         key={Get_Defib.Defibrilatteur.id}
                         coordinate={{latitude : Get_Defib.Defibrilatteur.latitude, longitude : Get_Defib.Defibrilatteur.longitude }}
                         color='#0000FF'
-                    />
+                      />
                         
                       </MapView>
                     </View>
@@ -202,8 +274,13 @@ const DetailsScreen = ({navigation}) => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                  right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,marginBottom:0}}  onPress={() =>  HandleModal()}/>}/>
+               {isEdit ? (
+                  <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                     right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,marginBottom:0}}  onPress={() =>  HandleModal()}/>}/>
+                 ):(
+                  <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                
+                 )}
                 <Card.Content>
                     <View>
                       { AccessibiliteState.checked === 'Non mentionne' ? (<Paragraph style={styles.para}>{Accessibilite}</Paragraph>) : (<Paragraph style={styles.para}>{AccessibiliteState.checked}</Paragraph>)}
