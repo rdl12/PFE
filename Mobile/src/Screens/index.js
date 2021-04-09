@@ -8,6 +8,7 @@ import DetailsScreen from './DetailsScreen'
 import UrgenceScreen from './UrgenceScreen'
 import MyDefibsScreen from './MyDefibsScreen'
 import ProfilScreen from './ProfilScreen'
+import MapDetails from './MapDetails'
 
 
 export {
@@ -20,5 +21,6 @@ export {
     DetailsScreen,
     UrgenceScreen,
     MyDefibsScreen,
-    ProfilScreen
+    ProfilScreen,
+    MapDetails
 }

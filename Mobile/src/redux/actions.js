@@ -38,7 +38,7 @@ const Fetch_DefibIn100 = (coords) => {
  }
 }
 
-const Fetch_defib_byId = (id) => {
+export const Fetch_defib_byId = (id) => {
   return {
     type: t.FETCH_DEFIB_DETAILS,
     payload: id
@@ -276,6 +276,32 @@ export const Singup = (firstName,lastName,email,password) => {
   }
 }
 
+export const Modify_defib = (defib) => {
+  console.log(defib)
+ return (dispatch) => {
+   return  fetch(`${API_URI}/Defibrillateur/update`, {
+     method: 'PATCH', 
+     headers: {  // these could be different for your API call
+       Accept: 'application/json',
+       'Content-Type': 'application/json'
 
+     },
+     body: JSON.stringify(defib),
+     },
+   )
+   .then((response) => {
+     response.text().then((data) => {
+       console.log(data)
+       //dispatch(Set_Defib_State({defib : data}))
+      }
+      )
+     //dispatch(FecthDefib({markers:['hello mother fucker']}))
+   })
+  .catch((err) => {
+    alert("defib not posted,please retry");
+      console.log(err);
+  });
+}
+}
 
 

@@ -8,7 +8,7 @@ import { COLORS } from "../../Constantes";
 
 class ArInput extends React.Component {
   render() {
-    const { shadowless, success, error } = this.props;
+    const { shadowless, success, error,onChangeText } = this.props;
 
     const inputStyles = [
       styles.input,
@@ -24,6 +24,7 @@ class ArInput extends React.Component {
         placeholderTextColor={COLORS.MUTED}
         style={inputStyles}
         color={COLORS.HEADER}
+        onChangeText = {onChangeText}
        
         {...this.props}
       />

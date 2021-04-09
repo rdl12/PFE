@@ -1,14 +1,15 @@
-import { View,Text, SafeAreaView ,KeyboardAvoidingView, ImageBackground} from 'react-native'
+import {StyleSheet ,StatusBar, KeyboardAvoidingView,TouchableOpacity,Image,ImageBackground} from 'react-native'
 import React ,{useState}  from 'react'
 import { login } from '../redux/actions';
 import { useDispatch } from 'react-redux';
 import {SignupScreen} from './SignupScreen'
-import Input from '../components/Input/Input'
-import { StyleSheet } from "react-native";
+import { Block, Checkbox, Text, theme } from "galio-framework";
+import {Avatar} from 'react-native-paper';
 import { COLORS,images } from "../Constantes";
-import {windowHeight,windowWidth} from '../utils/Dimentions'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import ArInput from '../components/GalioInput/Input'
+import ArButton  from '../components/Button/Button'
+import {windowWidth as width ,windowHeight as height} from '../utils/Dimentions'
+
 
 
 
@@ -17,50 +18,120 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch()
     return (
-        <SafeAreaView style = {{backgroundColor : COLORS.white,flex:1,justifyContent:'space-between',display:'flex'}}>
-        <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
-        
-        <View style = {styles.login}>
-        <Text style = {styles.title}> Login</Text>
-          <Input
-          placeholderText='Email'
-          labelValue={username}
-          onChangeText={(text) => setUsername(text)}
-        />
-        <Input
-          placeholderText='password'
-          labelValue={password}
-          onChangeText={(text) => setPassword(text)}
-        />
+      <ImageBackground source= {{uri : "https://thumbs.dreamstime.com/b/abstract-blue-gradient-background-textured-circles-cells-glitch-texture-abstract-blue-gradient-background-textured-159577766.jpg"}}  style = {styles.background_image} imageStyle={{borderBottomRightRadius : 300}}>
+      <Block flex middle >
+        <StatusBar hidden />
+
+          <Block safe flex middle>
+            <Block style={styles.registerContainer}>
+              <Block flex={0.25} middle style={styles.socialConnect}>
+                  <Image 
+                            source={images.login_avatar}
+                            style={{marginTop : 25}}
+                            tintcolor = {COLORS.primary}
+                        />
+                  <Text style = {styles.title}> Login</Text>
+                <Block row style={{ marginTop: theme.SIZES.BASE }}>
+                </Block>
+              </Block>
+              <Block flex>
+                <Block flex={0.17} middle>
+                  <Text color="#8898AA" size={12}>
+                    Or sign up the classic way
+                  </Text>
+                </Block>
+                <Block flex center>
+                  <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    behavior="padding"
+                    enabled
+                  >
+                    
+                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                      <ArInput
+                        borderless
+                        placeholder="Email"
+                        onChangeText={(text) => setUsername(text)}
+                       
+                      />
+                    </Block>
+                    <Block width={width * 0.8}>
+                      <ArInput
+                        password
+                        borderless
+                        placeholder="Password"
+                        onChangeText={(text) => setPassword(text)}
+                       
+                      />
+                      <Block row style={styles.passwordCheck}>
+                        
+                      </Block>
+                    </Block>
+                    
+                    <Block middle>
+                      <ArButton color="primary" style={styles.createArButton}  onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
+                        <Text bold size={14} color={COLORS.WHITE}>
+                          login
+                        </Text>
+                      </ArButton>
+                    </Block>
+                    <Block row style={styles.passwordCheck}>
+                        
+                    </Block>
+                    
+                 
+                 <Block row width={width * 0.75}>
+                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
+                          <Text style = {styles.RegisterText}>S'inscrire ?</Text>
+                       </TouchableOpacity> 
+                    </Block>
+
+                    <Block right width={width * 0.75}>
+                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
+                          <Text style = {styles.RegisterText}>mot de passe oublié?</Text>
+                       </TouchableOpacity> 
+                    </Block>
+
+                    
+                    
+                   
+                  </KeyboardAvoidingView>
+                </Block>
+              </Block>
+            </Block>
+          </Block>
+   
+      </Block>
+      </ImageBackground>
+        // <SafeAreaView style = {{backgroundColor : COLORS.white,flex:1,justifyContent:'space-between',display:'flex'}}>
        
-          </View>
+        // <View style = {styles.login}>
+        // <Text style = {styles.title}> Login</Text>
+        //   <Input
+        //   placeholderText='Email'
+        //   labelValue={username}
+        //   onChangeText={(text) => setUsername(text)}
+        // />
+        // <Input
+        //   placeholderText='password'
+        //   labelValue={password}
+        //   onChangeText={(text) => setPassword(text)}
+        // />
+        //   </View>
           
-          
-        </ImageBackground> 
-        <ImageBackground source= {images.login_background_footer} resizeMode='cover' style = {styles.image_footer}>
+        //   <View style = {styles.Register}>
+        //      <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
+        //        <Text style = {styles.RegisterText}>S'inscrire ?</Text>
+        //      </TouchableOpacity>
+        //   </View>
 
-          <View style = {styles.Register}>
-             <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
-               <Text style = {styles.RegisterText}>S'inscrire ?</Text>
-             </TouchableOpacity>
-          </View>
-
-          <View style={styles.loginButton}>
-            <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
-              <Text style = {styles.text}>Login</Text>
-            </TouchableOpacity>
-          </View>
+        //   <View style={styles.loginButton}>
+        //     <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
+        //       <Text style = {styles.text}>Login</Text>
+        //     </TouchableOpacity>
+        //   </View>
            
-         
-      
-         </ImageBackground>  
-
-         
-
-         
-         
-        
-        </SafeAreaView>
+        // </SafeAreaView>
      )
 }
 
@@ -68,11 +139,15 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
 
-  login:{
-    flex:2,
-    marginTop:windowHeight/3.1
+  background_image:{
+    flex:1,
+    width:width,
+    height:height/2,
+    
+    
   },
 
+  
   title:{
     color:COLORS.primary,
     fontSize:30,
@@ -80,55 +155,56 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     fontFamily:'Nunito',
     marginBottom:10,
-    marginLeft: 20,
-  },
- 
-  background_image:{
-    flex:1,
-    width:windowWidth,
-    height:windowHeight/2
-  },
-
-  image_footer:{
-    flex:0.35,
-    width:windowWidth,
-    height:windowHeight/4
-  },
-
-
-  loginButton:{
-    top:40,
-    left:windowWidth/1.7,
-    width:windowWidth/2.7,
-    borderColor:COLORS.white,
-    borderWidth:2  
-  },
-
-  text:{
-    color:Colors.white,
-    padding:18,
-    fontSize:20,
-    marginLeft:23,
-    fontFamily:'Nunito',
-
-  },
-
-  Register:{
-    
-    top:80,
-    width:windowWidth/5.5,
-    left:windowWidth/12,
-    borderBottomColor:COLORS.primary,
-    borderBottomWidth:0.5
-  
- 
   },
   
-  RegisterText:{
-   
-    fontSize:15,
-    fontFamily:'Nunito',
-    color:COLORS.primary
+  registerContainer: {
+    width: width * 0.9,
+    height: height * 0.60,
+    backgroundColor: "#F4F5F7",
+    borderRadius: 4,
+    shadowColor: COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1,
+    overflow: "hidden"
   },
+  socialConnect: {
+    backgroundColor: COLORS.WHITE,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: "#8898AA"
+  },
+  socialArButtons: {
+    width: 120,
+    height: 40,
+    backgroundColor: "#fff",
+    shadowColor: COLORS.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 4
+    },
+    shadowRadius: 8,
+    shadowOpacity: 0.1,
+    elevation: 1
+  },
+  socialTextArButtons: {
+    color: COLORS.PRIMARY,
+    fontWeight: "800",
+    fontSize: 14
+  },
+  ArInputIcons: {
+    marginRight: 12
+  },
+  passwordCheck: {
+    paddingLeft: 15,
+    paddingTop: 13,
+    paddingBottom: 15
+  },
+  createArButton: {
+    width: width * 0.5,
+    marginTop: 25
+  }
 });
-

@@ -39,6 +39,7 @@ const instruction_menu_icon = require('../../assets/images/instruction_menu_icon
 const arrow_down = require('../../assets/images/arrow_down.png')
 const defib_list_icon = require('../../assets/images/defib_list_icon.png')
 const RegisterBackground = require("../../assets/images/register-bg.png");
+const login_avatar = require("../../assets/images/login_avatar.png");
 
 export default {
     Home_image,
@@ -82,6 +83,7 @@ export default {
     arrow_down,
     defib_list_icon,
     RegisterBackground,
+    login_avatar
 
 
 }

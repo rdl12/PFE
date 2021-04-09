@@ -76,6 +76,10 @@ public class DefibrillateurController {
 	
 	  @PatchMapping("/update")//replace an existing Resource entirely  // @PatchMapping partial update
 	    public String update(@RequestBody Defibrillateur defibrillateur) {
+		    Float lat= (Float) defibrillateur.getLatitude();
+	        Float lng= (Float) defibrillateur.getLongitude();
+		    String geom = defibrillateurService.getGeom(lat,lng);
+		    defibrillateur.setGeom(geom);
             defibrillateurService.save(defibrillateur);
 	        return "updated  success";
 	    }

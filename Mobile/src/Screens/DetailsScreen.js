@@ -1,5 +1,5 @@
-import React,{useState,useEffect,} from 'react'
-import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image } from 'react-native'
+import React,{useState,useEffect,useRef} from 'react'
+import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image,TouchableOpacity } from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph, ActivityIndicator,IconButton} from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import MapView, { Marker } from 'react-native-maps';
@@ -7,7 +7,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Modals from '../components/Modal/Modals'
 import Dialog from "react-native-dialog";
 import {useSelector,useDispatch} from 'react-redux'
-import {ModalState,} from '../redux/actions'
+import {ModalState,Modify_defib} from '../redux/actions'
 
 const DetailsScreen = ({navigation}) => {
     const Modal_State = useSelector(state => state.Modal_State);
@@ -17,12 +17,14 @@ const DetailsScreen = ({navigation}) => {
     const [visible, setVisible] = useState(false);
     const [title, settitle] = useState('');
     const [value, setvalue] = useState('');
-    const [Nom, setNom] = useState(Get_Defib.Defibrilatteur.nom)
-    const [Telephone, setTel] = useState(Get_Defib.Defibrilatteur.telephone)
-    const [Description, setDescription] = useState(Get_Defib.Defibrilatteur.description)
-    const [Marque, setMarque] = useState(Get_Defib.Defibrilatteur.marque_defib)
-    const [Accessibilite, setAccessibilite] = useState(Get_Defib.Defibrilatteur.accesibillité)
+    const [id, setid] = useState('')
+    const [Nom, setNom] = useState('')
+    const [Telephone, setTel] = useState('')
+    const [Description, setDescription] = useState('')
+    const [Marque, setMarque] = useState('')
+    const [Accessibilite, setAccessibilite] = useState('')
     const dispatch = useDispatch();
+    const mapView = React.createRef();
 
 
     const showDialog = (title,value) => {
@@ -51,13 +53,42 @@ const DetailsScreen = ({navigation}) => {
       setVisible(false);
     };
 
+  
     useEffect(() => {
-        console.log(Get_Defib)
+      navigation.setOptions({
+        headerRight : props => (
+          <TouchableOpacity {...props} onPress={() => console.log('easy a si ali')} >
+              <Image
+                source={ images.close_icon }
+                resizeMode='contain'
+                  /> 
+          </TouchableOpacity>
+       )
+      })
+      setid(Get_Defib.Defibrilatteur.id)
+      setNom(Get_Defib.Defibrilatteur.nom)
+      setTel(Get_Defib.Defibrilatteur.telephone)
+      setDescription(Get_Defib.Defibrilatteur.description)
+      setMarque(Get_Defib.Defibrilatteur.marque_defib)
+      setAccessibilite(Get_Defib.Defibrilatteur.accesibillité)
+      if (mapView.current){
+        console.log(mapView.current)
+        mapView.current.animateToRegion({
+          latitude:Get_Defib.Defibrilatteur.latitude,
+          longitude : Get_Defib.Defibrilatteur.longitude,
+          latitudeDelta : 0.002,
+          longitudeDelta : 0.004
+        })
        
-    }, [Get_Defib])
+      }
+
+      console.log(Accessibilite)
+     
+      
+    }, [Get_Defib,Accessibilite])
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
-          {Get_Defib.Defibrilatteur.latitude === undefined ? (
+          {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
              <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />
           ):(
             
@@ -74,7 +105,7 @@ const DetailsScreen = ({navigation}) => {
           </Dialog.Container>
             <Card style={styles.card}>
                 <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                            right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("Telephone",Get_Defib.Defibrilatteur.telephone)} />}/>
+                            right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Telephone",Get_Defib.Defibrilatteur.telephone)} />}/>
                 <Card.Content>
                     <View>
                       <Paragraph style={styles.para}>{Telephone}</Paragraph>
@@ -84,7 +115,7 @@ const DetailsScreen = ({navigation}) => {
 
              <Card style={styles.card}>
                 <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                           right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("marque",Get_Defib.Defibrilatteur.marque_defib)} />}/>
+                           right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("marque",Get_Defib.Defibrilatteur.marque_defib)} />}/>
                 <Card.Content>
                 <View style = {{display:'flex',flexDirection:'row'}}>
                     <View style={{flex:1}}>
@@ -100,7 +131,7 @@ const DetailsScreen = ({navigation}) => {
 
              <Card style={styles.card}>
                 <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                             right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("Nom",Get_Defib.Defibrilatteur.nom)} />}/>
+                             right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => showDialog("Nom",Get_Defib.Defibrilatteur.nom)} />}/>
                 <Card.Content>
                     <View>
                       <Paragraph style={styles.para}>{Nom}</Paragraph>
@@ -144,10 +175,11 @@ const DetailsScreen = ({navigation}) => {
 
              <Card style={styles.card}>
                 <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                 right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => navigation.navigate('MapScreen',{titre:'choisissez un emplacement',lat:Get_Defib.Defibrilatteur.latitude,long:Get_Defib.Defibrilatteur.longitude})} />}/>
+                 right={(props) => <IconButton {...props} icon={images.edit_icon}  size={25}  onPress= {() => navigation.navigate('MapDetails',{titre:'choisissez un emplacement',Defib:Get_Defib.Defibrilatteur})} />}/>
                 <Card.Content style = {{flex:1}}>
                     <View style = {{flex:1}}>
                       <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:350,height:200,marginTop:5}}
+                        ref={mapView}
                         mapType = 'standard'
                         scrollEnabled = {false}
                         showsTraffic ={true}

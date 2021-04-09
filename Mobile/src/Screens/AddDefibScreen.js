@@ -60,72 +60,7 @@ const AddDefibScreen = ({navigation}) => {
 
    
 
-    const openThreeButtonAlert=()=>{
-      Alert.alert(
-        'Ajouter une photo!', 'Choisir',
-        [
-          { text: 'Annuler', onPress: () => console.log('Cancel Pressed'),style: 'cancel'},
-          {text: 'ouvrir camera', onPress: () => imageCameraLaunch()},
-          {text: 'depuis Galery', onPress: () => imageGalleryLaunch()},
-        ],
-        { 
-          cancelable: false 
-        }
-      );
-    }
-    const imageCameraLaunch = () => {
-      let options = {
-      storageOptions: {
-          skipBackup: true,
-          path: 'images',
-      },
-      };
-  
-      launchCamera(options, (response) => {
-        console.log('Response = ', response);
-  
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-          alert(response.customButton);
-        } else {
-          const source = { uri: response.uri };
-          setImageSource(source.uri);
-          
-        }
-      });
-    }
-    const imageGalleryLaunch = () => {
-            let options = {
-            storageOptions: {
-                skipBackup: true,
-                path: 'images',
-            },
-            };
-  
-          
-        
-        launchImageLibrary(options, (response) => {
-                if (response.didCancel) {
-                    console.log('User cancelled photo picker');
-                    alert('You did not select any image');
-                  } else if (response.error) {
-                    console.log('ImagePicker Error: ', response.error);
-                  } else if (response.customButton) {
-                    console.log('User tapped custom button: ', response.customButton);
-                  } else {
-                    let source = { uri: response.uri };
-                    // ADD THIS
-                    setImageSource(source.uri);
-                  }
-              
-            
-            });
-          }
-    
+   
     return (
       <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
           <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
