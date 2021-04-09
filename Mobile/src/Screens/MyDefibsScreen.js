@@ -22,7 +22,9 @@ class MyDefibsScreen extends Component{
     }
 
     getDetails(id,lat,long) {
-        this.props.navigation.navigate('Details')
+        this.props.navigation.navigate('Details', {
+            isEdit: true
+          })
         this.props.Fecth_DefiById(id);
         let coords={ latitude:lat,
                     longitude:long,}

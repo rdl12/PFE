@@ -1,15 +1,55 @@
 import React,{useState,useEffect,} from 'react'
 import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image } from 'react-native'
-import {useSelector} from 'react-redux'
-import { Avatar, Button, Card, Title, Paragraph, ActivityIndicator} from 'react-native-paper';
+import { Avatar, Button, Card, Title, Paragraph, ActivityIndicator,IconButton} from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import MapView, { Marker } from 'react-native-maps';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Modals from '../components/Modal/Modals'
+import Dialog from "react-native-dialog";
+import {useSelector,useDispatch} from 'react-redux'
+import {ModalState,} from '../redux/actions'
 
-const DetailsScreen = () => {
-
+const DetailsScreen = ({navigation}) => {
+    const Modal_State = useSelector(state => state.Modal_State);
     const Get_Defib = useSelector(state => state.Get_Defib);
     const Adresse = useSelector(state => state.AdresseReducer);
+    const AccessibiliteState = useSelector(state => state.get_Accessibilite);
+    const [visible, setVisible] = useState(false);
+    const [title, settitle] = useState('');
+    const [value, setvalue] = useState('');
+    const [Nom, setNom] = useState(Get_Defib.Defibrilatteur.nom)
+    const [Telephone, setTel] = useState(Get_Defib.Defibrilatteur.telephone)
+    const [Description, setDescription] = useState(Get_Defib.Defibrilatteur.description)
+    const [Marque, setMarque] = useState(Get_Defib.Defibrilatteur.marque_defib)
+    const [Accessibilite, setAccessibilite] = useState(Get_Defib.Defibrilatteur.accesibillité)
+    const dispatch = useDispatch();
+
+
+    const showDialog = (title,value) => {
+      console.log(Telephone)
+      console.log(Nom)
+      console.log(Description)
+      setvalue(String(value))
+      settitle(title)
+      setVisible(true);
+    };
+     const HandleModal = () => {
+      dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))
+     
+      
+      
+     }
+    const setmodif = (id,modif) =>{
+      if(id=="Telephone") {setTel(modif)}
+      else if (id=="Description") {setDescription(modif)}
+      else if (id=="Nom") {setNom(modif)}
+      else if (id == "marque") {setMarque(modif)}
+      
+    }
+  
+    const handleCancel = () => {
+      setVisible(false);
+    };
 
     useEffect(() => {
         console.log(Get_Defib)
@@ -20,27 +60,38 @@ const DetailsScreen = () => {
           {Get_Defib.Defibrilatteur.latitude === undefined ? (
              <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />
           ):(
+            
             <ScrollView>
+               <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
+          <Dialog.Container visible={visible}>
+              <Dialog.Title>{title}</Dialog.Title>
+              <Dialog.Input 
+              style={{borderColor:COLORS.black, borderWidth:1}}
+                  placeholder = {value}
+                  mode = 'outlined'
+                  onChangeText={(modif) => setmodif(title,modif)}/>
+              <Dialog.Button label="OK" onPress={handleCancel} />
+          </Dialog.Container>
             <Card style={styles.card}>
-                <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Telephone" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                            right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("Telephone",Get_Defib.Defibrilatteur.telephone)} />}/>
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.telephone}</Paragraph>
+                      <Paragraph style={styles.para}>{Telephone}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Specification" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                           right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("marque",Get_Defib.Defibrilatteur.marque_defib)} />}/>
                 <Card.Content>
                 <View style = {{display:'flex',flexDirection:'row'}}>
                     <View style={{flex:1}}>
                       <Title Text style={styles.Title}>Marque</Title>
-                      <Paragraph>{Get_Defib.Defibrilatteur.marque_defib}</Paragraph>
-                    </View>
-                    <View style={{flex:1}}>
-                      <Title Text style={styles.Title}>Type d'eclectrode</Title>
-                      <Paragraph>{Get_Defib.Defibrilatteur.type_electrode}</Paragraph>
+                      <Paragraph>{Marque}</Paragraph>
+                      <Title Text style={styles.Title}>Description</Title>
+                      <Paragraph>{Description}</Paragraph>
                     </View>
                 </View>
                     
@@ -48,10 +99,11 @@ const DetailsScreen = () => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Nom" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                             right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => showDialog("Nom",Get_Defib.Defibrilatteur.nom)} />}/>
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.nom}</Paragraph>
+                      <Paragraph style={styles.para}>{Nom}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
@@ -91,7 +143,8 @@ const DetailsScreen = () => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Emplacement" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                 right={(props) => <IconButton {...props} icon={images.next_icon}  size={25}  onPress= {() => navigation.navigate('MapScreen',{titre:'choisissez un emplacement',lat:Get_Defib.Defibrilatteur.latitude,long:Get_Defib.Defibrilatteur.longitude})} />}/>
                 <Card.Content style = {{flex:1}}>
                     <View style = {{flex:1}}>
                       <MapView style = {{display:'flex', justifyContent:'center', alignContent:'stretch',width:350,height:200,marginTop:5}}
@@ -117,10 +170,11 @@ const DetailsScreen = () => {
              </Card>
 
              <Card style={styles.card}>
-                <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}/>
+                <Card.Title title="Accessibilité" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
+                  right={(props) => <IconButton {...props} icon={images.edit_icon} style = {{marginRight:5,marginBottom:0}}  onPress={() =>  HandleModal()}/>}/>
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.accesibillité}</Paragraph>
+                      { AccessibiliteState.checked === 'Non mentionne' ? (<Paragraph style={styles.para}>{Accessibilite}</Paragraph>) : (<Paragraph style={styles.para}>{AccessibiliteState.checked}</Paragraph>)}
                     </View>
                </Card.Content>
              </Card>

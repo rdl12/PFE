@@ -46,8 +46,8 @@ export const DefibPosted = {
 }
 
 export const accessibilite = {
-  checked:'null',
-  isPediatrique: 'null'
+  checked:'Non mentionne',
+  isPediatrique: 'Non mentionne'
 }
 
 export const user = {
