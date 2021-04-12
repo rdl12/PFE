@@ -286,8 +286,6 @@ export const Modify_defib = (defib) => {
   
   delete defib.user.authorities
   console.log(defib)
- return (dispatch) => {
-  console.log("gggggg")
    return  fetch(`${API_URI}/Defibrillateur/update`, {
      method: 'PATCH', 
      headers: {  // these could be different for your API call
@@ -295,13 +293,13 @@ export const Modify_defib = (defib) => {
        'Content-Type': 'application/json'
  
      },
-     body: defib,
+     body: JSON.stringify(defib),
      },
    )
    .then((response) => {
      response.text().then((data) => {
        console.log(data)
-       dispatch(Set_Defib_modif({defib : data}))
+       //dispatch(Set_Defib_modif({defib : data}))
       }
       )
      //dispatch(FecthDefib({markers:['hello mother fucker']}))
@@ -311,6 +309,6 @@ export const Modify_defib = (defib) => {
       console.log(err);
   });
 }
-}
+
 
 
