@@ -7,7 +7,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Modals from '../components/Modal/Modals'
 import Dialog from "react-native-dialog";
 import {useSelector,useDispatch} from 'react-redux'
-import {ModalState,Modify_defib} from '../redux/actions'
+import {Modify_defib, ModalState,Fetch_defib_byId} from '../redux/actions'
 import {windowWidth,windowHeight} from '../utils/Dimentions'
 
 const DetailsScreen = ({route,navigation}) => {
@@ -27,66 +27,75 @@ const DetailsScreen = ({route,navigation}) => {
     const [Accessibilite, setAccessibilite] = useState('')
     const dispatch = useDispatch();
     const mapView = React.createRef();
-
+  
 
     const showDialog = (title,value) => {
-      console.log(Telephone)
-      console.log(Nom)
-      console.log(Description)
-      setvalue(String(value))
-      settitle(title)
-      setVisible(true);
+    setvalue(String(value))
+    settitle(title)
+    setVisible(true);
     };
-     const HandleModal = () => {
-      dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))
-     
-      
-      
-     }
+    const HandleModal = () => {
+    dispatch(ModalState({"isModalOpen": true,"isElectrode":false}))
+
+
+
+    }
     const setmodif = (id,modif) =>{
-      if(id=="Telephone") {setTel(modif)}
-      else if (id=="Description") {setDescription(modif)}
-      else if (id=="Nom") {setNom(modif)}
-      else if (id == "marque") {setMarque(modif)}
-      
+        if(id=="Telephone") {
+        setTel(modif)
+
+        }
+        else if (id=="Description") {setDescription(modif)}
+        else if (id=="Nom") {setNom(modif)}
+        else if (id == "marque") {setMarque(modif)
+        }
+
+    }
+
+    const handleCancel = (title) => {
+    setVisible(false);
+    if (title == 'Telephone')
+    {
+      Get_Defib.Defibrilatteur.telephone = Telephone
     }
   
-    const handleCancel = () => {
-      setVisible(false);
+    if (title == 'Specification')
+    {
+      Get_Defib.Defibrilatteur.description = Description
+      Get_Defib.Defibrilatteur.marque_defib = Marque
+    }
+    if (title == 'Nom')
+    {
+      Get_Defib.Defibrilatteur.nom = Nom
+    }
+   
+    dispatch(Fetch_defib_byId({Defibrilatteur : Get_Defib.Defibrilatteur}))
     };
 
-    const modify = (tel,mar,n,desc,adr,prov,vil,acc) => {
-      console.log(tel)
-      if(AccessibiliteState.checked === 'Non mentionne'){
+    const modify = () => {
+         if(AccessibiliteState.checked == 'Non mentionne' || AccessibiliteState.checked == undefined){
         let access = Get_Defib.Defibrilatteur.accesibillité
-      } else {Get_Defib.Defibrilatteur.accesibillité = acc }
-      Get_Defib.Defibrilatteur.telephone = tel
-      Get_Defib.Defibrilatteur.marque_defib = mar
-      Get_Defib.Defibrilatteur.description = desc
-      Get_Defib.Defibrilatteur.nom = n
-      Get_Defib.Defibrilatteur.addrese = adr 
-      Get_Defib.Defibrilatteur.province =  prov 
-      Get_Defib.Defibrilatteur.ville = vil 
+        }
+         else 
+            {Get_Defib.Defibrilatteur.accesibillité = AccessibiliteState.checked }
       
-      
-      
-
-      Get_Defib.Defibrilatteur.etat.etat = 'modifié'
-      Get_Defib.Defibrilatteur.etat.id = 4
-
-      
-      setTimeout(() =>  Modify_defib(Get_Defib.Defibrilatteur),1000)
-     
-
+         Get_Defib.Defibrilatteur.adresse = Adresse.addrese 
+         Get_Defib.Defibrilatteur.province =   Adresse.province
+         Get_Defib.Defibrilatteur.ville = Adresse.ville 
+         Get_Defib.Defibrilatteur.latitude = Adresse.lat
+         Get_Defib.Defibrilatteur.longitude = Adresse.long
+         Get_Defib.Defibrilatteur.etat.etat = 'modifié'
+         Get_Defib.Defibrilatteur.etat.id = 4
+         console.log(Adresse.addrese)
+         setTimeout(() =>  Modify_defib(Get_Defib.Defibrilatteur),1000)
     }
-
   
     useEffect(() => {
       if(isEdit){
         navigation.setOptions({
           headerRight : props => (
-            <TouchableOpacity {...props} onPress={() => modify(Telephone,Marque,Nom,Description,Adresse.addrese,Adresse.province,Adresse.ville,AccessibiliteState.checked)} >
-                <Text style={{marginRight:15, fontSize:20}}>modifier</Text>
+            <TouchableOpacity {...props} onPress={() => modify()} >
+                <Text style={{marginRight:15, fontSize:20}}>Modifier</Text>
             </TouchableOpacity>
          )
         })
@@ -99,7 +108,6 @@ const DetailsScreen = ({route,navigation}) => {
       setMarque(Get_Defib.Defibrilatteur.marque_defib)
       setAccessibilite(Get_Defib.Defibrilatteur.accesibillité)
       if (mapView.current){
-        console.log(mapView.current)
         mapView.current.animateToRegion({
           latitude:Get_Defib.Defibrilatteur.latitude,
           longitude : Get_Defib.Defibrilatteur.longitude,
@@ -109,10 +117,9 @@ const DetailsScreen = ({route,navigation}) => {
        
       }
 
-      console.log(Accessibilite)
      
       
-    }, [Accessibilite])
+    }, [Get_Defib.Defibrilatteur,AccessibiliteState.checked,Adresse])
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
           {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
@@ -134,7 +141,9 @@ const DetailsScreen = ({route,navigation}) => {
                      style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10,}}
                      placeholder = {Get_Defib.Defibrilatteur.description}
                      mode = 'outlined'
-                     onChangeText={(modif) => setDescription(title,modif)}/>
+                     onChangeText={(modif) => setMarque(modif)}
+                    
+                    />
               ):
               <Dialog.Input 
                   style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
@@ -148,9 +157,9 @@ const DetailsScreen = ({route,navigation}) => {
                      style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
                      placeholder = {Get_Defib.Defibrilatteur.description}
                      mode = 'outlined'
-                     onChangeText={(modif) => setDescription(title,modif)}/>
+                     onChangeText={(modif) => setDescription(modif)}/>
               ):null}
-              <Dialog.Button label="OK" onPress={handleCancel} style={{color:COLORS.primary , marginRight:10}}  />
+              <Dialog.Button label="OK" onPress={ () => handleCancel(title)} style={{color:COLORS.primary , marginRight:10}}  />
               
           </Dialog.Container>
 
@@ -165,7 +174,7 @@ const DetailsScreen = ({route,navigation}) => {
               )}
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Telephone}</Paragraph>
+                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.telephone}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
@@ -182,9 +191,9 @@ const DetailsScreen = ({route,navigation}) => {
                 <View style = {{display:'flex',flexDirection:'row'}}>
                     <View style={{flex:1}}>
                       <Title Text style={styles.Title}>Marque</Title>
-                      <Paragraph>{Marque}</Paragraph>
+                      <Paragraph>{Get_Defib.Defibrilatteur.marque_defib}</Paragraph>
                       <Title Text style={styles.Title}>Description</Title>
-                      <Paragraph>{Description}</Paragraph>
+                      <Paragraph>{Get_Defib.Defibrilatteur.description}</Paragraph>
                     </View>
                 </View>
                     
@@ -201,7 +210,7 @@ const DetailsScreen = ({route,navigation}) => {
                  )}
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Nom}</Paragraph>
+                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.nom}</Paragraph>
                     </View>
                </Card.Content>
              </Card>
