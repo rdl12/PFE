@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen, MapDetails, } from '../Screens';
+import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen, MapDetails,InfoProfilScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -44,6 +44,12 @@ const ProfilStack = ({navigation}) => (
          
        )}}
 
+      />
+
+    <Stack.Screen
+        name="InfoProfil"
+        component={InfoProfilScreen}
+        options={{headerShown: true}}
       />
 
     </Stack.Navigator>

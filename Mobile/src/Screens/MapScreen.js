@@ -10,7 +10,7 @@ import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
 import ListDefib from '../components/ListDefib/ListDefib';
-
+import BgTracking from '../components/BgTracking';
 
 class MapScreen extends Component{
     constructor(props){

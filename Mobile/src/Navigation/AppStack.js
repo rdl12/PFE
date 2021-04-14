@@ -8,7 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,SignupScreen } from '../Screens';
+import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,SignupScreen,LocationScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -73,9 +73,14 @@ const MapStack = ({navigation}) => (
         component={ListDefibScreen}
         options={{headerShown: false}}
       />
-        <Stack.Screen
+        {/* <Stack.Screen
         name="Details"
         component={DetailsScreen}
+        options={{headerShown: true}}
+      /> */}
+      <Stack.Screen
+        name="Location"
+        component={LocationScreen}
         options={{headerShown: true}}
       />
 

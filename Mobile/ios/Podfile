@@ -19,6 +19,10 @@ target 'mobile' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod '@mauron85_react-native-background-geolocation', :path => '../node_modules/@mauron85/react-native-background-geolocation'
+
+  pod 'RNBoundary', :path => '../node_modules/react-native-boundary'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing

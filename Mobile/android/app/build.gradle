@@ -181,6 +181,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-boundary')
+    compile project(':@mauron85_react-native-background-geolocation')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     implementation(project(':react-native-maps')){
     exclude group: 'com.google.android.gms', module: 'play-services-base'
     exclude group: 'com.google.android.gms', module: 'play-services-maps'

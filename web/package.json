@@ -3,7 +3,7 @@
   "proxy": "http://localhost:9090",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://lite.codedthemes.com/datta-able/react/default/",
+  "homepage": "http://localhost:3030",
   "dependencies": {
     "@types/react": "^17.0.3",
     "bootstrap": "^4.3.1",

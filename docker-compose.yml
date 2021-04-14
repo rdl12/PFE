@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+  #Backend/springBoot
+  backend:
+    container_name: backend-container
+    image: rdl123/backend-container
+    build: ./Backend
+    ports:
+      - "9090:9090"
+    depends_on:
+      - postgresqldb
+   #Database Postgres/postgis
+  postgresqldb:
+    image: rdl123/db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=defib_tech
+    #Fron-end React
+  web:
+    build: ./web
+    container_name: web
+    image: rdl123/pfe_web
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
