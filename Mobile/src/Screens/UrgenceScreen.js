@@ -46,7 +46,7 @@ const UrgenceScreen = ({navigation}) => {
              <Card style={styles.card}>
                 <Card.Title title="Massage cardiaque" titleStyle={{color:COLORS.primary,fontFamily: "Cochin",fontWeight: 'bold',fontSize:20,marginLeft:10}} style={styles.cardTitle}
                             left={(props) => <IconButton {...props} icon={images.next_icon} size={25} style={{transform: [{rotateY: '180deg'}]}}  onPress={() => {setNext(true)}} />}
-                            right={(props) => <IconButton {...props} icon={images.next_icon} size={25} style={{marginRight:20}} onPress={() => navigation.navigate('Location')} />}/>
+                            right={(props) => <IconButton {...props} icon={images.next_icon} size={25} style={{marginRight:20}} onPress={() => navigation.navigate('ListDefib')} />}/>
                 <Card.Content>
                 <View>
                     <View style={{marginLeft:15, flexDirection:'column',marginTop:-8}}>

@@ -23,6 +23,8 @@ target 'mobile' do
 
   pod 'RNBoundary', :path => '../node_modules/react-native-boundary'
 
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing

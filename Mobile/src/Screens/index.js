@@ -11,6 +11,7 @@ import ProfilScreen from './ProfilScreen'
 import MapDetails from './MapDetails'
 import LocationScreen from './LocationScreen'
 import InfoProfilScreen from './InfoProfilScreen'
+import TutorialScreen from './TutorialScreen'
 
 
 export {
@@ -26,6 +27,7 @@ export {
     ProfilScreen,
     MapDetails,
     LocationScreen,
-    InfoProfilScreen
+    InfoProfilScreen,
+    TutorialScreen
 
 }

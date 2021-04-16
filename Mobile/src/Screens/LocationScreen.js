@@ -8,11 +8,12 @@ import {
 } from 'react-native';
 import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
+import PushNotification from "react-native-push-notification";
 
 const LocationScreen = () => {
 
 
-const [Enter, setEnter] = useState(false);
+  const [Enter, setEnter] = useState(false);
   const location = useBackgroundGeolocationTracker();
   console.log('useTraking latitude', location.latitude);
   const hasLocationPermission = async () => {
@@ -28,6 +29,7 @@ const [Enter, setEnter] = useState(false);
   };
 
   useEffect(() => {
+
     if (hasLocationPermission()) {
       const BoundaryData = [
       
@@ -47,7 +49,6 @@ const [Enter, setEnter] = useState(false);
     }
 
     Boundary.on(Events.ENTER, (id) => {
-      console.warn('Enter Boundary ', id);
       setEnter(true)
       
     });
@@ -55,7 +56,19 @@ const [Enter, setEnter] = useState(false);
       console.warn('Exit Boundary ', id);
       setEnter(false)
     });
-  }, []);
+
+    if (Enter){
+      PushNotification.localNotification({
+        /* iOS and Android properties */
+        title: "test", // (optional)
+        message: "entered Zone", // (required)
+       
+      });
+    }
+
+    console.log(Enter)
+    
+  }, [Enter]);
 
   // Cluster Zone Location
   const P0 = {latitude: 37.5692842, longitude: 126.8267638};

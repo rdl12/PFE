@@ -1,10 +1,27 @@
-import React from 'react'
-import { View,StyleSheet,Text,Image,SafeAreaView, ImageBackground } from 'react-native'
+import React,{useEffect} from 'react'
+import { View,StyleSheet,Text,Image,SafeAreaView, ImageBackground,Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
+import messaging from '@react-native-firebase/messaging';
 
 const HomeScreen = ({navigation}) => {
+
+  
+  // useEffect(() => {
+  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
+     
+  //     console.log(remoteMessage)
+  //     PushNotification.localNotification({
+  //       /* iOS and Android properties */
+  //       title: "test", // (optional)
+  //       message: "test", // (required)
+      
+  //     });
+  //   });
+
+  //   return unsubscribe;
+  // }, []);
     return (
        <SafeAreaView style = {styles.view}>
            <ImageBackground source = {{uri:'https://www.condair-merchandising.com/pub/img/home-hero-wave.png'}} resizeMode='cover'  style={styles.background_image}>
@@ -50,7 +67,7 @@ const HomeScreen = ({navigation}) => {
            
            <View style = {styles.container}>
                <View style = {styles.imageContainer}>
-               <TouchableOpacity onPress = {() => navigation.navigate('')} >
+               <TouchableOpacity onPress = {() => navigation.navigate('Tutorial')} >
                 <Image 
                     style={{width:77,height:77,marginLeft:9}}
                     source={images.instruction_icon}
@@ -59,7 +76,7 @@ const HomeScreen = ({navigation}) => {
            </TouchableOpacity>
                </View>
             <View style = {styles.imageContainer}>
-            <TouchableOpacity onPress = {() => navigation.navigate('Login')} >
+            <TouchableOpacity onPress = {() => navigation.navigate('Help')} >
            <Image 
             style={{width:77,height:77}}
             source={images.help_icon}
