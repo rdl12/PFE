@@ -16,7 +16,7 @@ const useBackgroundGeolocationTracker = () => {
   useEffect(() => {
     // Configs
     BackgroundGeolocation.configure({
-      desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
+      locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
       stationaryRadius: 50,
       distanceFilter: 50,
       notificationTitle: 'Background tracking',

@@ -9,8 +9,13 @@ import {
 import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
 import PushNotification from "react-native-push-notification";
+import Geolocation from '@react-native-community/geolocation';
+import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
 
 const LocationScreen = () => {
+
+  const [latitude, setlat] = useState();
+  const [longitude, setlong] = useState();
 
 
   const [Enter, setEnter] = useState(false);
@@ -23,19 +28,34 @@ const LocationScreen = () => {
 
     if (Platform.OS === 'android') {
       await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
       );
+      
     }
   };
 
   useEffect(() => {
+    PushNotification.createChannel(
+      {
+        channelId: "fcm_fallback_notification_channel", // (required)
+        channelName: "My channel", // (required)
+        channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
+        soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
+        importance: 4, // (optional) default: 4. Int value of the Android notification importance
+        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+      },
+      (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
+    );
 
-    if (hasLocationPermission()) {
+    
+    
+    if (hasLocationPermission() || latitude == undefined || longitude == undefined) {
+      console.log(latitude,longitude)
       const BoundaryData = [
       
         {
-          lat: 33.547120,
-          lng:-7.681710,
+          lat: 33.5307432,
+          lng: -7.6868358,
           radius: 100,
           id: 'Company',
         },
@@ -66,7 +86,7 @@ const LocationScreen = () => {
       });
     }
 
-    console.log(Enter)
+    console.log(Enter,hasLocationPermission())
     
   }, [Enter]);
 

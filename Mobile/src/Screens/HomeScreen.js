@@ -46,7 +46,7 @@ const HomeScreen = ({navigation}) => {
                <View style = {styles.imageContainer}>
                <TouchableOpacity onPress = {() => navigation.navigate('UrgenceScreen')}>
                 <Image 
-                    style={{width:77,height:77}}
+                    style={{width:77,height:77,alignSelf:'center'}}
                     source={images.phone_icon}
                     resizeMode ='contain'
                     tintColor='red'/>
@@ -56,7 +56,7 @@ const HomeScreen = ({navigation}) => {
             <View style = {styles.imageContainer}>
             <TouchableOpacity onPress = {() => navigation.navigate('Maps')} >
            <Image 
-            style={{width:77,height:77,marginLeft:13}}
+            style={{width:77,height:77,alignSelf:'center'}}
             source={images.location_icon}
             tintColor={COLORS.primary}/>
              <Text style = {styles.text}> Geolocaliser </Text>
@@ -69,7 +69,7 @@ const HomeScreen = ({navigation}) => {
                <View style = {styles.imageContainer}>
                <TouchableOpacity onPress = {() => navigation.navigate('Tutorial')} >
                 <Image 
-                    style={{width:77,height:77,marginLeft:9}}
+                    style={{width:77,height:77,alignSelf:'center'}}
                     source={images.instruction_icon}
                     tintColor="#D2691E"/>
                 <Text style = {styles.text}> Instruction </Text>
@@ -78,7 +78,7 @@ const HomeScreen = ({navigation}) => {
             <View style = {styles.imageContainer}>
             <TouchableOpacity onPress = {() => navigation.navigate('Help')} >
            <Image 
-            style={{width:77,height:77}}
+            style={{width:77,height:77,alignSelf:'center'}}
             source={images.help_icon}
             tintColor='green'/>
               <Text style = {styles.text}> HELP </Text>
@@ -96,7 +96,6 @@ export default HomeScreen
 
 const styles = StyleSheet.create({
     background_image:{
-        marginTop:-10,
         flex:0.3,
         width:windowWidth,
       },
@@ -132,15 +131,12 @@ const styles = StyleSheet.create({
         backgroundColor:COLORS.white,
         alignItems:'center',
         padding:10,
-        marginTop:20,
         marginBottom:0,
         margin:27,
-        
         borderRadius:10
     },
     text:{
         textAlign: 'center',
-        letterSpacing:1,
         fontFamily:'cochin',
         letterSpacing:2,
         fontWeight:'bold',
