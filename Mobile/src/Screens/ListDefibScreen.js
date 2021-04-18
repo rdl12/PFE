@@ -185,11 +185,11 @@ class ListDefibScreen extends Component {
                 ]}
                 defaultValue={this.state.rayon}
                 containerStyle={{height: 0,width:120}}
-                style={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:240,top:9, height:40,width:110}}
+                style={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:windowWidth/2,top:9, height:40,width:110}}
                 itemStyle={{
                     justifyContent: 'flex-start'
                 }}
-                dropDownStyle={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:240,top:20}}
+                dropDownStyle={{backgroundColor: '#fafafa',position:"absolute",zIndex:2,left:windowWidth/2,top:20}}
                 onChangeItem={item => this.ReFetchDefib(item.value)}
             />
 
