@@ -25,6 +25,8 @@ target 'mobile' do
 
   pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'mobileTests' do
     inherit! :complete
     # Pods for testing

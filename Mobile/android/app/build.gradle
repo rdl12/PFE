@@ -79,7 +79,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: false  // <- here | clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -186,6 +186,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     compile project(':react-native-boundary')
     compile project(':@mauron85_react-native-background-geolocation')
+    compile project(':react-native-background-task')
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
     implementation(project(':react-native-maps')){
     exclude group: 'com.google.android.gms', module: 'play-services-base'

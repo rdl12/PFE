@@ -169,7 +169,7 @@ export function SideBar(props) {
                              )}
                         label="Formation"
                         labelStyle={{color:"#228B22", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('Profile')}}
+                        onPress={() => {props.navigation.navigate('Formation')}}
                     />
                     <DrawerItem 
                         style={{marginBottom:-5,}}

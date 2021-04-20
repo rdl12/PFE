@@ -12,6 +12,7 @@ import MapDetails from './MapDetails'
 import LocationScreen from './LocationScreen'
 import InfoProfilScreen from './InfoProfilScreen'
 import TutorialScreen from './TutorialScreen'
+import FormationScreen from './FormationScreen'
 
 
 export {
@@ -28,6 +29,7 @@ export {
     MapDetails,
     LocationScreen,
     InfoProfilScreen,
-    TutorialScreen
+    TutorialScreen,
+    FormationScreen,
 
 }

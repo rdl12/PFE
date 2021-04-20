@@ -9,8 +9,53 @@ import {
 import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
 import PushNotification from "react-native-push-notification";
-import Geolocation from '@react-native-community/geolocation';
-import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
+import BackgroundJob from 'react-native-background-job';
+
+
+  const BoundaryData = [
+  
+    {
+       lat: 33.547120,
+      lng:-7.681710,
+      radius: 100,
+      id: 'Company',
+    },
+ 
+  ];
+  BoundaryData.map((boundary) => {
+    Boundary.add(boundary)
+      .then(() => console.log('success!'))
+      .catch((e) => console.log(e));
+  });
+
+
+const backgroundJob = {
+ jobKey: "myJob",
+ job: () => BoundaryData.map((boundary) => {
+  Boundary.add(boundary)
+    .then(() => console.log('success!'))
+    .catch((e) => console.log(e));
+})
+};
+ 
+BackgroundJob.register(backgroundJob);
+ 
+var backgroundSchedule = {
+ jobKey: "myJob",
+}
+
+BackgroundJob.schedule(backgroundSchedule)
+  .then(() => Boundary.on(Events.ENTER, (id) => {
+    PushNotification.localNotification({
+      /* iOS and Android properties */
+      title: "test", // (optional)
+      message: "entered Zone", // (required)
+     
+   })
+    }))
+  .catch(err => console.err(err));
+
+
 
 const LocationScreen = () => {
 
@@ -34,28 +79,16 @@ const LocationScreen = () => {
     }
   };
 
-  useEffect(() => {
-    PushNotification.createChannel(
-      {
-        channelId: "fcm_fallback_notification_channel", // (required)
-        channelName: "My channel", // (required)
-        channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
-        soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
-        importance: 4, // (optional) default: 4. Int value of the Android notification importance
-        vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-      },
-      (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
-    );
+  
 
+  useEffect(() => {
     
-    
-    if (hasLocationPermission() || latitude == undefined || longitude == undefined) {
-      console.log(latitude,longitude)
+    if (hasLocationPermission()) {
       const BoundaryData = [
       
         {
-          lat: 33.5307432,
-          lng: -7.6868358,
+           lat: 33.547120,
+          lng:-7.681710,
           radius: 100,
           id: 'Company',
         },
@@ -70,23 +103,24 @@ const LocationScreen = () => {
 
     Boundary.on(Events.ENTER, (id) => {
       setEnter(true)
-      
     });
+
     Boundary.on(Events.EXIT, (id) => {
       console.warn('Exit Boundary ', id);
       setEnter(false)
     });
 
-    if (Enter){
+     if (Enter){
       PushNotification.localNotification({
+      
         /* iOS and Android properties */
         title: "test", // (optional)
         message: "entered Zone", // (required)
        
-      });
-    }
+     });
+      
+   }
 
-    console.log(Enter,hasLocationPermission())
     
   }, [Enter]);
 

@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.swmansion.reanimated.ReanimatedPackage;
+import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 import com.eddieowens.RNBoundaryPackage;
 import com.marianhello.bgloc.react.BackgroundGeolocationPackage;
@@ -15,6 +17,7 @@ import com.facebook.soloader.SoLoader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import com.marianhello.bgloc.react.BackgroundGeolocationPackage;  
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -31,7 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-          //packages.add(new BackgroundGeolocationPackage()); 
+          //packages.add(new BackgroundTaskPackage()); 
           return packages;
         }
 
@@ -39,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
+
       };
 
   @Override
@@ -51,6 +55,7 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
+    BackgroundTaskPackage.useContext(this);
   }
 
   /**
