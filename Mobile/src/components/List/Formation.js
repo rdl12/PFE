@@ -10,13 +10,19 @@ import {
 
 
 // Single book component
-function Formation({ formation, index }) {
+function Formation({ formation, navigation }) {
   
-  const margin = 30;
-  const BOOKW = 100;
-  const BOOKH = BOOKW * 1.5;
+  const margin = 20;
+  const BOOKW = 170;
+  const BOOKH = BOOKW * 1.25;
  
 
+
+  // View book details
+const formationDetails = () => {
+
+  navigation.push('formationDetails', { formation });
+};
 
  // Styles
  const styles = StyleSheet.create({
@@ -42,15 +48,15 @@ function Formation({ formation, index }) {
 
  
   return (
-    <Pressable >
+    <Pressable onPress = {formationDetails} >
       <View >
        
           <View style={styles.imgBox}>
-            <Image style={styles.bookImg} source={{ uri: formation.imageUrl }} />
+            <Image style={styles.bookImg} source={{ uri: formation.image }} />
           </View>
  
         <Text  style={styles.bookText}>
-          {formation.author.name}
+          {formation.nom}
         </Text>
       </View>
     </Pressable>

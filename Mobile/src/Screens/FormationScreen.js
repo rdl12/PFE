@@ -1,51 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView,StyleSheet } from 'react-native';
+import {useSelector} from 'react-redux'
 
 import List from '../components/List/FormationList';
 
 const FormationScreen = ({navigation}) => {
-  const [reading, setReading] = useState(
-    [{
-    id:'1',
-    author:{
-      name:'name'
-    }},
-    {
-      id:'2',
-      author:{
-        name:'name'
-      }
-    },
-    {
-      id:'3',
-      author:{
-        name:'name'
-    }
-  },
-  {
-    id:'4',
-    author:{
-      name:'name'
-  }
-},
-]);
-  const [completed, setCompleted] = useState([]);
-  const [wishlist, setWishlist] = useState([]);
-  const styles = StyleSheet.create ({
-    screen: {
-      flex: 1,
-     
-    },
-  });
-
+  const formation = useSelector(state => state.Formation_Reducer.formation);
+   
+  let secourisme = formation.filter(
+    (formation) => formation.categorie.nom === 'secourisme' 
+  );
+  let Mannequin  = formation.filter(
+    (formation) => formation.categorie.nom === 'Mannequin formation' 
+  );
+  
 
     return (
     <View style={styles.screen}>
       <ScrollView
       >
-        <List formations={reading} title="Reading" navigation={navigation} />
-        <List formations={completed} title="Completed" navigation={navigation} />
-        <List formations={wishlist} title="Wishlist" navigation={navigation} />
+        <List formations={secourisme} title="Secourisme" navigation={navigation} />
+        <List formations={Mannequin} title="Mannequin formation" navigation={navigation} />
+
       </ScrollView>
     </View>
     )
@@ -53,3 +29,9 @@ const FormationScreen = ({navigation}) => {
 
 export default FormationScreen
 
+const styles = StyleSheet.create ({
+    screen: {
+      flex: 2,
+     
+    },
+  });

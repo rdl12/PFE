@@ -13,6 +13,7 @@ import LocationScreen from './LocationScreen'
 import InfoProfilScreen from './InfoProfilScreen'
 import TutorialScreen from './TutorialScreen'
 import FormationScreen from './FormationScreen'
+import FormationDetailsScreen from './FormationDetailsScreen'
 
 
 export {
@@ -31,5 +32,6 @@ export {
     InfoProfilScreen,
     TutorialScreen,
     FormationScreen,
+    FormationDetailsScreen,
 
 }

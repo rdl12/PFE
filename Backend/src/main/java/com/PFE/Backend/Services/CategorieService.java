@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.PFE.Backend.Repository.CategorieRepository;
 import com.PFE.Backend.entities.Categorie;
+import com.PFE.Backend.entities.Defibrillateur;
+import com.PFE.Backend.entities.Etat;
 
 import lombok.AllArgsConstructor;
 
@@ -16,6 +18,10 @@ public class CategorieService {
 	    
 	    public List<Categorie> findAll() {
 	        return categorieRepo.findAll();
+	    }
+	    
+	    public Categorie findByNom(String nom) {
+	        return categorieRepo.findByNom(nom);
 	    }
 
 }

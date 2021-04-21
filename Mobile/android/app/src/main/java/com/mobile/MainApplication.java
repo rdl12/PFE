@@ -4,8 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
-import com.swmansion.reanimated.ReanimatedPackage;
-import com.jamesisaac.rnbackgroundtask.BackgroundTaskPackage;
 import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
 import com.eddieowens.RNBoundaryPackage;
 import com.marianhello.bgloc.react.BackgroundGeolocationPackage;
@@ -55,7 +53,6 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    BackgroundTaskPackage.useContext(this);
   }
 
   /**

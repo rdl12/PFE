@@ -8,7 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,SignupScreen,LocationScreen,TutorialScreen,FormationScreen } from '../Screens';
+import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,SignupScreen,LocationScreen,TutorialScreen,FormationScreen,FormationDetailsScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -65,7 +65,7 @@ const MapStack = ({navigation}) => (
     <Stack.Navigator>
         <Stack.Screen
         name="Formation"
-        component={FormationScreen}
+        component={FormationStack}
         options={{headerShown: true}}
       />
       <Stack.Screen
@@ -103,6 +103,22 @@ const MapStack = ({navigation}) => (
       />
       
       
+      </Stack.Navigator>
+    )
+
+    const FormationStack = () => (
+      <Stack.Navigator>
+        
+        <Stack.Screen
+        name="Formation"
+        component={FormationScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="formationDetails"
+        component={FormationDetailsScreen}
+        options={{headerShown: false}}
+      />  
       </Stack.Navigator>
     )
 const AppStack = () => {

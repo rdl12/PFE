@@ -7,10 +7,10 @@ import Formation from './Formation';
 
 
 // Horizontal list of books
-function FormationList({ formations, title }) {
+function FormationList({ formations, title,navigation }) {
     
-  const margin = 30;
-  const width = 80
+  const margin = 20;
+  const width = 400
 
   // Handle horizontal scroll
   
@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
         data={formations}
-        keyExtractor={(i) => i.id}
+        keyExtractor={(i) => i.id.toString()}
         renderItem={({ item, index }) => (
-          <Formation formation={item} index={index}   />
+          <Formation formation={item} navigation={navigation}   />
         )}
         ListEmptyComponent={<EmptyList />}
       />

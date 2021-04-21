@@ -22,6 +22,19 @@ const Set_User = (data) => {
     payload: data
  }
 }
+const Set_Formation = (data) => {
+  return {
+    type: t.FETCH_FORMATION,
+    payload: data
+ }
+}
+
+const Set_Formation_Details = (data) => {
+  return {
+    type: t.FETCH_FORMATION_DETAILS,
+    payload: data
+ }
+}
 
 const Set_Defib_user = (email) => {
   return {
@@ -311,4 +324,40 @@ export const Modify_defib = (defib) => {
 }
 
 
+export const Fetch_Formation = () => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Formation({formation:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Formation ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+
+export const Fetch_Formation_Details = (id) => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Formation_Details({formationDetails:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Formation Details ,please retry");
+            console.log(err);
+          });
+  }
+}
 

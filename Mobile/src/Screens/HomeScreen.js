@@ -3,25 +3,16 @@ import { View,StyleSheet,Text,Image,SafeAreaView, ImageBackground,Alert } from '
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
-import messaging from '@react-native-firebase/messaging';
+import { useDispatch } from 'react-redux';
+import { Fetch_Formation } from '../redux/actions';
 
 const HomeScreen = ({navigation}) => {
+  const dispatch = useDispatch()
 
   
-  // useEffect(() => {
-  //   const unsubscribe = messaging().onMessage(async remoteMessage => {
-     
-  //     console.log(remoteMessage)
-  //     PushNotification.localNotification({
-  //       /* iOS and Android properties */
-  //       title: "test", // (optional)
-  //       message: "test", // (required)
-      
-  //     });
-  //   });
-
-  //   return unsubscribe;
-  // }, []);
+  useEffect(() => {
+      dispatch(Fetch_Formation())
+  }, []);
     return (
        <SafeAreaView style = {styles.view}>
            <ImageBackground source = {{uri:'https://www.condair-merchandising.com/pub/img/home-hero-wave.png'}} resizeMode='cover'  style={styles.background_image}>
