@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,18 +28,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	 private final AppUserService appUserService;
 	    private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-
+	    @Override
+	    public void configure(WebSecurity web) throws Exception {
+	        web.ignoring().antMatchers("/success_login");
+	    }
 	    @Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	        http    
-	                .cors().and()
-	                .csrf().disable()
-	                .authorizeRequests()
-	                .antMatchers("/api/v*/registration/**","/Defibrillateur/**")
-	                .permitAll().and()
-	                .formLogin()
-	                .defaultSuccessUrl("/success_login",true)
-	                .permitAll();
+	        .cors().and()
+            .csrf().disable()
+            .formLogin()
+            .defaultSuccessUrl("/success_login",true).and()
+            .authorizeRequests()
+            .antMatchers("/api/v*/registration/*","/Defibrillateur/*")
+            .permitAll()
+            .anyRequest()
+            .authenticated().and();
 	                
 	                
 	    }

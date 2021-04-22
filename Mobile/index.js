@@ -3,56 +3,50 @@
  */
  import React from 'react';
 import {AppRegistry} from 'react-native';
-import PushNotification from "react-native-push-notification";
+
 
 import App from './App';
 import {name as appName} from './app.json';
 import { Provider } from 'react-redux';
 import {store} from './src/redux/store';
+import BackgroundJob from 'react-native-background-job';
+import Boundary, {Events} from 'react-native-boundary';
+import { LocalNotification } from './src/services/PushNotificationService';
+//import { getBoundaryData } from './src/services/TrackingService'
+import { API_URI } from './src/utils/constants/Api'
 
-
-PushNotification.configure({
-  onRegister: function (token) {
-    console.log("TOKEN:", token);
-  },
-  onNotification: function (notification) {
-    console.log("NOTIFICATION:", notification);
-
-  },
-  onAction: function (notification) {
-    console.log("ACTION:", notification.action);
-    console.log("NOTIFICATION:", notification);
-
-  },
-
-  onRegistrationError: function(err) {
-    console.error(err.message, err);
-  },
-
-  permissions: {
-    alert: true,
-    badge: true,
-    sound: true,
-  },
-
-  popInitialNotification: true,
-  requestPermissions: true,
-});
-
-PushNotification.createChannel(
-  {
-    channelId: "fcm_fallback_notification_channel", // (required)
-    channelName: "My channel", // (required)
-    channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
-    soundName: "default", // (optional) See `soundName` parameter of `localNotification` function
-    importance: 4, // (optional) default: 4. Int value of the Android notification importance
-    vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
-  },
-  (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
-);
-
+const getBoundaryData = async () => {
   
+ 
+const backgroundJob = {
+  jobKey: "myJob",
+  job: async () => {
+    const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
+    const BoundaryData = await response.json()
+    console.log(BoundaryData)
+    BoundaryData.map((boundary) => {
+    boundary.id=toString(boundary.id)
+    Boundary.add(boundary)
+    .then(() => console.log('success!'))
+    .catch((e) => console.log(e));
+  })}
+  
+  };
+  let backgroundSchedule = {
+    jobKey: "myJob",
+   }
+  
+  BackgroundJob.register(backgroundJob);
+  BackgroundJob.schedule(backgroundSchedule)
+  .then(() => Boundary.on(Events.ENTER, (id) => {
+    LocalNotification()
+    }))
+  .catch(err => console.err(err));
+ }
 
+ getBoundaryData()
+
+ 
 const Redux = () =>
 
   <Provider store={store}>

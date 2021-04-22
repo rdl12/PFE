@@ -9,50 +9,6 @@ import {
 import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
 import PushNotification from "react-native-push-notification";
-import BackgroundJob from 'react-native-background-job';
-import Geolocation from '@react-native-community/geolocation';
-  const BoundaryData = [
-  
-    {
-       lat: 33.547120,
-      lng:-7.681710,
-      radius: 100,
-      id: 'Company',
-    },
- 
-  ];
-  BoundaryData.map((boundary) => {
-    Boundary.add(boundary)
-      .then(() => console.log('success!'))
-      .catch((e) => console.log(e));
-  });
-
-
-const backgroundJob = {
- jobKey: "myJob",
- job: () => BoundaryData.map((boundary) => {
-  Boundary.add(boundary)
-    .then(() => console.log('success!'))
-    .catch((e) => console.log(e));
-})
-};
- 
-BackgroundJob.register(backgroundJob);
- 
-var backgroundSchedule = {
- jobKey: "myJob",
-}
-
-BackgroundJob.schedule(backgroundSchedule)
-  .then(() => Boundary.on(Events.ENTER, (id) => {
-    PushNotification.localNotification({
-      /* iOS and Android properties */
-      title: "test", // (optional)
-      message: "entered Zone", // (required)
-     
-   })
-    }))
-  .catch(err => console.err(err));
 
 
 
@@ -107,14 +63,21 @@ const LocationScreen = () => {
       setEnter(false)
     });
 
-     if (Enter){
-      PushNotification.localNotification({
-      
-        /* iOS and Android properties */
-        title: "test", // (optional)
-        message: "entered Zone", // (required)
-       
-     });
+  if (Enter){
+    PushNotification.localNotification({
+      autoCancel: true,
+      bigText:
+        'This is local notification demo in React Native app. Only shown, when expanded.',
+      subText: 'Local Notification Demo',
+    /* iOS and Android properties */
+      title: "test", // (optional)
+      message: "entered Zone", // (required)
+      vibrate: true,
+      vibration: 300,
+      playSound: true,
+      soundName: 'default',
+      actions: '["Yes", "No"]'
+    })
       
    }
 
