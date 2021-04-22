@@ -16,6 +16,7 @@ const useBackgroundGeolocationTracker = () => {
   useEffect(() => {
     // Configs
     BackgroundGeolocation.configure({
+      desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       locationProvider: BackgroundGeolocation.ACTIVITY_PROVIDER,
       stationaryRadius: 50,
       distanceFilter: 50,
@@ -32,8 +33,8 @@ const useBackgroundGeolocationTracker = () => {
       fastestInterval: 500,
       activitiesInterval: 10000,
       stopOnStillActivity: false,
-      url: 'http://192.168.1.7:3000/location',
-      syncUrl: 'http://192.168.1.7:3000/sync',
+      url: 'http://192.168.1.5:3000/location',
+      syncUrl: 'http://192.168.1.5:3000/sync',
       httpHeaders: {
         'X-FOO': 'bar',
       },

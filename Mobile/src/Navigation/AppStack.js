@@ -66,7 +66,7 @@ const MapStack = ({navigation}) => (
         <Stack.Screen
         name="Formation"
         component={FormationStack}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="ListDefib"

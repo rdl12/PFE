@@ -10,8 +10,7 @@ import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
 import PushNotification from "react-native-push-notification";
 import BackgroundJob from 'react-native-background-job';
-
-
+import Geolocation from '@react-native-community/geolocation';
   const BoundaryData = [
   
     {
@@ -58,11 +57,7 @@ BackgroundJob.schedule(backgroundSchedule)
 
 
 const LocationScreen = () => {
-
-  const [latitude, setlat] = useState();
-  const [longitude, setlong] = useState();
-
-
+  
   const [Enter, setEnter] = useState(false);
   const location = useBackgroundGeolocationTracker();
   console.log('useTraking latitude', location.latitude);
@@ -74,6 +69,7 @@ const LocationScreen = () => {
     if (Platform.OS === 'android') {
       await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
+      
       );
       
     }
@@ -84,11 +80,12 @@ const LocationScreen = () => {
   useEffect(() => {
     
     if (hasLocationPermission()) {
+      
       const BoundaryData = [
       
         {
            lat: 33.547120,
-          lng:-7.681710,
+          lng: -7.681710,
           radius: 100,
           id: 'Company',
         },

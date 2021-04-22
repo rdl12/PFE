@@ -3,6 +3,7 @@ import { View, ScrollView,StyleSheet } from 'react-native';
 import {useSelector} from 'react-redux'
 
 import List from '../components/List/FormationList';
+import { COLORS } from '../Constantes';
 
 const FormationScreen = ({navigation}) => {
   const formation = useSelector(state => state.Formation_Reducer.formation);
@@ -32,6 +33,6 @@ export default FormationScreen
 const styles = StyleSheet.create ({
     screen: {
       flex: 2,
-     
+     backgroundColor:COLORS.white
     },
   });
