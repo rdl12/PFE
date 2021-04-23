@@ -16,6 +16,7 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+
 const Set_User = (data) => {
   return {
     type: t.FETCH_USER,
@@ -312,10 +313,8 @@ export const Modify_defib = (defib) => {
    .then((response) => {
      response.text().then((data) => {
        console.log(data)
-       //dispatch(Set_Defib_modif({defib : data}))
       }
       )
-     //dispatch(FecthDefib({markers:['hello mother fucker']}))
    })
   .catch((err) => {
     alert("defib not posted,please retry");
@@ -361,3 +360,19 @@ export const Fetch_Formation_Details = (id) => {
   }
 }
 
+export const HelpAction = (obj) => {
+    return  fetch(`${API_URI}/Boundary/add_Boundary`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(obj)
+    })
+  .then((responseData) => {
+      console.log(
+          "location Posted " + JSON.stringify(responseData)
+      )
+  })
+  .done();
+  }

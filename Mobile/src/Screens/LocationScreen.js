@@ -5,10 +5,13 @@ import {
   Text,
   Platform,
   PermissionsAndroid,
+  TouchableOpacity,
 } from 'react-native';
-import Boundary, {Events} from 'react-native-boundary';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
-import PushNotification from "react-native-push-notification";
+
+
+import { HelpAction } from '../redux/actions'
+import { useDispatch } from 'react-redux';
 
 
 
@@ -16,7 +19,8 @@ const LocationScreen = () => {
   
   const [Enter, setEnter] = useState(false);
   const location = useBackgroundGeolocationTracker();
-  console.log('useTraking latitude', location.latitude);
+  const dispatch = useDispatch()
+ 
   const hasLocationPermission = async () => {
     // if (Platform.OS === 'ios') {
     //   Geolocation.requestAuthorization('always');
@@ -31,62 +35,17 @@ const LocationScreen = () => {
     }
   };
 
-  
-
-  useEffect(() => {
-    
-    if (hasLocationPermission()) {
-      
-      const BoundaryData = [
-      
-        {
-           lat: 33.547120,
-          lng: -7.681710,
-          radius: 100,
-          id: 'Company',
-        },
-     
-      ];
-      BoundaryData.map((boundary) => {
-        Boundary.add(boundary)
-          .then(() => console.log('success!'))
-          .catch((e) => console.log(e));
-      });
+  const Help = () => {
+      const object = {
+      "lat":location.latitude,
+      "lng":location.longitude,
+      "radius":100.0
     }
+       HelpAction(object)
+  }
 
-    Boundary.on(Events.ENTER, (id) => {
-      setEnter(true)
-    });
 
-    Boundary.on(Events.EXIT, (id) => {
-      console.warn('Exit Boundary ', id);
-      setEnter(false)
-    });
 
-  if (Enter){
-    PushNotification.localNotification({
-      autoCancel: true,
-      bigText:
-        'This is local notification demo in React Native app. Only shown, when expanded.',
-      subText: 'Local Notification Demo',
-    /* iOS and Android properties */
-      title: "test", // (optional)
-      message: "entered Zone", // (required)
-      vibrate: true,
-      vibration: 300,
-      playSound: true,
-      soundName: 'default',
-      actions: '["Yes", "No"]'
-    })
-      
-   }
-
-    
-  }, [Enter]);
-
-  // Cluster Zone Location
-  const P0 = {latitude: 37.5692842, longitude: 126.8267638};
-  const P1 = {latitude: 37.8949, longitude: 127.0586};
   return (
     <View style={styles.container}>
       <View style={styles.infoContainer}>
@@ -95,6 +54,9 @@ const LocationScreen = () => {
         <Text>
           Boundary entered : {Enter ? 'Enter' : 'Not Enter'}
         </Text>
+        <TouchableOpacity onPress = {() => Help()}>
+          <Text>Help</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

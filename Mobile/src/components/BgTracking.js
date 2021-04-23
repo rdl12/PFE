@@ -47,7 +47,7 @@ const useBackgroundGeolocationTracker = () => {
 
     // Onchange
     BackgroundGeolocation.on('location', (location) => {
-      console.log('[DEBUG] BackgroundGeolocation location', location);
+      //console.log('[DEBUG] BackgroundGeolocation location', location);
 
       BackgroundGeolocation.startTask((taskKey) => {
         const region = Object.assign({}, location, {

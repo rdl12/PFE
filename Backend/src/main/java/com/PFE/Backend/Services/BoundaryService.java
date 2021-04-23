@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.PFE.Backend.Repository.BoundaryRepository;
 import com.PFE.Backend.entities.Boundary;
-
+import com.PFE.Backend.entities.Defibrillateur;
 
 import lombok.AllArgsConstructor;
 
@@ -19,6 +19,9 @@ public class BoundaryService {
         return boundaryRepo.findAll();
     }
     
+    public void save(Boundary boundary) {
+    	boundaryRepo.save(boundary);
 
+    }
 
 }

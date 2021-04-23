@@ -16,36 +16,38 @@ import { LocalNotification } from './src/services/PushNotificationService';
 import { API_URI } from './src/utils/constants/Api'
 
 const getBoundaryData = async () => {
-  
- 
-const backgroundJob = {
-  jobKey: "myJob",
-  job: async () => {
-    const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
-    const BoundaryData = await response.json()
-    console.log(BoundaryData)
-    BoundaryData.map((boundary) => {
+  const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
+  const BoundaryData = await response.json()
+  console.log(BoundaryData)
+  await Boundary.off(Events.ENTER)
+  BoundaryData.map((boundary) => {
     boundary.id=toString(boundary.id)
     Boundary.add(boundary)
     .then(() => console.log('success!'))
     .catch((e) => console.log(e));
-  })}
+  })
+  Boundary.on(Events.ENTER, (id) => {
+    LocalNotification()
+
+   
+    })
+
+ }
+
+ const backgroundJob = {
+  jobKey: "myJob",
+  job:  () => getBoundaryData()
   
   };
   let backgroundSchedule = {
     jobKey: "myJob",
+    period:2000
    }
   
   BackgroundJob.register(backgroundJob);
   BackgroundJob.schedule(backgroundSchedule)
-  .then(() => Boundary.on(Events.ENTER, (id) => {
-    LocalNotification()
-    }))
+  .then(() => console.log('changed'))
   .catch(err => console.err(err));
- }
-
- getBoundaryData()
-
  
 const Redux = () =>
 
