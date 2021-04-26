@@ -1,16 +1,22 @@
 import PushNotification from "react-native-push-notification";
+import * as Navigation  from './NavigationService';
 
-PushNotification.configure({
+export const LocalNotification = (data) => {
+
+  PushNotification.configure({
     onRegister: function (token) {
       console.log("TOKEN:", token);
     },
     onNotification: function (notification) {
-      console.log("NOTIFICATION:", notification);
+     // console.log("NOTIFICATION:", notification);
+      Navigation.navigate('Notification',{id:data})
+    
   
     },
     onAction: function (notification) {
       console.log("ACTION:", notification.action);
       console.log("NOTIFICATION:", notification);
+     
   
     },
   
@@ -27,7 +33,7 @@ PushNotification.configure({
     popInitialNotification: true,
     requestPermissions: true,
   });
-  
+    
   PushNotification.createChannel(
     {
       channelId: "fcm_fallback_notification_channel", // (required)
@@ -40,7 +46,6 @@ PushNotification.configure({
     (created) => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
   );
 
-export const LocalNotification = () => {
    return PushNotification.localNotification({
       autoCancel: true,
       bigText:
@@ -50,9 +55,11 @@ export const LocalNotification = () => {
       title: "test", // (optional)
       message: "entered Zone", // (required)
       vibrate: true,
+      userInfo:data,
       vibration: 300,
       playSound: true,
       soundName: 'default',
-      actions: '["Yes", "No"]'
+      actions: '["Yes", "No"]',
+      
     })
 }

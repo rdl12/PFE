@@ -20,21 +20,6 @@ const LocationScreen = () => {
   const [Enter, setEnter] = useState(false);
   const location = useBackgroundGeolocationTracker();
   const dispatch = useDispatch()
- 
-  const hasLocationPermission = async () => {
-    // if (Platform.OS === 'ios') {
-    //   Geolocation.requestAuthorization('always');
-    // }
-
-    if (Platform.OS === 'android') {
-      await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
-      
-      );
-      
-    }
-  };
-
   const Help = () => {
       const object = {
       "lat":location.latitude,

@@ -14,7 +14,8 @@ import InfoProfilScreen from './InfoProfilScreen'
 import TutorialScreen from './TutorialScreen'
 import FormationScreen from './FormationScreen'
 import FormationDetailsScreen from './FormationDetailsScreen'
-
+import UrgenceMap from './UrgenceMap'
+ 
 
 export {
     HomeScreen,
@@ -33,5 +34,6 @@ export {
     TutorialScreen,
     FormationScreen,
     FormationDetailsScreen,
+    UrgenceMap
 
 }

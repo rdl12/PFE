@@ -18,19 +18,18 @@ import { API_URI } from './src/utils/constants/Api'
 const getBoundaryData = async () => {
   const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
   const BoundaryData = await response.json()
-  console.log(BoundaryData)
   await Boundary.off(Events.ENTER)
+  console.log(BoundaryData)
   BoundaryData.map((boundary) => {
-    boundary.id=toString(boundary.id)
+    boundary.id=boundary.id.toString()
     Boundary.add(boundary)
     .then(() => console.log('success!'))
     .catch((e) => console.log(e));
   })
-  Boundary.on(Events.ENTER, (id) => {
-    LocalNotification()
-
-   
+  Boundary.on(Events.ENTER, id => {
+    LocalNotification(id)
     })
+   
 
  }
 
@@ -46,7 +45,7 @@ const getBoundaryData = async () => {
   
   BackgroundJob.register(backgroundJob);
   BackgroundJob.schedule(backgroundSchedule)
-  .then(() => console.log('changed'))
+  .then(() => Boundary.removeAll())
   .catch(err => console.err(err));
  
 const Redux = () =>
