@@ -6,13 +6,18 @@ import {windowHeight,windowWidth} from '../utils/Dimentions'
 import { useDispatch } from 'react-redux';
 import { Fetch_Formation } from '../redux/actions';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({navigation,route}) => {
   const dispatch = useDispatch()
 
   
   useEffect(() => {
+      if(route.params){
+          navigation.navigate('Notification',route.params)
+      }
+
+
       dispatch(Fetch_Formation())
-  }, []);
+  }, [route]);
     return (
        <SafeAreaView style = {styles.view}>
            <ImageBackground source = {{uri:'https://www.condair-merchandising.com/pub/img/home-hero-wave.png'}} resizeMode='cover'  style={styles.background_image}>

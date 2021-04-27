@@ -24,4 +24,8 @@ public class BoundaryService {
 
     }
 
+	public Boundary findByID(long id) {
+		 return  boundaryRepo.findById(id);
+	}
+
 }

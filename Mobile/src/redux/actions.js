@@ -85,10 +85,10 @@ const AddDefibPosted = (defib) => {
  }
 }
 
-const Set_Defib_modif = (defib) => {
+const Set_Boundary = (boundary) => {
   return {
-    type: t.MODIFY_DEFIB,
-    payload: defib
+    type: t.FETCH_BOUNDARY,
+    payload: boundary
  }
 }
 
@@ -376,3 +376,20 @@ export const HelpAction = (obj) => {
   })
   .done();
   }
+
+export const Fetch_By_id = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Boundary/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Boundary({Boundary:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Boundary ,please retry");
+            console.log(err);
+          });
+  }
+}

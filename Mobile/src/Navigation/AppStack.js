@@ -15,16 +15,16 @@ const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-const NotifStack = ({navigation}) => (
-  <Stack.Navigator>
-    <Stack.Screen
-      name="Notfication"
-      component={UrgenceMap}
-      options={{headerShown: false}}
-    />
+// const NotifStack = ({navigation}) => (
+//   <Stack.Navigator>
+//     <Stack.Screen
+//       name="Notfication"
+//       component={UrgenceMap}
+//       options={{headerShown: false}}
+//     />
     
-  </Stack.Navigator>
-);
+//   </Stack.Navigator>
+// );
 const LoginStack = ({navigation}) => (
     <Stack.Navigator>
       <Stack.Screen
@@ -112,8 +112,12 @@ const MapStack = ({navigation}) => (
         component={TutorialScreen}
         options={{headerShown: true}}
       />
-      
-      
+      <Stack.Screen
+        name="Notification"
+        component={UrgenceMap}
+        options={{headerShown: false}}
+        />
+  
       </Stack.Navigator>
     )
 
@@ -228,7 +232,7 @@ const AppStack = () => {
             }}
         /> 
         
-        <Tab.Screen
+        {/* <Tab.Screen
         name="Notification"
         component={NotifStack}
         options={{
@@ -251,7 +255,7 @@ const AppStack = () => {
                 />
             )
         }}
-    />
+    /> */}
 
          <Tab.Screen
             name="Login"
