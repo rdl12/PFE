@@ -41,6 +41,7 @@ const formationDetails = () => {
   bookText: {
     marginRight: margin,
     marginTop: margin / 2,
+    width:BOOKW
   },
 });
   // Animated styles

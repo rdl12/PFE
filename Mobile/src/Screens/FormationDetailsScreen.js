@@ -4,10 +4,13 @@ import {   View,
   TouchableOpacity,
   Image,
   ScrollView,
+  ImageBackground,
   Animated} from 'react-native'
   
 import {windowHeight, windowWidth} from '../utils/Dimentions'
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
+import { Caption } from 'react-native-paper'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const FormationDetailsScreen = ({ navigation, route }) => {
     const [formation, setformation] = React.useState(null);
@@ -25,74 +28,52 @@ const FormationDetailsScreen = ({ navigation, route }) => {
       return (
           <View style={{ flex: 1 }}>
               {/* Color Overlay */}
-              <View
-                  style={{
-                      position: 'absolute',
-                      top: 0,
-                      right: 0,
-                      bottom: 0,
-                      left: 0,
-                      backgroundColor: COLORS.white
-                  }}
-              >
-              </View>
+             
 
               {/* Navigation header */}
-              <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 80, alignItems: 'flex-end' }}>
+              <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 }}>
                   <TouchableOpacity
-                      style={{ marginLeft: SIZES.base }}
+                      style={{ marginLeft: -8 }}
                       onPress={() => navigation.goBack()}
                   >
                       <Image
                           source={images.back_arrow}
                           resizeMode="contain"
                           style={{
-                              width: 25,
-                              height: 25,
+                              width: 30,
+                              height: 30,
                               tintColor: COLORS.black
                           }}
                       />
                   </TouchableOpacity>
 
                   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Text style={{ ...FONTS.h3, color: COLORS.black }}>Formation Detail</Text>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Formation Detail</Text>
                   </View>
 
-                  <TouchableOpacity
-                      style={{ marginRigth: SIZES.base }}
-                      onPress={() => console.log("Click More")}
-                  >
-                      <Image
-                          source={images.edit_icon}
-                          resizeMode="contain"
-                          style={{
-                              width: 30,
-                              height: 30,
-                              tintColor: COLORS.black,
-                              alignSelf: 'flex-end'
-                          }}
-                      />
-                  </TouchableOpacity>
               </View>
 
               {/* Book Cover */}
-              <View style={{ flex: 5, paddingTop: SIZES.padding2, alignItems: 'center' }}>
+              <ImageBackground source = {{uri:formation.image}} resizeMode='cover' imageStyle= {{opacity:0.1}} style={{ flex: 4, paddingTop: SIZES.padding, alignItems: 'center'}}>
+              <View >
                   <Image
                       source={{uri:formation.image}}
                       resizeMode="contain"
                       style={{
-                          flex: 1,
-                          width: 300,
+                          flex: 2.5,
+                          width: 360,
                           height: "auto"
                       }}
                   />
-              </View>
-
-              {/* Book Name and Author */}
-              <View style={{ flex: 1.8, alignItems: 'center', justifyContent: 'center' }}>
+                   {/* Book Name and Author */}
+              <View style={{ flex: 0.8, alignItems: 'center', justifyContent: 'center'}}>
                   <Text style={{ ...FONTS.h2, color: COLORS.BLACK }}>{formation.nom}</Text>
                   <Text style={{ ...FONTS.body3, color: COLORS.black }}>{formation.nom}</Text>
               </View>
+              </View>
+              </ImageBackground>
+
+             
 
               {/* Book Info */}
               {/* <View
@@ -173,7 +154,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                   )}
               >
                   <Text style={{ ...FONTS.h2, color: COLORS.black, marginBottom: SIZES.padding }}>Description</Text>
-                  <Text style={{ ...FONTS.body2, color: COLORS.black }}>{formation.desription}</Text>
+                  <Caption style={{ ...FONTS.body3,marginBottom:2}}>{formation.desription}</Caption>
               </ScrollView>
           </View>
       )
@@ -229,7 +210,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
       return (
           <View style={{ flex: 1, backgroundColor: COLORS.white }}>
               {/* Book Cover Section */}
-              <View style={{ flex: 4 }}>
+              <View style={{ flex: 3.2 }}>
                   {renderBookInfoSection()}
               </View>
 
@@ -239,7 +220,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
               </View>
 
               {/* Buttons */}
-              <View style={{ height: 70, marginBottom: 30 }}>
+              <View style={{ height: 70, marginBottom: 10 }}>
                   {renderBottomButton()}
               </View>
           </View>
@@ -251,4 +232,3 @@ const FormationDetailsScreen = ({ navigation, route }) => {
 }
 
 export default React.memo(FormationDetailsScreen)
-

@@ -42,6 +42,12 @@ const styles = StyleSheet.create({
     emptyText: {
       padding: margin,
     },
+    title:{
+      fontWeight:'bold',
+      fontSize:17,
+      fontFamily:'cochin',
+
+    }
   });
 
   // Empty list placeholder
@@ -57,7 +63,7 @@ const styles = StyleSheet.create({
   return (
     <View style={styles.list}>
       <View style={styles.heading}>
-        <Text >{title}</Text>
+        <Text style = {styles.title} >{title}</Text>
         <Text >{formations.length}</Text>
       </View>
       <FlatList

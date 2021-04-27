@@ -27,6 +27,12 @@ const styles = StyleSheet.create({
     emptyText: {
       padding: margin,
     },
+    title:{
+      fontWeight:'bold',
+      fontSize:17,
+      fontFamily:'cochin',
+
+    }
   });
 
 export default styles;

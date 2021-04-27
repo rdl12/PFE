@@ -41,7 +41,9 @@ const defib_list_icon = require('../../assets/images/defib_list_icon.png')
 const RegisterBackground = require("../../assets/images/register-bg.png");
 const login_avatar = require("../../assets/images/login_avatar.png");
 const ProfilScreen = require("../../assets/images/ProfilScreen.png");
-
+const directions = require("../../assets/images/directions.png");
+const timer = require("../../assets/images/timer.png"); 
+const heart_icon = require("../../assets/images/Heart_icon.png"); 
 export default {
     Home_image,
     close_Button_icon,
@@ -85,7 +87,10 @@ export default {
     defib_list_icon,
     RegisterBackground,
     login_avatar,
-    ProfilScreen
+    ProfilScreen,
+    directions,
+    timer,
+    heart_icon
 
 
 }
