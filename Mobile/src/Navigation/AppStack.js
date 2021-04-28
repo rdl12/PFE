@@ -75,9 +75,9 @@ const MapStack = ({navigation}) => (
   const UrgenceStack = ({navigation})=>(
     <Stack.Navigator>
         <Stack.Screen
-        name="Formation"
-        component={FormationStack}
-        options={{headerShown: false}}
+        name="Urgence"
+        component={UrgenceScreen}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="ListDefib"
@@ -117,25 +117,22 @@ const MapStack = ({navigation}) => (
         component={UrgenceMap}
         options={{headerShown: false}}
         />
-  
-      </Stack.Navigator>
-    )
 
-    const FormationStack = () => (
-      <Stack.Navigator>
-        
-        <Stack.Screen
+      <Stack.Screen
         name="Formation"
         component={FormationScreen}
         options={{headerShown: false}}
-      />
+        />
       <Stack.Screen
         name="formationDetails"
         component={FormationDetailsScreen}
         options={{headerShown: false}}
       />  
+        
+  
       </Stack.Navigator>
     )
+
 const AppStack = () => {
   return (
     <Tab.Navigator
@@ -158,7 +155,7 @@ const AppStack = () => {
             name="Home"
             component={HomeStack}
             options={{
-                
+              tabBarVisible: true,
                 tabBarIcon: ({ focused }) => (
                     <Image
                     source={images.Home_image}

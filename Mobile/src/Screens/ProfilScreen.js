@@ -29,7 +29,7 @@ const ProfilScreen = ({navigation}) => {
                             source={{
                                 uri: 'https://png.pngtree.com/element_our/png_detail/20181124/businessman-vector-icon-png_246587.jpg'
                             }}
-                            size={150}
+                            size={120}
                             style={{alignSelf:'center',backgroundColor:COLORS.white,borderRadius:40}}
                         />
                         <View style={{alignContent:'center',marginTop:8}}>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     //   },
 
     background_image:{
-        height:150,
+        height:120,
         width:windowWidth,
       },
 

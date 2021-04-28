@@ -61,14 +61,14 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                       resizeMode="contain"
                       style={{
                           flex: 2.5,
-                          width: 360,
+                          width: 320,
                           height: "auto"
                       }}
                   />
                    {/* Book Name and Author */}
-              <View style={{ flex: 0.8, alignItems: 'center', justifyContent: 'center'}}>
-                  <Text style={{ ...FONTS.h2, color: COLORS.BLACK }}>{formation.nom}</Text>
-                  <Text style={{ ...FONTS.body3, color: COLORS.black }}>{formation.nom}</Text>
+              <View style={{ flex: 0.9, alignItems: 'center', justifyContent: 'center'}}>
+                  <Text style={{ ...FONTS.h3, color: COLORS.BLACK, textAlign:'center' }}>{formation.nom}</Text>
+                  <Text style={{ ...FONTS.body3, color: COLORS.black }}>date de debut : {formation.date_debut}</Text>
               </View>
               </View>
               </ImageBackground>
@@ -153,8 +153,8 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                       { useNativeDriver: false }
                   )}
               >
-                  <Text style={{ ...FONTS.h2, color: COLORS.black, marginBottom: SIZES.padding }}>Description</Text>
-                  <Caption style={{ ...FONTS.body3,marginBottom:2}}>{formation.desription}</Caption>
+                  <Text style={{ ...FONTS.h3, color: COLORS.black, marginBottom: SIZES.padding }}>Description</Text>
+                  <Caption style={{ ...FONTS.body4,marginBottom:2}}>{formation.desription}</Caption>
               </ScrollView>
           </View>
       )
@@ -166,7 +166,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
               {/* Bookmark */}
               <TouchableOpacity
                   style={{
-                      width: 60,
+                      width: 70,
                       backgroundColor: COLORS.secondary,
                       marginLeft: SIZES.padding,
                       marginVertical: SIZES.base,
@@ -220,7 +220,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
               </View>
 
               {/* Buttons */}
-              <View style={{ height: 70, marginBottom: 10 }}>
+              <View style={{ height: 60, marginBottom: 10 }}>
                   {renderBottomButton()}
               </View>
           </View>
