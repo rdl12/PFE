@@ -44,6 +44,17 @@ const ProfilScreen = require("../../assets/images/ProfilScreen.png");
 const directions = require("../../assets/images/directions.png");
 const timer = require("../../assets/images/timer.png"); 
 const heart_icon = require("../../assets/images/Heart_icon.png"); 
+const formation = require("../../assets/images/formation.png"); 
+const un = require("../../assets/images/1.png");
+const deux = require("../../assets/images/2.png");
+const trois = require("../../assets/images/3.png");
+const quatre = require("../../assets/images/4.png");
+const cinq = require("../../assets/images/5.png");
+const arret_icon = require("../../assets/images/arret-icon.png");
+const defibriller_icon = require("../../assets/images/defibriller-icon.png");
+const massage_icon2 = require("../../assets/images/massage-icon.png");
+const secours_icon = require("../../assets/images/secours-icon.png");
+
 export default {
     Home_image,
     close_Button_icon,
@@ -90,7 +101,17 @@ export default {
     ProfilScreen,
     directions,
     timer,
-    heart_icon
+    heart_icon,
+    formation,
+    un,
+    deux,
+    trois,
+    quatre,
+    cinq,
+    arret_icon,
+    defibriller_icon,
+    massage_icon2,
+    secours_icon
 
 
 }

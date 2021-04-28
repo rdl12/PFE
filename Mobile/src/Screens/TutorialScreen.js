@@ -49,10 +49,10 @@ const TutorialScreen = ({navigation}) => {
         next===1 ? (
 
         <View>
-            <View style={{flexDirection:'row',margin:10,zIndex: 0, }}>
+            <View style={{flexDirection:'row',margin:10,zIndex: 0,alignSelf:"center" }}>
+                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={[styles.minititle,{...minititleStyle}]}>Verifier</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
-                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={[styles.minititle,{...minititleStyle}]}>Verifier</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(4)}}><Title style={styles.minititle}>Defibriller</Title><Caption style={styles.minicaption}>4</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(5)}}><Title style={styles.minititle}>Attendre</Title><Caption style={styles.minicaption}>5</Caption></TouchableOpacity></Card>
             </View>
@@ -66,12 +66,12 @@ const TutorialScreen = ({navigation}) => {
                                <View style={{flexDirection:"row"}}>
                                     <Image 
                                         style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
-                                        source= {{uri : "https://img.icons8.com/carbon-copy/2x/1.png"}}
+                                        source= {images.un}
                                         tintColor={COLORS.red}
                                     />
                                     <Image 
                                         style={{width:245,height:155}}
-                                        source= {{uri : "https://img.flaticon.com/icons/png/512/2855/2855011.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF"}}
+                                        source= {images.arret_icon}
                                     />
                                </View>
                               <Caption style={styles.titleDrawer}> On reconnaît un arrêt cardiaque quand la victime ne répond pas, ne réagit pas et ne respire pas ou présente une respiration anormale.</Caption>
@@ -88,10 +88,10 @@ const TutorialScreen = ({navigation}) => {
         next === 2? (
 
         <View>
-            <View style={{flexDirection:'row',margin:10}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
-                <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
                 <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={[styles.minititle,{...minititleStyle}]}>Appeler</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>2</Caption></TouchableOpacity></Card>
+                <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(4)}}><Title style={styles.minititle}>Defibriller</Title><Caption style={styles.minicaption}>4</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(5)}}><Title style={styles.minititle}>Attendre</Title><Caption style={styles.minicaption}>5</Caption></TouchableOpacity></Card>
             </View>
@@ -105,7 +105,7 @@ const TutorialScreen = ({navigation}) => {
                         <View style={{flexDirection:"row"}}>
                               <Image 
                                    style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
-                                   source= {{uri : "https://img.icons8.com/carbon-copy/2x/2.png"}}
+                                   source= {images.deux}
                                    tintColor={COLORS.primary}
                               />
                                <View style={{ alignSelf:'center'}}>
@@ -137,7 +137,7 @@ const TutorialScreen = ({navigation}) => {
                 
         <View>
             
-            <View style={{flexDirection:'row',margin:10}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption} >1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={[styles.minititle,{...minititleStyle}]}>Masser</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>3</Caption></TouchableOpacity></Card>
@@ -155,12 +155,12 @@ const TutorialScreen = ({navigation}) => {
                                 <View style={{flexDirection:"row"}}>
                                        <Image 
                                            style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
-                                           source= {{uri : "https://img.icons8.com/carbon-copy/2x/3.png"}}
+                                           source= {images.trois}
                                            tintColor={COLORS.red}
                                         />
                                         <Image 
-                                           style={{width:150,height:100,margin:10}}
-                                           source= {{uri : "https://image.flaticon.com/icons/png/512/90/90594.png"}}
+                                           style={{width:200,height:150,marginLeft:-5}}
+                                           source= {images.massage_icon2}
                                         />
                                 </View>
                                 <Caption style={styles.titleDrawer}> Maintenez vos mains en position sur le sternum. La durée de la compression
@@ -180,11 +180,11 @@ const TutorialScreen = ({navigation}) => {
 
         <View>
 
-            <View style={{flexDirection:'row',margin:10}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
-                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(4)}}><Title style={[styles.minititle,{...minititleStyle}]}>Defibriller</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>4</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
+                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(4)}}><Title style={[styles.minititle,{...minititleStyle}]}>Defibriller</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>4</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(5)}}><Title style={styles.minititle}>Attendre</Title><Caption style={styles.minicaption}>5</Caption></TouchableOpacity></Card>
             </View>
 
@@ -199,12 +199,12 @@ const TutorialScreen = ({navigation}) => {
                              <View style={{flexDirection:"row"}}>
                                    <Image 
                                       style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
-                                      source= {{uri : "https://img.icons8.com/carbon-copy/2x/4.png"}}
+                                      source= {images.quatre}
                                       tintColor={COLORS.red}
                                     />
                                     <Image 
-                                      style={{width:210,height:140,margin:10}}
-                                      source= {{uri : "https://www.swissheart.ch/fileadmin/_processed_/5/c/csm_Externer_Defibrillator_web_f7ea020627.png"}}
+                                      style={{width:210,height:200,margin:10}}
+                                      source= {images.defibriller_icon}
                                     />
                               </View>
                               <Caption style={styles.titleDrawer}> Le défibrillateur cardiaque est un appareil capable de délivrer une 
@@ -225,12 +225,12 @@ const TutorialScreen = ({navigation}) => {
         next===5 ? (  
 
         <View>
-            <View style={{flexDirection:'row',margin:10}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
-                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(5)}}><Title style={[styles.minititle,{...minititleStyle}]}>Attendre</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>5</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(4)}}><Title style={styles.minititle}>Defibriller</Title><Caption style={styles.minicaption}>4</Caption></TouchableOpacity></Card>
+                <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(5)}}><Title style={[styles.minititle,{...minititleStyle}]}>Attendre</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>5</Caption></TouchableOpacity></Card>
             </View>
 
             
@@ -242,13 +242,13 @@ const TutorialScreen = ({navigation}) => {
                         <View>
                               <View style={{flexDirection:"row"}}>
                                     <Image 
-                                         style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
-                                         source= {{uri : "https://img.icons8.com/carbon-copy/2x/5.png"}}
+                                         style={{width:95,height:95,alignSelf:'flex-start',margin:5}}
+                                         source= {images.cinq}
                                          tintColor={COLORS.red}
                                     />
                                     <Image 
                                          style={{width:170,height:100}}
-                                         source= {{uri : "https://media.istockphoto.com/vectors/medics-carry-a-stretcher-with-the-patient-with-infusion-eps-vector-id1299216646?k=6&m=1299216646&s=612x612&w=0&h=qsN5wJXBJmJBO-hiSuemVKJTCeRZDDVNU33a9021C-A="}}
+                                         source= {images.secours_icon}
                                     /> 
                                </View>
                            <Title style={{alignSelf:'center',marginTop:15}}>En attendant veuiller :</Title>

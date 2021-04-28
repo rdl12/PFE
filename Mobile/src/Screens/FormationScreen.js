@@ -52,7 +52,7 @@ const FormationScreen = ({navigation}) => {
                <Text style={{ fontWeight:'700',fontSize:15,color: COLORS.BLACK,marginTop:20,marginLeft:35 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
                <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:35}}>
                  <Image
-                      source={{uri : 'https://clinicalgate.com/wp-content/uploads/2015/03/B9780323100458000256_f025-002-9780323100458.jpg'}}
+                      source={images.formation}
                       resizeMode="contain"
                       style={{
                           alignSelf:'flex-end',
