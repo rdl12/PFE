@@ -49,17 +49,16 @@ export const LocalNotification = (data) => {
    return PushNotification.localNotification({
       autoCancel: true,
       bigText:
-        'This is local notification demo in React Native app. Only shown, when expanded.',
-      subText: 'Local Notification Demo',
+        'un arret cardiaque se trouve a votre proximité dans un rayon de 100 m',
+      subText: 'entrer pour voir sa position exact',
     /* iOS and Android properties */
-      title: "test", // (optional)
-      message: "entered Zone", // (required)
+      title: "Help", // (optional)
+      message: "Arret cardiaque à porximité", // (required)
       vibrate: true,
       userInfo:data,
       vibration: 300,
       playSound: true,
       soundName: 'default',
-      actions: '["Yes", "No"]',
       
     })
 }

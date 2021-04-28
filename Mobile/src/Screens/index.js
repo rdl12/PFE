@@ -15,6 +15,7 @@ import TutorialScreen from './TutorialScreen'
 import FormationScreen from './FormationScreen'
 import FormationDetailsScreen from './FormationDetailsScreen'
 import UrgenceMap from './UrgenceMap'
+import Parametre from './Parametre'
  
 
 export {
@@ -34,6 +35,7 @@ export {
     TutorialScreen,
     FormationScreen,
     FormationDetailsScreen,
-    UrgenceMap
+    UrgenceMap,
+    Parametre
 
 }

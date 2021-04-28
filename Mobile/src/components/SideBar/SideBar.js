@@ -126,19 +126,6 @@ export function SideBar(props) {
 
               
              ):null}
-                 <DrawerItem 
-                  style={{marginBottom:-5,}}
-                  icon={() => (
-                      <Avatar.Image 
-                      style={{backgroundColor:"#9932CC",width: 25,height: 25,}}
-                      source={images.signaler_icon}
-                      resizeMode='contain' 
-                      size={25}/> 
-                       )}
-                  label="Mes Defibs"
-                  labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                  onPress={() => {props.navigation.navigate('MyDefibs')}}
-              />
                 </Drawer.Section>
 
                 <Drawer.Section style={styles.drawerSection}>

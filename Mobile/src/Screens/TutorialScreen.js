@@ -8,7 +8,7 @@ import {windowWidth, windowHeight} from '../utils/Dimentions'
 
 const TutorialScreen = ({navigation}) => {
     const [next, setNext] = useState(1); 
-    const numStyle = {fontSize:30,color:'red'}
+    const numStyle = {fontSize:30,color:'red',marginLeft:-50}
     const minititleStyle ={color:COLORS.primary,fontSize:12}
     const selectedStyle = {
         zIndex: 2,
@@ -65,12 +65,12 @@ const TutorialScreen = ({navigation}) => {
                            <View>
                                <View style={{flexDirection:"row"}}>
                                     <Image 
-                                        style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
+                                        style={{width:75,height:85,alignSelf:'flex-start'}}
                                         source= {images.un}
                                         tintColor={COLORS.red}
                                     />
                                     <Image 
-                                        style={{width:245,height:155}}
+                                        style={{width:225,height:115}}
                                         source= {images.arret_icon}
                                     />
                                </View>
@@ -104,7 +104,7 @@ const TutorialScreen = ({navigation}) => {
                 <Card.Content>
                         <View style={{flexDirection:"row"}}>
                               <Image 
-                                   style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
+                                   style={{width:75,height:85,alignSelf:'flex-start'}}
                                    source= {images.deux}
                                    tintColor={COLORS.primary}
                               />
@@ -154,7 +154,7 @@ const TutorialScreen = ({navigation}) => {
                             <View>
                                 <View style={{flexDirection:"row"}}>
                                        <Image 
-                                           style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
+                                           style={{width:75,height:85,alignSelf:'flex-start'}}
                                            source= {images.trois}
                                            tintColor={COLORS.red}
                                         />
@@ -198,7 +198,7 @@ const TutorialScreen = ({navigation}) => {
                         <View>
                              <View style={{flexDirection:"row"}}>
                                    <Image 
-                                      style={{width:75,height:85,alignSelf:'flex-start',marginTop:10}}
+                                      style={{width:75,height:85,alignSelf:'flex-start'}}
                                       source= {images.quatre}
                                       tintColor={COLORS.red}
                                     />
@@ -242,7 +242,7 @@ const TutorialScreen = ({navigation}) => {
                         <View>
                               <View style={{flexDirection:"row"}}>
                                     <Image 
-                                         style={{width:95,height:95,alignSelf:'flex-start',margin:5}}
+                                         style={{width:75,height:85,alignSelf:'flex-start'}}
                                          source= {images.cinq}
                                          tintColor={COLORS.red}
                                     />

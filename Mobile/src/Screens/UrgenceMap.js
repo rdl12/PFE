@@ -19,6 +19,7 @@ const UrgenceMap = ({ navigation, route }) => {
      const coords = useSelector(state => state.Boundary_Reducer.Boundary)
      const [showDirections, setshowDirections] = useState(true)
      const [origin, setorigin] = useState({latitude:0,longitude:0})
+     const [marginBottom , setmarginBottom ] = useState(1)
      const dispatch = useDispatch()
      
 
@@ -28,6 +29,7 @@ const UrgenceMap = ({ navigation, route }) => {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })    
     useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
+        setTimeout(()=>setmarginBottom(0),10)
         const {id} = route.params
         parent.setOptions({
             tabBarVisible: false,  
@@ -55,7 +57,7 @@ const UrgenceMap = ({ navigation, route }) => {
         <View style = {{flex:1}}>
        {  coords === undefined ? ( <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />) 
        : ( <View style = {{flex:1}}>
-           <MapView style = {{flex:1}}
+           <MapView style = {{flex:1,  marginBottom : marginBottom,}}
                 //ref={mapView}
                 mapType = 'standard'
                 scrollEnabled = {true}
@@ -108,7 +110,7 @@ const UrgenceMap = ({ navigation, route }) => {
 { showDirections ?  ( <Card style={styles.card}>
         
             <Card.Title title="Arret Cardiaque a proximite" titleStyle={{color:COLORS.primary,fontFamily: "Cochin",alignSelf:'center'}} style={styles.cardTitle}/>
-            <Card.Content>
+            <Card.Content style={{justifyContent:'center'}}>
                 <View>
                 <View style = {styles.directions}>
                   <Image
@@ -172,8 +174,7 @@ const styles = StyleSheet.create({
     directions:{
       display:'flex',
       flexDirection:'row',
-      justifyContent:'space-evenly',
-      alignItems:'center'
+      marginLeft:-10
      
     },
     Aide:{

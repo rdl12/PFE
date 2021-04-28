@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen, MapDetails,InfoProfilScreen } from '../Screens';
+import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,FormationDetailsScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -46,11 +46,17 @@ const ProfilStack = ({navigation}) => (
 
       />
 
-    <Stack.Screen
-        name="InfoProfil"
-        component={InfoProfilScreen}
-        options={{headerShown: true}}
-      />
+      <Stack.Screen
+          name="InfoProfil"
+          component={InfoProfilScreen}
+          options={{headerShown: true}}
+        />
+
+      <Stack.Screen
+          name="Parametre"
+          component={Parametre}
+          options={{headerShown: true}}
+        />
 
     </Stack.Navigator>
   );
@@ -107,6 +113,43 @@ const ProfilStack = ({navigation}) => (
     
   );
 
+  const HomeStack = () => (
+    <Stack.Navigator>
+      
+      <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      options={{headerShown: false}}
+    />
+    <Stack.Screen
+      name="Help"
+      component={LocationScreen}
+      options={{headerShown: true}}
+    />
+    <Stack.Screen
+      name="Tutorial"
+      component={TutorialScreen}
+      options={{headerShown: true}}
+    />
+    <Stack.Screen
+      name="Notification"
+      component={UrgenceMap}
+      options={{headerShown: false}}
+      />
+    <Stack.Screen
+        name="Formation"
+        component={FormationScreen}
+        options={{headerShown: false}}
+      />
+    <Stack.Screen
+        name="formationDetails"
+        component={FormationDetailsScreen}
+        options={{headerShown: false}}
+      />  
+
+    </Stack.Navigator>
+  )
+
 const AuthStack = () => {
     return (
       <Tab.Navigator
@@ -127,7 +170,7 @@ const AuthStack = () => {
       >
           <Tab.Screen
               name="Home"
-              component={HomeScreen}
+              component={HomeStack}
               options={{
                   
                   tabBarIcon: ({ focused }) => (

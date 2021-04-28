@@ -10,16 +10,6 @@ import { UrlTile } from 'react-native-maps'
 
 const ProfilScreen = ({navigation}) => {
     const LoginInfo = useSelector(state => state.loginReducer);
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-    const [IsEnabeld, setIsEnabeld] = useState(false)
-    const location = useBackgroundGeolocationTracker(IsEnabeld); 
-  
-  
-    const onToggleSwitch = () => {
-        setIsSwitchOn(!isSwitchOn)
-        setIsEnabeld(!IsEnabeld)
-        
-    };
     return (
        
        <SafeAreaView style = {styles.view}>
@@ -29,7 +19,7 @@ const ProfilScreen = ({navigation}) => {
                             source={{
                                 uri: 'https://png.pngtree.com/element_our/png_detail/20181124/businessman-vector-icon-png_246587.jpg'
                             }}
-                            size={150}
+                            size={120}
                             style={{alignSelf:'center',backgroundColor:COLORS.white,borderRadius:40}}
                         />
                         <View style={{alignContent:'center',marginTop:8}}>
@@ -57,7 +47,7 @@ const ProfilScreen = ({navigation}) => {
                   />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress = {() => navigation.navigate('MyDefibs')} >
+            <TouchableOpacity onPress = {() => navigation.navigate('Parametre')} >
                  <List.Item
                     title="Parametres"
                      left={props => <List.Icon {...props} icon={images.entretenir_icon} />}
@@ -72,7 +62,6 @@ const ProfilScreen = ({navigation}) => {
                      style={styles.list}
                   />
             </TouchableOpacity>
-            <Switch value={isSwitchOn} onValueChange={onToggleSwitch}  />
             </ScrollView>
           
                   
@@ -103,7 +92,7 @@ const styles = StyleSheet.create({
     //   },
 
     background_image:{
-        height:150,
+        height:120,
         width:windowWidth,
       },
 

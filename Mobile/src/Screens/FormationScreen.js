@@ -4,16 +4,36 @@ import {   View,
   TouchableOpacity,
   Image,
   ScrollView,
-  ImageBackground,
+  Linking,
   StyleSheet} from 'react-native'
 import {useSelector} from 'react-redux'
 
 import List from '../components/List/FormationList';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
+import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
-const FormationScreen = ({navigation}) => {
+  const FormationScreen = ({navigation}) => {
   const formation = useSelector(state => state.Formation_Reducer.formation);
+
+      useEffect(() => {
+        const parent = navigation.dangerouslyGetParent();
+        parent.setOptions({
+              tabBarVisible: false,  
+              tabBarButton: (props) => (
+                        <TabBarCustomButton visible
+                              {...props}
+                          /> ),
+        });
+      return () =>
+          parent.setOptions({
+                tabBarVisible: true,
+                tabBarButton: (props) => (
+                        <TabBarCustomButton 
+                            {...props}
+                        />),
+            });
+    }, [navigation])
    
   let secourisme = formation.filter(
     (formation) => formation.categorie.nom === 'secourisme' 
@@ -49,21 +69,24 @@ const FormationScreen = ({navigation}) => {
         </View>
 
         <View style={styles.box}>
-               <Text style={{ fontWeight:'700',fontSize:15,color: COLORS.BLACK,marginTop:20,marginLeft:35 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
-               <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:35}}>
+               <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
+               <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
                  <Image
                       source={images.formation}
                       resizeMode="contain"
                       style={{
                           alignSelf:'flex-end',
-                          width: 150,
-                          height: 120,
+                          width: 120,
+                          height: 90,
                           margin:10,
                       }}
                   />
                    
                       
-                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,marginTop:25,marginLeft:-35}}>Inscrivez vous tout de suite pour plus d'informations visiter "Himaya.ma"</Text>  
+                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
+                                     onPress={() => Linking.openURL('https://www.himaya.ma/')}>
+                                     Himaya.ma  </Text>
+                      </Text>  
                     </View>
                       
         </View>
@@ -82,7 +105,7 @@ export default FormationScreen
 
 const styles = StyleSheet.create ({
   box:{
-    height:windowHeight/4,
+    height:windowHeight/4.4,
     backgroundColor:COLORS.lightGray4,
     elevation:2,
     borderBottomRightRadius:100

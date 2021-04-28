@@ -16,9 +16,9 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator drawerStyle={{width:windowWidth*3/4.5}} drawerContent = {props => <SideBar {...props}/>}>
       {LoginInfo.isLoggedIn ?(
-       <Drawer.Screen name="Home" component={AppStack} />
+       <Drawer.Screen name="Home" component={AuthStack} />
       ):
-       ( <Drawer.Screen name="Home" component={AuthStack} />)
+       ( <Drawer.Screen name="Home" component={AppStack} />)
       
       }
       
