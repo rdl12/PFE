@@ -47,7 +47,7 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="ListDefib"
         component={ListDefibScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       
       <Stack.Screen

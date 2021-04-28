@@ -18,11 +18,11 @@ const LoginScreen = ({navigation}) => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch()
     return (
-      <ImageBackground source= {{uri : "https://thumbs.dreamstime.com/b/abstract-blue-gradient-background-textured-circles-cells-glitch-texture-abstract-blue-gradient-background-textured-159577766.jpg"}}  style = {styles.background_image} imageStyle={{borderBottomRightRadius : 300}}>
-      <Block flex middle >
+    
+      <Block flex middle  style = {{backgroundColor:COLORS.white,elevation:2}}>
         <StatusBar hidden />
 
-          <Block safe flex middle>
+          <Block safe flex middle style = {{elevation:2}}>
             <Block style={styles.registerContainer}>
               <Block flex={0.25} middle style={styles.socialConnect}>
                   <Image 
@@ -102,36 +102,8 @@ const LoginScreen = ({navigation}) => {
           </Block>
    
       </Block>
-      </ImageBackground>
-        // <SafeAreaView style = {{backgroundColor : COLORS.white,flex:1,justifyContent:'space-between',display:'flex'}}>
-       
-        // <View style = {styles.login}>
-        // <Text style = {styles.title}> Login</Text>
-        //   <Input
-        //   placeholderText='Email'
-        //   labelValue={username}
-        //   onChangeText={(text) => setUsername(text)}
-        // />
-        // <Input
-        //   placeholderText='password'
-        //   labelValue={password}
-        //   onChangeText={(text) => setPassword(text)}
-        // />
-        //   </View>
-          
-        //   <View style = {styles.Register}>
-        //      <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
-        //        <Text style = {styles.RegisterText}>S'inscrire ?</Text>
-        //      </TouchableOpacity>
-        //   </View>
 
-        //   <View style={styles.loginButton}>
-        //     <TouchableOpacity onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
-        //       <Text style = {styles.text}>Login</Text>
-        //     </TouchableOpacity>
-        //   </View>
-           
-        // </SafeAreaView>
+
      )
 }
 

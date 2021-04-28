@@ -1,18 +1,30 @@
-import React from 'react'
-import { View,StyleSheet,Image,SafeAreaView, ImageBackground } from 'react-native'
+import React, { useEffect,useState } from 'react'
+import { View,StyleSheet,Image,SafeAreaView, ImageBackground, ScrollView } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
 import {useSelector} from 'react-redux'
-import {Avatar,Title,Caption,List,} from 'react-native-paper';
+import {Avatar,Title,Caption,List,Switch } from 'react-native-paper';
+import useBackgroundGeolocationTracker from '../components/BgTracking';
 import { UrlTile } from 'react-native-maps'
 
 const ProfilScreen = ({navigation}) => {
     const LoginInfo = useSelector(state => state.loginReducer);
+    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
+    const [IsEnabeld, setIsEnabeld] = useState(false)
+    const location = useBackgroundGeolocationTracker(IsEnabeld); 
+  
+  
+    const onToggleSwitch = () => {
+        setIsSwitchOn(!isSwitchOn)
+        setIsEnabeld(!IsEnabeld)
+        
+    };
     return (
+       
        <SafeAreaView style = {styles.view}>
-           
-           <View style={styles.top}>
+            <ScrollView>
+            <View style={styles.top}>
                        <Avatar.Image 
                             source={{
                                 uri: 'https://png.pngtree.com/element_our/png_detail/20181124/businessman-vector-icon-png_246587.jpg'
@@ -60,7 +72,9 @@ const ProfilScreen = ({navigation}) => {
                      style={styles.list}
                   />
             </TouchableOpacity>
-                  
+            <Switch value={isSwitchOn} onValueChange={onToggleSwitch}  />
+            </ScrollView>
+          
                   
        </SafeAreaView>
     )

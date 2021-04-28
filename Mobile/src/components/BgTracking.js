@@ -3,7 +3,7 @@ import BackgroundGeolocation from '@mauron85/react-native-background-geolocation
 import Boundary, {Events} from 'react-native-boundary';
 import {Platform, Alert} from 'react-native';
 
-const useBackgroundGeolocationTracker = () => {
+const useBackgroundGeolocationTracker = (enabled) => {
   const [state, setState] = useState({
     region: null,
     latitude: null,
@@ -33,11 +33,8 @@ const useBackgroundGeolocationTracker = () => {
       fastestInterval: 500,
       activitiesInterval: 10000,
       stopOnStillActivity: false,
-      url: 'http://192.168.1.5:3000/location',
-      syncUrl: 'http://192.168.1.5:3000/sync',
-      httpHeaders: {
-        'X-FOO': 'bar',
-      },
+      url: null,
+      syncUrl: null,
       // customize post properties
       postTemplate: {
         lat: '@latitude',
@@ -107,10 +104,13 @@ const useBackgroundGeolocationTracker = () => {
         '[INFO] BackgroundGeolocation auth status: ' + status.authorization,
       );
 
-      // you don't need to check status before start (this is just the example)
-      // if (!status.isRunning) {
+    
+      if (enabled) {
       BackgroundGeolocation.start(); //triggers start on start event
-      // }
+      }
+      if (!enabled) {
+        BackgroundGeolocation.stop(); //triggers start on start event
+        }
     });
 
     BackgroundGeolocation.on('background', () => {
@@ -131,7 +131,7 @@ const useBackgroundGeolocationTracker = () => {
       );
       Boundary.removeAll();
     };
-  }, []);
+  }, [enabled]);
 
   return state;
 };
