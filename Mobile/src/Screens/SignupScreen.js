@@ -1,5 +1,5 @@
 import React ,{useState}  from 'react'
-import { View,TouchableOpacity,StyleSheet ,StatusBar,ImageBackground, KeyboardAvoidingView} from 'react-native'
+import { View,Image,StyleSheet ,StatusBar,ImageBackground, KeyboardAvoidingView, TouchableOpacity} from 'react-native'
 import { useDispatch } from 'react-redux'
 
 import { Singup } from '../redux/actions';
@@ -8,6 +8,8 @@ import ArInput from '../components/GalioInput/Input'
 import ArButton  from '../components/Button/Button'
 import {  images,COLORS  } from "../Constantes";
 import {windowWidth as width ,windowHeight as height} from '../utils/Dimentions'
+import { Colors } from 'react-native-paper';
+import { LinearGradient } from 'react-native-svg';
 
 const SignupScreen = ({navigation}) => {
     const [email, setemail] = useState('');
@@ -17,35 +19,19 @@ const SignupScreen = ({navigation}) => {
 
     const dispatch = useDispatch()
     return (
-      <Block flex middle>
+      <Block flex middle style = {{backgroundColor:COLORS.white}}>
         <StatusBar hidden />
 
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
-              <Block flex={0.25} middle style={styles.socialConnect}>
-                <Text color="#8898AA" size={12}>
-                  Sign up with
-                </Text>
-                <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                  <ArButton style={{ ...styles.socialArButtons, marginRight: 30 }}>
-                    <Block row>
-                    
-                      <Text style={styles.socialTextArButtons}>GITHUB</Text>
-                    </Block>
-                  </ArButton>
-                  <ArButton style={styles.socialArButtons}>
-                    <Block row>
-                     
-                      <Text style={styles.socialTextArButtons}>GOOGLE</Text>
-                    </Block>
-                  </ArButton>
-                </Block>
-              </Block>
+            <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
+             
+              </ImageBackground>
               <Block flex>
-                <Block flex={0.17} middle>
-                  <Text color="#8898AA" size={12}>
-                    Or sign up the classic way
-                  </Text>
+                <Block flex={0.06} center row>
+                    <Text bold color={COLORS.black} size={32}>
+                      Sign Up <Text color="#8898AA" size={18}> /   Login </Text> 
+                    </Text>
                 </Block>
                 <Block flex center>
                   <KeyboardAvoidingView
@@ -57,14 +43,18 @@ const SignupScreen = ({navigation}) => {
                       <ArInput
                         borderless
                         placeholder="Name"
-                      
                       />
                     </Block>
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <ArInput
                         borderless
                         placeholder="Email"
-                       
+                      />
+                    </Block>
+                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                      <ArInput
+                        borderless
+                        placeholder="Telephone"
                       />
                     </Block>
                     <Block width={width * 0.8}>
@@ -74,7 +64,7 @@ const SignupScreen = ({navigation}) => {
                         placeholder="Password"
                        
                       />
-                      <Block row style={styles.passwordCheck}>
+                      {/* <Block row style={styles.passwordCheck}>
                         <Text size={12} color={COLORS.MUTED}>
                           password strength:
                         </Text>
@@ -82,7 +72,7 @@ const SignupScreen = ({navigation}) => {
                           {" "}
                           strong
                         </Text>
-                      </Block>
+                      </Block> */}
                     </Block>
                     <Block row width={width * 0.75}>
                       <Checkbox
@@ -90,7 +80,7 @@ const SignupScreen = ({navigation}) => {
                           borderWidth: 3
                         }}
                         color={COLORS.PRIMARY}
-                        label="I agree with the"
+                        label="J'accepte les termes"
                       />
                       <ArButton
                         style={{ width: 100 }}
@@ -104,13 +94,20 @@ const SignupScreen = ({navigation}) => {
                       </ArButton>
                     </Block>
                     <Block middle>
-                      <ArButton color="primary" style={styles.createArButton}>
+                      <ArButton  style={styles.createArButton}>
                         <Text bold size={14} color={COLORS.WHITE}>
-                          CREATE ACCOUNT
+                          CREER
                         </Text>
                       </ArButton>
                     </Block>
                   </KeyboardAvoidingView>
+                  <Block middle row style={{marginBottom:30}}>
+                      <Text size={14} color={COLORS.black} >
+                         Vous avez déjà un compte?
+                      </Text>
+                      <TouchableOpacity  onPress = {() => {navigation.navigate('Login')}} ><Text color={COLORS.PRIMARY}>  Connectez-vous ici</Text></TouchableOpacity>
+                  </Block>
+                      
                 </Block>
               </Block>
             </Block>
@@ -121,10 +118,15 @@ const SignupScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
+  background_image:{
+    flex:0.45,
+    width:width,
+  },
+
   registerContainer: {
-    width: width * 0.9,
-    height: height * 0.875,
-    backgroundColor: "#F4F5F7",
+    width: width ,
+    height: height ,
+    backgroundColor: COLORS.white,
     borderRadius: 4,
     shadowColor: COLORS.BLACK,
     shadowOffset: {
@@ -169,7 +171,8 @@ const styles = StyleSheet.create({
   },
   createArButton: {
     width: width * 0.5,
-    marginTop: 25
+    marginTop: 25,
+    backgroundColor:COLORS.primary,
   }
 });
 export default SignupScreen

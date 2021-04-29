@@ -11,6 +11,7 @@ import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-nativ
 import {images,COLORS} from '../Constantes'
 import { useDispatch } from 'react-redux';
 import {ModalState,Add_Defib_Posted,AccessibiliteState,Fetch_User} from '../redux/actions'
+import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
 
 const AddDefibScreen = ({navigation}) => {
@@ -26,12 +27,28 @@ const AddDefibScreen = ({navigation}) => {
     const dispatch = useDispatch();
    
     useEffect(() => {
+      const parent = navigation.dangerouslyGetParent();
+        parent.setOptions({
+              tabBarVisible: false,  
+              tabBarButton: (props) => (
+                         <TabBarCustomButton visible
+                              {...props}
+                          /> ),
+        });
       dispatch(Fetch_User(LoginInfo.userId))
       console.log("adress:"+Modal_State)
       console.log(LoginInfo.userId)
       console.log(user)
-      
-      }, [Modal_State])
+      return () =>
+          parent.setOptions({
+               tabBarVisible: true,
+               tabBarButton: (props) => (
+                        <TabBarCustomButton 
+                            {...props}
+                        />),
+           });
+       
+      }, [Modal_State, navigation])
 
     const submit = () =>{
      let defib = {  
@@ -132,8 +149,8 @@ const AddDefibScreen = ({navigation}) => {
     return (
       <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
           <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
-          <Header title = "ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
-          <ScrollView style={{flex:1}}>
+          <Header title = "Ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
+          <ScrollView style={{flex:1, marginTop:15}}>
       
           <Input
             labelValue={Nom}

@@ -94,7 +94,7 @@ export function SideBar(props) {
                              )}
                         label="Help"
                         labelStyle={{color:"#228B22", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('AddDefib')}}
+                        onPress={() => {props.navigation.navigate('Help')}}
                     />
                     <DrawerItem 
                         style={{marginBottom:-5,}}
@@ -107,7 +107,7 @@ export function SideBar(props) {
                              )}
                         label="Instruction"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('BookmarkScreen')}}
+                        onPress={() => {props.navigation.navigate('Tutorial')}}
                     />
              { LoginInfo.isLoggedIn ?  (
                   <DrawerItem 
@@ -198,9 +198,9 @@ export function SideBar(props) {
                             resizeMode='contain' 
                             size={25}/> 
                              )}
-                        label="Profile"
+                        label="Profil"
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('Profile')}}
+                        onPress={() => {props.navigation.navigate('Profil')}}
                     />):(<DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
@@ -212,7 +212,7 @@ export function SideBar(props) {
                              )}
                         label="Se Connecter"
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('Se Connecter')}}
+                        onPress={() => {props.navigation.navigate('Login')}}
                     />)
 }
             {LoginInfo.isLoggedIn ? ( <DrawerItem 
@@ -238,7 +238,7 @@ export function SideBar(props) {
                          )}
                     label="S'inscrire"
                     labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                    onPress={() => {props.navigation.navigate("")}}
+                    onPress={() => {props.navigation.navigate("Sign up")}}
                 />)}
 
         </Drawer.Section>
