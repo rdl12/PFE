@@ -36,7 +36,7 @@ const LoginStack = ({navigation}) => (
       <Stack.Screen
         name="Sign up"
         component={SignupScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
 

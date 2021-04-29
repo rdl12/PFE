@@ -21,7 +21,7 @@ class ArInput extends React.Component {
     return (
       <Input
         placeholder="write something here"
-        placeholderTextColor={COLORS.MUTED}
+        placeholderTextColor={COLORS.darkgray}
         style={inputStyles}
         color={COLORS.HEADER}
         onChangeText = {onChangeText}
@@ -46,10 +46,12 @@ ArInput.propTypes = {
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 4,
-    borderColor: COLORS.BORDER,
+    //borderRadius: 4,
+    borderColor: COLORS.black,
     height: 44,
+    borderBottomWidth:1,
     backgroundColor: '#FFFFFF'
+    
   },
   success: {
     borderColor: COLORS.INPUT_SUCCESS,
@@ -58,11 +60,11 @@ const styles = StyleSheet.create({
     borderColor: COLORS.INPUT_ERROR,
   },
   shadow: {
-    shadowColor: COLORS.BLACK,
-    shadowOffset: { width: 0, height: 1 },
-    shadowRadius: 2,
-    shadowOpacity: 0.05,
-    elevation: 2,
+    // shadowColor: COLORS.BLACK,
+    // shadowOffset: { width: 0, height: 1 },
+    // shadowRadius: 2,
+    // shadowOpacity: 0.05,
+    // elevation: 2,
   }
 });
 

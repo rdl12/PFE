@@ -19,27 +19,24 @@ const LoginScreen = ({navigation}) => {
     const dispatch = useDispatch()
     return (
     
-      <Block flex middle  style = {{backgroundColor:COLORS.white,elevation:2}}>
+      <Block flex middle  style = {{backgroundColor:COLORS.white}}>
         <StatusBar hidden />
 
-          <Block safe flex middle style = {{elevation:2}}>
+          <Block safe flex middle >
             <Block style={styles.registerContainer}>
-              <Block flex={0.25} middle style={styles.socialConnect}>
-                  <Image 
-                            source={images.login_avatar}
-                            style={{marginTop : 25}}
-                            tintcolor = {COLORS.primary}
-                        />
-                  <Text style = {styles.title}> Login</Text>
-                <Block row style={{ marginTop: theme.SIZES.BASE }}>
-                </Block>
+            <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
+             
+             </ImageBackground>
+              <Block flex={0.35} middle style={styles.socialConnect}>
+                    <Text bold color={COLORS.black} size={32}>
+                      Login <Text color="#8898AA" size={18}> /  Sign Up</Text> 
+                    </Text>
+                    <Image 
+                      source={images.login_avatar}
+                      style={{marginTop:25}}
+                    />
               </Block>
               <Block flex>
-                <Block flex={0.17} middle>
-                  <Text color="#8898AA" size={12}>
-                    Or sign up the classic way
-                  </Text>
-                </Block>
                 <Block flex center>
                   <KeyboardAvoidingView
                     style={{ flex: 1 }}
@@ -63,13 +60,18 @@ const LoginScreen = ({navigation}) => {
                         onChangeText={(text) => setPassword(text)}
                        
                       />
+                      <Block right width={width * 0.75}>
+                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
+                          <Text style = {styles.RegisterText}>mot de passe oublié?</Text>
+                       </TouchableOpacity> 
+                    </Block>
                       <Block row style={styles.passwordCheck}>
                         
                       </Block>
                     </Block>
                     
                     <Block middle>
-                      <ArButton color="primary" style={styles.createArButton}  onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
+                      <ArButton  style={styles.createArButton}  onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
                         <Text bold size={14} color={COLORS.WHITE}>
                           login
                         </Text>
@@ -79,23 +81,19 @@ const LoginScreen = ({navigation}) => {
                         
                     </Block>
                     
-                 
-                 <Block row width={width * 0.75}>
-                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
-                          <Text style = {styles.RegisterText}>S'inscrire ?</Text>
-                       </TouchableOpacity> 
-                    </Block>
 
-                    <Block right width={width * 0.75}>
-                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
-                          <Text style = {styles.RegisterText}>mot de passe oublié?</Text>
-                       </TouchableOpacity> 
-                    </Block>
+                    
 
                     
                     
                    
                   </KeyboardAvoidingView>
+                  <Block middle row style={{marginBottom:30}}>
+                      <Text size={14} color={COLORS.black} >
+                         Vous n'avez pas un compte?
+                      </Text>
+                      <TouchableOpacity  onPress = {() => {navigation.navigate('Sign up')}} ><Text color={COLORS.PRIMARY}>  Inscrivez-vous ici</Text></TouchableOpacity>
+                  </Block>
                 </Block>
               </Block>
             </Block>
@@ -112,11 +110,8 @@ export default LoginScreen
 const styles = StyleSheet.create({
 
   background_image:{
-    flex:1,
+    flex:0.45,
     width:width,
-    height:height/2,
-    
-    
   },
 
   
@@ -130,9 +125,9 @@ const styles = StyleSheet.create({
   },
   
   registerContainer: {
-    width: width * 0.9,
-    height: height * 0.60,
-    backgroundColor: "#F4F5F7",
+    width: width ,
+    height: height ,
+    backgroundColor: COLORS.white,
     borderRadius: 4,
     shadowColor: COLORS.BLACK,
     shadowOffset: {
@@ -146,8 +141,6 @@ const styles = StyleSheet.create({
   },
   socialConnect: {
     backgroundColor: COLORS.WHITE,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: "#8898AA"
   },
   socialArButtons: {
     width: 120,
@@ -177,6 +170,7 @@ const styles = StyleSheet.create({
   },
   createArButton: {
     width: width * 0.5,
-    marginTop: 25
+    marginTop: 25,
+    backgroundColor:COLORS.primary,
   }
 });

@@ -49,7 +49,7 @@ const TutorialScreen = ({navigation}) => {
         next===1 ? (
 
         <View>
-            <View style={{flexDirection:'row',margin:10,zIndex: 0,alignSelf:"center" }}>
+            <View style={{flexDirection:'row',margin:10,zIndex: 0,alignSelf:"center", marginTop:20 }}>
                 <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={[styles.minititle,{...minititleStyle}]}>Verifier</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
@@ -88,7 +88,7 @@ const TutorialScreen = ({navigation}) => {
         next === 2? (
 
         <View>
-            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center", marginTop:20}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
                 <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={[styles.minititle,{...minititleStyle}]}>Appeler</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>2</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
@@ -137,7 +137,7 @@ const TutorialScreen = ({navigation}) => {
                 
         <View>
             
-            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center", marginTop:20}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption} >1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={[styles.minicard,{...selectedStyle}]}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={[styles.minititle,{...minititleStyle}]}>Masser</Title><Caption style={[styles.minicaption,{...minititleStyle}]}>3</Caption></TouchableOpacity></Card>
@@ -180,7 +180,7 @@ const TutorialScreen = ({navigation}) => {
 
         <View>
 
-            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center", marginTop:20}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>
@@ -225,7 +225,7 @@ const TutorialScreen = ({navigation}) => {
         next===5 ? (  
 
         <View>
-            <View style={{flexDirection:'row',margin:10,alignSelf:"center"}}>
+            <View style={{flexDirection:'row',margin:10,alignSelf:"center", marginTop:20}}>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(1)}}><Title style={styles.minititle}>Verifier</Title><Caption style={styles.minicaption}>1</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(2)}}><Title style={styles.minititle}>Appeler</Title><Caption style={styles.minicaption}>2</Caption></TouchableOpacity></Card>
                 <Card style={styles.minicard}><TouchableOpacity onPress={()=>{setNext(3)}}><Title style={styles.minititle}>Masser</Title><Caption style={styles.minicaption}>3</Caption></TouchableOpacity></Card>

@@ -145,7 +145,17 @@ const ProfilStack = ({navigation}) => (
         name="formationDetails"
         component={FormationDetailsScreen}
         options={{headerShown: false}}
-      />  
+      />
+    <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{headerShown: false}}
+      />
+    <Stack.Screen
+        name="AddDefib"
+        component={AddDefibScreen}
+        options={{headerShown: false}}
+      />
 
     </Stack.Navigator>
   )
