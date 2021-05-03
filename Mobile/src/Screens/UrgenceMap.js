@@ -39,11 +39,9 @@ const UrgenceMap = ({ navigation, route }) => {
                         /> ),
       });
         setIdentifiers(parseFloat(id))
-        console.log(identifiers)
         if(identifiers.length != 0){
             dispatch(Fetch_By_id(identifiers))
         }
-      
         return () =>
         parent.setOptions({
              tabBarVisible: true,

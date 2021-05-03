@@ -118,6 +118,28 @@ export default {
                 }
             ]
         },
+        {
+            id: 'Formation_group',
+            title: 'Formation',
+            type: 'group',
+            icon: 'icon-pages',
+            children: [
+                {
+                    id: 'charts',
+                    title: 'Ajouter Formation',
+                    type: 'item',
+                    icon: 'feather icon-plus',
+                    url: '/Formation/Ajouter'
+                },
+                {
+                    id: 'list',
+                    title: 'Liste des Formations',
+                    type: 'item',
+                    icon: 'feather icon-list',
+                    url: '/Formation/list'
+                }
+            ]
+        },
         // {
         //     id: 'pages',
         //     title: 'Pages',

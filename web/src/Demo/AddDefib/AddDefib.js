@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs} from 'react-bootstrap';
 import {Etape2} from './Etape2'
 import { GoogleApiWrapper,}  from 'google-maps-react';
+import {Map, Marker, InfoWindow,}  from 'google-maps-react';
 import { connect } from 'react-redux';
 
 import Aux from "../../hoc/_Aux";
 import {Adress,Add_Defib_Posted} from '../../store/actions'
+import defib_icon from '../../assets/images/pin/medical.png';
 
 export class AddDefib extends Component {
    
@@ -20,7 +22,18 @@ export class AddDefib extends Component {
             lat:'',
             lng:''
         },
-        Access:'Inconnue'
+        Access:'Inconnue',
+        activeMarker: {},
+        selectedPlace: {},
+        showingInfoWindow: false,
+        position: null,
+        Etat:"",
+        center:{ lat: 0, lng: 0 },
+        addMarker:false,
+        markerCoords:{
+            lat:0,
+            lng:0
+        }
 
     };
 
@@ -62,6 +75,45 @@ export class AddDefib extends Component {
           this.props.Add_Defib_Posted(defib)
       
      }
+     componentDidMount() {
+
+        console.log(this.props)
+        // console.log(this.props.Defib)
+         setTimeout(() => {this.setState({
+             center:{ lat: 30, lng: -7.20 }
+         })},200) 
+     }
+    
+    onMarkerClick = (props, marker) =>
+    this.setState({
+        activeMarker: marker,
+        selectedPlace: props,
+        showingInfoWindow: true
+    });
+    onInfoWindowClose = () =>
+    this.setState({
+        activeMarker: null,
+        showingInfoWindow: false
+    });
+
+    onMapClicked = (location, map) => {
+      
+        if (this.state.showingInfoWindow)
+            this.setState({
+                activeMarker: null,
+                showingInfoWindow: false,
+                
+            });
+        this.setState({addMarker: !this.state.addMarker,markerCoords:{
+            lat:location.lat(),
+            lng:location.lng()
+        },
+     coords:{
+        lat:location.lat(),
+        lng:location.lng()
+     }})
+    };
+     
     render() {
         return (
             <Aux>
@@ -101,14 +153,36 @@ export class AddDefib extends Component {
                                         </Form>
                                     </Col>
                                     <Col md={6}>
-                                        <Form.Group controlId="exampleForm.Latitude">
-                                            <Form.Label>Latitude</Form.Label>
-                                            <Form.Control type="email" placeholder="0" value={this.state.coords.lat} required onChange={e => this.setState({coords:{lat:e.target.value}})}/>
-                                        </Form.Group>
-                                        <Form.Group controlId="exampleForm.Longitude">
-                                            <Form.Label>Longitude</Form.Label>
-                                            <Form.Control type="email" placeholder="0"  value={this.state.coords.lng} onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
-                                        </Form.Group>
+                                      
+                                            <Tabs defaultActiveKey="home">
+                                                <Tab eventKey="profile" title="Map">
+                                                <div style={{height: '575px', width: '100%'}}>
+                                                    <Map  
+                                                        className="map"
+                                                        center={this.state.center}
+                                                        google={this.props.google}
+                                                        onDblclick={(t, map, c) =>this.onMapClicked(c.latLng, map)}
+                                                        zoom={4.5}>
+                                                    { this.state.addMarker ? (<Marker
+                                                            name={this.props.Nom}
+                                                            position={{ lat: this.state.markerCoords.lat, lng: this.state.markerCoords.lng }}
+                                                            //onClick={(t,c) => this.onMarkerClick(c.latLng)}
+                                                            icon={defib_icon}
+                                                        />):null}
+                                                    </Map>
+                                                </div>
+                                                </Tab>
+                                                <Tab eventKey="home" title="Coords">
+                                                <Form.Group controlId="exampleForm.Latitude">
+                                                    <Form.Label>Latitude</Form.Label>
+                                                    <Form.Control type="email" placeholder="0" value={this.state.coords.lat} required onChange={e => this.setState({coords:{lat:e.target.value}})}/>
+                                                </Form.Group>
+                                                <Form.Group controlId="exampleForm.Longitude">
+                                                        <Form.Label>Longitude</Form.Label>
+                                                        <Form.Control type="email" placeholder="0"  value={this.state.coords.lng} onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
+                                                    </Form.Group>
+                                                </Tab>     
+                                         </Tabs>
                                         <Form.Group>
                                         <Form.Label >Accessibilite</Form.Label>
                                             <Form.Check
