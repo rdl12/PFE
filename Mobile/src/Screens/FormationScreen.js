@@ -93,8 +93,8 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
       <ScrollView
       >
-        <List formations={secourisme} title="Secourisme" navigation={navigation} />
-        <List formations={Mannequin} title="Mannequin formation" navigation={navigation} />
+        <List formations={secourisme} title="Secourisme" navigation={navigation} BOOKW = {170} BOOKH = {50}/>
+        <List formations={Mannequin} title="Mannequin formation" navigation={navigation} BOOKW = {170} BOOKH = {50} />
 
       </ScrollView>
     </View>

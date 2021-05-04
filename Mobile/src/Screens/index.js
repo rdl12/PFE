@@ -14,8 +14,10 @@ import InfoProfilScreen from './InfoProfilScreen'
 import TutorialScreen from './TutorialScreen'
 import FormationScreen from './FormationScreen'
 import FormationDetailsScreen from './FormationDetailsScreen'
+import ProductsScreen from './ProductsScreen'
 import UrgenceMap from './UrgenceMap'
 import Parametre from './Parametre'
+import NosDefibrilatteur from './NosDefibrilatteur'
  
 
 export {
@@ -36,6 +38,8 @@ export {
     FormationScreen,
     FormationDetailsScreen,
     UrgenceMap,
-    Parametre
+    Parametre,
+    ProductsScreen,
+    NosDefibrilatteur
 
 }

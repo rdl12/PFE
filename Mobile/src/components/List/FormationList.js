@@ -7,7 +7,7 @@ import Formation from './Formation';
 
 
 // Horizontal list of books
-function FormationList({ formations, title,navigation }) {
+function FormationList({ formations, title,navigation,BOOKH,BOOKW }) {
     
   const margin = 20;
   const width = 400
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         data={formations}
         keyExtractor={(i) => i.id.toString()}
         renderItem={({ item, index }) => (
-          <Formation formation={item} navigation={navigation}   />
+          <Formation formation={item} navigation={navigation} BOOKH ={BOOKH} BOOKW = {BOOKW}   />
         )}
         ListEmptyComponent={<EmptyList />}
       />

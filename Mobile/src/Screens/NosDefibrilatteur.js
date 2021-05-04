@@ -13,43 +13,42 @@ import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
-const ProductsScreen = ({navigation}) => {
-    
-    const [Covid, setCovid] = useState([{
+const NosDefibrilatteur = ({navigation}) => {
+    const [defib, setdefib] = useState([{
         id:'1',
-        nom:'Gel desinfectant',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-2736-9f702_1.png',
+        nom:'Defibrillateur Lifeline AUTO Defibtech',
+        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/3/-/3-174-8ef0f.jpg',
         desription:'test'
     },
     {
         id:'2',
-        nom:'Thermomètre sans contact infrarouge',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-2734-e1329.png',
+        nom:'Defibrillateur Lifeline View',
+        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-175-bcf39.jpg',
         desription:'test'
     },
     {
         id:'3',
-        nom:'Distributeur de gel à pédale',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/7/2742-44064.JPG',
+        nom:'Défibrillateur Lifeline ECG',
+        image:'https://www.defibtech.ma/img/produits/181-9b46c.png',
         desription:"test"
     },
 ])
-    const [Secours, setSecours] = useState([{
+    const [AccessDefib, setSecours] = useState([{
         id:'1',
-        nom:'Valise de secours 8/12 personnes',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/-/2-189-8546f.jpg',
+        nom:'Boitier mural avec alarme',
+        image:'https://www.defibtech.ma/img/produits/192-a7f30.jpg',
         desription:'test'
     },
     {
         id:'2',
-        nom:"Bouteille d'oxygène",
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/9/191-3bb6a.jpg',
+        nom:"Paquet de tampons de défibrillation pour adultes (DDP-100)",
+        image:'https://www.defibtech.ma/img/produits/184-68e46.png',
         desription:'test'
     },
     {
         id:'3',
-        nom:'Laveur d’yeux',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/-/2-200-f0c17.jpg',
+        nom:'Batterie de remplacement pour quatre ans (DCF-2003)',
+        image:'https://www.defibtech.ma/img/produits/191-eb937.png',
         desription:'test'
     },
     ])
@@ -96,7 +95,7 @@ const ProductsScreen = ({navigation}) => {
                 </TouchableOpacity>
 
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={{ ...FONTS.h2, color: COLORS.black }}>Nos Produits</Text>
+                    <Text style={{ ...FONTS.h2, color: COLORS.black }}>Nos Defibs</Text>
                 </View>
 
       </View>
@@ -126,8 +125,8 @@ const ProductsScreen = ({navigation}) => {
 
     <ScrollView
     >
-      <List formations={Covid} title="Covid" navigation={navigation} />
-      <List formations={Secours} title="Secours" navigation={navigation} />
+      <List formations={defib} title="Défibrillateur" navigation={navigation} BOOKH = {170} BOOKW= {100} />
+      <List formations={AccessDefib} title="Accessoires Défibrillateurs" navigation={navigation} BOOKH = {170} BOOKW= {42}/>
 
     </ScrollView>
   </View>
@@ -135,7 +134,7 @@ const ProductsScreen = ({navigation}) => {
 
 }
 
-export default ProductsScreen
+export default NosDefibrilatteur
 
 const styles = StyleSheet.create ({
     box:{

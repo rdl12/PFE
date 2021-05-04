@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import {   View,
   Text,
   TouchableOpacity,
@@ -6,24 +6,44 @@ import {   View,
   ScrollView,
   ImageBackground,
   Animated} from 'react-native'
+import Dialog from "react-native-dialog";
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
   
-import {windowHeight, windowWidth} from '../utils/Dimentions'
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { Caption } from 'react-native-paper'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
+
 
 const FormationDetailsScreen = ({ navigation, route }) => {
     const [formation, setformation] = React.useState(null);
     const [scrollViewWholeHeight, setScrollViewWholeHeight] = React.useState(1);
     const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = React.useState(0);
+    const [visible, setVisible] = useState(false);
+    const [visible1, setVisible1] = useState(false);
+    const [suivant, setSuivant] = useState(false)
+    const [nbrpersonnes, setnbrpersonnes] = useState(0)
+    const getCurrentDate=()=>{
+
+        var date = new Date().getDate();
+        var month = new Date().getMonth() + 1;
+        var year = new Date().getFullYear();
+        if( month<10 ){
+           var month = "0"+month
+        }
+        if( date<10    ){
+            var date = "0"+date
+        }
+        var current = year + '-' + month + '-' + date
+        return  current.toString();
+  }
 
     const indicator = new Animated.Value(0);
     useEffect(() => {
       let { formation } = route.params;
       setformation(formation)
+      console.log(getCurrentDate())
     }, [formation])
-
-    
+   
+   
     function renderBookInfoSection() {
       return (
           <View style={{ flex: 1 }}>
@@ -163,30 +183,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
   function renderBottomButton() {
       return (
           <View style={{ flex: 1, flexDirection: 'row' ,backgroundColor:COLORS.grey1}}>
-              {/* Bookmark */}
-              <TouchableOpacity
-                  style={{
-                      width: 70,
-                      backgroundColor: COLORS.secondary,
-                      marginLeft: SIZES.padding,
-                      marginVertical: SIZES.base,
-                      borderRadius: SIZES.radius,
-                      alignItems: 'center',
-                      justifyContent: 'center'
-                  }}
-                  onPress={() => console.log("Bookmark")}
-              >
-                  <Image
-                      source={images.edit_icon}
-                      resizeMode="contain"
-                      style={{
-                          width: 25,
-                          height: 25,
-                          tintColor: COLORS.lightGray2
-                      }}
-                  />
-              </TouchableOpacity>
-
+            
               {/* Start Reading */}
               <TouchableOpacity
                   style={{
@@ -198,10 +195,40 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                       alignItems: 'center',
                       justifyContent: 'center'
                   }}
-                  onPress={() => console.log("Start Reading")}
+                  onPress={() => setVisible(!visible)}
               >
                   <Text style={{ ...FONTS.h3, color: COLORS.white }}>S'inscrire</Text>
               </TouchableOpacity>
+            
+          
+              <Dialog.Container visible={visible} contentStyle={{padding:-10, paddingTop:-20}}>
+              <Dialog.Title>choisissez votre statut</Dialog.Title>
+                   <View> 
+                   
+                 </View>
+           <Dialog.Button label="Suivant"  onPress={() => setSuivant(!suivant)}/>
+        {   suivant ? (
+                  <View>
+                  <Dialog.Title>Prenez un rendez-vous</Dialog.Title>
+                   <View>
+                  <Calendar
+                       current={getCurrentDate()}
+                        // Handler which gets executed on day press. Default = undefined
+                        onDayPress={(day) => {console.log('selected day', day)}}
+                        // Handler which gets executed on day long press. Default = undefined
+                        onDayLongPress={(day) => {console.log('selected day', day)}}
+                        // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+                        monthFormat={'yyyy MM'}
+                        // Handler which gets executed when visible month changes in calendar. Default = undefined
+                        onMonthChange={(month) => {console.log('month changed', month)}}
+                />
+                 </View>
+               <Dialog.Button label="Cancel"  onPress={() => setVisible(!visible)}/>
+            </View>
+          ):null}
+            </Dialog.Container>
+
+
           </View>
       )
   }
@@ -222,6 +249,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
               {/* Buttons */}
               <View style={{ height: 60, marginBottom: 10 }}>
                   {renderBottomButton()}
+                 
               </View>
           </View>
       )

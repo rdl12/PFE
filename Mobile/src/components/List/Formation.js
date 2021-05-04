@@ -10,11 +10,11 @@ import {
 
 
 // Single book component
-function Formation({ formation, navigation }) {
+function Formation({ formation, navigation , BOOKH, BOOKW }) {
   
   const margin = 20;
-  const BOOKW = 170;
-  const BOOKH = BOOKW * 1.25;
+ // const BOOKW = 170;
+ // const BOOKH = BOOKW * 1.25;
  
 
 
