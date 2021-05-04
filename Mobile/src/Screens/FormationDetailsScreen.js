@@ -18,9 +18,10 @@ const FormationDetailsScreen = ({ navigation, route }) => {
     const [scrollViewWholeHeight, setScrollViewWholeHeight] = React.useState(1);
     const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = React.useState(0);
     const [visible, setVisible] = useState(false);
-    const [visible1, setVisible1] = useState(false);
-    const [suivant, setSuivant] = useState(false)
-    const [nbrpersonnes, setnbrpersonnes] = useState(0)
+    const [individu, setindividu] = useState(false)
+    const [entreprise, setentreprise] = useState(false)
+    const [status, setstatus] = useState(true)
+
     const getCurrentDate=()=>{
 
         var date = new Date().getDate();
@@ -35,6 +36,26 @@ const FormationDetailsScreen = ({ navigation, route }) => {
         var current = year + '-' + month + '-' + date
         return  current.toString();
   }
+
+    const individu_fct=()=>{
+        setstatus(false)
+        setentreprise(false)
+        setindividu(true)
+    }
+    const entreprise_fct=()=>{
+        setstatus(false)
+        setindividu(false)
+        setentreprise(true)
+    }
+    const status_fct=()=>{
+        setstatus(!status)
+    }
+    const showdialog=()=>{
+        setVisible(!visible)
+        setstatus(true)
+        setentreprise(false)
+        setindividu(false)
+    }
 
     const indicator = new Animated.Value(0);
     useEffect(() => {
@@ -200,33 +221,99 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                   <Text style={{ ...FONTS.h3, color: COLORS.white }}>S'inscrire</Text>
               </TouchableOpacity>
             
-          
-              <Dialog.Container visible={visible} contentStyle={{padding:-10, paddingTop:-20}}>
-              <Dialog.Title>choisissez votre statut</Dialog.Title>
-                   <View> 
-                   
-                 </View>
-           <Dialog.Button label="Suivant"  onPress={() => setSuivant(!suivant)}/>
-        {   suivant ? (
-                  <View>
-                  <Dialog.Title>Prenez un rendez-vous</Dialog.Title>
-                   <View>
-                  <Calendar
-                       current={getCurrentDate()}
-                        // Handler which gets executed on day press. Default = undefined
-                        onDayPress={(day) => {console.log('selected day', day)}}
-                        // Handler which gets executed on day long press. Default = undefined
-                        onDayLongPress={(day) => {console.log('selected day', day)}}
-                        // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-                        monthFormat={'yyyy MM'}
-                        // Handler which gets executed when visible month changes in calendar. Default = undefined
-                        onMonthChange={(month) => {console.log('month changed', month)}}
-                />
-                 </View>
-               <Dialog.Button label="Cancel"  onPress={() => setVisible(!visible)}/>
-            </View>
-          ):null}
-            </Dialog.Container>
+              <View >
+                    <Dialog.Container visible={visible} style={{borderRadius:300}}>
+                    {   status ? (
+                        <View >
+                                <View style={{padding:15,marginTop:-25}}>
+                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>choisissez votre statut</Dialog.Title>
+                                </View>
+                                <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly'}}>
+                                    <View style={{padding:10, margin:10}}>
+                                        <TouchableOpacity  onPress={()=>individu_fct()}>
+                                            <Image
+                                                source={{uri :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt2DWjTgr6ByNZeADVCjsMTQedxJrtCvdU4w&usqp=CAU' }}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 150,
+                                                    height: 100,
+                                                }}
+                                            />
+                                            <Text style={{alignSelf:'center'}}>Individu</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={{padding:10, margin:10}}>
+                                        <TouchableOpacity  onPress={()=>entreprise_fct()}>
+                                            <Image
+                                                source={{uri :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYqliVnDOjTdDc91wixY0CEwNERjOP2YrMPQ&usqp=CAU' }}
+                                                resizeMode="contain"
+                                                style={{
+                                                    width: 150,
+                                                    height: 100,
+                                                }}
+                                            />
+                                            <Text style={{alignSelf:'center'}}>Entreprise</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+                                
+                                <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                                    <Dialog.Button label="Annuler"  onPress={() => setVisible(!visible)}/>
+                                </View>
+                        </View>
+                        ):individu?(
+                        <View>
+                                <View style={{padding:15,marginTop:-25}}>
+                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Prenez un rendez-vous</Dialog.Title>
+                                </View>
+                                <View>
+                                    <Calendar
+                                            current={getCurrentDate()}
+                                            // Handler which gets executed on day press. Default = undefined
+                                            onDayPress={(day) => {console.log('selected day', day)}}
+                                            // Handler which gets executed on day long press. Default = undefined
+                                            onDayLongPress={(day) => {console.log('selected day', day)}}
+                                            // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
+                                            monthFormat={'yyyy MM'}
+                                            // Handler which gets executed when visible month changes in calendar. Default = undefined
+                                            onMonthChange={(month) => {console.log('month changed', month)}}
+                                    />
+                                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                                        <Dialog.Button label="precedent"  onPress={() => status_fct()}/>
+                                        <Dialog.Button label="Ok"  onPress={() => setVisible(!visible)}/>
+                                    </View>
+                                    </View>
+                        </View>
+                        ):entreprise?(
+                        <View>
+                                <View style={{padding:15,marginTop:-25, marginBottom:15}}>
+                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Entrer vos informations</Dialog.Title>
+                                </View>
+                                <View>
+                                    <Dialog.Input 
+                                        label = "Nom"
+                                        style={{borderBottomColor:COLORS.black, borderBottomWidth:1,}}
+                                        placeholder = "nom de l'entreprise"
+                                        mode = 'outlined'
+                                        onChangeText={(modif) => setMarque(modif)}
+                                    />
+                                    <Dialog.Input 
+                                        label = "Telephone"
+                                        style={{borderBottomColor:COLORS.black, borderBottomWidth:1,}}
+                                        placeholder = "telephone de l'entreprise"
+                                        mode = 'outlined'
+                                        onChangeText={(modif) => setMarque(modif)}
+                                    />
+                                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                                        <Dialog.Button label="precedent"  onPress={() => status_fct()}/>
+                                        <Dialog.Button label="Ok"  onPress={() => setVisible(!visible)}/>
+                                    </View>
+                                </View>
+                        </View>
+                        ):null}  
+                    </Dialog.Container>
+              </View>
+              
 
 
           </View>

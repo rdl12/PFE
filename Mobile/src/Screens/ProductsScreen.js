@@ -102,32 +102,48 @@ const ProductsScreen = ({navigation}) => {
       </View>
 
       <View style={styles.box}>
-             <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
+             <Text style={{ fontWeight:'600',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya.ma (DefibMahreb SARL) apporte à toute entreprise, quel que soit sa taille ou son activité, une offre globale pour améliorer les conditions de travail des salariés. </Text>
              <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
-               <Image
-                    source={images.formation}
-                    resizeMode="contain"
-                    style={{
-                        alignSelf:'flex-end',
-                        width: 120,
-                        height: 90,
-                        margin:10,
-                    }}
-                />
-                 
-                    
-                    <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
-                                   onPress={() => Linking.openURL('https://www.himaya.ma/')}>
-                                   Himaya.ma  </Text>
-                    </Text>  
-                  </View>
+                    <Text style={{ color: COLORS.black,width:windowWidth*0.6,fontSize:13,marginTop:25,marginLeft:2}}>Pour acheter ou voir plus de produits visiter notre site web:
+                        <Text style={{color: 'blue', fontSize:20}}
+                               onPress={() => Linking.openURL('https://www.himaya.ma/')}>
+                               Himaya.ma 
+                         </Text>
+                    </Text> 
+                    <Image
+                        source={images.formation}
+                        resizeMode="contain"
+                        style={{
+                            alignSelf:'flex-end',
+                            width: 120,
+                            height: 90,
+                            margin:10,
+                        }}
+                    /> 
+            </View>
                     
       </View>
 
     <ScrollView
     >
-      <List formations={Covid} title="Covid" navigation={navigation} />
-      <List formations={Secours} title="Secours" navigation={navigation} />
+      <List formations={Covid} title="Covid" navigation={navigation} BOOKH = {170} BOOKW= {150} />
+      <List formations={Secours} title="Secours" navigation={navigation} BOOKH = {170} BOOKW= {150} />
+      
+      <View style={{backgroundColor:"#0088CC", height:40,width:100, position:'absolute', bottom:205, left:50,zIndex:3}}><Text style={{color:COLORS.WHITE, alignSelf:"center", fontSize:20, fontFamily:"cochin", marginTop:3}}>Himaya</Text></View>
+            <View style={{backgroundColor:"#121214", height:230,width:windowWidth, marginTop:10}}>
+                <View style={{marginLeft:30, width:300}}>
+                    <Text style={{fontWeight:'bold', color:COLORS.WHITE, marginTop:40}}>ADRESSE</Text>
+                    <Text style={{color:"#A8A8A8"}}>DefibMaghreb SARLAU
+                        56 rue Cadi BAKKAR, 1er ét. Quartier Berger (MAARIF),
+                        20000 Casablanca - Maroc</Text>
+                    <Text style={{fontWeight:'bold', color:COLORS.WHITE, marginTop:10}}>TEL</Text>
+                    <Text style={{color:"#A8A8A8"}}>+212 522-984-177</Text>
+                    <Text style={{fontWeight:'bold', color:COLORS.WHITE, marginTop:10}}>EMAIL</Text>
+                    <Text style={{color:"#A8A8A8"}}>info@himaya.ma</Text>
+                </View>
+                
+                
+            </View>
 
     </ScrollView>
   </View>
@@ -139,7 +155,7 @@ export default ProductsScreen
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/4.4,
+      height:windowHeight/4.3,
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100

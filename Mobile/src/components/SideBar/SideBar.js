@@ -149,13 +149,13 @@ export function SideBar(props) {
                         style={{marginBottom:-5,marginTop:10}}
                         icon={() => (
                             <Image 
-                            style={{backgroundColor: 'rgba(0,0,177,0.23)',width: 25,height: 25,borderRadius:50}}
+                            style={{backgroundColor: 'rgba(100,0,0,0.18)',width: 25,height: 25,borderRadius:50}}
                             source={images.product_icon}
                             size={25}
-                            tintColor="#0000CD"/> 
+                            tintColor="#a30000"/> 
                              )}
-                        label="Nos defib"
-                        labelStyle={{color:"#0000CD", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
+                        label="Nos defibrillateurs"
+                        labelStyle={{color:"#a30000", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('NosDefib')}}
                     />
                     <DrawerItem
