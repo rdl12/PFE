@@ -138,7 +138,7 @@ const DetailsScreen = ({route,navigation}) => {
               {title === "Specification" ?(
                  <Dialog.Input 
                      label = "Marque"
-                     style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10,}}
+                     style={{borderBottomColor:COLORS.black, borderBottomWidth:1, }}
                      placeholder = {Get_Defib.Defibrilatteur.description}
                      mode = 'outlined'
                      onChangeText={(modif) => setMarque(modif)}
@@ -146,7 +146,7 @@ const DetailsScreen = ({route,navigation}) => {
                     />
               ):
               <Dialog.Input 
-                  style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
+                  style={{borderBottomColor:COLORS.black, borderBottomWidth:1, }}
                   placeholder = {value}
                   mode = 'outlined'
                   onChangeText={(modif) => setmodif(title,modif)}/>}
@@ -154,7 +154,7 @@ const DetailsScreen = ({route,navigation}) => {
               {title === "Specification" ?(
                  <Dialog.Input 
                      label = "Description"
-                     style={{borderColor:COLORS.black, borderWidth:1, marginBottom:-10}}
+                     style={{borderBottomColor:COLORS.black, borderBottomWidth:1, }}
                      placeholder = {Get_Defib.Defibrilatteur.description}
                      mode = 'outlined'
                      onChangeText={(modif) => setDescription(modif)}/>

@@ -101,7 +101,7 @@ const NosDefibrilatteur = ({navigation}) => {
       </View>
 
       <View style={styles.box}>
-             <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
+             <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
              <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
                <Image
                     source={images.formation}
@@ -115,9 +115,9 @@ const NosDefibrilatteur = ({navigation}) => {
                 />
                  
                     
-                    <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
-                                   onPress={() => Linking.openURL('https://www.himaya.ma/')}>
-                                   Himaya.ma  </Text>
+                    <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Pour acheter ou voir plus de produits visiter notre site web : <Text style={{color: 'blue'}}
+                                   onPress={() => Linking.openURL('https://www.defibtech.ma')}>
+                                   defibtech.ma  </Text>
                     </Text>  
                   </View>
                     
@@ -125,8 +125,8 @@ const NosDefibrilatteur = ({navigation}) => {
 
     <ScrollView
     >
-      <List formations={defib} title="Défibrillateur" navigation={navigation} BOOKH = {170} BOOKW= {100} />
-      <List formations={AccessDefib} title="Accessoires Défibrillateurs" navigation={navigation} BOOKH = {170} BOOKW= {42}/>
+      <List formations={defib} title="Défibrillateur" navigation={navigation} BOOKH = {170} BOOKW= {150} />
+      <List formations={AccessDefib} title="Accessoires Défibrillateurs" navigation={navigation} BOOKH = {170} BOOKW= {150}/>
 
     </ScrollView>
   </View>
