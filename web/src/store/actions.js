@@ -18,6 +18,12 @@ const Set_Defib_State = (defib) => {
       payload: defib,
     };
   };
+  const Set_Formation_byId = (Formation) => {
+    return {
+      type: t.FETCH_FORMATION_BYID,
+      payload: Formation,
+    };
+  };
   const Set_Subscribed_State = (sub) => {
     return {
       type: t.FETCH_SUBSCRIBED_PEOPLE,
@@ -342,6 +348,23 @@ export const Fetch_Formations = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch formation ,please retry to refresh the page");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Formation_ById = (id) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              console.log(data)
+              dispatch(Set_Formation_byId({formationDetail : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch Formation ,please retry");
             console.log(err);
           });
   }

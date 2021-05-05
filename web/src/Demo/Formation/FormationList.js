@@ -3,8 +3,10 @@ import { useDispatch,useSelector } from 'react-redux';
 import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs} from 'react-bootstrap';
 
 
+
 import Aux from "../../hoc/_Aux";
 import {Fetch_Formations} from '../../store/actions'
+import { Link } from 'react-router-dom';
 
 function FormationList() {
  const [Formation, setFormation] = useState([])
@@ -16,12 +18,12 @@ function FormationList() {
        setFormation(formation)
     }, [formation])
     return (
-        <div style = {{display:'flex',justifyContent:'space-around',flexDirection:'row',alignItems:'center'}}>
+        <div style = {{display:'flex',justifyContent:'space-around',flexWrap:'wrap'}}>
             {Formation.map((item) =>
-             <div>
-              <img src={item.image} width="300" height="150" />
+             <Link to={`/Formation/Detail/${item.id}`} >
+              <img src={item.image} width="250" height="150" />
               <div>{item.nom}</div>
-            </div>
+             </Link>
             )
             }
         </div>

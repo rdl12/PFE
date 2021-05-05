@@ -162,6 +162,12 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
 
         };
+    case actionTypes.FETCH_FORMATION_BYID:
+        return {
+            ...state,
+            ...action.payload
+
+        };
         default:
             return state;
     }

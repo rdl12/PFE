@@ -27,6 +27,7 @@ export const initialState = {
     stat_prov_defib : [],
     personnes_inscrites:[],
     categories:[],
-    formations:[]
+    formations:[],
+    formationDetail : {}
 };
 

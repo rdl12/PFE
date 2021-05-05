@@ -30,7 +30,7 @@ function FormationAdd() {
         (category) => category.nom === CategorieChoosed 
       );
     const formation = {
-        "Nom":Nom,
+        "nom":Nom,
         "desription":Description,
         "date_debut":value,
         "nbr_inscrit":0,
