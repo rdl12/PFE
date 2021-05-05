@@ -102,32 +102,41 @@ const ProductsScreen = ({navigation}) => {
       </View>
 
       <View style={styles.box}>
-             <Text style={{ fontWeight:'600',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya.ma (DefibMahreb SARL) apporte à toute entreprise, quel que soit sa taille ou son activité, une offre globale pour améliorer les conditions de travail des salariés. </Text>
-             <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
-                    <Text style={{ color: COLORS.black,width:windowWidth*0.6,fontSize:13,marginTop:25,marginLeft:2}}>Pour acheter ou voir plus de produits visiter notre site web:
-                        <Text style={{color: 'blue', fontSize:20}}
-                               onPress={() => Linking.openURL('https://www.himaya.ma/')}>
-                               Himaya.ma 
-                         </Text>
-                    </Text> 
+            <View>
+                    <Text style={{ fontWeight:'600',fontSize:13,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Himaya.ma (DefibMahreb SARL) apporte à toute entreprise, quel que soit sa taille ou son activité, une offre globale pour améliorer les conditions de travail des salariés. </Text>
                     <Image
-                        source={images.formation}
+                        source={images.himaya_logo}
+                        resizeMode="contain"
+                        style={{
+                            width: windowWidth,
+                            height: 80,
+                        }}
+                    /> 
+             </View>
+             <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
+                    {/* <Image
+                        source={{uri : 'https://images-na.ssl-images-amazon.com/images/I/4157jSarsYL.png'}}
                         resizeMode="contain"
                         style={{
                             alignSelf:'flex-end',
                             width: 120,
                             height: 90,
-                            margin:10,
+                            margin:0,
                         }}
-                    /> 
+                    />  */}
+                    <Text style={{ color: COLORS.black,fontSize:15,margin:20,marginLeft:2}}>Pour acheter ou voir plus de produits visiter notre site web  <Text style={{color: 'blue', fontSize:17}}
+                               onPress={() => Linking.openURL('https://www.himaya.ma/')}>
+                                :     Himaya.ma 
+                         </Text>
+                    </Text> 
             </View>
                     
       </View>
 
     <ScrollView
     >
-      <List formations={Covid} title="Covid" navigation={navigation} BOOKH = {170} BOOKW= {150} />
-      <List formations={Secours} title="Secours" navigation={navigation} BOOKH = {170} BOOKW= {150} />
+      <List formations={Covid} title="Covid" navigation={navigation} BOOKH = {120} BOOKW= {100} />
+      <List formations={Secours} title="Secours" navigation={navigation} BOOKH = {120} BOOKW= {100} />
       
       <View style={{backgroundColor:"#0088CC", height:40,width:100, position:'absolute', bottom:205, left:50,zIndex:3}}><Text style={{color:COLORS.WHITE, alignSelf:"center", fontSize:20, fontFamily:"cochin", marginTop:3}}>Himaya</Text></View>
             <View style={{backgroundColor:"#121214", height:230,width:windowWidth, marginTop:10}}>
@@ -155,7 +164,7 @@ export default ProductsScreen
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/4.3,
+      height:windowHeight/3,
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100

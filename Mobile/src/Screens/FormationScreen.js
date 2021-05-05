@@ -69,7 +69,7 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
         </View>
 
         <View style={styles.box}>
-               <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
+               <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30, marginBottom:10 }}>Himaya et Save vous offre des formations aux gestes qui sauvent</Text>
                <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
                  <Image
                       source={images.formation}
@@ -83,7 +83,7 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
                   />
                    
                       
-                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
+                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:15,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
                                      onPress={() => Linking.openURL('https://www.himaya.ma/')}>
                                      Himaya.ma  </Text>
                       </Text>  

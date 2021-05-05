@@ -54,6 +54,9 @@ const arret_icon = require("../../assets/images/arret-icon.png");
 const defibriller_icon = require("../../assets/images/defibriller-icon.png");
 const massage_icon2 = require("../../assets/images/massage-icon.png");
 const secours_icon = require("../../assets/images/secours-icon.png");
+const himaya_logo = require("../../assets/images/himaya_logo.png");
+const individu_icon = require("../../assets/images/individu_icon.png");
+const entreprise_icon = require("../../assets/images/entreprise_icon.png");
 
 export default {
     Home_image,
@@ -111,7 +114,10 @@ export default {
     arret_icon,
     defibriller_icon,
     massage_icon2,
-    secours_icon
+    secours_icon,
+    himaya_logo,
+    individu_icon,
+    entreprise_icon
 
 
 }
