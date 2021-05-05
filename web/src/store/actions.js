@@ -18,6 +18,24 @@ const Set_Defib_State = (defib) => {
       payload: defib,
     };
   };
+  const Set_Subscribed_State = (sub) => {
+    return {
+      type: t.FETCH_SUBSCRIBED_PEOPLE,
+      payload: sub,
+    };
+  };
+  const Set_Formation = (formation) => {
+    return {
+      type: t.FETCH_FORMATION,
+      payload: formation,
+    };
+  };
+  const Set_Categories = (categorie) => {
+    return {
+      type: t.FETCH_CATEGORIES,
+      payload: categorie,
+    };
+  };
 
 const Defib_valide = (defib) => {
   return {
@@ -256,6 +274,74 @@ export const Fetch_stats_prov = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Subscribed_people = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Subscription/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Subscribed_State({personnes_inscrites : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch subscribed people ,please retry to refresh the page");
+            console.log(err);
+          });
+  }
+}
+
+export const Add_Formation = (formation) => {
+    return (dispatch) => {
+      return fetch(`${API_URI}/Formation/add`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(formation)
+    })
+  .then((responseData) => {
+      console.log(
+          "POST Response",
+          "Response Body -> " + JSON.stringify(responseData)
+      )
+  })
+  
+}
+}
+
+export const Fetch_Categories = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Categorie/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Categories({categories : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch categories ,please retry to refresh the page");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Formations = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Formation({formations : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch formation ,please retry to refresh the page");
             console.log(err);
           });
   }

@@ -138,6 +138,30 @@ export const reducer = (state = initialState, action) => {
                 ...action.payload
         
             };
+    case actionTypes.FETCH_SUBSCRIBED_PEOPLE:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
+    case actionTypes.ADD_FORMATION:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+    case actionTypes.FETCH_CATEGORIES:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+    case actionTypes.FETCH_FORMATION:
+        return {
+            ...state,
+            ...action.payload
+
+        };
         default:
             return state;
     }

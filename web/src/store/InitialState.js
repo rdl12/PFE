@@ -24,6 +24,9 @@ export const initialState = {
     showHeader:true,
     defibValide:[],
     stat_etat_defib : [],
-    stat_prov_defib : []
+    stat_prov_defib : [],
+    personnes_inscrites:[],
+    categories:[],
+    formations:[]
 };
 

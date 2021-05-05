@@ -137,6 +137,13 @@ export default {
                     type: 'item',
                     icon: 'feather icon-list',
                     url: '/Formation/list'
+                },
+                {
+                    id: 'listInscrit',
+                    title: 'Liste des personnes inscrits',
+                    type: 'item',
+                    icon: 'feather icon-list',
+                    url: '/Formation/Inscrit'
                 }
             ]
         },

@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()
             .defaultSuccessUrl("/success_login",true).and()
             .authorizeRequests()
-            .antMatchers("/api/v*/registration/**","/Defibrillateur/**","/Boundary/**","/Formation/**")
+            .antMatchers("/api/v*/registration/**","/Defibrillateur/**","/Boundary/**","/Formation/**","/Subscription/**","/Categorie/**")
             .permitAll()
             .anyRequest()
             .authenticated().and();

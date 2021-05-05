@@ -29,6 +29,7 @@ const OtherDocs = React.lazy(() => import('./Demo/Other/Docs'));
 const AddDefib = React.lazy(() => import('./Demo/AddDefib/AddDefib'));
 const FormationAdd = React.lazy(() => import('./Demo/Formation/FormationAdd'));
 const FormationList = React.lazy(() => import('./Demo/Formation/FormationList'));
+const SubscriptionList = React.lazy(() => import('./Demo/Formation/SubscriptionList'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
@@ -47,6 +48,7 @@ const routes = [
     { path: '/Ajout', exact: true, name: 'Ajout de defibrilateur', component: AddDefib },
     { path: '/Formation/Ajouter', exact: true, name: 'Ajout de defibrilateur', component: FormationAdd },
     { path: '/Formation/list', exact: true, name: 'Ajout de defibrilateur', component: FormationList },
+    { path: '/Formation/Inscrit', exact: true, name: 'Liste des personnes inscrits', component: SubscriptionList },
 ];
 
 export default routes;
