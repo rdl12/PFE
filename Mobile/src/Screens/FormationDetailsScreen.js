@@ -232,7 +232,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                     <View style={{padding:10, margin:10}}>
                                         <TouchableOpacity  onPress={()=>individu_fct()}>
                                             <Image
-                                                source={{uri :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt2DWjTgr6ByNZeADVCjsMTQedxJrtCvdU4w&usqp=CAU' }}
+                                                source={images.individu_icon}
                                                 resizeMode="contain"
                                                 style={{
                                                     width: 150,
@@ -245,7 +245,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                     <View style={{padding:10, margin:10}}>
                                         <TouchableOpacity  onPress={()=>entreprise_fct()}>
                                             <Image
-                                                source={{uri :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYqliVnDOjTdDc91wixY0CEwNERjOP2YrMPQ&usqp=CAU' }}
+                                                source={images.entreprise_icon}
                                                 resizeMode="contain"
                                                 style={{
                                                     width: 150,

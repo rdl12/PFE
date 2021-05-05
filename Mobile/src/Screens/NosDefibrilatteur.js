@@ -101,9 +101,22 @@ const NosDefibrilatteur = ({navigation}) => {
       </View>
 
       <View style={styles.box}>
-             <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
+            <View>
+                    <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
+                    <Image
+                        source={{uri : 'https://www.defibtech-aed.ch/wp-content/uploads/2018/07/logo.png'}}
+                        resizeMode="contain"
+                        style={{
+                            width: windowWidth,
+                            height: 80,
+                            marginTop:10,
+                            marginLeft:-20,
+                        }}
+                    /> 
+             </View>
+             
              <View style={{flexDirection:'row',justifyContent:'space-evenly',marginLeft:30}}>
-               <Image
+               {/* <Image
                     source={images.formation}
                     resizeMode="contain"
                     style={{
@@ -112,12 +125,12 @@ const NosDefibrilatteur = ({navigation}) => {
                         height: 90,
                         margin:10,
                     }}
-                />
+                /> */}
                  
                     
-                    <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Pour acheter ou voir plus de produits visiter notre site web : <Text style={{color: 'blue'}}
+                    <Text style={{ color: COLORS.black,fontSize:15,margin:20,marginLeft:2,marginTop:0}}>Pour acheter ou voir plus de produits visiter notre site web  <Text style={{color: 'blue', fontSize:17}}
                                    onPress={() => Linking.openURL('https://www.defibtech.ma')}>
-                                   defibtech.ma  </Text>
+                                   :   defibtech.ma  </Text>
                     </Text>  
                   </View>
                     
@@ -138,7 +151,7 @@ export default NosDefibrilatteur
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/4.4,
+      height:windowHeight/4,
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100
