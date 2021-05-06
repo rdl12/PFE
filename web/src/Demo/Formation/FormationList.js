@@ -20,7 +20,7 @@ function FormationList() {
     return (
         <div class="row" >
             {Formation.map((item) =>
-             <Link to={`/Formation/Detail/${item.id}`} >
+             <Link to={`/Formation/Detail/${item.id}`} style={{ textDecoration: 'none' }}>
                 <div style={{margin:10}} class="col-sm">
                     <img src={item.image} width="200" height="200" />
                     <p class="font-weight-bold" style={{margin:3, width:200}}>{item.nom}</p>

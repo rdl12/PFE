@@ -89,57 +89,57 @@ function FormationDetail() {
           ) 
           : null}
           <Tabs defaultActiveKey="home">
-                                         <Tab eventKey="home" title="Individus">
-                                                    <Table striped responsive>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nom</th>
-                                                                    <th>prenom</th>
-                                                                    <th>email</th>
-                                                                    <th>Formation</th>
-                                                                    <th>date d'inscription</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {typeof inscrits !== "undefined" &&  inscrits.map(item => 
-                                                                <tr key = {item.id}>
-                                                                    <td>{item.user.firstName}</td>
-                                                                    <td>{item.user.lastName}</td>
-                                                                    <td>{item.user.email}</td>
-                                                                    <td>{item.formation.nom}</td>
-                                                                    <td>{item.date_inscription}</td>
-                                                                </tr>)
-                                                                }
-                                                            </tbody>
-                                                    </Table>    
-                                            </Tab>
-                                            <Tab eventKey="profile" title="Entreprise">
-                                                    <Table striped responsive>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nom</th>
-                                                                    <th>Entreprise</th>
-                                                                    <th>Telephone</th>
-                                                                    <th>Formation</th>
-                                                                    <th>date d'inscription</th>
-                                                                    <th></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                {typeof inscrits !== "undefined" &&  inscrits.map(item => 
-                                                                <tr key = {item.id}>
-                                                                    <td>{item.user.firstName}</td>
-                                                                    <td>{item.user.lastName}</td>
-                                                                    <td>{item.user.email}</td>
-                                                                    <td>{item.formation.nom}</td>
-                                                                    <td>{item.date_inscription}</td>
-                                                                </tr>)
-                                                                }
-                                                            </tbody>
-                                                    </Table>    
-                                            </Tab>     
-                                         </Tabs>
+    <Tab eventKey="home" title="Individus">
+            <Table striped responsive>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>prenom</th>
+                            <th>email</th>
+                            <th>Formation</th>
+                            <th>date d'inscription</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                        <tr key = {item.id}>
+                            <td>{item.user.firstName}</td>
+                            <td>{item.user.lastName}</td>
+                            <td>{item.user.email}</td>
+                            <td>{item.formation.nom}</td>
+                            <td>{item.date_inscription}</td>
+                        </tr>)
+                        }
+                    </tbody>
+            </Table>    
+    </Tab>
+    <Tab eventKey="profile" title="Entreprise">
+            <Table striped responsive>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Entreprise</th>
+                            <th>Telephone</th>
+                            <th>Formation</th>
+                            <th>date d'inscription</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                        <tr key = {item.id}>
+                            <td>{item.user.firstName}</td>
+                            <td>{item.user.lastName}</td>
+                            <td>{item.user.email}</td>
+                            <td>{item.formation.nom}</td>
+                            <td>{item.date_inscription}</td>
+                        </tr>)
+                        }
+                    </tbody>
+            </Table>    
+    </Tab>     
+    </Tabs>
            
         </div>
     )

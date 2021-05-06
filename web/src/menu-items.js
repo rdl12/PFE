@@ -140,7 +140,7 @@ export default {
                 },
                 {
                     id: 'listInscrit',
-                    title: 'Liste des personnes inscrits',
+                    title: 'Liste des inscrits',
                     type: 'item',
                     icon: 'feather icon-list',
                     url: '/Formation/Inscrit'
