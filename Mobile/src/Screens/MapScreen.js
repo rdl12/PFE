@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
 import ListDefib from '../components/ListDefib/ListDefib';
 import BgTracking from '../components/BgTracking';
-
+import Dialog from "react-native-dialog";
 class MapScreen extends Component{
     constructor(props){
         super(props);
@@ -30,6 +30,7 @@ class MapScreen extends Component{
            
             btn_add_state:false,
             longitudeDelta : windowWidth/windowHeight,
+            showAlert:false
             
            
         }
@@ -62,15 +63,21 @@ class MapScreen extends Component{
     }
     
     Pressed_Icon = () => {
-        this.setState({btn_add_state:!this.state.btn_add_state})
-        this.setState({longitudeDelta:windowWidth/windowHeight + 10})
-        this.map.animateToRegion({
-            latitude:this.state.coords.latitude,
-            longitude : this.state.coords.longitude,
-            latitudeDelta : 0.002,
-            longitudeDelta : 0.004
+        if ( this.props.userInfo.isLoggedIn){
+            this.setState({btn_add_state:!this.state.btn_add_state})
+            this.setState({longitudeDelta:windowWidth/windowHeight + 10})
+            this.map.animateToRegion({
+                latitude:this.state.coords.latitude,
+                longitude : this.state.coords.longitude,
+                latitudeDelta : 0.002,
+                longitudeDelta : 0.004
+              })    
+        }
+      else{
+          this.setState({
+              showAlert: !this.state.showAlert
           })
-
+      }
         
     
         
@@ -147,7 +154,13 @@ class MapScreen extends Component{
               </TouchableOpacity>) : null 
            }
            
-            </View>
+        <View >
+        <Dialog.Container visible={this.state.showAlert} style={{borderRadius:300}}>
+            <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Veilliez vous connecter avant de s'inscrire</Dialog.Title>
+             <Dialog.Button label="Ok"  onPress={() => this.setState({showAlert:!this.state.showAlert})}/>
+        </Dialog.Container>
+             </View>
+        </View>
            
         </View>
     )}
@@ -155,8 +168,8 @@ class MapScreen extends Component{
 
 const mapStateToProps = (state) => {
     const { MapReducer } = state
-    const { Fecth_Defib_in_100 } = state
-    return { maptype: MapReducer.maptype , markers:Fecth_Defib_in_100.markers }
+    const { Fecth_Defib_in_100 , loginReducer } = state
+    return { maptype: MapReducer.maptype , markers:Fecth_Defib_in_100.markers, userInfo: loginReducer }
   }
 const mapDispatchToProps = (dispatch) => {
 

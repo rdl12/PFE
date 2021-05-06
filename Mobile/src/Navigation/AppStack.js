@@ -104,6 +104,11 @@ const MapStack = ({navigation}) => (
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="MapScreen"
+        component={MapScreen}
+        options={{headerShown: true}}
+      />
+      <Stack.Screen
         name="Help"
         component={LocationScreen}
         options={{headerShown: true}}

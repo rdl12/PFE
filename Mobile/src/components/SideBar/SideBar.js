@@ -109,7 +109,7 @@ export function SideBar(props) {
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('Tutorial')}}
                     />
-             { LoginInfo.isLoggedIn ?  (
+            
                   <DrawerItem 
                   style={{marginBottom:-5,}}
                   icon={() => (
@@ -125,7 +125,7 @@ export function SideBar(props) {
               />
 
               
-             ):null}
+
                 </Drawer.Section>
 
                 <Drawer.Section style={styles.drawerSection}>

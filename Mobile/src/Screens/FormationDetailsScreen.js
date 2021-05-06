@@ -11,9 +11,10 @@ import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
   
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { Caption } from 'react-native-paper'
-
+import {useSelector} from 'react-redux'
 
 const FormationDetailsScreen = ({ navigation, route }) => {
+    const LoginInfo = useSelector(state => state.loginReducer);
     const [formation, setformation] = React.useState(null);
     const [scrollViewWholeHeight, setScrollViewWholeHeight] = React.useState(1);
     const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = React.useState(0);
@@ -61,7 +62,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
     useEffect(() => {
       let { formation } = route.params;
       setformation(formation)
-      console.log(getCurrentDate())
+  
     }, [formation])
    
    
@@ -223,7 +224,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
             
               <View >
                     <Dialog.Container visible={visible} style={{borderRadius:300}}>
-                    {   status ? (
+                    {   status && LoginInfo.isLoggedIn ? (
                         <View >
                                 <View style={{padding:15,marginTop:-25}}>
                                     <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>choisissez votre statut</Dialog.Title>
@@ -310,7 +311,12 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                     </View>
                                 </View>
                         </View>
-                        ):null}  
+                        ):(    
+                            <View style={{padding:15,marginTop:-25, marginBottom:15}}>
+                                <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Veilliez vous connecter avant de s'inscrire</Dialog.Title>
+                                <Dialog.Button label="Ok"  onPress={() => setVisible(!visible)}/>
+                            </View>
+                           )}  
                     </Dialog.Container>
               </View>
               
