@@ -18,11 +18,13 @@ function FormationList() {
        setFormation(formation)
     }, [formation])
     return (
-        <div style = {{display:'flex',justifyContent:'space-around',flexWrap:'wrap'}}>
+        <div class="row" >
             {Formation.map((item) =>
              <Link to={`/Formation/Detail/${item.id}`} >
-              <img src={item.image} width="250" height="150" />
-              <div>{item.nom}</div>
+                <div style={{margin:10}} class="col-sm">
+                    <img src={item.image} width="200" height="200" />
+                    <p class="font-weight-bold" style={{margin:3, width:200}}>{item.nom}</p>
+                </div>
              </Link>
             )
             }
