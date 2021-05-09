@@ -9,7 +9,7 @@ import { COLORS,images } from "../Constantes";
 import ArInput from '../components/GalioInput/Input'
 import ArButton  from '../components/Button/Button'
 import {windowWidth as width ,windowHeight as height} from '../utils/Dimentions'
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -31,10 +31,8 @@ const LoginScreen = ({navigation}) => {
                     <Text bold color={COLORS.black} size={32}>
                       Login <Text color="#8898AA" size={18}> /  Sign Up</Text> 
                     </Text>
-                    <Image 
-                      source={images.login_avatar}
-                      style={{marginTop:25}}
-                    />
+                    <Icon name="user" size={50}  style={{marginTop:25}} />
+                   
               </Block>
               <Block flex>
                 <Block flex center>

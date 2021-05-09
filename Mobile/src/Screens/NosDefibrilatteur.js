@@ -102,7 +102,7 @@ const NosDefibrilatteur = ({navigation}) => {
 
       <View style={styles.box}>
             <View>
-                    <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
+                    <Text style={{ fontWeight:'700',fontSize:15,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
                     <Image
                         source={{uri : 'https://www.defibtech-aed.ch/wp-content/uploads/2018/07/logo.png'}}
                         resizeMode="contain"
@@ -151,7 +151,7 @@ export default NosDefibrilatteur
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/4,
+      height:windowHeight/3.6,
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100

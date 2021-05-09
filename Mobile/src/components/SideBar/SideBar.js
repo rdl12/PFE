@@ -19,6 +19,7 @@ import {
 
 import { COLORS, images} from '../../Constantes'
 import styles from './styles'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export function SideBar(props) {
  
@@ -62,10 +63,13 @@ export function SideBar(props) {
                      <DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
-                            <Avatar.Image 
-                            style={{backgroundColor:'red',width: 28,height: 25}}
-                            source={images.phone_icon}
-                            size={25}/> 
+                            <Icon   name="phone" size={20}  
+                                    style={{backgroundColor:'red',width: 25,height: 25,borderRadius:50, paddingLeft:5,paddingTop:2,paddingBottom:-5}} 
+                                    color="#ffff"   />
+                            // <Avatar.Image 
+                            // style={{backgroundColor:'red',width: 28,height: 25}}
+                            // source={images.phone_icon}
+                            // size={25}/> 
                              )}
                         label="Urgence"
                         labelStyle={{color:"#a30000", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -74,10 +78,13 @@ export function SideBar(props) {
                     <DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
-                            <Avatar.Image 
-                            style={{backgroundColor:COLORS.primary,width: 28,height: 25}}
-                            source={images.location_icon}
-                            size={25}/> 
+                            <Icon   name="map-marker" size={20}  
+                                    style={{backgroundColor:"#0000CD",width: 25,height: 25,borderRadius:50, paddingLeft:6.5,paddingTop:2,paddingBottom:-5}} 
+                                    color="#ffff"   />
+                            // <Avatar.Image 
+                            // style={{backgroundColor:COLORS.primary,width: 28,height: 25}}
+                            // source={images.location_icon}
+                            // size={25}/> 
                              )}
                         label="Geolocaliser"
                         labelStyle={{color:"#0000CD", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -86,24 +93,30 @@ export function SideBar(props) {
                     <DrawerItem 
                         style={{marginBottom:-5}}
                         icon={() => (
-                            <Avatar.Image 
-                            style={{backgroundColor:"#008000",width: 25,height: 25}}
-                            source={images.help_icon}
-                            resizeMode='center' 
-                            size={25}/> 
+                            <Icon   name="question" size={15}  
+                                    style={{backgroundColor:"#008000",width: 25,height: 25,borderRadius:50, paddingLeft:7.8,paddingTop:4.5,paddingBottom:-5}} 
+                                    color="#ffff"   />
+                            // <Avatar.Image 
+                            // style={{backgroundColor:"#008000",width: 25,height: 25}}
+                            // source={images.help_icon}
+                            // resizeMode='center' 
+                            // size={25}/> 
                              )}
-                        label="Help"
+                        label="S.O.S"
                         labelStyle={{color:"#228B22", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
                         onPress={() => {props.navigation.navigate('Help')}}
                     />
                     <DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
-                            <Avatar.Image 
-                            style={{backgroundColor:"#FF8C00",width: 25,height: 25,}}
-                            source={images.instruction_menu_icon}
-                            resizeMode='contain' 
-                            size={25}/> 
+                            <Icon   name="info" size={15}  
+                                    style={{backgroundColor:"#FF8C00",width: 25,height: 25,borderRadius:50, paddingLeft:9.8,paddingTop:4.5,paddingBottom:-5}} 
+                                    color="#ffff"   />
+                            // <Avatar.Image 
+                            // style={{backgroundColor:"#FF8C00",width: 25,height: 25,}}
+                            // source={images.instruction_menu_icon}
+                            // resizeMode='contain' 
+                            // size={20}/> 
                              )}
                         label="Instruction"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -113,14 +126,12 @@ export function SideBar(props) {
                   <DrawerItem 
                   style={{marginBottom:-5,}}
                   icon={() => (
-                      <Avatar.Image 
-                      style={{backgroundColor:"#9932CC",width: 25,height: 25,}}
-                      source={images.signaler_icon}
-                      resizeMode='contain' 
-                      size={25}/> 
+                    <Icon name="plus" size={15}  
+                          style={{backgroundColor:"#9932CC",width: 25,height: 25,borderRadius:50, paddingLeft:6.7,paddingTop:5,paddingBottom:-5}} 
+                          color="#ffff"   />
                        )}
-                  label="Signaler"
-                  labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
+                  label="Ajouter defib"
+                  labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20,}}
                   onPress={() => {props.navigation.navigate('MapScreen')}}
               />
 
@@ -135,11 +146,14 @@ export function SideBar(props) {
                     <DrawerItem 
                         style={{marginBottom:-5,marginTop:10}}
                         icon={() => (
-                            <Image 
-                            style={{backgroundColor: 'rgba(0,0,177,0.23)',width: 25,height: 25,borderRadius:50}}
-                            source={images.product_icon}
-                            size={25}
-                            tintColor="#0000CD"/> 
+                             <Icon   name="shopping-basket" size={18}  
+                                     style={{backgroundColor:"rgba(0,0,177,0.23)",width: 25,height: 25,borderRadius:50, paddingLeft:2.5,paddingTop:2.5,paddingBottom:-5}} 
+                                     color="#0000CD"   />
+                            // <Image 
+                            //  style={{backgroundColor: 'rgba(0,0,177,0.23)',width: 25,height: 25,borderRadius:50}}
+                            //  source={images.product_icon}
+                            //  size={25}
+                            //  tintColor="#0000CD"/> 
                              )}
                         label="Nos Produit"
                         labelStyle={{color:"#0000CD", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -148,11 +162,9 @@ export function SideBar(props) {
                        <DrawerItem 
                         style={{marginBottom:-5,marginTop:10}}
                         icon={() => (
-                            <Image 
-                            style={{backgroundColor: 'rgba(100,0,0,0.18)',width: 25,height: 25,borderRadius:50}}
-                            source={{uri : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL-iaC3kzzwodNg2nnDmDZ4QVanhWPflRXEG-oOqrH9g_FULWrqJL2P_98jdn8s5xZ3yc&usqp=CAU'}}
-                            size={25}
-                            tintColor="#a30000"/> 
+                            <Icon   name="medkit" size={20}  
+                                    style={{backgroundColor:"rgba(100,0,0,0.18)",width: 25,height: 25,borderRadius:50, paddingLeft:3.3,paddingTop:2,paddingBottom:-5}} 
+                                    color="#a30000"   />
                              )}
                         label="Nos defibrillateurs"
                         labelStyle={{color:"#a30000", fontSize:13, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -174,11 +186,14 @@ export function SideBar(props) {
                     <DrawerItem 
                         style={{marginBottom:-5,}}
                         icon={() => (
-                            <Image 
-                            style={{backgroundColor:"rgba(197,86,0,0.16)",width: 25,height: 25,borderRadius:50}}
-                            source={images.about_us_icon}
-                            size={25}
-                            tintColor="#D2691E"/> 
+                            <Icon   name="users" size={20}  
+                                    style={{backgroundColor:"rgba(197,86,0,0.16)",width: 25,height: 25,borderRadius:50, paddingLeft:2,paddingTop:2,paddingBottom:-5}} 
+                                    color="#a30000"   />
+                            // <Image 
+                            // style={{backgroundColor:"rgba(197,86,0,0.16)",width: 25,height: 25,borderRadius:50}}
+                            // source={images.about_us_icon}
+                            // size={25}
+                            // tintColor="#D2691E"/> 
                              )}
                         label="A propos"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
@@ -187,11 +202,14 @@ export function SideBar(props) {
                     <DrawerItem 
                         style={{marginBottom:-5}}
                         icon={() => (
-                            <Image 
-                            style={{backgroundColor:"rgba(74,0,224,0.16)",width: 25,height: 25,borderRadius:50}}
-                            source={images.stats_icon}
-                            size={25}
-                            tintColor="#800080"/> 
+                            <Icon   name="bar-chart" size={15}  
+                                    style={{backgroundColor:"rgba(74,0,224,0.16)",width: 25,height: 25,borderRadius:50, paddingLeft:4.5,paddingTop:4.5,paddingBottom:-5}} 
+                                    color="#800080"   />
+                            // <Image 
+                            // style={{backgroundColor:"rgba(74,0,224,0.16)",width: 25,height: 25,borderRadius:50}}
+                            // source={images.stats_icon}
+                            // size={25}
+                            // tintColor="#800080"/> 
                              )}
                         label="Statistique"
                         labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}

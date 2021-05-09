@@ -8,7 +8,7 @@ import {Fetch_By_id} from '../redux/actions'
 import {images,COLORS, FONTS} from '../Constantes'
 import MapViewDirections from 'react-native-maps-directions';
 import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 
 const UrgenceMap = ({ navigation, route }) => {
