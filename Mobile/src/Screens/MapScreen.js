@@ -3,15 +3,16 @@ import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
 import Header from '../components/Header'
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
 import styles from './styles_global'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib} from '../redux/actions'
 import ListDefib from '../components/ListDefib/ListDefib';
-import BgTracking from '../components/BgTracking';
 import Dialog from "react-native-dialog";
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 class MapScreen extends Component{
     constructor(props){
         super(props);
@@ -142,15 +143,12 @@ class MapScreen extends Component{
            </MapView>
            
            <View>          
-          { !this.state.btn_add_state ?   ( <TouchableOpacity
+          { !this.state.btn_add_state ?   ( 
+             <TouchableOpacity
                   style={styles.iconPlaceHolder}
                   onPress={() => this.Pressed_Icon() }
               >
-                  <Image
-                        source={images.add_defib}
-                        resizeMode="contain"
-                        style={styles.image_icon}
-                    />       
+                    <Icon name="plus" size={30} color="#ffff" />
               </TouchableOpacity>) : null 
            }
            

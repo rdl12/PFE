@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {   View,
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  Linking,
-  StyleSheet} from 'react-native'
+import {   View, Text,TouchableOpacity,Image,ScrollView,Linking,StyleSheet} from 'react-native'
 import {useSelector} from 'react-redux'
 
 import List from '../components/List/FormationList';
@@ -78,12 +72,12 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
                           alignSelf:'flex-end',
                           width: 120,
                           height: 90,
-                          margin:10,
+                          margin:5,
                       }}
                   />
                    
                       
-                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:15,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
+                      <Text style={{ color: COLORS.black,width:windowWidth*0.7,fontSize:13,marginTop:25,marginLeft:-35}}>Inscrivez-vous tout de suite pour plus d'informations visiter : <Text style={{color: 'blue'}}
                                      onPress={() => Linking.openURL('https://www.himaya.ma/')}>
                                      Himaya.ma  </Text>
                       </Text>  

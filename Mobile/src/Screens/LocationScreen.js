@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 
 import { windowHeight, windowWidth } from '../utils/Dimentions';

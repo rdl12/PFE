@@ -2,7 +2,7 @@ import { View,Image,TouchableOpacity, Button, FlatList,Text} from 'react-native'
 import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
 import { COLORS, images} from '../Constantes'
 import { connect } from 'react-redux';
@@ -12,6 +12,8 @@ import {GOOGLE_MAPS_APIKEY} from '../utils/constants/Api'
 import { AdresseReducer } from '../redux/reducer';
 import ListDefib from '../components/ListDefib/ListDefib';
 import DropDownPicker from 'react-native-dropdown-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -241,9 +243,13 @@ class ListDefibScreen extends Component {
                     <Marker
                         key={marker.id}
                         coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
-                        title={`Point$`}
-                        description={marker.description}
-                    />
+                        title={marker.nom}
+                        description={marker.description}>
+                            <Icon name="thumb-tack" size={35} color='red'   />
+                    </Marker>
+                        
+                               
+                    
                     
                 ))}
                 
