@@ -20,12 +20,14 @@ function FormationDetail() {
     useEffect(() => {
       dispatch(Fetch_Formation_ById(id))
       dispatch(Fetch_Subscribed_people())
-      setFormation(detail)
-      const filter_subbed =  people_subbed.filter(
-        (sub) => sub.formation.nom === Formation.nom 
-      );
-      setinscrits(filter_subbed)
-    }, [detail,people_subbed,Formation])
+
+      setTimeout(() => { setFormation(detail)
+        const filter_subbed =  people_subbed.filter(
+          (sub) => sub.formation.nom === detail.nom 
+        );
+        setinscrits(filter_subbed)},200)
+     
+    }, [Formation])
 
     const Modify = () => {
         console.log('modify')
@@ -36,15 +38,15 @@ function FormationDetail() {
     return (
         <div>
           {Formation ? 
-          (<div class="row">
-               <img class="col-sm4" src={Formation.image} width ="200" height = "250"/>
-               <div class="col-sm" style ={{margin:20, marginTop : 0}} >
-                    <h3 class="font-weight-bold" > {Formation.nom}</h3>
+          (<div className="row">
+               <img className="col-sm4" src={Formation.image} width ="200" height = "250"/>
+               <div className="col-sm" style ={{margin:20, marginTop : 0}} >
+                    <h3 className="font-weight-bold" > {Formation.nom}</h3>
                     <Card style={{padding:10}}>
-                        <p class="font-italic" >{Formation.desription}</p>
+                        <p className="font-italic" >{Formation.desription}</p>
                     </Card>
                 </div>
-                <div class="col-sm4">
+                <div className="col-sm4">
                         <Card>
                             <Card.Body className='border-bottom'>
                                 <div className="row d-flex align-items-center">

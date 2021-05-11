@@ -28,6 +28,7 @@ export const initialState = {
     personnes_inscrites:[],
     categories:[],
     formations:[],
-    formationDetail : {}
+    formationDetail : {},
+    showToast: false
 };
 

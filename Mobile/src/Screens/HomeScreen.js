@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
 import { useDispatch } from 'react-redux';
-import { Fetch_Formation } from '../redux/actions';
+import { Fetch_Formation,Fetch_Products } from '../redux/actions';
 
 const HomeScreen = ({navigation,route}) => {
   const dispatch = useDispatch()
@@ -17,6 +17,7 @@ const HomeScreen = ({navigation,route}) => {
 
 
       dispatch(Fetch_Formation())
+      dispatch(Fetch_Products())
   }, [route]);
     return (
        <SafeAreaView style = {styles.view}>

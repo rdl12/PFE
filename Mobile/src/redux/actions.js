@@ -16,7 +16,12 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
-
+const Set_Product = (data) => {
+  return {
+    type: t.FETCH_PRODUCTS,
+    payload: data
+ }
+}
 const Set_User = (data) => {
   return {
     type: t.FETCH_USER,
@@ -269,8 +274,8 @@ export const Fetch_Defib_User = (email) => {
           });
   }
 }
-export const Singup = (firstName,lastName,email,password) => {
-  const SingupData = {firstName,lastName,email,password}
+export const Singup = (SingupData) => {
+ 
   console.log(SingupData)
   return (dispatch) => {
     return fetch(`${API_URI}/api/v1/registration`, {
@@ -290,10 +295,12 @@ export const Singup = (firstName,lastName,email,password) => {
               )
            })
            .catch((err) => {
-            Alert.alert("couldn't fetch user ,please retry");
+            Alert.alert("couldn't subscribe user ,please retry");
             console.log(err);
           });
+         
   }
+  
 }
 
 export const Modify_defib = (defib) => {
@@ -389,6 +396,24 @@ export const Fetch_By_id = (id) => {
            })
            .catch((err) => {
             Alert.alert("couldn't fetch Boundary ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Products = () => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Product({products:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Products ,please retry");
             console.log(err);
           });
   }

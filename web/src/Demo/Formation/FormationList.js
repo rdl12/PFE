@@ -15,8 +15,11 @@ function FormationList() {
 
     useEffect(() => {
        dispatch(Fetch_Formations())
-       setFormation(formation)
-    }, [formation])
+       setTimeout(() => {
+        setFormation(formation)
+       },200)
+      
+    }, [Formation])
     return (
         <div class="row" >
             {Formation.map((item) =>

@@ -73,6 +73,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isFullScreen: false
             };
+        case actionTypes.SHOW_TOAST:
+            return {
+                ...state,
+                showToast: action.show
+            };
         case actionTypes.CHANGE_LAYOUT:
             return {
                 ...state,

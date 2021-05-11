@@ -358,7 +358,6 @@ export const Fetch_Formation_ById = (id) =>{
     return fetch(`${API_URI}/Formation/find/${id}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
-              console.log(data)
               dispatch(Set_Formation_byId({formationDetail : data}))
             }
               )

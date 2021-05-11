@@ -13,6 +13,7 @@ public class RegistrationRequest {
 	    private final String firstName ;
 	    private final String lastName ;
 	    private  final String email ;
+	    private final String telephone;
 	    private final  String password ;
 	    
 	    
@@ -29,6 +30,11 @@ public class RegistrationRequest {
 		}
 		public String getPassword() {
 			return password;
+		}
+
+		public String getTelephone() {
+			
+			return telephone;
 		}
 	   
 }

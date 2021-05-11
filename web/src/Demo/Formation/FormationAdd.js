@@ -1,11 +1,14 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs,Toast} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { useHistory } from 'react-router-dom';
+import ImageUploader from 'react-images-upload';
 
 import Aux from "../../hoc/_Aux";
 import {Add_Formation,Fetch_Categories} from '../../store/actions'
+import * as actionTypes from "../../store/actionsTypes";
 
 function FormationAdd() {
     const [Nom, setNom] = useState("")
@@ -17,6 +20,8 @@ function FormationAdd() {
     const [Categories, setCategories] = useState([])
     const [CategorieChoosed, setCategorieChoosed] = useState("")
     const formation_categories = useSelector(state => state.categories)
+    const showA = useSelector(state => state.showToast)
+    let history = useHistory();
     const dispatch = useDispatch()
      
 
@@ -39,7 +44,14 @@ function FormationAdd() {
         "categorie":categorie_filterd[0],
     }
     dispatch(Add_Formation(formation))
-
+    dispatch({type: actionTypes.SHOW_TOAST,show:true})
+    history.push('/Formation/Ajouter');
+    setNom("")
+    setDescription("")
+    setnbrmax("")
+    setImage("")
+    
+    
    }
     return (
         <Aux>
@@ -65,7 +77,9 @@ function FormationAdd() {
                         <Form.Group controlId="Categories">
                         <Form.Label>Categorie</Form.Label>
                         <Form.Control as="select" onChange = {(e) => setCategorieChoosed(e.target.value)} >
-                        {Categories.map((item) => <option  key={item.id} value={item.nom}> {item.nom} </option>)}
+                            <option  key={'choisir'} value='choisissez votre categorie'> choisissez la categorie de la formation  </option>
+                             {Categories.map((item) => <option  key={item.id} value={item.nom}> {item.nom} </option>)}
+                             <option  key={'ajouter'} value='Ajouter Categorie'> Ajouter Categorie </option>
                         </Form.Control>
                         </Form.Group>
 
@@ -94,9 +108,21 @@ function FormationAdd() {
                      </Button>
                     </Card.Body>
             </Card>
-               
-        </Col>
-  </Row>
+          
+    
+
+</Col> 
+       </Row>
+           <Toast show={showA} onClose={() =>  dispatch({type: actionTypes.SHOW_TOAST,show:false})}  style={{ position: 'absolute',top: 0,right: 50, }}>
+                <Toast.Header>
+                <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+                <strong className="mr-auto">DefibTech</strong>
+                <small>Just now</small>
+                </Toast.Header>
+                <Toast.Body>Formation Ajouter avec succes</Toast.Body>
+            </Toast>
+      
+     
 </Aux>
     )
 }

@@ -25,6 +25,7 @@ public class LoginController {
                    "name",
                    "lastname",
                     "email",
+                    "Telephone",
                    "password",
                     AppUserRole.USER
 

@@ -15,9 +15,22 @@ const SignupScreen = ({navigation}) => {
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setfirstName] = useState('')
-    const [lastName, setlastName] = useState('')
+    const [Telephone, setTelephone] = useState('')
 
     const dispatch = useDispatch()
+      const submit = () => {
+        const object = {
+          "firstName":firstName,
+          "lastName":"",
+          "email" : email,
+          "telephone": Telephone,
+          "password": password
+      }
+      dispatch(Singup(object))
+
+      }
+     
+    
     return (
       <Block flex middle style = {{backgroundColor:COLORS.white}}>
         <StatusBar hidden />
@@ -43,18 +56,21 @@ const SignupScreen = ({navigation}) => {
                       <ArInput
                         borderless
                         placeholder="Name"
+                        onChangeText={(text) => setfirstName(text)}
                       />
                     </Block>
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <ArInput
                         borderless
                         placeholder="Email"
+                        onChangeText={(text) => setemail(text)}
                       />
                     </Block>
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <ArInput
                         borderless
                         placeholder="Telephone"
+                        onChangeText={(text) => setTelephone(text)}
                       />
                     </Block>
                     <Block width={width * 0.8}>
@@ -62,6 +78,7 @@ const SignupScreen = ({navigation}) => {
                         password
                         borderless
                         placeholder="Password"
+                        onChangeText={(text) => setPassword(text)}
                        
                       />
                       {/* <Block row style={styles.passwordCheck}>
@@ -94,7 +111,7 @@ const SignupScreen = ({navigation}) => {
                       </ArButton>
                     </Block>
                     <Block middle>
-                      <ArButton  style={styles.createArButton}>
+                      <ArButton  style={styles.createArButton} onPress = {submit}>
                         <Text bold size={14} color={COLORS.WHITE}>
                           CREER
                         </Text>

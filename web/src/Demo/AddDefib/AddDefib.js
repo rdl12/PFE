@@ -4,38 +4,48 @@ import {Etape2} from './Etape2'
 import { GoogleApiWrapper,}  from 'google-maps-react';
 import {Map, Marker, InfoWindow,}  from 'google-maps-react';
 import { connect } from 'react-redux';
+import ImageUploader from 'react-images-upload';
 
 import Aux from "../../hoc/_Aux";
 import {Adress,Add_Defib_Posted} from '../../store/actions'
 import defib_icon from '../../assets/images/pin/medical.png';
 
 export class AddDefib extends Component {
-   
-    state = {
-        isActive: true,
-        Nom:'',
-        Telephone:'',
-        image:'',
-        Description:'',
-        Marque:'',
-        coords:{
-            lat:'',
-            lng:''
-        },
-        Access:'Inconnue',
-        activeMarker: {},
-        selectedPlace: {},
-        showingInfoWindow: false,
-        position: null,
-        Etat:"",
-        center:{ lat: 0, lng: 0 },
-        addMarker:false,
-        markerCoords:{
-            lat:0,
-            lng:0
-        }
+    constructor(props) {
+        super(props);
+         this.state = {  isActive: true,
+            Nom:'',
+            Telephone:'',
+            image:'',
+            Description:'',
+            Marque:'',
+            coords:{
+                lat:'',
+                lng:''
+            },
+            Access:'Inconnue',
+            activeMarker: {},
+            selectedPlace: {},
+            showingInfoWindow: false,
+            position: null,
+            Etat:"",
+            center:{ lat: 0, lng: 0 },
+            addMarker:false,
+            markerCoords:{
+                lat:0,
+                lng:0
+            },
+            pictures: [],};
+         this.onDrop = this.onDrop.bind(this);
+    }
+    
+    onDrop = (picture) => {
+        this.setState({
+            pictures: this.state.pictures.concat(picture),
+        });
 
-    };
+        console.log(this.state.pictures)
+    }
 
     Suivant = () => {
       
@@ -149,41 +159,7 @@ export class AddDefib extends Component {
                                             <Form.Label>Marque</Form.Label>
                                             <Form.Control type="email" placeholder="marque du defib" value={this.state.Marque} onChange={e => this.setState({Marque:e.target.value})} />
                                             </Form.Group>
-                                         
-                                        </Form>
-                                    </Col>
-                                    <Col md={6}>
-                                      
-                                            <Tabs defaultActiveKey="home">
-                                                <Tab eventKey="profile" title="Map">
-                                                <div style={{height: '575px', width: '100%'}}>
-                                                    <Map  
-                                                        className="map"
-                                                        center={this.state.center}
-                                                        google={this.props.google}
-                                                        onDblclick={(t, map, c) =>this.onMapClicked(c.latLng, map)}
-                                                        zoom={4.5}>
-                                                    { this.state.addMarker ? (<Marker
-                                                            name={this.props.Nom}
-                                                            position={{ lat: this.state.markerCoords.lat, lng: this.state.markerCoords.lng }}
-                                                            //onClick={(t,c) => this.onMarkerClick(c.latLng)}
-                                                            icon={defib_icon}
-                                                        />):null}
-                                                    </Map>
-                                                </div>
-                                                </Tab>
-                                                <Tab eventKey="home" title="Coords">
-                                                <Form.Group controlId="exampleForm.Latitude">
-                                                    <Form.Label>Latitude</Form.Label>
-                                                    <Form.Control type="email" placeholder="0" value={this.state.coords.lat} required onChange={e => this.setState({coords:{lat:e.target.value}})}/>
-                                                </Form.Group>
-                                                <Form.Group controlId="exampleForm.Longitude">
-                                                        <Form.Label>Longitude</Form.Label>
-                                                        <Form.Control type="email" placeholder="0"  value={this.state.coords.lng} onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
-                                                    </Form.Group>
-                                                </Tab>     
-                                         </Tabs>
-                                        <Form.Group>
+                                            <Form.Group>
                                         <Form.Label >Accessibilite</Form.Label>
                                             <Form.Check
                                                 custom
@@ -212,8 +188,50 @@ export class AddDefib extends Component {
                                                 id="inconnue"
                                                 onChange={e => this.setState({Access:e.target.value})}
                                             />
-                                             <Image src="#" rounded />
+                                            <ImageUploader
+                                                withIcon={true}
+                                                buttonText='Choose images'
+                                                onChange={this.onDrop}
+                                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                                maxFileSize={5242880}
+                                            />
+                                             
+                                        
                                         </Form.Group>
+                                        </Form>
+                                    </Col>
+                                    <Col md={6}>
+                                      
+                                            <Tabs defaultActiveKey="home">
+                                                <Tab eventKey="home" title="Map">
+                                                <div style={{height: '500px', width: '100%'}}>
+                                                    <Map  
+                                                        className="map"
+                                                        center={this.state.center}
+                                                        google={this.props.google}
+                                                        onDblclick={(t, map, c) =>this.onMapClicked(c.latLng, map)}
+                                                        zoom={4.5}>
+                                                    { this.state.addMarker ? (<Marker
+                                                            name={this.props.Nom}
+                                                            position={{ lat: this.state.markerCoords.lat, lng: this.state.markerCoords.lng }}
+                                                            //onClick={(t,c) => this.onMarkerClick(c.latLng)}
+                                                            icon={defib_icon}
+                                                        />):null}
+                                                    </Map>
+                                                </div>
+                                                </Tab>
+                                                <Tab eventKey="profile" title="Coords">
+                                                <Form.Group controlId="exampleForm.Latitude">
+                                                    <Form.Label>Latitude</Form.Label>
+                                                    <Form.Control type="email" placeholder="0" value={this.state.coords.lat} required onChange={e => this.setState({coords:{lat:e.target.value}})}/>
+                                                </Form.Group>
+                                                <Form.Group controlId="exampleForm.Longitude">
+                                                        <Form.Label>Longitude</Form.Label>
+                                                        <Form.Control type="email" placeholder="0"  value={this.state.coords.lng} onChange={e => this.setState({coords:{...this.state.coords,lng:e.target.value}})}/>
+                                                    </Form.Group>
+                                                </Tab>     
+                                         </Tabs>
+                                       
                                        
                                         <Button variant="primary" onClick = {this.Suivant}>
                                                 Suivant

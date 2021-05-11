@@ -1,4 +1,4 @@
-import { View,Image,TouchableOpacity, Button, FlatList,Text} from 'react-native'
+import { View,Image,TouchableOpacity, PermissionsAndroid, FlatList,Text} from 'react-native'
 import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
@@ -13,7 +13,7 @@ import { AdresseReducer } from '../redux/reducer';
 import ListDefib from '../components/ListDefib/ListDefib';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
+import  {requestLocationPermission} from '../services/LocationPermission'
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -61,6 +61,7 @@ class ListDefibScreen extends Component {
 
    
     componentDidMount(){
+        requestLocationPermission()
         setTimeout(()=>this.setState({marginBottom : 0}),10)
         console.log(this.state.rayon)
         setTimeout(()=> this.props.Fecth_Defib(this.state.coords,this.state.rayon),50)

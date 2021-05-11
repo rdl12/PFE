@@ -6,53 +6,17 @@ import {   View,
   ScrollView,
   Linking,
   StyleSheet} from 'react-native'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+
 
 import List from '../components/List/FormationList';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
+import {Fetch_Products} from '../redux/actions'
 
 const ProductsScreen = ({navigation}) => {
-    
-    const [Covid, setCovid] = useState([{
-        id:'1',
-        nom:'Gel desinfectant',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-2736-9f702_1.png',
-        desription:'test'
-    },
-    {
-        id:'2',
-        nom:'Thermomètre sans contact infrarouge',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-2734-e1329.png',
-        desription:'test'
-    },
-    {
-        id:'3',
-        nom:'Distributeur de gel à pédale',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/7/2742-44064.JPG',
-        desription:"test"
-    },
-])
-    const [Secours, setSecours] = useState([{
-        id:'1',
-        nom:'Valise de secours 8/12 personnes',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/-/2-189-8546f.jpg',
-        desription:'test'
-    },
-    {
-        id:'2',
-        nom:"Bouteille d'oxygène",
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/9/191-3bb6a.jpg',
-        desription:'test'
-    },
-    {
-        id:'3',
-        nom:'Laveur d’yeux',
-        image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/2/-/2-200-f0c17.jpg',
-        desription:'test'
-    },
-    ])
+    const Products = useSelector(state => state.Products_Reducer.products)
   
     useEffect(() => {
       const parent = navigation.dangerouslyGetParent();
@@ -135,8 +99,8 @@ const ProductsScreen = ({navigation}) => {
 
     <ScrollView
     >
-      <List formations={Covid} title="Covid" navigation={navigation} BOOKH = {120} BOOKW= {100} />
-      <List formations={Secours} title="Secours" navigation={navigation} BOOKH = {120} BOOKW= {100} />
+      <List formations={Products} title="Covid" navigation={navigation} BOOKH = {120} BOOKW= {100} />
+      <List formations={Products} title="Secours" navigation={navigation} BOOKH = {120} BOOKW= {100} />
       
       <View style={{backgroundColor:"#0088CC", height:40,width:100, position:'absolute', bottom:205, left:50,zIndex:3}}><Text style={{color:COLORS.WHITE, alignSelf:"center", fontSize:20, fontFamily:"cochin", marginTop:3}}>Himaya</Text></View>
             <View style={{backgroundColor:"#121214", height:230,width:windowWidth, marginTop:10}}>

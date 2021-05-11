@@ -43,6 +43,7 @@ public class AppUser implements UserDetails {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String telephone;
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private AppUserRole appUserRole;
@@ -50,10 +51,11 @@ public class AppUser implements UserDetails {
     private Boolean enabled = false;
 	
     
-    public AppUser(String firstName, String lastName,String email,String password,AppUserRole appUserRole) {
+    public AppUser(String firstName, String lastName,String email,String telephone,String password,AppUserRole appUserRole) {
              this.firstName = firstName;
              this.lastName = lastName;
               this.email = email;
+              this.telephone = telephone;
               this.password = password;
               this.appUserRole = appUserRole;
 }
