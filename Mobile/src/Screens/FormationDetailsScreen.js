@@ -8,13 +8,16 @@ import {   View,
   Animated} from 'react-native'
 import Dialog from "react-native-dialog";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { Caption } from 'react-native-paper'
+import {useSelector,useDispatch} from 'react-redux'
   
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
-import { Caption } from 'react-native-paper'
-import {useSelector} from 'react-redux'
+import {Fetch_User,Subscribe_To_Formation,Subscribe_Entreprise} from '../redux/actions'
 
 const FormationDetailsScreen = ({ navigation, route }) => {
+    const dispatch = useDispatch();
     const LoginInfo = useSelector(state => state.loginReducer);
+    const user = useSelector(state => state.Fetch_User)
     const [formation, setformation] = React.useState(null);
     const [scrollViewWholeHeight, setScrollViewWholeHeight] = React.useState(1);
     const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = React.useState(0);
@@ -22,6 +25,17 @@ const FormationDetailsScreen = ({ navigation, route }) => {
     const [individu, setindividu] = useState(false)
     const [entreprise, setentreprise] = useState(false)
     const [status, setstatus] = useState(true)
+    const [date, setdate] = useState('')
+    const [Nom, setNom] = useState('')
+    const [Telephone, setTelephone] = useState('')
+
+    useEffect(() => {
+        if (LoginInfo.isLoggedIn){
+            dispatch(Fetch_User(LoginInfo.userId))
+            
+        }
+       
+        }, [LoginInfo.userId])
 
     const getCurrentDate=()=>{
 
@@ -37,6 +51,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
         var current = year + '-' + month + '-' + date
         return  current.toString();
   }
+ 
 
     const individu_fct=()=>{
         setstatus(false)
@@ -58,6 +73,26 @@ const FormationDetailsScreen = ({ navigation, route }) => {
         setindividu(false)
     }
 
+    const subscribe = () => {
+        setVisible(!visible)
+        var subscribeData = {
+            "date_inscription" :date.dateString,
+            "formation" : formation,
+            "user" : user.user
+
+        }
+     dispatch(Subscribe_To_Formation(subscribeData))
+   
+    }
+
+    const subscribeEntreprise = () => {
+        setVisible(!visible)
+        var subscribeData = {
+            "nom" :Nom,
+            "telephone" : Telephone,
+        }
+        dispatch(Subscribe_Entreprise(subscribeData))
+    }
     const indicator = new Animated.Value(0);
     useEffect(() => {
       let { formation } = route.params;
@@ -271,7 +306,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                     <Calendar
                                             current={getCurrentDate()}
                                             // Handler which gets executed on day press. Default = undefined
-                                            onDayPress={(day) => {console.log('selected day', day)}}
+                                            onDayPress={(day) => {setdate(day)}}
                                             // Handler which gets executed on day long press. Default = undefined
                                             onDayLongPress={(day) => {console.log('selected day', day)}}
                                             // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
@@ -281,7 +316,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                     />
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
                                         <Dialog.Button label="precedent"  onPress={() => status_fct()}/>
-                                        <Dialog.Button label="Ok"  onPress={() => setVisible(!visible)}/>
+                                        <Dialog.Button label="Ok"  onPress={subscribe}/>
                                     </View>
                                     </View>
                         </View>
@@ -296,18 +331,18 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                         style={{borderBottomColor:COLORS.black, borderBottomWidth:1,}}
                                         placeholder = "nom de l'entreprise"
                                         mode = 'outlined'
-                                        onChangeText={(modif) => setMarque(modif)}
+                                        onChangeText={(modif) => setNom(modif)}
                                     />
                                     <Dialog.Input 
                                         label = "Telephone"
                                         style={{borderBottomColor:COLORS.black, borderBottomWidth:1,}}
                                         placeholder = "telephone de l'entreprise"
                                         mode = 'outlined'
-                                        onChangeText={(modif) => setMarque(modif)}
+                                        onChangeText={(modif) => setTelephone(modif)}
                                     />
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
                                         <Dialog.Button label="precedent"  onPress={() => status_fct()}/>
-                                        <Dialog.Button label="Ok"  onPress={() => setVisible(!visible)}/>
+                                        <Dialog.Button label="Ok"  onPress={subscribeEntreprise}/>
                                     </View>
                                 </View>
                         </View>

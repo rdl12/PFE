@@ -1,16 +1,18 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs,Toast} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Image , FormControl, InputGroup, Dropdown,Tab,Tabs,Toast,Modal} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 
 import Aux from "../../hoc/_Aux";
-import {Add_Formation,Fetch_Categories} from '../../store/actions'
+import {Add_Formation,Fetch_Categories,add_Category} from '../../store/actions'
 import * as actionTypes from "../../store/actionsTypes";
 
 function FormationAdd() {
+    const [NomCategorie, setNomCategorie] = useState('')
+    const [DescriptionCategorie, setDescriptionCategorie] = useState('')
     const [Nom, setNom] = useState("")
     const [Description, setDescription] = useState("")
     const [Categorie, setCategorie] = useState("")
@@ -23,8 +25,18 @@ function FormationAdd() {
     const showA = useSelector(state => state.showToast)
     let history = useHistory();
     const dispatch = useDispatch()
-     
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const Save = () => {
+        setShow(false)
+        const object = {
+            "nom":NomCategorie,
+            "description":DescriptionCategorie
+        }
+        dispatch(add_Category(object))
+    };
     useEffect(() => {
         dispatch(Fetch_Categories())
         setCategories(formation_categories)
@@ -51,7 +63,13 @@ function FormationAdd() {
     setnbrmax("")
     setImage("")
     
-    
+
+   }
+   const change = (e) => {
+    setCategorieChoosed(e.target.value)
+    if(e.target.value == 'Ajouter Categorie'){
+        handleShow()
+    }
    }
     return (
         <Aux>
@@ -76,10 +94,10 @@ function FormationAdd() {
 
                         <Form.Group controlId="Categories">
                         <Form.Label>Categorie</Form.Label>
-                        <Form.Control as="select" onChange = {(e) => setCategorieChoosed(e.target.value)} >
+                        <Form.Control as="select" onChange = {(e) => change(e)} >
                             <option  key={'choisir'} value='choisissez votre categorie'> choisissez la categorie de la formation  </option>
                              {Categories.map((item) => <option  key={item.id} value={item.nom}> {item.nom} </option>)}
-                             <option  key={'ajouter'} value='Ajouter Categorie'> Ajouter Categorie </option>
+                             <option  key={'ajouter'} value='Ajouter Categorie' onClick={() => console.log('hello')} > Ajouter Categorie </option>
                         </Form.Control>
                         </Form.Group>
 
@@ -122,7 +140,30 @@ function FormationAdd() {
                 <Toast.Body>Formation Ajouter avec succes</Toast.Body>
             </Toast>
       
-     
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>Ajouter Une Categorie</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <Form.Group controlId="formBasicNom">
+                    <Form.Label>Nom categorie</Form.Label>
+                    <Form.Control type="email" placeholder="Nom de la categorie" value={NomCategorie}  onChange={e => setNomCategorie(e.target.value)}/>
+                    </Form.Group>
+
+                    <Form.Group controlId="formBasicTelephone">
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control type="email" placeholder="Description" value={DescriptionCategorie} onChange={e => setDescriptionCategorie(e.target.value)}/>
+                </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={Save}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+         </Modal>
 </Aux>
     )
 }

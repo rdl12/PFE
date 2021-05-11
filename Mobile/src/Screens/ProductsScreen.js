@@ -13,10 +13,11 @@ import List from '../components/List/FormationList';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import {Fetch_Products} from '../redux/actions'
+
 
 const ProductsScreen = ({navigation}) => {
     const Products = useSelector(state => state.Products_Reducer.products)
+    const categories = useSelector(state => state.Product_Category_Reducer.product_categories)
   
     useEffect(() => {
       const parent = navigation.dangerouslyGetParent();
@@ -99,8 +100,20 @@ const ProductsScreen = ({navigation}) => {
 
     <ScrollView
     >
-      <List formations={Products} title="Covid" navigation={navigation} BOOKH = {120} BOOKW= {100} />
-      <List formations={Products} title="Secours" navigation={navigation} BOOKH = {120} BOOKW= {100} />
+       {
+          categories.map(item => {
+            let category = Products.filter(
+              (product) => product.categorie.nom === item.nom
+            );
+        if (category.length != 0)
+        {
+            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230}/>
+        }
+          
+
+          }
+            )
+        } 
       
       <View style={{backgroundColor:"#0088CC", height:40,width:100, position:'absolute', bottom:205, left:50,zIndex:3}}><Text style={{color:COLORS.WHITE, alignSelf:"center", fontSize:20, fontFamily:"cochin", marginTop:3}}>Himaya</Text></View>
             <View style={{backgroundColor:"#121214", height:230,width:windowWidth, marginTop:10}}>

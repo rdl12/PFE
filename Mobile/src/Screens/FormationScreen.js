@@ -9,6 +9,7 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
   const FormationScreen = ({navigation}) => {
   const formation = useSelector(state => state.Formation_Reducer.formation);
+  const categories = useSelector(state => state.Categories_Reducer.categories)
 
       useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
@@ -36,6 +37,7 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
     (formation) => formation.categorie.nom === 'Mannequin formation' 
   );
   
+ 
 
     return (
     <View style={styles.screen}>
@@ -87,9 +89,15 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
       <ScrollView
       >
-        <List formations={secourisme} title="Secourisme" navigation={navigation} BOOKW = {170} BOOKH = {230}/>
-        <List formations={Mannequin} title="Mannequin formation" navigation={navigation} BOOKW = {170} BOOKH = {230} />
-
+        {
+          categories.map(item => {
+            let category = formation.filter(
+              (formation) => formation.categorie.nom === item.nom
+            );
+            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230}/>
+          }
+            )
+        } 
       </ScrollView>
     </View>
     )

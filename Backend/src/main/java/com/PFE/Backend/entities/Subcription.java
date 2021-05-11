@@ -27,7 +27,7 @@ public class Subcription {
 	@Column(name = "id", unique = true,nullable = false)
     private long id;
 	@Column(name = "date_inscription")
-    private LocalDateTime date_inscription;
+    private String date_inscription;
 	@ManyToOne
 	private Formation formation;
 	@ManyToOne

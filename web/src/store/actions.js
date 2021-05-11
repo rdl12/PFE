@@ -368,3 +368,23 @@ export const Fetch_Formation_ById = (id) =>{
           });
   }
 }
+
+export const add_Category = (category) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Categorie/add_Categorie`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(category)
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Added Category" + JSON.stringify(responseData)
+    )
+})
+
+}
+}

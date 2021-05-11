@@ -1,11 +1,12 @@
 package com.PFE.Backend.entities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,17 +18,14 @@ import lombok.Setter;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-public class Product {
+public class Entreprise {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "id", unique = true,nullable = false)
-    private long id;
+	@Column(name = "id", unique = true,nullable = false)
+    private long Id;
 	@Column(name = "nom")
     private String nom;
-	@Column(name = "image")
-    private String image;
-	@Column(name = "desription")
-    private String desription;
-   @ManyToOne
-   private ProductCategory categorie;
+	@Column(name = "Telephone")
+    private String Telephone;
+	
 }

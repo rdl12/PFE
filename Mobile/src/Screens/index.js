@@ -18,7 +18,7 @@ import ProductsScreen from './ProductsScreen'
 import UrgenceMap from './UrgenceMap'
 import Parametre from './Parametre'
 import NosDefibrilatteur from './NosDefibrilatteur'
- 
+
 
 export {
     HomeScreen,
@@ -40,6 +40,7 @@ export {
     UrgenceMap,
     Parametre,
     ProductsScreen,
-    NosDefibrilatteur
+    NosDefibrilatteur,
+    
 
 }

@@ -28,8 +28,8 @@ public class FormationService {
 	public Formation findbyId(long id) {
 		return  FormationRepo.findById(id);	}
 	
-	public Formation save(Formation formation) {
-		  return  FormationRepo.save(formation);
+	public void save(Formation formation) {
+		    FormationRepo.save(formation);
 		
 	}
 }

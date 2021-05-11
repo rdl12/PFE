@@ -16,6 +16,19 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+
+ const Set_Categories = (data) => {
+  return {
+    type: t.FETCH_CATEGORIES,
+    payload: data
+ }
+ }
+ const Set_Product_Categories = (data) => {
+  return {
+    type: t.FETCH_PRODUCT_CATEGORIES,
+    payload: data
+ }
+ }
 const Set_Product = (data) => {
   return {
     type: t.FETCH_PRODUCTS,
@@ -417,4 +430,80 @@ export const Fetch_Products = () => {
             console.log(err);
           });
   }
+}
+
+export const Subscribe_To_Formation = (obj) => { 
+  return (dispatch) => {
+    return fetch(`${API_URI}/Subscription/add`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(obj)
+  })
+.then((responseData) => {
+    console.log(
+        "rendez-vous Ajouter " + JSON.stringify(responseData)
+    )
+})
+.done();
+}
+}
+
+
+export const Fetch_Categories = () => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/Categorie/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Categories({categories:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Categories of Formation ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_ProductCategories = () => {
+  
+  return (dispatch) => {
+    return fetch(`${API_URI}/ProductCategory/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Product_Categories({product_categories:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Categories of Formation ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+
+export const Subscribe_Entreprise = (obj) => { 
+  return (dispatch) => {
+    return fetch(`${API_URI}/Entreprise/add`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(obj)
+  })
+.then((responseData) => {
+    console.log(
+        "rendez-vous Ajouter Entreprise " + JSON.stringify(responseData)
+    )
+})
+.done();
+}
 }

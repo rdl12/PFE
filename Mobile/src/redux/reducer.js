@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -201,6 +201,34 @@ export const Boundary_Reducer = (state = Boundary ,action) => {
 export const Products_Reducer = (state = products ,action) => {
   switch (action.type) {
     case t.FETCH_PRODUCTS:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+
+}
+
+export const Categories_Reducer = (state = categories ,action) => {
+  switch (action.type) {
+    case t.FETCH_CATEGORIES:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+
+}
+
+export const Product_Category_Reducer = (state = product_categories ,action) => {
+  switch (action.type) {
+    case t.FETCH_PRODUCT_CATEGORIES:
       return {
         ...state,
         ...action.payload

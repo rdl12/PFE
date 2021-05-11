@@ -74,3 +74,7 @@ export const formationDetails = {}
 export const Boundary = {}
 
 export const products = {}
+
+export const categories = {}
+
+export const product_categories = {}

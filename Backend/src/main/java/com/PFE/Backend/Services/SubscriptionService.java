@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.PFE.Backend.Repository.SubscriptionRepository;
+import com.PFE.Backend.entities.Boundary;
 import com.PFE.Backend.entities.Subcription;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,9 @@ public class SubscriptionService {
     
     public List<Subcription> findAll() {
         return SubsriptionRepo.findAll();
+    }
+    public void save(Subcription subscription) {
+    	SubsriptionRepo.save(subscription);
+
     }
 }

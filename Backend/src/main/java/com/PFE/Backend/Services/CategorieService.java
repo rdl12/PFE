@@ -8,6 +8,7 @@ import com.PFE.Backend.Repository.CategorieRepository;
 import com.PFE.Backend.entities.Categorie;
 import com.PFE.Backend.entities.Defibrillateur;
 import com.PFE.Backend.entities.Etat;
+import com.PFE.Backend.entities.Formation;
 
 import lombok.AllArgsConstructor;
 
@@ -23,5 +24,8 @@ public class CategorieService {
 	    public Categorie findByNom(String nom) {
 	        return categorieRepo.findByNom(nom);
 	    }
-
+	    public void save(Categorie category) {
+	    	categorieRepo.save(category);
+		
+	}
 }
