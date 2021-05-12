@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.PFE.Backend.Repository.ProductRepository;
+import com.PFE.Backend.entities.Formation;
 import com.PFE.Backend.entities.Product;
 
 import lombok.AllArgsConstructor;
@@ -15,5 +16,13 @@ private final ProductRepository ProductRepo;
     public List<Product> findAll() {
         return ProductRepo.findAll();
     }
+
+	public Product findbyId(long id) {
+		return  ProductRepo.findById(id);	}
+	
+	public void save(Product product) {
+		ProductRepo.save(product);
+	
+}
 
 }

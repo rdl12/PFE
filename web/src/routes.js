@@ -31,6 +31,9 @@ const FormationAdd = React.lazy(() => import('./Demo/Formation/FormationAdd'));
 const FormationList = React.lazy(() => import('./Demo/Formation/FormationList'));
 const SubscriptionList = React.lazy(() => import('./Demo/Formation/SubscriptionList'));
 const FormationDetail = React.lazy(() => import('./Demo/Formation/FormationDetail'));
+const ProduitList = React.lazy(() => import('./Demo/Produit/ProduitList'));
+const ProduitAdd = React.lazy(() => import('./Demo/Produit/ProduitAdd'));
+const ProduitDetail = React.lazy(() => import('./Demo/Produit/ProduitDetail'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
@@ -51,6 +54,9 @@ const routes = [
     { path: '/Formation/list', exact: true, name: 'Ajout de defibrilateur', component: FormationList },
     { path: '/Formation/Inscrit', exact: true, name: 'Liste des personnes inscrits', component: SubscriptionList },
     { path: '/Formation/Detail/:id', exact: true, name: 'Detail Formation', component: FormationDetail },
+    { path: '/Produit/list', exact: true, name: 'Liste des produits', component: ProduitList },
+    { path: '/Produit/Ajouter', exact: true, name: 'Ajout de produit', component: ProduitAdd },
+    { path: '/Produit/Detail/:id', exact: true, name: 'detail de produit', component: ProduitDetail },
 ];
 
 export default routes;

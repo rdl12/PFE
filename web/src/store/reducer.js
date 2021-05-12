@@ -143,6 +143,12 @@ export const reducer = (state = initialState, action) => {
                 ...action.payload
         
             };
+    case actionTypes.FETCH_STATS_FORMATION:
+        return {
+            ...state,
+            ...action.payload
+    
+        };
     case actionTypes.FETCH_SUBSCRIBED_PEOPLE:
         return {
             ...state,
@@ -168,6 +174,24 @@ export const reducer = (state = initialState, action) => {
 
         };
     case actionTypes.FETCH_FORMATION_BYID:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+    case actionTypes.FETCH_PRODUCTS:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+    case actionTypes.FETCH_PRODUCT_BYID:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+    case actionTypes.FETCH_PRODUCT_CATEGORIES:
         return {
             ...state,
             ...action.payload

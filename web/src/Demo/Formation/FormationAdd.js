@@ -15,7 +15,6 @@ function FormationAdd() {
     const [DescriptionCategorie, setDescriptionCategorie] = useState('')
     const [Nom, setNom] = useState("")
     const [Description, setDescription] = useState("")
-    const [Categorie, setCategorie] = useState("")
     const [nbrmax, setnbrmax] = useState(0)
     const [Image, setImage] = useState("")
     const [value, onChange] = useState(new Date());

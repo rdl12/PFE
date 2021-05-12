@@ -18,6 +18,31 @@ const Set_Defib_State = (defib) => {
       payload: defib,
     };
   };
+
+const Set_Product_Categories = (data) => {
+  return {
+    type: t.FETCH_PRODUCT_CATEGORIES,
+    payload: data,
+  };
+};
+  const Set_Produits = (data) => {
+    return {
+      type: t.FETCH_PRODUCTS,
+      payload: data,
+    };
+  };
+ const Set_Product_ById = (data) => {
+  return {
+    type: t.FETCH_PRODUCT_BYID,
+    payload: data,
+  };
+ }
+  const Formation_stats = (data) => {
+    return {
+      type: t.FETCH_STATS_FORMATION,
+      payload: data,
+    };
+  };
   const Set_Formation_byId = (Formation) => {
     return {
       type: t.FETCH_FORMATION_BYID,
@@ -383,6 +408,88 @@ export const add_Category = (category) => {
     console.log(
         
         "Added Category" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+export const Fetch_stats_formation = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/Statistique`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Formation_stats({nbr_inscrit_formation : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
+  }
+}
+export const Fetch_Produits = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Produits({produits : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch products ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Produit_ById = (id) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Product_ById({product_detail : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch Product detail ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Fetch_Product_Categories = () =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/ProductCategory/find/all`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Product_Categories({product_categories : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch categories ,please retry to refresh the page");
+            console.log(err);
+          });
+  }
+}
+
+export const Add_Product = (product) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/add`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(product)
+  })
+.then((responseData) => {
+    console.log(
+        "Product Added -> " + JSON.stringify(responseData)
     )
 })
 

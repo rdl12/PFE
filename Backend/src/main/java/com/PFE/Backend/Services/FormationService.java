@@ -32,4 +32,7 @@ public class FormationService {
 		    FormationRepo.save(formation);
 		
 	}
+    public Integer stat() {
+        return FormationRepo.stat();
+    }
 }

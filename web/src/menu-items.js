@@ -147,6 +147,29 @@ export default {
                 }
             ]
         },
+        {
+            id: 'Produits_group',
+            title: 'Produits',
+            type: 'group',
+            icon: 'icon-pages',
+            children: [
+                // {
+                //     id: 'charts',
+                //     title: 'Ajouter Produit',
+                //     type: 'item',
+                //     icon: 'feather icon-plus',
+                //     url: '/Produit/Ajouter'
+                // },
+                {
+                    id: 'list',
+                    title: 'Liste des Produits',
+                    type: 'item',
+                    icon: 'feather icon-list',
+                    url: '/Produit/list'
+                },
+              
+            ]
+        },
         // {
         //     id: 'pages',
         //     title: 'Pages',

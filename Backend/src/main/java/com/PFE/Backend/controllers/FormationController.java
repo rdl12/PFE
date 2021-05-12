@@ -47,4 +47,9 @@ public class FormationController {
 		 formationservice.save(formation);
 	    }
      
+	 @GetMapping(value = "/Statistique")
+	    public Integer findIncidentsStatut () {
+	        return formationservice.stat();
+	    }
+	 
 }

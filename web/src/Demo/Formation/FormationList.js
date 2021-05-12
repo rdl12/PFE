@@ -9,29 +9,34 @@ import {Fetch_Formations} from '../../store/actions'
 import { Link } from 'react-router-dom';
 
 function FormationList() {
- const [Formation, setFormation] = useState([])
  const dispatch = useDispatch()
  const formation = useSelector(state => state.formations)
 
     useEffect(() => {
        dispatch(Fetch_Formations())
-       setTimeout(() => {
-        setFormation(formation)
-       },200)
-      
-    }, [Formation])
+    }, [formation])
     return (
-        <div class="row" >
-            {Formation.map((item) =>
+        <Aux>
+        <Card>
+               <Card.Header>
+               <Card.Title as="h5"> Liste des Formations </Card.Title>
+               </Card.Header>
+                  <Card.Body className='border-bottom' >
+                  <div className="row" >
+            { formation.length != 0  && formation.map((item) =>
              <Link to={`/Formation/Detail/${item.id}`} style={{ textDecoration: 'none' }}>
                 <div style={{margin:10}} class="col-sm">
-                    <img src={item.image} width="200" height="200" />
-                    <p class="font-weight-bold" style={{margin:3, width:200}}>{item.nom}</p>
+                    <img src={item.image} width="200" height="200" style = {{borderRadius:20}} />
+                    <p className="font-weight-bold" style={{margin:3, width:200}}>{item.nom}</p>
                 </div>
              </Link>
             )
             }
         </div>
+        </Card.Body>
+      </Card>
+               
+        </Aux>
     )
 }
 

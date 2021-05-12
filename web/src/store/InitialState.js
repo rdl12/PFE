@@ -29,6 +29,10 @@ export const initialState = {
     categories:[],
     formations:[],
     formationDetail : {},
-    showToast: false
+    showToast: false,
+    nbr_inscrit_formation:'',
+    produits:'',
+    product_detail:{},
+    product_categories:[]
 };
 

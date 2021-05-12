@@ -20,10 +20,7 @@ class Nvd3Chart extends React.Component {
     componentDidMount(){
       this.props.Fetch_stats_etat();
       this.props.Fetch_stats_prov();
-      setTimeout(() => {
-        console.log(this.props.Stats)
-        console.log(this.props.Stats_Prov)
-      }, 1000);
+     
  
     }
 
