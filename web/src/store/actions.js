@@ -1,6 +1,7 @@
 import {store} from './store'
 import * as t from './actionsTypes';
 import {API_URI,Here_API_Key} from '../utils/Api';
+import firebase from '../firebase'
 import {NavLink,useHistory} from 'react-router-dom';
 
 
@@ -18,7 +19,12 @@ const Set_Defib_State = (defib) => {
       payload: defib,
     };
   };
-
+  const Set_Chat_State = (data) => {
+    return {
+      type: t.FETCH_USER_CHAT,
+      payload: data,
+    };
+  };
 const Set_Product_Categories = (data) => {
   return {
     type: t.FETCH_PRODUCT_CATEGORIES,
@@ -493,5 +499,18 @@ export const Add_Product = (product) =>{
     )
 })
 
+}
+}
+
+export const Fetch_user_chat = () =>{
+  return (dispatch) => {
+    const ref = firebase.firestore().collection("userChat")
+    const users = []
+    ref.onSnapshot((querySnapShot) => {
+        querySnapShot.forEach((doc) =>{
+            users.push(doc.data())
+        })
+    })
+    return dispatch(Set_Chat_State({user_chat:users}))
 }
 }

@@ -14,7 +14,7 @@ class PieDonutChart extends React.Component {
    componentDidMount(){
     setTimeout(() => {
         console.log(datum)
-        if(datum.length == 0){
+        if(datum.length === 0){
             for (let pas = 0; pas < Array.from(this.props.data).length; pas++) {
                 datum.push( {key: this.props.data[pas][0] , y: this.props.data[pas][1]})
               }

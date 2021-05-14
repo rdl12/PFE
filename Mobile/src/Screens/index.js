@@ -18,6 +18,7 @@ import ProductsScreen from './ProductsScreen'
 import UrgenceMap from './UrgenceMap'
 import Parametre from './Parametre'
 import NosDefibrilatteur from './NosDefibrilatteur'
+import ChatScreen from './ChatScreen'
 
 
 export {
@@ -41,6 +42,7 @@ export {
     Parametre,
     ProductsScreen,
     NosDefibrilatteur,
+    ChatScreen,
     
 
 }

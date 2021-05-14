@@ -33,6 +33,7 @@ export const initialState = {
     nbr_inscrit_formation:'',
     produits:'',
     product_detail:{},
-    product_categories:[]
+    product_categories:[],
+    user_chat : []
 };
 
