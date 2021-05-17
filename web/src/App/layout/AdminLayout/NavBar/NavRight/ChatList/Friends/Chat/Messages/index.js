@@ -5,8 +5,11 @@ import DEMO from "../../../../../../../../../store/constant";
 const images = require.context('../../../../../../../../../assets/images/user', true);
 
 const messages = (props) => {
+    console.log('props')
+    console.log(props)
+    console.log('props')
     let image = '';
-
+   
     if (props.message) {
         image = (
             <a className="media-left photo-table" href={DEMO.BLANK_LINK}>
@@ -16,7 +19,7 @@ const messages = (props) => {
     }
 
     let msgClass = ['media-body'];
-    if(props.message.user._id === 1) {
+    if(props.message.type === 1) {
         msgClass = [...msgClass, 'chat-menu-content'];
     } else {
         msgClass = [...msgClass, 'chat-menu-reply'];
@@ -28,9 +31,9 @@ const messages = (props) => {
                 {image}
                 <div className={msgClass.join(' ')}>
                     <div className="">
-                        <p className="chat-cont">{props.message.text}</p>
+                        <p className="chat-cont">{props.message.message}</p>
                     </div>
-                    <p className="chat-time">{props.message.createdAt.seconds}</p>
+                    <p className="chat-time"></p>
                 </div>
             </div>
         </Aux>

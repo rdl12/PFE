@@ -28,7 +28,7 @@ class Friends extends Component {
      <Aux>
             {typeof this.props.freind !== "undefined" &&  this.props.freind.filter((f,index,arr) => {
                 if (arr[index+1]){
-                    if(arr[index+1].user.name === f.user.name )
+                    if(arr[index+1].user.name === f.user.name  )
                     {
                         return false
                     }

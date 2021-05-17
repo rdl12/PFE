@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar'
 
 //import chatMsg from './chat';
@@ -9,69 +9,68 @@ import firebase from '../../../../../../../../firebase'
 
 const Chat = (props) => {
     const [Message, setMessage] = useState('')
-    const [test, settest] = useState(0)
+    const [message, setmessage] = useState(  <div className="media chat-messages text-center">
+                                                <div className="media-body chat-menu-content">
+                                                <div className="">
+                                                    <p className="chat-cont">CHAT NOT FOUND</p>
+                                                </div>
+                                            </div>
+                                            </div>)
     const [arr, setarr] = useState([])
+    const [done, setdone] = useState(false)
+
+  
     let chatClass = ['header-chat'];
     if (props.chatOpen && props.listOpen) {
         chatClass = [...chatClass, 'open'];
     }
 
-   
-const setmessage = (value) =>  
- { setMessage(value) }
-
-
-const sendMessage = () => {
-    
-        var object = 
+    function sendMessage (e){
+        
+        e.preventDefault();
+        let object = 
             {"user": {"name": "admin", "_id": 2, "avatar": ""}, 
             "createdAt": new Date(),
             "_id": "lkanfewnfao233",
-            "text": "test ad"
+            "messages": [{"type":2,"message":Message}]
             }
-            settest(1)
-            arr.push(object)
-            return (
-                arr.map((msg) =>{
-                return <Messages key={msg._id } message={msg} name={props.user.user.name} photo={msg.avatar} />
-                
-            })
-            );
-                
-    //     firebase.firestore()
-    //     .collection('userChat')
-    //     .add(object)
-    //    .then(() => {
-    //      console.log('added'); 
-    //      });
+          
+             arr.push(object.messages[0])
+             setmessage(arr.map((msg,index) =>{
+                return <Messages key={index} message={msg} name={props.user.user.name} photo={props.user.avatar} />
+            }))
+        setdone(true)
+       
+        firebase.firestore()
+        .collection('userChat')
+        .doc(props.user.user.name)
+        .update({
+            messages: firebase.firestore.FieldValue.arrayUnion(object.messages[0])
+          })
+       .then(() => {
+         console.log('added'); 
+         });
     }
-    let message = (
-        <div className="media chat-messages text-center">
-            <div className="media-body chat-menu-content">
-                <div className="">
-                    <p className="chat-cont">CHAT NOT FOUND</p>
-                </div>
-            </div>
-        </div>
-    );
-   
+  
+   useEffect(() => {
+     filter()
+   }, [])
 
-    props.chatMsg.filter(chats => {
-      
+   const filter = () =>{
+    setdone(true)
+    props.chatMsg.filter((chats,index) => {
         if (chats.user.name === props.user.user.name) {
-            arr.length = 0
-            arr.push(chats)
-            message = arr.map((msg) =>{
-                return <Messages key={msg._id } message={msg} name={props.user.user.name} photo={msg.avatar} />
-                
-            })
-              
-     
+           setmessage( chats.messages.map((msg,index) =>{
+                arr.push(chats.messages[index])
+                return <Messages key={index } message={msg} name={props.user.user.name} photo={props.user.avatar} />
+            }))
+        
          }
-
-    
+       
         return false;
     });
+   }
+   
 
     return (
         <Aux>
@@ -84,12 +83,9 @@ const sendMessage = () => {
                 <div className="main-chat-cont">
                     <PerfectScrollbar>
                         
-                        {test === 1 ? (<div className="main-friend-chat">
-                            {sendMessage()}
-                        </div>):
-                        (<div className="main-friend-chat">
-                        {message}
-                    </div>)}
+                    <div className="main-friend-chat">
+                        {done? message :null}
+                    </div>
                         
                     </PerfectScrollbar>
                 </div>
@@ -100,9 +96,9 @@ const sendMessage = () => {
                     <a href={DEMO.BLANK_LINK} className="input-group-prepend btn btn-success btn-attach">
                         <i className="feather icon-paperclip" />
                     </a>
-                    <input type="text" name="h-chat-text" className="form-control h-send-chat" placeholder="Write hear . . "  onChangeCapture={e =>  setmessage(e.target.value)}  />
+                    <input type="text" name="h-chat-text" className="form-control h-send-chat" placeholder="Write hear . . "  onChange ={e =>  setMessage(e.target.value)}  />
                     <button type="submit" className="input-group-append btn-send btn btn-primary">
-                        <i className="feather icon-message-circle" onClick = {() => sendMessage()}/>
+                        <i className="feather icon-message-circle" onClick = {(e)=>sendMessage(e)}/>
                     </button>
                 </div>
             </div>

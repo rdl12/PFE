@@ -54,7 +54,8 @@ const ChatScreen = ({navigation}) => {
       messages[0].user.name = 'user'
       firestore()
       .collection('userChat')
-      .add(messages[0])
+      .doc(messages[0].user.name)
+      .set(messages[0])
       .then(() => {
         console.log(messages); 
       });
