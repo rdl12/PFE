@@ -14,9 +14,6 @@ class Friends extends Component {
     };
     componentDidMount(){
         this.props.Fetch_user_chat()
-        setTimeout(() => {
-            console.log(this.props.freind)
-        }, 100);
 
     }
     componentWillReceiveProps = (nextProps) => {
@@ -29,9 +26,19 @@ class Friends extends Component {
       
         return (
      <Aux>
-            {typeof this.props.freind !== "undefined" &&  this.props.freind.map(f => {
-            return <Friend key={f._id} data={f} activeId={this.state.user.id} clicked={() => this.setState({chatOpen: true, user: f})} />;
-        })}
+            {typeof this.props.freind !== "undefined" &&  this.props.freind.filter((f,index,arr) => {
+                if (arr[index+1]){
+                    if(arr[index+1].user.name === f.user.name )
+                    {
+                        return false
+                    }
+                }
+                return true;
+                }).map(f => {
+                return <Friend key={f._id} data={f} activeId={this.state.user.id} clicked={() => this.setState({chatOpen: true, user: f})} />;
+             }
+                
+        )}
 
         {this.props.freind.length !=0 && this.state.user.length != 0 ? 
         ( <Chat 

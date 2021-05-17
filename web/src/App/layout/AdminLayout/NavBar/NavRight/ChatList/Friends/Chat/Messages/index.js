@@ -6,6 +6,7 @@ const images = require.context('../../../../../../../../../assets/images/user', 
 
 const messages = (props) => {
     let image = '';
+
     if (props.message) {
         image = (
             <a className="media-left photo-table" href={DEMO.BLANK_LINK}>
@@ -15,7 +16,7 @@ const messages = (props) => {
     }
 
     let msgClass = ['media-body'];
-    if(props.message) {
+    if(props.message.user._id === 1) {
         msgClass = [...msgClass, 'chat-menu-content'];
     } else {
         msgClass = [...msgClass, 'chat-menu-reply'];
@@ -29,7 +30,7 @@ const messages = (props) => {
                     <div className="">
                         <p className="chat-cont">{props.message.text}</p>
                     </div>
-                    <p className="chat-time"></p>
+                    <p className="chat-time">{props.message.createdAt.seconds}</p>
                 </div>
             </div>
         </Aux>
