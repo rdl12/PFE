@@ -17,6 +17,7 @@ const ChatScreen = ({navigation}) => {
         },
       },
     ]);
+     const [arr, setarr] = useState([])
 
   
     useEffect(() => {
@@ -33,9 +34,24 @@ const ChatScreen = ({navigation}) => {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            setMessages(data =>{return [doc.data(), ...data];})
+          console.log(doc.data())
+          doc.data().messages.map((msg,index) =>{
+            arr.push({
+              _id: Math.random(),
+              text: msg.message,
+              createdAt: doc.data().createdAt,
+              user: {
+                _id: doc.data().user._id,
+                name: doc.data().user.name,
+                avatar: doc.data().user.avatar,
+              },
+            })
+            
+          })
+       
             
       });
+       setMessages(data =>{return [...arr, ...data];})
        
       });
    
@@ -51,14 +67,17 @@ const ChatScreen = ({navigation}) => {
   
     const onSend = useCallback((messages = []) => {
       setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-      messages[0].user.name = 'user'
+      messages[0].user.name = 'user12'
       firestore()
       .collection('userChat')
       .doc(messages[0].user.name)
-      .set(messages[0])
+      .update({
+        messages: firestore.FieldValue.arrayUnion({"type":1,"message":messages[0].text})
+      })
       .then(() => {
-        console.log(messages); 
+        console.log('added'); 
       });
+    
     
     }, [])
   
