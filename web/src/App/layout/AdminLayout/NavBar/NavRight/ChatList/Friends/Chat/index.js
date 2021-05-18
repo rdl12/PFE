@@ -50,7 +50,16 @@ const Chat = (props) => {
        .then(() => {
          console.log('added'); 
          });
+
+         setMessage("")
     }
+
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+          sendMessage(event)
+          setMessage("")
+        }
+      }
   
    useEffect(() => {
      filter()
@@ -96,7 +105,7 @@ const Chat = (props) => {
                     <a href={DEMO.BLANK_LINK} className="input-group-prepend btn btn-success btn-attach">
                         <i className="feather icon-paperclip" />
                     </a>
-                    <input type="text" name="h-chat-text" className="form-control h-send-chat" placeholder="Write hear . . "  onChange ={e =>  setMessage(e.target.value)}  />
+                    <input type="text" name="h-chat-text" className="form-control h-send-chat" placeholder="Write hear . . " value={Message}  onChange ={e =>  setMessage(e.target.value)}  onKeyPress={handleKeyPress}/>
                     <button type="submit" className="input-group-append btn-send btn btn-primary">
                         <i className="feather icon-message-circle" onClick = {(e)=>sendMessage(e)}/>
                     </button>
