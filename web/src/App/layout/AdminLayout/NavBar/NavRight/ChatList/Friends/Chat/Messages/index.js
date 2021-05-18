@@ -1,5 +1,5 @@
 import React from 'react';
-
+import avatar2 from '../../../../../../../../../assets/images/user/avatar-2.jpg';
 import Aux from "../../../../../../../../../hoc/_Aux";
 import DEMO from "../../../../../../../../../store/constant";
 const images = require.context('../../../../../../../../../assets/images/user', true);
@@ -10,10 +10,12 @@ const messages = (props) => {
     console.log('props')
     let image = '';
    
-    if (props.message) {
+    if (props.message && props.message.type != 2) {
         image = (
             <a className="media-left photo-table" href={DEMO.BLANK_LINK}>
-                <img className="media-object img-radius img-radius m-t-5" src={props.photo} alt={props.name} />
+                {props.photo? (<img className="media-object img-radius img-radius m-t-5" src={props.photo} alt={props.name} />)
+                        :
+                               (<img className="media-object img-radius img-radius m-t-5" src={avatar2} alt={props.name} />)}
             </a>
         );
     }
