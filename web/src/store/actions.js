@@ -13,6 +13,12 @@ const setLoginState = (loginData) => {
       payload: loginData,
     };
   };
+const setFilteredFor = (loginData) => {
+  return {
+    type: t.SET_FILTERD_FORMATION,
+    payload: loginData,
+  };
+};
 const Set_Defib_State = (defib) => {
     return {
       type: t.FETCH_DEFIB,
@@ -339,6 +345,7 @@ export const Add_Formation = (formation) => {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json'
+        
       },
       body:  JSON.stringify(formation)
     })
@@ -507,6 +514,7 @@ export const Fetch_user_chat = () =>{
     const ref = firebase.firestore().collection("userChat")
     const users = []
     ref.onSnapshot((querySnapShot) => {
+        users.length = 0
         querySnapShot.forEach((doc) =>{
             users.push(doc.data())
         })
@@ -514,3 +522,30 @@ export const Fetch_user_chat = () =>{
     return dispatch(Set_Chat_State({user_chat:users}))
 }
 }
+ export const Send_Notif = (token,sub) =>{
+   console.log(sub)
+   var object = {
+    "to" : token
+    , 
+    "notification": {
+    "body": "Firebase Cloud Message"
+  }
+  }
+  return (dispatch) => {
+    return fetch("https://fcm.googleapis.com/fcm/send", {
+    method: 'POST',  
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=AAAA6QTcTe8:APA91bEGqDG0C9On_iy8t4ly43OHzFruMJIE814q7zodWZfqgn_Mp8GM9URyYFOVeCBkmayU4PaMyfnI5PR4zGEMeoUUy1Spy3sdH9bIFgu2V6PXOKPmrNwc8_4d7Furr_bED4acjNVC'       
+    },
+    body:  JSON.stringify(object)
+  })
+.then((responseData) => {
+    console.log(
+        "notification sent -> " + JSON.stringify(responseData)
+    )
+    dispatch(setFilteredFor({filtered:sub}))
+})
+
+}
+ }

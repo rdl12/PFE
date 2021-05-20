@@ -30,6 +30,8 @@ public class Subcription {
     private String date_inscription;
 	@ManyToOne
 	private Formation formation;
+	@Column(name = "etat")
+    private String etat;
 	@ManyToOne
 	private AppUser user;
 	

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Dropdown} from 'react-bootstrap';
+import {Dropdown,Badge} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
 
@@ -46,7 +46,8 @@ class NavRight extends Component {
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
-                                <i className="icon feather icon-bell"/>
+                            <Badge variant="danger" className="ml-5">{this.props.Notifs.length}</Badge>
+                            <i className="icon feather icon-bell"/>
                             </Dropdown.Toggle>
                             <Dropdown.Menu alignRight className="notification">
                                 <div className="noti-head">
@@ -56,24 +57,30 @@ class NavRight extends Component {
                                         <a href={DEMO.BLANK_LINK}>clear all</a>
                                     </div>
                                 </div>
+                                
                                 <ul className="noti-body">
-                                    <li className="n-title">
+                                <li className="n-title">
                                         <p className="m-b-0">NEW</p>
                                     </li>
-                                    <li className="notification">
+                                {typeof this.props.Notifs !== "undefined" &&
+                                 this.props.Notifs.map((item,index) => 
+                                 
+                                    <li className="notification" key = {index}>
                                         <div className="media">
                                             <img className="img-radius" src={Avatar1} alt="Generic placeholder"/>
                                             <div className="media-body">
-                                                <p><strong>{this.state.user}</strong><span className="n-time text-muted"><i
+                                                <p><strong>{item.user.firstName} {item.user.lastName}</strong><span className="n-time text-muted"><i
                                                     className="icon feather icon-clock m-r-10"/>30 min</span></p>
-                                                <p>New ticket Added</p>
+                                                <p>Inscrit dans la {item.formation.nom}</p>
                                             </div>
                                         </div>
                                     </li>
+                                 )}
+                                   
                                     <li className="n-title">
                                         <p className="m-b-0">EARLIER</p>
                                     </li>
-                                    <li className="notification">
+                                    {/* <li className="notification">
                                         <div className="media">
                                             <img className="img-radius" src={Avatar2} alt="Generic placeholder"/>
                                             <div className="media-body">
@@ -92,7 +99,7 @@ class NavRight extends Component {
                                                 <p>currently login</p>
                                             </div>
                                         </div>
-                                    </li>
+                                    </li> */}
                                 </ul>
                                 <div className="noti-footer">
                                     <a href={DEMO.BLANK_LINK}>show all</a>
@@ -133,9 +140,9 @@ class NavRight extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { userId } = state
+    const { userId,filtered } = state
     
-    return { username: userId,  }
+    return { username: userId,  Notifs:filtered }
   }
 
 

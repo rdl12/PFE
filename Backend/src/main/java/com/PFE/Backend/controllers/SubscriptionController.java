@@ -29,6 +29,7 @@ public class SubscriptionController {
 	    }
 	 @PostMapping(value = "/add")
 	    public void save(@RequestBody Subcription subscription){
+		 subscription.setEtat("non traiter");
 		 subscriptionService.save(subscription);
 	    }
 }

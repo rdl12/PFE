@@ -1,14 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar'
+import { useDispatch,useSelector } from 'react-redux';
 
 //import chatMsg from './chat';
 import Messages from './Messages';
 import Aux from "../../../../../../../../hoc/_Aux";
 import DEMO from "../../../../../../../../store/constant";
 import firebase from '../../../../../../../../firebase'
+import {Fetch_user_chat} from "../../../../../../../../store/actions"
 
 const Chat = (props) => {
     const [Message, setMessage] = useState('')
+    const dispatch = useDispatch()
     const [message, setmessage] = useState(  <div className="media chat-messages text-center">
                                                 <div className="media-body chat-menu-content">
                                                 <div className="">
@@ -63,6 +66,7 @@ const Chat = (props) => {
   
    useEffect(() => {
      filter()
+    // dispatch(Fetch_user_chat())
    }, [])
 
    const filter = () =>{

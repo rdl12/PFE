@@ -3,12 +3,13 @@ import { View,StyleSheet,Text,Image,SafeAreaView, ImageBackground,Alert } from '
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
-import { useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { useDispatch,useSelector } from 'react-redux';
 import { Fetch_Formation,Fetch_Products,Fetch_Categories,Fetch_ProductCategories } from '../redux/actions';
 
 const HomeScreen = ({navigation,route}) => {
   const dispatch = useDispatch()
-
+  const LoginInfo = useSelector(state => state.loginReducer);
   
   useEffect(() => {
       if(route.params){
@@ -36,7 +37,12 @@ const HomeScreen = ({navigation,route}) => {
                 source={images.logo_icon}
                 style={{width:55,height:55}}
                 /> */}
+                {LoginInfo.isLoggedIn ? (<Icon   name="comments" size={37}  
+                style={{display:'flex',flexDirection:'row'}} 
+                color="black" 
+                onPress = {() => navigation.navigate('chat')}  />):null}
            </View>
+         
            </ImageBackground>
            <ImageBackground source = {{uri:'https://cdn.pixabay.com/photo/2017/05/16/11/45/blue-waves-2317606_960_720.png'}} resizeMode='cover'  style={{flex:1}}>
            <View style = {styles.container}>

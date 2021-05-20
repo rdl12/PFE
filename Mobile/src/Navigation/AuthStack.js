@@ -5,7 +5,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,FormationDetailsScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre } from '../Screens';
+import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,
+  FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -121,6 +122,11 @@ const ProfilStack = ({navigation}) => (
       component={HomeScreen}
       options={{headerShown: false}}
     />
+    <Stack.Screen
+      name="chat"
+      component={ChatScreen}
+      options={{headerShown: false}}
+      />
     <Stack.Screen
       name="Help"
       component={LocationScreen}

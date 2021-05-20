@@ -2,9 +2,6 @@ import React from 'react';
 import {View, TouchableOpacity, Text,Image} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
@@ -112,7 +109,7 @@ const MapStack = ({navigation}) => (
       />
       <Stack.Screen
         name="Help"
-        component={ChatScreen}
+        component={LocationScreen}
         options={{headerShown: true}}
       />
       <Stack.Screen

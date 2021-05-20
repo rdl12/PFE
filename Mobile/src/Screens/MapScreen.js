@@ -12,6 +12,7 @@ import { Adress ,Fecth_Defib} from '../redux/actions'
 import ListDefib from '../components/ListDefib/ListDefib';
 import Dialog from "react-native-dialog";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
 class MapScreen extends Component{
     constructor(props){
@@ -47,9 +48,28 @@ class MapScreen extends Component{
           { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })    
     }
     componentDidMount(){
+        const parent = this.props.navigation.dangerouslyGetParent();
+        parent.setOptions({
+            tabBarVisible: false,  
+            tabBarButton: (props) => (
+                       <TabBarCustomButton visible
+                            {...props}
+                        /> ),
+      });
         setTimeout(()=>this.setState({marginBottom : 0}),10)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords,1),100)
+
       
+    }
+    componentWillUnmount(){
+        const parent = this.props.navigation.dangerouslyGetParent();
+        parent.setOptions({
+            tabBarVisible: true,
+            tabBarButton: (props) => (
+                     <TabBarCustomButton 
+                         {...props}
+                     />),
+        });
     }
     
     ReturnState = () => {
