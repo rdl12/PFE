@@ -12,30 +12,49 @@ import { Caption } from 'react-native-paper'
 import {useSelector,useDispatch} from 'react-redux'
   
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
-import {Fetch_User,Subscribe_To_Formation,Subscribe_Entreprise} from '../redux/actions'
+import {Fetch_User,Subscribe_To_Formation,Subscribe_Entreprise,Fetch_Date} from '../redux/actions'
+
 
 const FormationDetailsScreen = ({ navigation, route }) => {
     const dispatch = useDispatch();
     const LoginInfo = useSelector(state => state.loginReducer);
-    const user = useSelector(state => state.Fetch_User)
+    const user = useSelector(state => state.Fetch_User);
+    const date_formation = useSelector(state => state.Fetch_Date_formation.date_formation)
     const [formation, setformation] = React.useState(null);
     const [scrollViewWholeHeight, setScrollViewWholeHeight] = React.useState(1);
     const [scrollViewVisibleHeight, setScrollViewVisibleHeight] = React.useState(0);
     const [visible, setVisible] = useState(false);
-    const [individu, setindividu] = useState(false)
+    const [individu, setindividu] = useState(false);
+    const [arrDate, setarrDate] = useState([])
     const [entreprise, setentreprise] = useState(false)
     const [status, setstatus] = useState(true)
     const [date, setdate] = useState('')
     const [Nom, setNom] = useState('')
     const [Telephone, setTelephone] = useState('')
+    const [dots, setdots] = useState({selected: true, marked: true, selectedColor: 'blue'})
+    let newDaysObject = {};
+
+     typeof date_formation !== 'undefined' && date_formation.forEach((day) => {
+      newDaysObject[day.date.split('T')[0]] = {
+          selected: true,
+          marked: true
+      };
+    });
+
 
     useEffect(() => {
+        let { formation } = route.params;
+        setformation(formation)
+        dispatch(Fetch_Date(formation.id))
         if (LoginInfo.isLoggedIn){
             dispatch(Fetch_User(LoginInfo.userId))
-            
+           
         }
        
-        }, [LoginInfo.userId])
+       
+        
+        
+        }, [LoginInfo.userId,formation,])
 
     const getCurrentDate=()=>{
 
@@ -76,7 +95,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
     const subscribe = () => {
         setVisible(!visible)
         var subscribeData = {
-            "date_inscription" :date.dateString,
+            "date_inscription" : new Date().toDateString(),
             "formation" : formation,
             "user" : user.user
 
@@ -91,14 +110,16 @@ const FormationDetailsScreen = ({ navigation, route }) => {
             "nom" :Nom,
             "telephone" : Telephone,
         }
-        dispatch(Subscribe_Entreprise(subscribeData))
+        var date = {
+            "date_inscription" : new Date().toDateString(),
+            "formation" : formation,
+            "etat":'non traiter',
+            "user" : user.user,
+        }
+        dispatch(Subscribe_Entreprise(subscribeData,date))
     }
     const indicator = new Animated.Value(0);
-    useEffect(() => {
-      let { formation } = route.params;
-      setformation(formation)
   
-    }, [formation])
    
    
     function renderBookInfoSection() {
@@ -300,10 +321,11 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                         ):individu?(
                         <View>
                                 <View style={{padding:15,marginTop:-25}}>
-                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Prenez un rendez-vous</Dialog.Title>
+                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Prenez un rendez-vous,parmis les dates selectionnes en bleu</Dialog.Title>
                                 </View>
                                 <View>
                                     <Calendar
+                                            markingType={'multi-dot'}
                                             current={getCurrentDate()}
                                             // Handler which gets executed on day press. Default = undefined
                                             onDayPress={(day) => {setdate(day)}}
@@ -313,6 +335,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                             monthFormat={'yyyy MM'}
                                             // Handler which gets executed when visible month changes in calendar. Default = undefined
                                             onMonthChange={(month) => {console.log('month changed', month)}}
+                                            markedDates={newDaysObject}
                                     />
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
                                         <Dialog.Button label="precedent"  onPress={() => status_fct()}/>

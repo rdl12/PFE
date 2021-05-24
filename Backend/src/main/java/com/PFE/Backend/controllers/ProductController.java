@@ -3,6 +3,7 @@ package com.PFE.Backend.controllers;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +35,10 @@ public class ProductController {
 	 @PostMapping(value = "/add")
 	    public void save(@RequestBody   Product product){
 		 productService.save(product);
+	    }
+	 @DeleteMapping(value = "/delete/{id}")
+	   public void Delete(@PathVariable long id ){
+		 Product product = productService.findbyId(id);
+		 productService.delete(product);
 	    }
 }

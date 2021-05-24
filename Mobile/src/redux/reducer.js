@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories, date_formation } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -229,6 +229,20 @@ export const Categories_Reducer = (state = categories ,action) => {
 export const Product_Category_Reducer = (state = product_categories ,action) => {
   switch (action.type) {
     case t.FETCH_PRODUCT_CATEGORIES:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+
+}
+
+export const Fetch_Date_formation = (state = date_formation ,action) => {
+  switch (action.type) {
+    case t.FETCH_DATE_FORMATION:
       return {
         ...state,
         ...action.payload

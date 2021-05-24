@@ -21,8 +21,11 @@ private final ProductRepository ProductRepo;
 		return  ProductRepo.findById(id);	}
 	
 	public void save(Product product) {
-		ProductRepo.save(product);
-	
+		ProductRepo.save(product);	
 }
+
+	public void delete(Product product) {
+		ProductRepo.delete(product);
+	}
 
 }

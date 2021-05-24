@@ -28,11 +28,17 @@ public class FormationService {
 	public Formation findbyId(long id) {
 		return  FormationRepo.findById(id);	}
 	
-	public void save(Formation formation) {
-		    FormationRepo.save(formation);
+	public long save(Formation formation) {
+		     FormationRepo.save(formation);
+		     return formation.getId();
 		
 	}
     public Integer stat() {
         return FormationRepo.stat();
     }
+
+	public void delete(Formation formation) {
+		FormationRepo.delete(formation);
+		
+	}
 }

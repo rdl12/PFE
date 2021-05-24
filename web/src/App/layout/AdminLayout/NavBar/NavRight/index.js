@@ -53,7 +53,6 @@ class NavRight extends Component {
                                 <div className="noti-head">
                                     <h6 className="d-inline-block m-b-0">Notifications</h6>
                                     <div className="float-right">
-                                        <a href={DEMO.BLANK_LINK} className="m-r-10">mark as read</a>
                                         <a href={DEMO.BLANK_LINK}>clear all</a>
                                     </div>
                                 </div>
@@ -124,10 +123,9 @@ class NavRight extends Component {
                                     </a>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-settings"/> Settings</a></li>
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Profile</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-mail"/> My Messages</a></li>
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-lock"/> Lock Screen</a></li>
+                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item" onClick={() => {this.setState({listOpen: true});}}><i className="feather icon-mail"/> My Messages</a></li>
+                                    <li ><a href={DEMO.BLANK_LINK} className="dropdown-item"  onClick = {() => this.logout()}><i className="feather icon-unlock" /> Deconnexion</a></li>
                                 </ul>
                             </Dropdown.Menu>
                         </Dropdown>

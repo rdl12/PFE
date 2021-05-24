@@ -1,11 +1,11 @@
 import React from 'react';
-import {Row, Col, Card, Table,Badge,Dropdown,DropdownButton,Form} from 'react-bootstrap';
+import {Row, Col, Card, Table,Badge,Dropdown,DropdownButton,Form,Pagination} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
 import Aux from "../../hoc/_Aux";
 import DEMO from "../../store/constant";
 import { connect } from 'react-redux';
-import {Fetch_Defib,Fetch_Defib_Valide} from '../../store/actions'
+import {Fetch_Defib,Fetch_Defib_Valide,Fetch_Defib_ByVille} from '../../store/actions'
 
 
 
@@ -13,7 +13,12 @@ class BootstrapTable extends React.Component {
      
     state = {
        etat:null,
-       showBulle : false
+       id:null,
+       showBulle : false,
+       ville:null,
+       page:1,
+       index:0,
+       number_per_page:3
 
     };
 
@@ -24,8 +29,31 @@ class BootstrapTable extends React.Component {
     }
 
     remove_filter = () =>{
-        this.props.Fetch_Defib()
+        if(this.state.ville){
+            this.props.Fetch_Defib_ByVille(this.state.ville)
+            
+        }
+        else{
+            this.props.Fetch_Defib()
+        }
         this.setState({etat:null})
+
+    }
+    remove_filter_ville = () =>{
+        if(this.state.etat){
+            this.props.Fetch_Defib_Valide(this.state.id)
+            
+        }
+        else{
+            this.props.Fetch_Defib()
+        }
+        this.setState({ville:null})
+      
+    }
+
+    PaginationHandler = (page) =>{
+        console.log(page)
+        this.setState({page:page,index:page*this.state.number_per_page-this.state.number_per_page})
     }
       
    
@@ -34,9 +62,23 @@ class BootstrapTable extends React.Component {
              Defib,
           } = this.props;
         
-          let defib_filtred = Defib.filter(
+          let page_arr = Defib.filter(
             (defib) => defib.etat.etat === 'signalé' || defib.etat.etat === 'modifié' || defib.etat.etat === 'en cours de traitement' 
           );
+          let defib_filtred  = page_arr.slice(this.state.index,this.state.index+this.state.number_per_page)
+          let ville = [...new Set(Defib.map(
+            item => item.ville
+        ))];
+        let active = this.state.page;
+        let activeItems = [];
+        for (let number = 1; number <= 5; number++) {
+            activeItems.push(
+                <Pagination.Item key={number} active={number === active} onClick = {() => this.PaginationHandler(number)}>
+                    {number}
+                </Pagination.Item>
+            );
+        }
+        
         return (
             <Aux>
                 <Row>
@@ -46,7 +88,7 @@ class BootstrapTable extends React.Component {
                                 <Card.Title as="h5">Defibrillateurs ajoutés</Card.Title>
                                 
                                 <DropdownButton
-                                title='filter'
+                                title='filtrer par etat'
                                 variant='primary'
                                 drop='left'
                                 id={`dropdown-variants-primary`}
@@ -55,7 +97,7 @@ class BootstrapTable extends React.Component {
 
                                 <Dropdown.Item  eventKey="1" onSelect = {(e) => {
                                     this.props.Fetch_Defib_Valide(e)
-                                    this.setState({etat:'signalé'})
+                                    this.setState({etat:'signalé',id:e})
                                 }} > 
                                 <Form.Check
                                      custom
@@ -69,7 +111,7 @@ class BootstrapTable extends React.Component {
                                  /></Dropdown.Item>
                                 <Dropdown.Item eventKey="5" onSelect = {(e) => {
                                     this.props.Fetch_Defib_Valide(e)
-                                    this.setState({etat:'en cours de traitement'})
+                                    this.setState({etat:'en cours de traitement',id:e})
                                 }} >   <Form.Check
                                      custom
                                      type="radio"
@@ -82,7 +124,7 @@ class BootstrapTable extends React.Component {
                                  /></Dropdown.Item>
                                 <Dropdown.Item eventKey="4" onSelect = {(e) => {
                                     this.props.Fetch_Defib_Valide(e)
-                                    this.setState({etat:'modifié'})
+                                    this.setState({etat:'modifié',id:e})
                                 }} > <Form.Check
                                      custom
                                      type="radio"
@@ -95,11 +137,37 @@ class BootstrapTable extends React.Component {
                                  /></Dropdown.Item>
                                 <Dropdown.Divider />
                             </DropdownButton>
+                            <DropdownButton
+                                title='filtrer par ville'
+                                variant='primary'
+                                drop='left'
+                                id={`dropdown-variants-primary`}
+                                style = {{float:'right'}}
+                            >
+                  {typeof ville !== "undefined" &&  ville.map((item,index) => 
+                   <Dropdown.Item key= {index} eventKey={index}  onSelect = {(e) => {
+                   this.props.Fetch_Defib_ByVille(ville[e])
+                   this.setState({ville:ville[e]})
+                }} > 
+                            <Form.Check
+                                     custom
+                                     type="radio"
+                                     label={item}
+                                     value = {item}
+                                     name="supportedRadios"
+                                     id="supportedRadio3"
+                                     checked = {this.state.ville === ville[index]}
+                                    
+                                 /></Dropdown.Item>)
+                             }
+                        <Dropdown.Divider />
+                            </DropdownButton>
                             <span className="d-block mt-0">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
 
                             </Card.Header>
                             <Card.Body>
                                 {this.state.etat !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.etat}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter}/></Badge>): null }
+                                {this.state.ville !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.ville}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter_ville}/></Badge>): null }
                                 <Table striped responsive>
                                     <thead>
                                     <tr>
@@ -124,6 +192,28 @@ class BootstrapTable extends React.Component {
                                   
                                     </tbody>
                                 </Table>
+                                    <hr/>
+                                <Row>
+                                     <Col  sm={8}>
+                                        <Pagination  style = {{float:'right'}}>
+                                            <Pagination.First />
+                                                <Pagination.Prev />
+                                                    {activeItems}
+                                                <Pagination.Next />
+                                            <Pagination.Last />
+                                        </Pagination>
+                                        </Col>
+                                    <Col  sm={4}>
+                                        <Form.Control as="select"  onChange = {(e) =>{this.setState({number_per_page:e.target.value})}} style = {{float:'right'}} sm={4}>
+                                        <option  key={'choisir'} value='choisissez le nombre d element par page'> nombre d'element par page  </option>
+                                        <option  key={1} value={5}> 5 </option>
+                                        <option  key={2} value={10}> 10 </option>
+                                        <option  key={3} value={20}> 20 </option>
+                                        <option  key={4} value={30}> 30 </option>
+                                    </Form.Control>
+                                    </Col>
+                               </Row>
+            
                             </Card.Body>
                         </Card>
                     </Col>
@@ -145,6 +235,7 @@ const mapStateToProps = (state) => {
     return {
         Fetch_Defib: () => dispatch(Fetch_Defib()),
         Fetch_Defib_Valide: (state) => dispatch(Fetch_Defib_Valide(state)),
+        Fetch_Defib_ByVille : (state) => dispatch(Fetch_Defib_ByVille(state)),
     }
 };
 

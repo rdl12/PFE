@@ -18,6 +18,7 @@ public interface DefibrillateurRepository extends JpaRepository<Defibrillateur,L
 	List<Defibrillateur> findByEtat(Etat etat);
     List<Defibrillateur> findByProvince(Province province);
     List<Defibrillateur> findByUser(Optional<AppUser> user);
+    List<Defibrillateur> findByVille(String ville);
     
     @Query( value="Select CAST (ST_SetSRID(ST_MakePoint(?2,?1),4326) AS varchar(255))", nativeQuery = true)
   	public String  getGeom(@Param("lat") Float lat,@Param("lon") Float lon); 
@@ -30,4 +31,5 @@ public interface DefibrillateurRepository extends JpaRepository<Defibrillateur,L
     
     @Query(value="select ville ,count(*) from defib group by ville",nativeQuery = true)
     List  Defib_province_stat();
+	
 }

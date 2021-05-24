@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/v*/registration/**","/Defibrillateur/**",
             		"/Boundary/**","/Formation/**","/Subscription/**",
-            		"/Categorie/**","/Product/**","/ProductCategory/**","/Entreprise/**")
+            		"/Categorie/**","/Product/**","/ProductCategory/**","/Entreprise/**","/DateFormation/**")
             .permitAll()
             .anyRequest()
             .authenticated().and();
@@ -53,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		CorsConfigurationSource corsConfigurationSource() {
 			CorsConfiguration configuration = new CorsConfiguration();
 			configuration.setAllowedOrigins(Arrays.asList("*"));
-			configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH"));
+			configuration.setAllowedMethods(Arrays.asList("GET","POST","PATCH","DELETE"));
 			configuration.setAllowedHeaders(Arrays.asList("*"));
 			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 			source.registerCorsConfiguration("/**", configuration);

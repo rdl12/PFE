@@ -19,6 +19,13 @@ const setFilteredFor = (loginData) => {
     payload: loginData,
   };
 };
+
+const date_formation = (data) => {
+  return {
+    type: t.FETCH_DATE_FORMATION,
+    payload: data,
+  };
+};
 const Set_Defib_State = (defib) => {
     return {
       type: t.FETCH_DEFIB,
@@ -84,6 +91,12 @@ const Defib_valide = (defib) => {
   return {
     type: t.FETCH_DEFIB,
     payload: defib,
+  };
+};
+const Defib_byVille = (ville) => {
+  return {
+    type: t.FIND_DEFIB_ByVille,
+    payload: ville,
   };
 };
 
@@ -338,7 +351,7 @@ export const Fetch_Subscribed_people = () =>{
   }
 }
 
-export const Add_Formation = (formation) => {
+export const Add_Formation = (formation,arrDate) => {
     return (dispatch) => {
       return fetch(`${API_URI}/Formation/add`, {
       method: 'POST',
@@ -349,13 +362,21 @@ export const Add_Formation = (formation) => {
       },
       body:  JSON.stringify(formation)
     })
-  .then((responseData) => {
-      console.log(
-          "POST Response",
-          "Response Body -> " + JSON.stringify(responseData)
-      )
-  })
-  
+    .then((response) => {
+      response.json().then((data) => {
+        arrDate.map(item =>{
+          formation.id = data
+          let object = {
+             "date":item,
+             "formation":formation
+               
+          }
+          dispatch(Add_Date(object))
+        })
+       
+      }
+        )
+     })
 }
 }
 
@@ -549,3 +570,123 @@ export const Fetch_user_chat = () =>{
 
 }
  }
+
+ export const Fetch_Defib_ByVille = (ville) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Defibrillateur/find/ville/${ville}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Defib_byVille({defib : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch defib ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const add_CategoryProduct = (category) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/ProductCategory/add_Categorie`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(category)
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Added Category" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+export const Delete_Product = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/delete/${id}`, {
+    method: 'DELETE',
+    
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Deleted Product" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+export const Delete_Formation = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/delete/${id}`, {
+    method: 'DELETE',
+    
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Deleted formation" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+export const Add_Date = (date) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/DateFormation/addDate`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body:  JSON.stringify(date)
+  })
+.then((responseData) => {
+    console.log(
+        "Added date" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+
+export const Fetch_date_Formation = (id) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/DateFormation/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(date_formation({date_formation : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch date formation ,please retry");
+            console.log(err);
+          });
+  }
+}
+
+export const Delete_DateFormation = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/DateFormation/delete/${id}`, {
+    method: 'DELETE',
+    
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Deleted date" + JSON.stringify(responseData)
+    )
+})
+
+}
+}

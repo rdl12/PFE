@@ -15,17 +15,19 @@ class SamplePage extends React.Component {
         position: null,
         Etat:"",
         Motif:"",
-        center:{ lat: 0, lng: 0 }
+        center:{ lat: 0, lng: 0 },
+        user : ""
         
         
     };
     componentDidMount() {
 
        this.props.Fecth_DefiById(this.props.match.params.id)
-        console.log(this.props.Defib)
         setTimeout(() => {this.setState({
             center:{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }
-        })},200) 
+        })
+        this.setState({user : this.props.Defib.user.email})
+        console.log(this.props.Defib.user.email)},200) 
 
       
     }
@@ -74,7 +76,7 @@ class SamplePage extends React.Component {
             <Aux>
                       <Card>
                             <Card.Header>
-                                <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : nom et prenom </Card.Title>
+      <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : {this.state.user} </Card.Title>
                                 <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Submit</Button>
                                 <span className="d-block mt-0">valider ou rejeter ce defib en changeant son etat au dessous</span>
                             </Card.Header>

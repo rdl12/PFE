@@ -1,13 +1,13 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, InputGroup, Dropdown,Tab,Tabs,Toast,Modal} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Badge , FormControl, InputGroup, Dropdown,Tab,Tabs,Toast,Modal} from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useHistory } from 'react-router-dom';
 import ImageUploader from 'react-images-upload';
 
 import Aux from "../../hoc/_Aux";
-import {Add_Formation,Fetch_Categories,add_Category} from '../../store/actions'
+import {Add_Formation,Fetch_Categories,add_Category,Add_Date} from '../../store/actions'
 import * as actionTypes from "../../store/actionsTypes";
 
 function FormationAdd() {
@@ -19,6 +19,9 @@ function FormationAdd() {
     const [Image, setImage] = useState("")
     const [value, onChange] = useState(new Date());
     const [Categories, setCategories] = useState([])
+    const [arrDate, setarrDate] = useState([])
+    const [i, seti] = useState(0)
+    const [dateChoosed, setdateChoosed] = useState(false)
     const [CategorieChoosed, setCategorieChoosed] = useState("")
     const formation_categories = useSelector(state => state.categories)
     const showA = useSelector(state => state.showToast)
@@ -48,21 +51,19 @@ function FormationAdd() {
     const formation = {
         "nom":Nom,
         "desription":Description,
-        "date_debut":value,
         "nbr_inscrit":0,
         "nbr_max":nbrmax,
         "image":Image,
         "categorie":categorie_filterd[0],
     }
-    dispatch(Add_Formation(formation))
-    dispatch({type: actionTypes.SHOW_TOAST,show:true})
+    dispatch(Add_Formation(formation,arrDate))
     history.push('/Formation/Ajouter');
     setNom("")
     setDescription("")
     setnbrmax("")
     setImage("")
-    
-
+    dispatch({type: actionTypes.SHOW_TOAST,show:true})
+   
    }
    const change = (e) => {
     setCategorieChoosed(e.target.value)
@@ -111,12 +112,19 @@ function FormationAdd() {
                         </Form.Group>
                         <Form.Group controlId="formBasicMarque">
                         <Form.Label>date de Formation</Form.Label>
-                        <Calendar
-                            onChange={onChange}
-                            value={value}
-                            
-                        
-                        />
+                        <Row >
+                            <Col  xs={6}>
+                                <Calendar
+                                    onChange={onChange}
+                                    value={value}
+                                    onClickDay = {(value) => {  arrDate.push(value)}  }
+                                    style = {{margin:0}}
+                                />
+                            </Col>
+                            <Col  xs={6}>    { arrDate.map((item,index) => {
+                            return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{item.getDate()}/{item.getDay()}/{item.getFullYear()}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>arrDate.pop(index)}/></Badge>
+                           }) }</Col>
+                        </Row>
                        </Form.Group>
                         
                       </Form>

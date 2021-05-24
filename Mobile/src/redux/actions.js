@@ -16,6 +16,12 @@ const Fetch_Adress = (coords) => {
     payload: coords
  }
 }
+const Set_Date = (data)=> {
+  return {
+    type: t.FETCH_DATE_FORMATION,
+    payload: data
+ }
+}
 
  const Set_Categories = (data) => {
   return {
@@ -489,7 +495,7 @@ export const Fetch_ProductCategories = () => {
 }
 
 
-export const Subscribe_Entreprise = (obj) => { 
+export const Subscribe_Entreprise = (obj,date) => { 
   return (dispatch) => {
     return fetch(`${API_URI}/Entreprise/add`, {
     method: 'POST',
@@ -499,11 +505,32 @@ export const Subscribe_Entreprise = (obj) => {
     },
     body:  JSON.stringify(obj)
   })
-.then((responseData) => {
-    console.log(
-        "rendez-vous Ajouter Entreprise " + JSON.stringify(responseData)
-    )
-})
+.then((responseData) =>{
+  responseData.json().then((data) => {
+    obj.id = data
+    let object = {
+      "entreprise":obj, ...date }
+    dispatch(Subscribe_To_Formation(object))
+  })
+ })
 .done();
 }
 }
+
+export const Fetch_Date = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/DateFormation/find/${id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Date({date_formation:data}))
+            }
+              
+              )
+           })
+           .catch((err) => {
+            Alert.alert("couldn't fetch Date Formation ,please retry");
+            console.log(err);
+          });
+  }
+}
+

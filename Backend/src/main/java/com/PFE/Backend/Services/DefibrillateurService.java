@@ -60,4 +60,9 @@ public class DefibrillateurService {
     public List Defib_stat_province() {
         return defibrillateurRepository.Defib_province_stat();
     }
+
+
+	public List<Defibrillateur> findByVille(String ville) {
+		return defibrillateurRepository.findByVille(ville);
+	}
 }

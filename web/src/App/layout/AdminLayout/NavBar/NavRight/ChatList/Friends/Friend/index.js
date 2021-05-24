@@ -33,7 +33,27 @@ const friend = (props) => {
     if (props.data.createdAt.seconds) {
        let minutes =  props.data.createdAt.seconds/(3600*24)
         //time = <small className={timeClass.join(' ')}>{minutes} ago</small>;
-        time = props.data.createdAt.seconds
+        time = props.data.createdAt.toDate().toDateString()
+        const date = new Date(time);
+        const currentDate = new Date();
+        const diffTime = Math.abs(date - currentDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+        const diffMinutes = Math.ceil(diffTime / (1000 * 60 )); 
+        const diffHoures = Math.ceil(diffTime / (1000 * 60 * 60 )); 
+        const diffSeconds = Math.ceil(diffTime / 1000); 
+        time = (diffDays - 1).toString() + " jours"
+       if(diffDays -1 === 0){
+           time = diffHoures.toString() + " Heures"
+           if(diffHoures === 0){
+               time = diffMinutes.toString() + "Minutes"
+               if(diffMinutes === 0){
+                time = diffSeconds.toString() + "Secondes"
+                
+               }
+           }
+       }
+       
+
     }
 
     let newFriend = '';
@@ -50,7 +70,8 @@ const friend = (props) => {
                     (<img className="media-object img-radius" src={avatar2}  />)}     
                 </a>
                 <div className="media-body">
-                    <h6 className="chat-header">{props.data.user.name}{time}</h6>
+                    <h6 className="chat-header">{props.data.user.name}</h6>
+                    <h6 style={{fontStyle:'italic',marginTop:'7px'}}> {time}</h6>
                 </div>
             </div>
         </Aux>

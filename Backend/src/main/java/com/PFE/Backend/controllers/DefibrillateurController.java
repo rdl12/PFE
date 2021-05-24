@@ -55,6 +55,10 @@ public class DefibrillateurController {
 	        Etat etat=etatService.findByID(id);
 	        return defibrillateurService.findByEtat(etat);
 	    }
+	 @GetMapping(value = "/find/ville/{ville}")
+	    public List<Defibrillateur> findVille(@PathVariable String ville) {
+	        return defibrillateurService.findByVille(ville);
+	    }
 	 @GetMapping(value = "/find/user/{email}")
 	    public List<Defibrillateur> findUser(@PathVariable String email) {
 	        Optional<AppUser> user=appUserService.findByEmail(email);

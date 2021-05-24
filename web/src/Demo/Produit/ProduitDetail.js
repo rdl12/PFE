@@ -6,9 +6,10 @@ import {
   } from "react-router-dom";
 
 import Aux from "../../hoc/_Aux";
-import {Fetch_Produit_ById,} from '../../store/actions'
+import {Fetch_Produit_ById,Delete_Product} from '../../store/actions'
+import { Link } from 'react-router-dom';
 
-function ProduitDetail() {
+function ProduitDetail({navigation}) {
 
     const {id} = useParams();
     const dispatch = useDispatch()
@@ -17,6 +18,7 @@ function ProduitDetail() {
 
     useEffect(() => {
        dispatch(Fetch_Produit_ById(id))
+      
  
       }, [])
   
@@ -37,14 +39,14 @@ function ProduitDetail() {
                             <Card.Body>
                                 <div className="row d-flex align-items-center">
                                     <div className="col">
-                                    <Button variant="primary"  >
-                                        Modifier
-                                    </Button>
-                                    </div>
-                                    <div className="col">
-                                    <Button variant="primary" >
+                                  
+                                        <Button variant="primary"  onClick = {() => {
+                                        dispatch(Delete_Product(id))
+                                        window.location.href = "/Produit/list"
+                                    }}>
                                             supprimer
                                     </Button>
+                                  
                                     </div>
                                 </div>
                             </Card.Body>

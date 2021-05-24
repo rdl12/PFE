@@ -69,7 +69,7 @@ export default {
         // },
         {
             id: 'ui-forms',
-            title: 'Forms & Tables',
+            title: 'Defibrilatteur',
             type: 'group',
             icon: 'icon-group',
             children: [
@@ -89,7 +89,7 @@ export default {
                 },
                 {
                     id: 'bootstrap',
-                    title: 'Table',
+                    title: 'Liste Defibrilatteur',
                     type: 'item',
                     icon: 'feather icon-server',
                     url: '/tables/bootstrap'
@@ -98,7 +98,7 @@ export default {
         },
         {
             id: 'chart-maps',
-            title: 'Chart & Maps',
+            title: 'Carte & Statistiques',
             type: 'group',
             icon: 'icon-charts',
             children: [

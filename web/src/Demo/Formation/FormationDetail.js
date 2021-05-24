@@ -1,12 +1,14 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Table,Tab,Tabs} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Badge , FormControl, DropdownButton, Modal,Table,Tab,Tabs} from 'react-bootstrap';
 import {
     useParams
   } from "react-router-dom";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 import Aux from "../../hoc/_Aux";
-import {Fetch_Formation_ById,Fetch_Subscribed_people} from '../../store/actions'
+import {Delete_Formation, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation} from '../../store/actions'
 
 
 function FormationDetail() {
@@ -14,26 +16,39 @@ function FormationDetail() {
     const dispatch = useDispatch()
     const detail = useSelector(state => state.formationDetail)
     const people_subbed = useSelector(state => state.personnes_inscrites)
+    const arrDate = useSelector(state => state.date_formation)
+    const [value, onChange] = useState(new Date());
+    const [dateAdded, setdateAdded] = useState([])
     const [inscrits, setinscrits] = useState([])
+    const [Description, setDescription] = useState("")
     const [Formation, setFormation] = useState(null)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     useEffect(() => {
       dispatch(Fetch_Formation_ById(id))
       dispatch(Fetch_Subscribed_people())
+      dispatch(Fetch_date_Formation(id))
 
       setTimeout(() => { setFormation(detail)
         const filter_subbed =  people_subbed.filter(
           (sub) => sub.formation.nom === detail.nom 
         );
-        setinscrits(filter_subbed)},200)
-     
+        setinscrits(filter_subbed)
+
+    },200)
+         
     }, [Formation])
 
     const Modify = () => {
-        console.log('modify')
+        handleShow()
     }
     const Delete = () => {
-        console.log('delete')
+        dispatch(Delete_Formation(id))
+        window.location.href = "/Formation/list"
     }
     return (
         <div>
@@ -142,6 +157,58 @@ function FormationDetail() {
             </Table>    
     </Tab>     
     </Tabs>
+
+    {Formation ? (  <Modal
+        show={show}
+        onHide={handleClose}
+        dialogClassName="modal-90w"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Modifier</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form.Group controlId="formBasicNom">
+            <Form.Label>Description</Form.Label>
+      <Form.Control as="textarea" rows={9} value={Formation.desription}  onChange={e => setDescription(e.target.value)}/>
+            </Form.Group>
+
+            <Form.Group controlId="formBasicTelephone">
+            <Row >
+                <Col  xs={6}>
+                    <Form.Label>Date</Form.Label>
+                    <Calendar
+                        onChange={onChange}
+                        value={value}
+                        defaultValue = {[new Date(2021, 24, 5),new Date(2021, 5, 24)]}
+                        onClickDay = {(value) => {  
+                            console.log(dateAdded)
+                            dateAdded.push(value)}  }
+                    />
+                </Col>
+                <Col  xs={6}>    {typeof arrDate !== "undefined" &&  arrDate.map((item,index) => {
+                     let date = item.date.split('T')[0]
+                    return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>
+                      {date}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dispatch(Delete_DateFormation(item.id))}/>
+                        </Badge>
+                }) }
+                 {typeof dateAdded !== "undefined" &&  dateAdded.map((item,index) => {
+                   
+                   return <Badge key = {index} variant="success" className="mb-1 f-20 p-3" style={{borderRadius:20}}>
+                    {item.getDate()}-{item.getDay()}-{item.getFullYear()}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dateAdded.pop(index)}/>
+                       </Badge>
+               }) }
+                </Col>
+              
+             </Row>
+        </Form.Group>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Fermer
+          </Button>
+          <Button variant="primary">Enregistrer</Button>
+        </Modal.Footer>
+      </Modal>):null}
            
         </div>
     )

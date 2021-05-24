@@ -203,12 +203,24 @@ export const reducer = (state = initialState, action) => {
                 ...action.payload
     
             };
-            case actionTypes.SET_FILTERD_FORMATION:
-                return {
-                    ...state,
-                    ...action.payload
-        
-                };
+        case actionTypes.SET_FILTERD_FORMATION:
+            return {
+                ...state,
+                ...action.payload
+    
+            };
+        case actionTypes.FIND_DEFIB_ByVille:
+            return {
+                ...state,
+                ...action.payload
+    
+            };
+    case actionTypes.FETCH_DATE_FORMATION:
+        return {
+            ...state,
+            ...action.payload
+
+        };
         default:
             return state;
     }

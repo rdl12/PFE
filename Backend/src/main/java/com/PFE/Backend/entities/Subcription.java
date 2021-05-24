@@ -34,5 +34,7 @@ public class Subcription {
     private String etat;
 	@ManyToOne
 	private AppUser user;
+	@ManyToOne
+	private Entreprise entreprise;
 	
 }

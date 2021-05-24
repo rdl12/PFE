@@ -35,6 +35,7 @@ export const initialState = {
     product_detail:{},
     product_categories:[],
     user_chat : [],
-    filtered: []
+    filtered: [],
+    date_formation:[]
 };
 

@@ -78,3 +78,5 @@ export const products = {}
 export const categories = {}
 
 export const product_categories = {}
+
+export const date_formation = []
