@@ -57,6 +57,7 @@ const secours_icon = require("../../assets/images/secours-icon.png");
 const himaya_logo = require("../../assets/images/himaya_logo.png");
 const individu_icon = require("../../assets/images/individu_icon.png");
 const entreprise_icon = require("../../assets/images/entreprise_icon.png");
+const book_icon = require("../../assets/images/book_icon.png");
 
 export default {
     Home_image,
@@ -117,7 +118,8 @@ export default {
     secours_icon,
     himaya_logo,
     individu_icon,
-    entreprise_icon
+    entreprise_icon,
+    book_icon
 
 
 }

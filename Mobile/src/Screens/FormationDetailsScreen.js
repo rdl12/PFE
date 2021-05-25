@@ -10,6 +10,7 @@ import Dialog from "react-native-dialog";
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import { Caption } from 'react-native-paper'
 import {useSelector,useDispatch} from 'react-redux'
+import firestore from '@react-native-firebase/firestore';
   
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import {Fetch_User,Subscribe_To_Formation,Subscribe_Entreprise,Fetch_Date} from '../redux/actions'
@@ -31,6 +32,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
     const [date, setdate] = useState('')
     const [Nom, setNom] = useState('')
     const [Telephone, setTelephone] = useState('')
+    const [success, setsucess] = useState(false)
     const [dots, setdots] = useState({selected: true, marked: true, selectedColor: 'blue'})
     let newDaysObject = {};
 
@@ -101,6 +103,20 @@ const FormationDetailsScreen = ({ navigation, route }) => {
 
         }
      dispatch(Subscribe_To_Formation(subscribeData,formation))
+     firestore()
+     .collection('NotifLauncher')
+     .doc('uu4CHdiSEw2WLAD3b1Oz')
+     .update({
+       test: Math.random().toString()
+     })
+     .then(() => {
+       console.log('added'); 
+     });
+
+     setsucess(!success)
+     setTimeout(() => {
+        setsucess(!success)
+     }, 50);
    
     }
 
@@ -117,6 +133,19 @@ const FormationDetailsScreen = ({ navigation, route }) => {
             "user" : user.user,
         }
         dispatch(Subscribe_Entreprise(subscribeData,date,formation))
+        firestore()
+        .collection('NotifLauncher')
+        .doc('uu4CHdiSEw2WLAD3b1Oz')
+        .update({
+        test: Math.random().toString()
+        })
+        .then(() => {
+        console.log('added'); 
+     });
+     setsucess(!sucess)
+     setsucess(!sucess)
+
+   
     }
     const indicator = new Animated.Value(0);
   
@@ -402,6 +431,21 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                   {renderBottomButton()}
                  
               </View>
+
+              <Dialog.Container visible={success}>
+                    <Image
+                        source={images.book_icon}
+                        resizeMode="contain"
+                        style={{
+                            width: 300,
+                            height: 100,
+                        }}
+                    />
+                    <Dialog.Description>
+                    Vous etes inscrit avec succes
+                    </Dialog.Description>
+                   
+            </Dialog.Container>
           </View>
       )
   } else {

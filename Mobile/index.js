@@ -14,6 +14,7 @@ import Boundary, {Events} from 'react-native-boundary';
 import { LocalNotification } from './src/services/PushNotificationService';
 //import { getBoundaryData } from './src/services/TrackingService'
 import { API_URI } from './src/utils/constants/Api'
+import messaging from '@react-native-firebase/messaging';
 
 const getBoundaryData = async () => {
   const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
@@ -47,6 +48,9 @@ const getBoundaryData = async () => {
   BackgroundJob.schedule(backgroundSchedule)
   .then(() => Boundary.removeAll())
   .catch(err => console.err(err));
+  messaging().setBackgroundMessageHandler(async remoteMessage => {
+    console.log('Message handled in the background!', remoteMessage);
+  });
  
 const Redux = () =>
 

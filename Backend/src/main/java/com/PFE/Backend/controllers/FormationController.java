@@ -47,6 +47,8 @@ public class FormationController {
 	    }
 	 @PostMapping(value = "/add")
 	    public long save(@RequestBody  Formation formation){
+		   formation.setNbr_inscrit(0);
+		   formation.setNbr_entreprise(0);
 		   return formationservice.save(formation);
 	    }
      
