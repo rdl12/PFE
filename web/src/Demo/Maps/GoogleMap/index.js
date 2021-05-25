@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Card, Form, Table, Button} from 'react-bootstrap';
+import {Row, Col, Card, Form, Table, Button, Alert} from 'react-bootstrap';
 import {Map, Marker, GoogleApiWrapper, InfoWindow, Polyline, Polygon}  from 'google-maps-react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
@@ -22,7 +22,8 @@ class GoogleMap extends React.Component {
         position: null,
         showlist : false,
         showlist_value : "voir Lise des defib",
-        showlist_icon : "feather icon-list text-c-black f-20"
+        showlist_icon : "feather icon-list text-c-black f-20",
+        showalert : false,
 
     };
 
@@ -40,11 +41,18 @@ class GoogleMap extends React.Component {
     }
 
     onMarkerClick = (props, marker) =>
-        this.setState({
+       { this.setState({
             activeMarker: marker,
             selectedPlace: props,
-            showingInfoWindow: true
+            showingInfoWindow: true,
+            showalert : true
         });
+       this.map.listeners.recenter.j.center.lat(props.position.lat)
+       this.map.listeners.recenter.j.center.lng(props.position.lng)
+        console.log(this.map)
+        console.log(props)
+        
+    }
 
     onInfoWindowClose = () =>
         this.setState({
@@ -75,6 +83,7 @@ class GoogleMap extends React.Component {
     onSubmit(e) {
         e.preventDefault();
     }
+
 
     renderAutoComplete() {
         const { google, map } = this.props;
@@ -108,14 +117,31 @@ class GoogleMap extends React.Component {
             <Aux>
           
                         <Card>
+                           
                             <Card.Header>
                                 <Card.Title as="h5">Carte des defibrillateurs en marche actuelle</Card.Title>
                                 <Button variant={'outline-dark'} onClick = {this.showlist} style={{float: 'right'}}><i className={this.state.showlist_icon} />{this.state.showlist_value}</Button>
                             </Card.Header>
                             <Card.Body>
+                            
                                 <div style={{height: window.innerHeight/1.35, width: '100%'}}>
+                                    
+                                {!this.state.showlist ?  (
+                                        <Alert show={this.state.showalert} variant="success" className="h-6 w-95 row">
+                                            <Alert.Heading className="col col-lg-3">How's it going?!</Alert.Heading>
+                                            <p className="col col-lg-7"></p>
+                                            <div className="d-flex justify-content-end px-10">
+                                            <Button onClick={() =>  this.setState({ showalert : false})} variant="outline-success">
+                                                Close me y'all!
+                                            </Button>
+                                            </div>
+                                      </Alert>
+                                    ): null}
+
                                     {!this.state.showlist ?(
+                                       
                                         <Map
+                                        ref={(map) => { this.map = map; }}
                                         centerAroundCurrentLocation
                                         className="map"
                                         google={this.props.google}

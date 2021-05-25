@@ -49,7 +49,7 @@ const ProfilScreen = ({navigation}) => {
 
             <TouchableOpacity onPress = {() => navigation.navigate('Parametre')} >
                  <List.Item
-                    title="Parametres"
+                    title="Devenir secouriste"
                      left={props => <List.Icon {...props} icon={images.entretenir_icon} />}
                      style={styles.list}
                   />

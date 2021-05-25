@@ -438,7 +438,7 @@ export const Fetch_Products = () => {
   }
 }
 
-export const Subscribe_To_Formation = (obj) => { 
+export const Subscribe_To_Formation = (obj,formation) => { 
   return (dispatch) => {
     return fetch(`${API_URI}/Subscription/add`, {
     method: 'POST',
@@ -449,6 +449,9 @@ export const Subscribe_To_Formation = (obj) => {
     body:  JSON.stringify(obj)
   })
 .then((responseData) => {
+    formation.nbr_inscrit = formation.nbr_inscrit + 1
+    Modify_formation(formation)
+    console.log(formation)
     console.log(
         "rendez-vous Ajouter " + JSON.stringify(responseData)
     )
@@ -495,7 +498,7 @@ export const Fetch_ProductCategories = () => {
 }
 
 
-export const Subscribe_Entreprise = (obj,date) => { 
+export const Subscribe_Entreprise = (obj,date,formation) => { 
   return (dispatch) => {
     return fetch(`${API_URI}/Entreprise/add`, {
     method: 'POST',
@@ -510,7 +513,9 @@ export const Subscribe_Entreprise = (obj,date) => {
     obj.id = data
     let object = {
       "entreprise":obj, ...date }
-    dispatch(Subscribe_To_Formation(object))
+    formation.nbr_inscrit = formation.nbr_inscrit - 1
+    formation.nbr_entreprise = formation.nbr_entreprise + 1
+    dispatch(Subscribe_To_Formation(object,formation))
   })
  })
 .done();
@@ -534,3 +539,27 @@ export const Fetch_Date = (id) => {
   }
 }
 
+export const Modify_formation = (formation) => {
+  
+  console.log(formation)
+   return  fetch(`${API_URI}/Formation/update`, {
+     method: 'PATCH', 
+     headers: {  // these could be different for your API call
+       Accept: 'application/json',
+       'Content-Type': 'application/json'
+ 
+     },
+     body: JSON.stringify(formation),
+     },
+   )
+   .then((response) => {
+     response.text().then((data) => {
+       console.log(data)
+      }
+      )
+   })
+  .catch((err) => {
+    alert("formation not posted,please retry");
+      console.log(err);
+  });
+}
