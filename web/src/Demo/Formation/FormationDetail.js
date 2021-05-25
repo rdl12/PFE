@@ -50,6 +50,10 @@ function FormationDetail() {
         dispatch(Delete_Formation(id))
         window.location.href = "/Formation/list"
     }
+    
+    let entrprise = inscrits.filter((item) => item.entreprise !== null)
+    let users = inscrits.filter((item) => item.entreprise === null)
+    
     return (
         <div>
           {Formation ? 
@@ -80,7 +84,7 @@ function FormationDetail() {
                                         <i className="feather icon-briefcase f-30 text-c-blue"/>
                                     </div>
                                     <div className="col">
-                                        <h3 className="f-w-300">26</h3>
+                                        <h3 className="f-w-300">{Formation.nbr_entreprise}</h3>
                                         <span className="d-block text-uppercase">Nombre d'inscription (Entreprise)</span>
                                     </div>
                                 </div>
@@ -105,7 +109,8 @@ function FormationDetail() {
           </div>
           ) 
           : null}
-          <Tabs defaultActiveKey="home">
+          {Formation ? 
+          (<Tabs defaultActiveKey="home">
     <Tab eventKey="home" title="Individus">
             <Table striped responsive>
                     <thead>
@@ -113,17 +118,19 @@ function FormationDetail() {
                             <th>Nom</th>
                             <th>prenom</th>
                             <th>email</th>
+                            <th>Telephone</th>
                             <th>Formation</th>
                             <th>date d'inscription</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                        {typeof inscrits !== "undefined" &&  users.map(item => 
                         <tr key = {item.id}>
                             <td>{item.user.firstName}</td>
                             <td>{item.user.lastName}</td>
                             <td>{item.user.email}</td>
+                            <td>{item.user.telephone}</td>
                             <td>{item.formation.nom}</td>
                             <td>{item.date_inscription}</td>
                         </tr>)
@@ -136,27 +143,33 @@ function FormationDetail() {
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Entreprise</th>
+                            <th>Email</th>
                             <th>Telephone</th>
+                            <th>Entreprise</th>
+                            <th>Tel entreprise</th>
                             <th>Formation</th>
                             <th>date d'inscription</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                        {typeof inscrits !== "undefined" && Formation.nbr_entreprise !== 0 && entrprise.map(item => 
                         <tr key = {item.id}>
                             <td>{item.user.firstName}</td>
-                            <td>{item.user.lastName}</td>
                             <td>{item.user.email}</td>
+                            <td>{item.user.telephone}</td>
+                            <td>{item.entreprise.nom}</td>
+                            <td>{item.entreprise.telephone}</td>
                             <td>{item.formation.nom}</td>
                             <td>{item.date_inscription}</td>
-                        </tr>)
+                        </tr>
+                        )
                         }
                     </tbody>
             </Table>    
     </Tab>     
-    </Tabs>
+    </Tabs>) 
+          : null}
 
     {Formation ? (  <Modal
         show={show}

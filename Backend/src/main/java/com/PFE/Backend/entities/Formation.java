@@ -29,9 +29,11 @@ public class Formation {
 	@Column(name = "desription")
     private String desription;
 	@Column(name = "nbr_inscrit")
-    private String nbr_inscrit;
+    private long nbr_inscrit;
+	@Column(name = "nbr_entreprise")
+    private long nbr_entreprise;
 	@Column(name = "nbr_max")
-    private String nbr_max;
+    private long nbr_max;
 	@Column(name = "image")
     private String image;
    @ManyToOne

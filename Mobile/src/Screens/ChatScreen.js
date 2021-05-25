@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { View, Text } from 'react-native'
 import firestore from '@react-native-firebase/firestore';
+import {FONTS, COLORS, SIZES, images} from '../Constantes'
 
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 
@@ -11,12 +12,12 @@ const ChatScreen = ({navigation}) => {
   const LoginInfo = useSelector(state => state.loginReducer);
     const [Messages, setMessages] = useState([{
         _id: 1,
-        text: 'Hello developer',
+        text: 'Boujour nous sommes HIMAYA.ma, et nous somme la pour repondre a vos questions',
         createdAt: new Date(),
         user: {
           _id: 2,
           name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
+          avatar: images.himaya_logo,
         },
       },
     ]);
@@ -41,7 +42,7 @@ const ChatScreen = ({navigation}) => {
            arr.push({
              _id: Math.random(),
              text: msg.message,
-             createdAt: doc.data().createdAt,
+             createdAt: doc.data().createdAt.toDate(),
              user: {
                _id:  msg.type,
                name: doc.data().user.name,
@@ -54,12 +55,12 @@ const ChatScreen = ({navigation}) => {
      let send = arr.reverse() //reversed data from firebase
      setMessages([{
       _id: 1,
-      text: 'Hello developer',
+      text: 'Boujour nous sommes HIMAYA.ma, et nous somme la pour repondre a vos questions',
       createdAt: new Date(),
       user: {
         _id: 2,
         name: 'React Native',
-        avatar: 'https://placeimg.com/140/140/any',
+        avatar: images.himaya_logo,
       },
     },
   ])

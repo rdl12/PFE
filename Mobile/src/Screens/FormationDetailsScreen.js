@@ -100,7 +100,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
             "user" : user.user
 
         }
-     dispatch(Subscribe_To_Formation(subscribeData))
+     dispatch(Subscribe_To_Formation(subscribeData,formation))
    
     }
 
@@ -116,7 +116,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
             "etat":'non traiter',
             "user" : user.user,
         }
-        dispatch(Subscribe_Entreprise(subscribeData,date))
+        dispatch(Subscribe_Entreprise(subscribeData,date,formation))
     }
     const indicator = new Animated.Value(0);
   
