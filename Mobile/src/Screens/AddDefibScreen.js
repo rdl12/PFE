@@ -6,13 +6,13 @@ import PhotoPicker from '../components/ImagePicker/PhotoPicker'
 import Header from '../components/Header'
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker'
 import {useSelector} from 'react-redux'
-import {AddDefibUrl} from '../utils/constants/Api'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import { useDispatch } from 'react-redux';
 import {ModalState,Add_Defib_Posted,AccessibiliteState,Fetch_User} from '../redux/actions'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-
+import Dialog from "react-native-dialog";
 
 const AddDefibScreen = ({navigation}) => {
     const [Nom, setNom] = useState("")
@@ -23,6 +23,7 @@ const AddDefibScreen = ({navigation}) => {
     const Modal_State = useSelector(state => state.Modal_State);
     const AccessibiliteState = useSelector(state => state.get_Accessibilite);
     const LoginInfo = useSelector(state => state.loginReducer);
+    const [success, setsucess] = useState(false)
     const user = useSelector(state => state.Fetch_User)
     const dispatch = useDispatch();
    
@@ -49,7 +50,7 @@ const AddDefibScreen = ({navigation}) => {
            });
        
       }, [Modal_State, navigation])
-
+  
     const submit = () =>{
      let defib = {  
         "description" : Description,
@@ -73,6 +74,11 @@ const AddDefibScreen = ({navigation}) => {
         
       }
        dispatch(Add_Defib_Posted(defib))
+       setsucess(!success)
+       setTimeout(() => {
+          setsucess(false)
+          navigation.navigate('MyDefibs')
+        }, 2000);
     }
 
     
@@ -148,6 +154,13 @@ const AddDefibScreen = ({navigation}) => {
    
     return (
       <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
+            <Dialog.Container visible={success}>
+                    <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22"/>
+                    <Dialog.Description>
+                             Defibrillateur ajouté avec succés avec succes
+                    </Dialog.Description>
+                   
+            </Dialog.Container>
           <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
           <Header title = "Ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
           <ScrollView style={{flex:1, marginTop:15}}>

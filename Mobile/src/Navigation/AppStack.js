@@ -7,7 +7,7 @@ import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import { HomeScreen, LoginScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,
   SignupScreen,LocationScreen,TutorialScreen,FormationScreen,FormationDetailsScreen, 
-  UrgenceMap,ProductsScreen, NosDefibrilatteur, ChatScreen } from '../Screens';
+  UrgenceMap,ProductsScreen, NosDefibrilatteur, StatistiqueScreen} from '../Screens';
 
 
 
@@ -139,10 +139,15 @@ const MapStack = ({navigation}) => (
         component={ProductsScreen}
         options={{headerShown: false}}
         />
-          <Stack.Screen
+        <Stack.Screen
         name="NosDefib"
         component={NosDefibrilatteur}
         options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="StatistiqueScreen"
+        component={StatistiqueScreen}
+        options={{headerShown: true}}
         />
         
   

@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
-import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,
+import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,StatistiqueScreen,
   FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre,ProductsScreen,NosDefibrilatteur } from '../Screens';
 
 
@@ -162,6 +162,11 @@ const ProfilStack = ({navigation}) => (
         component={AddDefibScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="MyDefibs"
+        component={MyDefibsScreen}
+        options={{headerShown: true}}
+      />
        <Stack.Screen
         name="Products"
         component={ProductsScreen}
@@ -171,6 +176,11 @@ const ProfilStack = ({navigation}) => (
         name="NosDefib"
         component={NosDefibrilatteur}
         options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="StatistiqueScreen"
+        component={StatistiqueScreen}
+        options={{headerShown: true}}
         />
 
     </Stack.Navigator>

@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'; 
 import { loginReducer,AdresseReducer,MapReducer,Fecth_Defib_in_100 ,
   Get_Defib,Modal_State,Add_Defib,get_Accessibilite,Fetch_User,
   Fetch_Defib_User, Register,Modify_defib, Formation_Reducer,
-   Formation_Details_Reducer,Boundary_Reducer,Products_Reducer,Categories_Reducer,Product_Category_Reducer,Fetch_Date_formation} from './reducer';
+   Formation_Details_Reducer,Boundary_Reducer,Products_Reducer,Categories_Reducer,Product_Category_Reducer,Fetch_Date_formation,Fetch_stats_prov,Fetch_stats_etat} from './reducer';
 
 
 const rootReducer = combineReducers({
@@ -26,7 +26,9 @@ const rootReducer = combineReducers({
   Products_Reducer:Products_Reducer,
   Categories_Reducer:Categories_Reducer,
   Product_Category_Reducer:Product_Category_Reducer,
-  Fetch_Date_formation:Fetch_Date_formation
+  Fetch_Date_formation:Fetch_Date_formation,
+  Fetch_stats_prov:Fetch_stats_prov,
+  Fetch_stats_etat:Fetch_stats_etat
 
   
 });

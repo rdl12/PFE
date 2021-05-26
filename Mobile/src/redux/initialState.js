@@ -80,3 +80,7 @@ export const categories = {}
 export const product_categories = {}
 
 export const date_formation = []
+
+export const stat_etat_defib = []
+
+export const  stat_prov_defib = []

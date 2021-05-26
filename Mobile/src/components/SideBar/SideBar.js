@@ -1,16 +1,11 @@
 import React from 'react';
-import { View, StyleSheet,Image } from 'react-native';
+import { View, TouchableOpacity,Image } from 'react-native';
 import {useSelector} from 'react-redux'
 import {
-    useTheme,
     Avatar,
     Title,
     Caption,
-    Paragraph,
     Drawer,
-    Text,
-    TouchableRipple,
-    Switch
 } from 'react-native-paper';
 import {
     DrawerContentScrollView,
@@ -29,8 +24,9 @@ export function SideBar(props) {
         <View style={{flex:1,}}>
         <DrawerContentScrollView {...props} >
             <View style={styles.drawerContent}>
-                <View style={styles.userInfoSection}>
-                   { LoginInfo.isLoggedIn ? ( <View style={{flexDirection:'row',marginTop: 10}}>
+                <Drawer.Section style={styles.userInfoSection}>
+                   { LoginInfo.isLoggedIn ? ( 
+                    <TouchableOpacity style={{flexDirection:'row',marginTop: 10}} onPress={() => props.navigation.navigate('Home')}>
                         <Avatar.Image 
                             source={{
                                 uri: 'https://www.clipartmax.com/png/middle/365-3654572_heart-cpr-save-a-life.png'
@@ -41,7 +37,9 @@ export function SideBar(props) {
                             <Title style={styles.titleDrawer}>Bonjour </Title> 
                             <Caption>{LoginInfo.userId}</Caption>
                         </View>
-                    </View>) : ( <View style={{flexDirection:'row',marginTop: 10}}>
+                    </TouchableOpacity>
+                    ) : (
+                    <TouchableOpacity style={{flexDirection:'row',marginTop: 10}} onPress={() => props.navigation.navigate('Home')}>
                         <Avatar.Image 
                             source={{
                                 uri: 'https://www.clipartmax.com/png/middle/365-3654572_heart-cpr-save-a-life.png'
@@ -53,8 +51,8 @@ export function SideBar(props) {
                             <Caption style={styles.caption}>L'application qui </Caption>
                             <Caption style={styles.caption}>sauve des vies </Caption>
                         </View>
-                    </View>)}
-                </View>
+                    </TouchableOpacity>)}
+                </Drawer.Section>
 
                 <Drawer.Section style={styles.drawerSection}>
                          <View style={{marginLeft:15, flexDirection:'column'}}>
@@ -213,7 +211,7 @@ export function SideBar(props) {
                              )}
                         label="Statistique"
                         labelStyle={{color:"#800080", fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('SettingsScreen')}}
+                        onPress={() => {props.navigation.navigate('StatistiqueScreen')}}
                     />
                 </Drawer.Section>
                 <Drawer.Section style={styles.drawerSection}>
