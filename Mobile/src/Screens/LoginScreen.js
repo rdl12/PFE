@@ -2,9 +2,8 @@ import {StyleSheet ,StatusBar, KeyboardAvoidingView,TouchableOpacity,Image,Image
 import React ,{useState}  from 'react'
 import { login } from '../redux/actions';
 import { useDispatch } from 'react-redux';
-import {SignupScreen} from './SignupScreen'
 import { Block, Checkbox, Text, theme } from "galio-framework";
-import {Avatar} from 'react-native-paper';
+import Dialog from "react-native-dialog";
 import { COLORS,images } from "../Constantes";
 import ArInput from '../components/GalioInput/Input'
 import ArButton  from '../components/Button/Button'
@@ -16,10 +15,29 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 const LoginScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [success, setsucess] = useState(false) 
     const dispatch = useDispatch()
+    const submit = () => {
+      if(username == '' || password == ''){
+        setsucess(!success)
+        setTimeout(() => {
+          setsucess(false)
+        }, 3000);
+      }
+      else{
+        dispatch(login({'username': username, 'password': password },navigation))
+      }
+    }
     return (
     
       <Block flex middle  style = {{backgroundColor:COLORS.white}}>
+            <Dialog.Container visible={success}>
+                    <Icon name="times-circle" size={80}  resizeMode="contain" color="red" style={{alignSelf:'center'}}/>
+                    <Dialog.Description>
+                             Veuiller entrer toutes vos informations 
+                    </Dialog.Description>
+                   
+            </Dialog.Container>
         <StatusBar hidden />
 
           <Block safe flex middle >
@@ -69,7 +87,7 @@ const LoginScreen = ({navigation}) => {
                     </Block>
                     
                     <Block middle>
-                      <ArButton  style={styles.createArButton}  onPress={() => dispatch(login({'username': username, 'password': password },navigation))}>
+                      <ArButton  style={styles.createArButton}  onPress = {submit}>
                         <Text bold size={14} color={COLORS.WHITE}>
                           login
                         </Text>

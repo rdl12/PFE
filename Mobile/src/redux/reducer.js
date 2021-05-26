@@ -1,4 +1,4 @@
-import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories, date_formation } from './initialState';
+import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories, date_formation, stat_etat_defib, stat_prov_defib } from './initialState';
 import * as t from './actionTypes';
 
 export const loginReducer = (state = initialState, action) => {
@@ -243,6 +243,34 @@ export const Product_Category_Reducer = (state = product_categories ,action) => 
 export const Fetch_Date_formation = (state = date_formation ,action) => {
   switch (action.type) {
     case t.FETCH_DATE_FORMATION:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+
+}
+
+export const Fetch_stats_etat = (state = stat_etat_defib ,action) => {
+  switch (action.type) {
+    case t.FETCH_STATS_DEFIB:
+      return {
+        ...state,
+        ...action.payload
+
+      };
+    default:
+      return state;
+  }
+
+}
+
+export const Fetch_stats_prov = (state = stat_prov_defib ,action) => {
+  switch (action.type) {
+    case t.FETCH_STATS_PROV_DEFIB:
       return {
         ...state,
         ...action.payload

@@ -1,38 +1,52 @@
 import React ,{useState}  from 'react'
 import { View,Image,StyleSheet ,StatusBar,ImageBackground, KeyboardAvoidingView, TouchableOpacity} from 'react-native'
 import { useDispatch } from 'react-redux'
-
 import { Singup } from '../redux/actions';
 import { Block, Checkbox, Text, theme } from "galio-framework";
 import ArInput from '../components/GalioInput/Input'
 import ArButton  from '../components/Button/Button'
+import Dialog from "react-native-dialog";
 import {  images,COLORS  } from "../Constantes";
 import {windowWidth as width ,windowHeight as height} from '../utils/Dimentions'
-import { Colors } from 'react-native-paper';
-import { LinearGradient } from 'react-native-svg';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SignupScreen = ({navigation}) => {
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setfirstName] = useState('')
     const [Telephone, setTelephone] = useState('')
+    const [success, setsucess] = useState(false) 
 
     const dispatch = useDispatch()
-      const submit = () => {
-        const object = {
+    const submit = () => {
+      const object = {
           "firstName":firstName,
           "lastName":"",
           "email" : email,
           "telephone": Telephone,
           "password": password
       }
-      dispatch(Singup(object))
-
+      if(email== '' || password == '' || firstName == '' || telephone == '' || lastName == '' ){
+        setsucess(!success)
+        setTimeout(() => {
+          setsucess(false)
+        }, 3000);
       }
+      else{
+        dispatch(Singup(object))
+      }
+    }
      
     
     return (
       <Block flex middle style = {{backgroundColor:COLORS.white}}>
+            <Dialog.Container visible={success}>
+                    <Icon name="times-circle" size={80}  resizeMode="contain" color="red" style={{alignSelf:'center'}}/>
+                    <Dialog.Description>
+                             Veuiller entrer toutes vos informations 
+                    </Dialog.Description>
+                   
+            </Dialog.Container>
         <StatusBar hidden />
 
           <Block safe flex middle>

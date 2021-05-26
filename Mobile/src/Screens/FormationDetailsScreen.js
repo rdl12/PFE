@@ -115,8 +115,8 @@ const FormationDetailsScreen = ({ navigation, route }) => {
 
      setsucess(!success)
      setTimeout(() => {
-        setsucess(!success)
-     }, 50);
+        setsucess(false)
+     }, 2000);
    
     }
 
@@ -142,8 +142,10 @@ const FormationDetailsScreen = ({ navigation, route }) => {
         .then(() => {
         console.log('added'); 
      });
-     setsucess(!sucess)
-     setsucess(!sucess)
+     setsucess(!success)
+     setTimeout(() => {
+        setsucess(false)
+     }, 2000);
 
    
     }
@@ -350,7 +352,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                         ):individu?(
                         <View>
                                 <View style={{padding:15,marginTop:-25}}>
-                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:20}}>Prenez un rendez-vous,parmis les dates selectionnes en bleu</Dialog.Title>
+                                    <Dialog.Title  Text style={{color : COLORS.black, fontSize:19}}>Prenez un rendez-vous, parmis les dates selectionnées en bleu</Dialog.Title>
                                 </View>
                                 <View>
                                     <Calendar

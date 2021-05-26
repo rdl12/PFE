@@ -33,7 +33,7 @@ const parametre = () => {
             <ScrollView>
                     <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Notre application sauve des vies et vous permet de sauver des vies a l'aide de sa fonction :  </Text>
                     <Text style={{ fontWeight:'bold',fontSize:19,color: COLORS.red,alignSelf:'center' }}>"Devenir secouriste"  </Text>
-                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>"Devenir secouriste" est une option qui vous permet de recevoir des notification des gens en tours de vous et qui ont besoin de vous lors d'un crise cardiaque, toute en securité totale votre position ne sera en aucun cas stocké par sur nos serveurs ni accaessible par notre equipe. (seule la localisation e la victime qui seront stocké pendant une duré de 5 min puis totlement supprimé)  </Text>
+                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>"Devenir secouriste" est une option qui vous permet de recevoir des notification des gens au tour de vous et qui ont besoin de vous lors d'une crise cardiaque, avec securité totale votre position ne sera en aucun cas stocké  sur nos serveurs ni accaessible par notre equipe. (seule la localisation de la victime qui sera stocké pendant une duré de 5 min puis totalement supprimé)  </Text>
                     <View style={{flexDirection:'row',alignSelf:'center'}}>
                         <Icon name="heartbeat" size={50}  color={COLORS.red} style={{margin:5}} /> 
                         <Icon name="heart" size={50} color={COLORS.BLACK} style={{margin:5}}  /> 
