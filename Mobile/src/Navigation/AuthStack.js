@@ -180,7 +180,7 @@ const ProfilStack = ({navigation}) => (
         <Stack.Screen
         name="StatistiqueScreen"
         component={StatistiqueScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
         />
 
     </Stack.Navigator>

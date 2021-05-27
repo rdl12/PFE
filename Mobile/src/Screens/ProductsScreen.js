@@ -107,7 +107,7 @@ const ProductsScreen = ({navigation}) => {
             );
         if (category.length != 0)
         {
-            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230}/>
+            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230} products = {true}/>
         }
           
 
@@ -141,7 +141,7 @@ export default ProductsScreen
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/2.8,
+    
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100

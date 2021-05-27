@@ -43,10 +43,10 @@ const friend = (props) => {
         const diffSeconds = Math.ceil(diffTime / 1000); 
         time = (diffDays - 1).toString() + " jours"
        if(diffDays -1 === 0){
-           time = diffHoures.toString() + " Heures"
-           if(diffHoures === 0){
-               time = diffMinutes.toString() + "Minutes"
-               if(diffMinutes === 0){
+           time = (diffHoures - 24).toString() + " Heures"
+           if(diffHoures - 24 === 0){
+               time = (diffMinutes-1410).toString() + " Minutes"
+               if(diffMinutes - 1410 === 0){
                 time = diffSeconds.toString() + "Secondes"
                 
                }
@@ -71,7 +71,7 @@ const friend = (props) => {
                 </a>
                 <div className="media-body">
                     <h6 className="chat-header">{props.data.user.name}</h6>
-                    <h6 style={{fontStyle:'italic',marginTop:'7px'}}> {time}</h6>
+                    <h6 style={{fontStyle:'italic',marginTop:'7px'}}> il y a {time}</h6>
                 </div>
             </div>
         </Aux>

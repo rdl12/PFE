@@ -20,6 +20,7 @@ import Parametre from './Parametre'
 import NosDefibrilatteur from './NosDefibrilatteur'
 import ChatScreen from './ChatScreen'
 import StatistiqueScreen from './StatistiqueScreen'
+import ProductDetails from './ProductDetails'
 
 
 export {
@@ -45,6 +46,7 @@ export {
     NosDefibrilatteur,
     ChatScreen,
     StatistiqueScreen,
+    ProductDetails
     
 
 }

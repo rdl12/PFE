@@ -10,7 +10,7 @@ import {
 
 
 // Single book component
-function Formation({ formation, navigation , BOOKH, BOOKW }) {
+function Formation({ formation, navigation , BOOKH, BOOKW , products }) {
   
   const margin = 20;
  // const BOOKW = 170;
@@ -21,7 +21,13 @@ function Formation({ formation, navigation , BOOKH, BOOKW }) {
   // View book details
 const formationDetails = () => {
 
+  if(products){
+    navigation.push('ProductDetails', { formation });
+  }
+ else{
   navigation.push('formationDetails', { formation });
+ }
+ 
 };
 
  // Styles

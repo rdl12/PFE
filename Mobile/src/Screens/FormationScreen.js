@@ -107,7 +107,7 @@ export default FormationScreen
 
 const styles = StyleSheet.create ({
   box:{
-    height:windowHeight/4.4,
+   
     backgroundColor:COLORS.lightGray4,
     elevation:2,
     borderBottomRightRadius:100

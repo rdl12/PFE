@@ -5,7 +5,7 @@ import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch,useSelector } from 'react-redux';
-import { Fetch_Formation,Fetch_Products,Fetch_Categories,Fetch_ProductCategories } from '../redux/actions';
+import { Fetch_Formation,Fetch_Products,Fetch_Categories,Fetch_ProductCategories,Fetch_stats_etat,Fetch_stats_prov } from '../redux/actions';
 
 const HomeScreen = ({navigation,route}) => {
   const dispatch = useDispatch()
@@ -19,6 +19,8 @@ const HomeScreen = ({navigation,route}) => {
       dispatch(Fetch_Products())
       dispatch(Fetch_Categories())
       dispatch(Fetch_ProductCategories())
+      dispatch(Fetch_stats_etat())
+      dispatch(Fetch_stats_prov())
   }, [route]);
     return (
        <SafeAreaView style = {styles.view}>

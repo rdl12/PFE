@@ -16,6 +16,9 @@ function SubscriptionList() {
         setinscrits(people_subbed)
      }, [people_subbed])
 
+
+     let entreprise = typeof inscrits !== "undefined" && inscrits.filter((item) => item.entreprise !== null)
+     let users = typeof inscrits !== "undefined" && inscrits.filter((item) => item.entreprise === null)
     return (
         <Aux>
         <Row>
@@ -34,7 +37,7 @@ function SubscriptionList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                                {typeof users !== "undefined" &&  users.map(item => 
                                 <tr key = {item.id}>
                                     <td>{item.user.firstName}</td>
                                     <td>{item.user.lastName}</td>
@@ -50,20 +53,22 @@ function SubscriptionList() {
                 <Table striped responsive>
                         <thead>
                             <tr>
-                                <th>Nom</th>
-                                <th>Entreprise</th>
-                                <th>Telephone</th>
-                                <th>Formation</th>
-                                <th>date d'inscription</th>
-                                <th></th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Entreprise</th>
+                            <th>Tel entreprise</th>
+                            <th>Formation</th>
+                            <th>date d'inscription</th>
+                            <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            {typeof inscrits !== "undefined" &&  inscrits.map(item => 
+                            {typeof entreprise !== "undefined" && entreprise.map(item => 
                             <tr key = {item.id}>
                                 <td>{item.user.firstName}</td>
-                                <td>{item.user.lastName}</td>
                                 <td>{item.user.email}</td>
+                                <td>{item.entreprise.nom}</td>
+                                <td>{item.entreprise.telephone}</td>
                                 <td>{item.formation.nom}</td>
                                 <td>{item.date_inscription}</td>
                             </tr>)

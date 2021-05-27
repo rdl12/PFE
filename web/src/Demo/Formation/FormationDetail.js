@@ -51,6 +51,10 @@ function FormationDetail() {
         window.location.href = "/Formation/list"
     }
     
+    const Save = () => {
+      console.log('save')
+    }
+
     let entrprise = inscrits.filter((item) => item.entreprise !== null)
     let users = inscrits.filter((item) => item.entreprise === null)
     
@@ -219,7 +223,7 @@ function FormationDetail() {
           <Button variant="secondary" onClick={handleClose}>
             Fermer
           </Button>
-          <Button variant="primary">Enregistrer</Button>
+          <Button variant="primary" onClick={Save}>Enregistrer</Button>
         </Modal.Footer>
       </Modal>):null}
            

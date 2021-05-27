@@ -151,7 +151,7 @@ export default NosDefibrilatteur
 
 const styles = StyleSheet.create ({
     box:{
-      height:windowHeight/3.6,
+    
       backgroundColor:COLORS.lightGray4,
       elevation:2,
       borderBottomRightRadius:100
