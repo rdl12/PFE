@@ -68,7 +68,6 @@ const UrgenceScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
     card :{
-         height:windowHeight/1.35,
          shadowColor: "#000",
          shadowOffset: {
            width: 0,

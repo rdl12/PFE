@@ -1,7 +1,6 @@
 import React, {useState,useEffect,} from 'react'
 import { SafeAreaView, Text, View,Image,TouchableOpacity,StyleSheet, ScrollView } from 'react-native'
-import {Fetch_stats_etat,Fetch_stats_prov} from '../redux/actions'
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {
     LineChart,
@@ -11,7 +10,7 @@ import {
     ContributionGraph,
     StackedBarChart,
   } from "react-native-chart-kit";
-
+  import Icon from 'react-native-vector-icons/FontAwesome';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
@@ -25,6 +24,7 @@ const StatistiqueScreen = ({navigation}) => {
 
 
     function getRandomColor() {
+       
         var letters = '0123456789ABCDEF';
         var color = '#';
         for (var i = 0; i < 6; i++) {
@@ -44,7 +44,6 @@ const StatistiqueScreen = ({navigation}) => {
     barPercentage: 0.5,
     useShadowColorFromDataset: false // optional
     };
-    
     typeof stat_etat_defib !== "undefiend" && stat_etat_defib.map((item,index) =>{
         if(index === 0){
             data.push({
@@ -94,6 +93,7 @@ const StatistiqueScreen = ({navigation}) => {
        
 
     useEffect(() => {
+      setdata([])
      
         const parent = navigation.dangerouslyGetParent();
         parent.setOptions({
@@ -118,7 +118,7 @@ const StatistiqueScreen = ({navigation}) => {
         return (
             <SafeAreaView style = {{display:'flex',flex:1}}>
                    {/* Header */}
-                <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE}}>
+                <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
                   <TouchableOpacity
                       style={{ marginLeft: -8 }}
                       onPress={() => navigation.goBack()}
@@ -140,21 +140,36 @@ const StatistiqueScreen = ({navigation}) => {
 
                </View>
                <ScrollView>
-                          {/* Pie CHART */}
+
+            <Card style={styles.card} >
+              <Card.Content style={{flexDirection:'row', alignContent:'center'}} >
+                <Icon name="medkit" size={30}  style={{marginLeft:10}} color = {COLORS.PRIMARY} />
+                <Text style={{ ...FONTS.h4, color: COLORS.black, marginLeft:13, marginTop:6 }}>Nombre de defibrillateurs : 1111  </Text>
+              </Card.Content>
+            </Card>
+
+            <Card style={styles.card} >
+              <Card.Content style={{flexDirection:'row', alignContent:'center'}} >
+                <Icon name="home" size={30}  style={{marginLeft:10}} color = {COLORS.PRIMARY} />
+                <Text style={{ ...FONTS.h3, color: COLORS.black, marginLeft:13, marginTop:4 }}>Nombre de villes : {stat_prov_defib.length} villes</Text>
+              </Card.Content>
+            </Card>
+
+
+            {/* Pie CHART */}
                 
-           <Card style={styles.card} >
-                <Card.Title title="Etat" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
-                           />
-                <Card.Content >
+            <Card style={styles.card} >
+                <Card.Title title="statistiques des defibrillateurs ajoutés " titleStyle={{...FONTS.h2,color:COLORS.primary,fontFamily: "Cochin", padding:10}} style={styles.cardTitle}/>
+                <Card.Content style={{borderTopWidth:1}}>
                     
                     { typeof data !== "undefiend" ? (<PieChart
                         data={data}
-                        width={windowWidth}
+                        width={windowWidth*0.93}
                         height={windowHeight*0.35}
                         chartConfig={chartConfig}
                         accessor={"population"}
                         backgroundColor={"transparent"}
-                        paddingLeft={"15"}
+                        paddingLeft={"25"}
                         center={[0, 10]}
                   
                         
@@ -162,8 +177,9 @@ const StatistiqueScreen = ({navigation}) => {
                  
                </Card.Content>
             </Card>
+
               
-           {/* Bar CHART */}
+           {/* Bar CHART 
            <Card style={styles.card} >
                 <Card.Title title="Etat" titleStyle={{color:COLORS.primary,fontFamily: "Cochin"}} style={styles.cardTitle}
                            />
@@ -188,7 +204,7 @@ const StatistiqueScreen = ({navigation}) => {
                         />):null }
                  
                </Card.Content>
-            </Card>
+            </Card>*/}
 
                </ScrollView>
          

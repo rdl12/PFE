@@ -138,8 +138,8 @@ const NosDefibrilatteur = ({navigation}) => {
 
     <ScrollView
     >
-      <List formations={defib} title="Défibrillateur" navigation={navigation} BOOKH = {170} BOOKW= {150} />
-      <List formations={AccessDefib} title="Accessoires Défibrillateurs" navigation={navigation} BOOKH = {170} BOOKW= {150}/>
+      <List formations={defib} title="Défibrillateur" navigation={navigation} BOOKH = {150} BOOKW= {150} products = {true}/>
+      <List formations={AccessDefib} title="Accessoires Défibrillateurs" navigation={navigation} BOOKH = {150} BOOKW= {150} products = {true}/>
 
     </ScrollView>
   </View>

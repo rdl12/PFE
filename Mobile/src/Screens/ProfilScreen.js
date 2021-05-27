@@ -57,8 +57,8 @@ const ProfilScreen = ({navigation}) => {
 
             <TouchableOpacity onPress = {() => navigation.navigate('MyDefibs')} >
                  <List.Item
-                    title="Mon Profil"
-                     left={props => <List.Icon {...props} icon={images.user_icon} />}
+                    title="Deconnexion"
+                     left={props => <List.Icon {...props} icon={images.login_icon} />}
                      style={styles.list}
                   />
             </TouchableOpacity>
