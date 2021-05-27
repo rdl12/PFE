@@ -21,7 +21,7 @@ import NosDefibrilatteur from './NosDefibrilatteur'
 import ChatScreen from './ChatScreen'
 import StatistiqueScreen from './StatistiqueScreen'
 import ProductDetails from './ProductDetails'
-
+import AboutScreen from './AboutScreen'
 
 export {
     HomeScreen,
@@ -46,7 +46,8 @@ export {
     NosDefibrilatteur,
     ChatScreen,
     StatistiqueScreen,
-    ProductDetails
+    ProductDetails,
+    AboutScreen
     
 
 }

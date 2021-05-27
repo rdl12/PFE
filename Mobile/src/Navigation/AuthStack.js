@@ -6,7 +6,8 @@ import { COLORS,images} from '../Constantes'
 import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,StatistiqueScreen,
-  FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre,ProductsScreen,NosDefibrilatteur } from '../Screens';
+  FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre,
+  ProductsScreen,NosDefibrilatteur,AboutScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -180,6 +181,11 @@ const ProfilStack = ({navigation}) => (
         <Stack.Screen
         name="StatistiqueScreen"
         component={StatistiqueScreen}
+        options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="AboutScreen"
+        component={AboutScreen}
         options={{headerShown: false}}
         />
 

@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {   View,
+  SafeAreaView,
   Text,
   TouchableOpacity,
   Image,
@@ -417,7 +418,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
 
   if (formation) {
       return (
-          <View style={{ flex: 1, backgroundColor: COLORS.white }}>
+          <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
               {/* Book Cover Section */}
               <View style={{ flex: 3.2 }}>
                   {renderBookInfoSection()}
@@ -448,7 +449,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                     </Dialog.Description>
                    
             </Dialog.Container>
-          </View>
+          </SafeAreaView>
       )
   } else {
       return (<></>)

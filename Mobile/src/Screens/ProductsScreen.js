@@ -107,7 +107,7 @@ const ProductsScreen = ({navigation}) => {
             );
         if (category.length != 0)
         {
-            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230} products = {true}/>
+            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {140} BOOKH = {180} products = {true}/>
         }
           
 

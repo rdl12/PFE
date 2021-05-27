@@ -195,7 +195,7 @@ export function SideBar(props) {
                              )}
                         label="A propos"
                         labelStyle={{color:"#D2691E", fontSize:15, fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate('BookmarkScreen')}}
+                        onPress={() => {props.navigation.navigate('AboutScreen')}}
                     />
                     <DrawerItem 
                         style={{marginBottom:-5}}

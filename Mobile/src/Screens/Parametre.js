@@ -33,15 +33,15 @@ const parametre = () => {
             <ScrollView>
                     <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Notre application sauve des vies et vous permet de sauver des vies a l'aide de sa fonction :  </Text>
                     <Text style={{ fontWeight:'bold',fontSize:19,color: COLORS.red,alignSelf:'center' }}>"Devenir secouriste"  </Text>
-                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>"Devenir secouriste" est une option qui vous permet de recevoir des notification des gens au tour de vous et qui ont besoin de vous lors d'une crise cardiaque, avec securité totale votre position ne sera en aucun cas stocké  sur nos serveurs ni accaessible par notre equipe. (seule la localisation de la victime qui sera stocké pendant une duré de 5 min puis totalement supprimé)  </Text>
+                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>"Devenir secouriste" est une option qui vous permet de recevoir des notification des gens au tour de vous et qui ont besoin de vous lors d'une crise cardiaque, avec securité totale votre position ne sera en aucun cas stocké  sur nos serveurs ni accessible par notre equipe. (seule la localisation de la victime qui sera stocké pendant une duré de 5 min puis totalement supprimé)  </Text>
                     <View style={{flexDirection:'row',alignSelf:'center'}}>
                         <Icon name="heartbeat" size={50}  color={COLORS.red} style={{margin:5}} /> 
                         <Icon name="heart" size={50} color={COLORS.BLACK} style={{margin:5}}  /> 
                         <Icon name="heartbeat" size={50} color={COLORS.red} style={{margin:5}} /> 
                     </View>
                     
-                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Pour devenir secouriste vous pouvez simplement activer la fonction ci dessous pour pouvoir recevoir des notification de demande d'aide, puis aller sur vos parametre de localisation et recativer la precision google, vous pouvez desactiver la fonction "Devenir secouriste" quand vous voulez </Text> 
-                    <Text style={{fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Ps : N'hesiter pas de visiter notre onglet formation, nous offrons des formation de secourisme pour vous, votre familles, vos employées</Text> 
+                    <Text style={{ fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Pour devenir secouriste vous pouvez simplement activer la fonction ci dessus pour pouvoir recevoir des notification de demande d'aide, puis aller sur vos parametre de localisation et recativer la precision google, vous pouvez desactiver la fonction "Devenir secouriste" quand vous voulez </Text> 
+                    <Text style={{fontWeight:'600',fontSize:16,color: COLORS.BLACK,margin:20,marginLeft:30 }}>Ps : N'hesiter pas de visiter notre onglet formation, nous offrons des formation de secourisme pour vous, votre familles et vos employées.</Text> 
            
              </ScrollView>             
       </View>
