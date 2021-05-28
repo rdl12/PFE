@@ -1,10 +1,8 @@
 import React,{useState,useEffect,} from 'react'
 import { View, Text, StyleSheet, SafeAreaView,Image, TouchableOpacity, Linking } from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph,IconButton } from 'react-native-paper';
-import {images,COLORS} from '../Constantes'
+import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import {windowWidth, windowHeight} from '../utils/Dimentions'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const UrgenceScreen = ({navigation}) => {
 
@@ -14,6 +12,30 @@ const UrgenceScreen = ({navigation}) => {
     return (
 
     <SafeAreaView style = {{backgroundColor:COLORS.white,flex:1}}>
+         {/* Header */}
+       <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
+                  <TouchableOpacity
+                      style={{ marginLeft: -8 }}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.black
+                          }}
+                      />
+                  </TouchableOpacity>
+
+                  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Urgence</Text>
+                  </View>
+
+               </View>
+      
+        
           {
             
             next ? (  

@@ -17,7 +17,7 @@ import { useDispatch } from 'react-redux';
 
 
 
-const LocationScreen = () => {
+const LocationScreen = ({navigation}) => {
   const [lat, setlat] = useState('')
   const [long, setlong] = useState('initialState')
   Geolocation.getCurrentPosition(data => {
@@ -41,6 +41,28 @@ const LocationScreen = () => {
 
   return (
     <View style={styles.container}>
+       {/* Header */}
+       <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
+                  <TouchableOpacity
+                      style={{ marginLeft: -8 }}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.black
+                          }}
+                      />
+                  </TouchableOpacity>
+
+                  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Help (S.O.S)</Text>
+                  </View>
+
+               </View>
       
       <View style={styles.box}>
                <Text style={{ fontWeight:'700',fontSize:13,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}> Save vous permet d'envoyer votre position aux gens autour de vous pour demender de l'aide</Text>

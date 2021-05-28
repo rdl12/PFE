@@ -1,18 +1,39 @@
 import React, { useEffect,useState } from 'react'
-import { View,StyleSheet,Image,SafeAreaView, ImageBackground, ScrollView } from 'react-native'
+import { View,StyleSheet,Image,SafeAreaView, ImageBackground, ScrollView, Text, } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import { COLORS, Colors, icons,images} from '../Constantes'
+import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
 import {useSelector} from 'react-redux'
 import {Avatar,Title,Caption,List,Switch } from 'react-native-paper';
-import useBackgroundGeolocationTracker from '../components/BgTracking';
-import { UrlTile } from 'react-native-maps'
 
 const ProfilScreen = ({navigation}) => {
     const LoginInfo = useSelector(state => state.loginReducer);
     return (
        
        <SafeAreaView style = {styles.view}>
+            {/* Header */}
+       <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
+                  <TouchableOpacity
+                      style={{ marginLeft: -8 }}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.black
+                          }}
+                      />
+                  </TouchableOpacity>
+
+                  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Mon Profil</Text>
+                  </View>
+
+               </View>
+               
             <ScrollView>
             <View style={styles.top}>
                        <Avatar.Image 

@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import { View, Text, StyleSheet,ScrollView,SafeAreaView,Image,TouchableOpacity } from 'react-native'
 import { Avatar, Button, Card, Title, Paragraph, ActivityIndicator,IconButton} from 'react-native-paper';
-import {images,COLORS} from '../Constantes'
+import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import MapView, { Marker } from 'react-native-maps';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Modals from '../components/Modal/Modals'
@@ -122,6 +122,31 @@ const DetailsScreen = ({route,navigation}) => {
     }, [Get_Defib.Defibrilatteur,AccessibiliteState.checked,Adresse])
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
+
+           {/* Header */}
+              <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
+                  <TouchableOpacity
+                      style={{ marginLeft: -8 }}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.black
+                          }}
+                      />
+                  </TouchableOpacity>
+
+                  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Details</Text>
+                  </View>
+
+               </View>
+      
+
           {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
              <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />
           ):(
