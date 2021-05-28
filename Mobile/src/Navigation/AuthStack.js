@@ -7,7 +7,7 @@ import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,StatistiqueScreen,
   FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre,
-  ProductsScreen,NosDefibrilatteur,AboutScreen } from '../Screens';
+  ProductsScreen,NosDefibrilatteur,AboutScreen, ResetPasswordScreen } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -186,6 +186,11 @@ const ProfilStack = ({navigation}) => (
         <Stack.Screen
         name="AboutScreen"
         component={AboutScreen}
+        options={{headerShown: false}}
+        />
+        <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
         options={{headerShown: false}}
         />
 

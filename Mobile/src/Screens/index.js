@@ -22,6 +22,7 @@ import ChatScreen from './ChatScreen'
 import StatistiqueScreen from './StatistiqueScreen'
 import ProductDetails from './ProductDetails'
 import AboutScreen from './AboutScreen'
+import ResetPasswordScreen from './ResetPasswordScreen'
 
 export {
     HomeScreen,
@@ -47,7 +48,8 @@ export {
     ChatScreen,
     StatistiqueScreen,
     ProductDetails,
-    AboutScreen
+    AboutScreen,
+    ResetPasswordScreen
     
 
 }

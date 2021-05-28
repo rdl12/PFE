@@ -77,7 +77,7 @@ const LoginScreen = ({navigation}) => {
                        
                       />
                       <Block right width={width * 0.75}>
-                       <TouchableOpacity onPress = {() => {navigation.navigate('Sign up')}} >
+                       <TouchableOpacity onPress = {() => {navigation.navigate('ResetPassword')}} >
                           <Text style = {styles.RegisterText}>mot de passe oublié?</Text>
                        </TouchableOpacity> 
                     </Block>

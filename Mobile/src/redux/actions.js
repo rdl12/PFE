@@ -609,3 +609,24 @@ export const Fetch_stats_prov = () =>{
           });
   }
 }
+
+export const Reset_Password = (email) =>{
+  console.log(email)
+  return (dispatch) => {
+    return fetch(`${API_URI}/User/forgot-password/${email}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(email)
+    })
+
+      .catch((err) => {
+      Alert.alert("couldn't subscribe user ,please retry");
+      console.log(err);
+    });
+    
+  }
+  
+}
