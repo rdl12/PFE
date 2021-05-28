@@ -275,7 +275,10 @@ export const Fetch_User = (email) => {
     return fetch(`${API_URI}/User/find/${email}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
-              delete data.authorities
+              if(data.authorities){
+                delete data.authorities
+              }
+              
               console.log(data)
               dispatch(Set_User({user:data}))
             }
@@ -337,8 +340,10 @@ export const Singup = (SingupData) => {
 }
 
 export const Modify_defib = (defib) => {
+  if (defib.user.authorities){
+    delete defib.user.authorities
+  }
   
-  delete defib.user.authorities
   console.log(defib)
    return  fetch(`${API_URI}/Defibrillateur/update`, {
      method: 'PATCH', 

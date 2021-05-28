@@ -154,6 +154,7 @@ const AddDefibScreen = ({navigation}) => {
    
     return (
       <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
+        
             <Dialog.Container visible={success}>
                     <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22"/>
                     <Dialog.Description>

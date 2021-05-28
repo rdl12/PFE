@@ -18,13 +18,13 @@ const ProfilStack = ({navigation}) => (
        <Stack.Screen
         name="Profil"
         component={ProfilScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       
       <Stack.Screen
         name="MyDefibs"
         component={MyDefibsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       
       <Stack.Screen
@@ -68,7 +68,7 @@ const ProfilStack = ({navigation}) => (
       <Stack.Screen
         name="ListDefib"
         component={ListDefibScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       
       <Stack.Screen
@@ -81,13 +81,13 @@ const ProfilStack = ({navigation}) => (
       <Stack.Screen
         name="AddDefib"
         component={AddDefibScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
        <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
     </Stack.Navigator>
@@ -98,7 +98,7 @@ const ProfilStack = ({navigation}) => (
         <Stack.Screen
         name="Urgence"
         component={UrgenceScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="ListDefib"
@@ -108,7 +108,7 @@ const ProfilStack = ({navigation}) => (
         <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
     </Stack.Navigator>
@@ -131,12 +131,12 @@ const ProfilStack = ({navigation}) => (
     <Stack.Screen
       name="Help"
       component={LocationScreen}
-      options={{headerShown: true}}
+      options={{headerShown: false}}
     />
     <Stack.Screen
       name="Tutorial"
       component={TutorialScreen}
-      options={{headerShown: true}}
+      options={{headerShown: false}}
     />
     <Stack.Screen
       name="Notification"

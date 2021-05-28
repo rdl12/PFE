@@ -60,13 +60,13 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="AddDefib"
         component={AddDefibScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
        <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
 
     </Stack.Navigator>
@@ -77,7 +77,7 @@ const MapStack = ({navigation}) => (
         <Stack.Screen
         name="Urgence"
         component={UrgenceScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="ListDefib"
@@ -87,7 +87,7 @@ const MapStack = ({navigation}) => (
         <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
     
 
@@ -110,12 +110,12 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="Help"
         component={LocationScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Tutorial"
         component={TutorialScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Notification"
