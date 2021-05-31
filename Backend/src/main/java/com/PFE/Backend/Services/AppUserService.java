@@ -13,6 +13,7 @@ import com.PFE.Backend.Repository.AppUserRepository;
 import com.PFE.Backend.Services.helpers.EmailSender;
 import com.PFE.Backend.entities.AppUser;
 import com.PFE.Backend.entities.ConfirmationToken;
+import com.PFE.Backend.entities.ModifyPasswordRequest;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -102,13 +103,37 @@ public class AppUserService implements UserDetailsService  {
 	}
 
 
-	public String ResetPassword(String email) {
-		System.out.println("email:"+email);
-	      String link = "http://localhost:9090/User/resetPassword";
-	      emailSender.send( email,buildEmail(email, link));
+	public String ResetPassword(String email) {;
+		  String string = email.replaceAll("^\"|\"$", "");
+		  AppUser appUserOld = appUserRepository.findByEmail(string).get();
+		  String token = UUID.randomUUID().toString().substring(0, 7);
+		  String encodedPassword = bCryptPasswordEncoder
+	                .encode(token);
+		  appUserOld.setPassword(encodedPassword);
+		  appUserRepository.save(appUserOld);
+		  System.out.println("changed password");
+	      emailSender.send( email,buildEmail(email, token));
+	      
 	     return email;
 	}
-	
+	public String ModifyPassword(ModifyPasswordRequest modifyRequest) {
+		
+		String email = modifyRequest.getEmail();
+		String password = modifyRequest.getPassword();
+		String ancienpassword = modifyRequest.getAncienpassword();
+		AppUser appUserOld = appUserRepository.findByEmail(email).get();
+		boolean test = bCryptPasswordEncoder.matches(ancienpassword, appUserOld.getPassword());
+		if (test) {
+			String encodedPassword = bCryptPasswordEncoder.encode(password);
+			appUserOld.setPassword(encodedPassword);
+			appUserRepository.save(appUserOld);
+			System.out.println("changed");
+			return "true";
+		}
+		
+		return "false";
+	}
+	  
 	
 	 private String buildEmail(String name, String link) {
 	        return "<div style=\"font-family:Helvetica,Arial,sans-serif;font-size:16px;margin:0;color:#0b0c0c\">\n" +
@@ -166,7 +191,7 @@ public class AppUserService implements UserDetailsService  {
 	                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
 	                "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
 	                "        \n" +
-	                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> To complete the password reset process, please click here:</p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
+	                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Bonjour " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Votre nouveau password est :</p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> " + link + " </p></blockquote>\n Merci de channger ce mot de passe le plutot possible. <p>See you soon</p>" +
 	                "        \n" +
 	                "      </td>\n" +
 	                "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
@@ -178,7 +203,9 @@ public class AppUserService implements UserDetailsService  {
 	                "\n" +
 	                "</div></div>";
 	    }
-	  
+
+
+	
 	  
 	  
 }

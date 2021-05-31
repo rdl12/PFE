@@ -9,7 +9,7 @@ import {images,COLORS} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 
 
-const InfoProfilScreen = () => {
+const InfoProfilScreen = ({navigation}) => {
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.Fetch_User)
@@ -53,6 +53,12 @@ const InfoProfilScreen = () => {
                      description={user.user.email}
                      left={props => <List.Icon {...props} icon={images.phone_icon} />}
                      style={styles.list}
+                  />
+                     <List.Item
+                     title="Modifier mot de passe"
+                     left={props => <List.Icon {...props} icon={images.phone_icon} />}
+                     style={styles.list}
+                     onPress = {() => navigation.navigate('ModifierPassword') }
                   />
              </Card.Content>
            </Card>

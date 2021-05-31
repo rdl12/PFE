@@ -635,3 +635,39 @@ export const Reset_Password = (email) =>{
   }
   
 }
+
+export const modifier_Password = (password,ancpassword,email) =>{
+  let data = {
+     "email":email,
+     "password": password,
+     "ancienpassword":ancpassword
+  }
+  return (dispatch) => {
+    return fetch(`${API_URI}/User/Modify_Password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(data)
+    })
+    .then((response) => {
+      response.text().then((data) => {
+      if(data === 'false'){
+        Alert.alert("mot de passe incorrecte");
+      }
+      else {
+        Alert.alert("mot de passe changed");
+      }
+      }
+        )
+     })
+
+      .catch((err) => {
+      Alert.alert("couldn't post modify user ,please retry");
+      console.log(err);
+    });
+    
+  }
+  
+}

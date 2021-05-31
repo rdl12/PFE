@@ -15,6 +15,7 @@ import com.PFE.Backend.Services.AppUserService;
 import com.PFE.Backend.Services.RegistrationService;
 import com.PFE.Backend.entities.AppUser;
 import com.PFE.Backend.entities.Boundary;
+import com.PFE.Backend.entities.ModifyPasswordRequest;
 import com.PFE.Backend.entities.Province;
 
 import lombok.AllArgsConstructor;
@@ -38,5 +39,10 @@ public class AppUserController {
 	 @GetMapping(value = "/resetPassword")
 	    public String Reset(){
 	        return "Reset";
+	    }
+	 
+	 @PostMapping(value = "/Modify_Password")
+	    public String modifyPassword(@RequestBody  ModifyPasswordRequest modifyRequest){
+		 return appUserService.ModifyPassword(modifyRequest);
 	    }
 }

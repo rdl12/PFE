@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/v*/registration/**","/Defibrillateur/**",
             		"/Boundary/**","/Formation/**","/Subscription/**",
             		"/Categorie/**","/Product/**","/User/forgot-password/**",
-            		"/ProductCategory/**","/Entreprise/**","/DateFormation/**","/User/resetPassword")
+            		"/ProductCategory/**","/Entreprise/**","/DateFormation/**","/User/**")
             .permitAll()
             .anyRequest()
             .authenticated().and();

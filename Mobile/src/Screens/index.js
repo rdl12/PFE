@@ -23,6 +23,7 @@ import StatistiqueScreen from './StatistiqueScreen'
 import ProductDetails from './ProductDetails'
 import AboutScreen from './AboutScreen'
 import ResetPasswordScreen from './ResetPasswordScreen'
+import ModifierPasswordScreen from './ModifierPasswordScreen'
 
 export {
     HomeScreen,
@@ -49,7 +50,8 @@ export {
     StatistiqueScreen,
     ProductDetails,
     AboutScreen,
-    ResetPasswordScreen
+    ResetPasswordScreen,
+    ModifierPasswordScreen
     
 
 }
