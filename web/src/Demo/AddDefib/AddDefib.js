@@ -4,10 +4,11 @@ import {Etape2} from './Etape2'
 import { GoogleApiWrapper,}  from 'google-maps-react';
 import {Map, Marker, InfoWindow,}  from 'google-maps-react';
 import { connect } from 'react-redux';
+import * as XLSX from "xlsx";
 import ImageUploader from 'react-images-upload';
 
 import Aux from "../../hoc/_Aux";
-import {Adress,Add_Defib_Posted} from '../../store/actions'
+import {Adress,Add_Defib_Posted,upload_csv} from '../../store/actions'
 import defib_icon from '../../assets/images/pin/medical.png';
 
 export class AddDefib extends Component {
@@ -35,9 +36,67 @@ export class AddDefib extends Component {
                 lat:0,
                 lng:0
             },
-            pictures: [],};
+            pictures: [],
+            file: "",
+              showFile:false,};
          this.onDrop = this.onDrop.bind(this);
+         this.handleClick = this.handleClick.bind(this);
     }
+
+    handleClick(e) {
+        this.refs.fileUploader.click();
+      }
+    
+      filePathset(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        var file = e.target.files[0];
+        console.log(file);
+        this.setState({ file });
+    
+        console.log(this.state.file);
+      }
+    
+      readFile() {
+        var f = this.state.file;
+        var name = f.name;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          // evt = on_file_select event
+          /* Parse data */
+          const bstr = evt.target.result;
+          const wb = XLSX.read(bstr, { type: "binary" });
+          /* Get first worksheet */
+          const wsname = wb.SheetNames[0];
+          const ws = wb.Sheets[wsname];
+          /* Convert array of arrays */
+          const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
+          /* Update state */
+         // console.log("Data>>>" + data);// shows that excel data is read
+          this.convertToJson(data); // shows data in json format
+        };
+        reader.readAsBinaryString(f);
+      }
+      convertToJson(csv) {
+        var lines = csv.split("\n");
+    
+        var result = [];
+    
+        var headers = lines[0].split(",");
+    
+        for (var i = 1; i < lines.length-1; i++) {
+          var obj = {};
+          var currentline = lines[i].split(",");
+    
+          for (var j = 0; j < headers.length; j++) {
+            obj[headers[j]] = currentline[j];
+          }
+    
+          result.push(obj);
+        }
+       // result.map(item => this.props.upload_csv(item))
+        console.log(result)
+      }
     
     onDrop = (picture) => {
         this.setState({
@@ -129,12 +188,17 @@ export class AddDefib extends Component {
             <Aux>
                 <Row>
                     <Col>
-                    { this.state.isActive ? ( <Card>
-                            <Card.Header>
+                    { this.state.isActive  ? (
+                         <Card>
+                            <Card.Header >
                                 <Card.Title as="h5">Ajouter un defibrillateur</Card.Title>
+                                <Button   variant={'outline-dark'} onClick = {() => this.setState({
+                                    showFile:!this.state.showFile })} style={{float: 'right'}}><i className="fa fa-upload f-18 m-r-10 "/>upload</Button>
                                 <span className="d-block m-t-8">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
+                             
                             </Card.Header>
-                            <Card.Body>
+                            
+                          { this.state.showFile === false ? (<Card.Body>
                                 
                                 
                                 <Row>
@@ -236,10 +300,25 @@ export class AddDefib extends Component {
                                         <Button variant="primary" onClick = {this.Suivant}>
                                                 Suivant
                                         </Button>
+                                      
                                     </Col>
                                    
                                 </Row>
-                            </Card.Body>
+                            </Card.Body>):(<Card.Body>
+                                <div>
+                                            <input
+                                                type="file"
+                                                id="file"
+                                                ref="fileUploader"
+                                                onChange={this.filePathset.bind(this)}
+                                            />
+                                            <button
+                                                onClick={() => { this.readFile(); }}
+                                             >
+                                              Read File
+                                            </button>
+                                        </div>
+                            </Card.Body>)}
                     </Card>) : 
                     <Etape2
                     Nom = {this.state.Nom} 
@@ -277,6 +356,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         Adress: (coords) => dispatch(Adress(coords)),
         Add_Defib_Posted: (defib) => dispatch(Add_Defib_Posted(defib)),
+        upload_csv: (csv) => dispatch(upload_csv(csv))
     }
 };
 

@@ -690,3 +690,24 @@ export const Delete_DateFormation = (id) => {
 
 }
 }
+
+export const upload_csv = (object) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Defibrillateur/upload`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+      
+    },
+    body:  JSON.stringify(object)
+  })
+  .then((response) => {
+    console.log('added')
+   })
+   .catch((err) => {
+    alert("couldn't post data defib ,please retry");
+    console.log(err);
+  });
+}
+}

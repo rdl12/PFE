@@ -74,7 +74,7 @@ public class DefibrillateurController {
 	        String geom = defibrillateurService.getGeom(lat,lng);
 	        System.out.println(""+geom);
 	        defibrillateur.setGeom(geom);
-	        //defibrillateur.setEtat(s);
+	        defibrillateur.setEtat(s);
 	        defibrillateurService.save(defibrillateur);
 	    }
 	
@@ -101,5 +101,18 @@ public class DefibrillateurController {
 	 @GetMapping(value = "/province/Statistique")
 	    public List findIncidentsProvince () {
 	        return defibrillateurService.Defib_stat_province();
+	    }
+	 
+	 @PostMapping(value = "/upload")
+	    public void upload(@RequestBody   Defibrillateur defibrillateur){
+	        Etat s = new Etat(1,"validé");
+	        defibrillateur.setDate(LocalDateTime.now());
+	       Float lat= (Float) defibrillateur.getLatitude();
+	       Float lng= (Float) defibrillateur.getLongitude();
+	       String geom = defibrillateurService.getGeom(lat,lng);
+	       //  System.out.println(""+geom);
+	        //defibrillateur.setGeom(geom);
+	        defibrillateur.setEtat(s);
+	        defibrillateurService.save(defibrillateur);
 	    }
 }
