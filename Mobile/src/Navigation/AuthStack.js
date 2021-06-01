@@ -194,6 +194,12 @@ const ProfilStack = ({navigation}) => (
         component={AboutScreen}
         options={{headerShown: false}}
         />
+         <Stack.Screen
+        name="ModifierPassword"
+        component={ModifierPasswordScreen}
+        options={{headerShown: false}}
+        />
+        
       
     </Stack.Navigator>
   )

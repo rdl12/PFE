@@ -38,16 +38,25 @@ export class AddDefib extends Component {
             },
             pictures: [],
             file: "",
-              showFile:false,};
+            showFile:false,
+            csv: "Upload CSV",
+            icon : "fa fa-upload f-18 m-r-10 "
+        };
          this.onDrop = this.onDrop.bind(this);
          this.handleClick = this.handleClick.bind(this);
     }
+
+    Click() {
+        this.setState({showFile:!this.state.showFile })
+        if(this.state.csv=="Upload CSV"){ this.setState({csv : "retour", icon :"fa fa-arrow-left f-18 m-r-10 "}) }
+        else this.setState({csv : "Upload CSV", icon : "fa fa-upload f-18 m-r-10 "})
+      }
 
     handleClick(e) {
         this.refs.fileUploader.click();
       }
     
-      filePathset(e) {
+    filePathset(e) {
         e.stopPropagation();
         e.preventDefault();
         var file = e.target.files[0];
@@ -57,7 +66,7 @@ export class AddDefib extends Component {
         console.log(this.state.file);
       }
     
-      readFile() {
+    readFile() {
         var f = this.state.file;
         var name = f.name;
         const reader = new FileReader();
@@ -94,7 +103,7 @@ export class AddDefib extends Component {
     
           result.push(obj);
         }
-       // result.map(item => this.props.upload_csv(item))
+        result.map(item => this.props.upload_csv(item))
         console.log(result)
       }
     
@@ -192,8 +201,7 @@ export class AddDefib extends Component {
                          <Card>
                             <Card.Header >
                                 <Card.Title as="h5">Ajouter un defibrillateur</Card.Title>
-                                <Button   variant={'outline-dark'} onClick = {() => this.setState({
-                                    showFile:!this.state.showFile })} style={{float: 'right'}}><i className="fa fa-upload f-18 m-r-10 "/>upload</Button>
+                                <Button   variant={'outline-dark'} onClick = {() => this.Click()} style={{float: 'right'}}><i className={this.state.icon}/>{this.state.csv}</Button>
                                 <span className="d-block m-t-8">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
                              
                             </Card.Header>
@@ -297,7 +305,7 @@ export class AddDefib extends Component {
                                          </Tabs>
                                        
                                        
-                                        <Button variant="primary" onClick = {this.Suivant}>
+                                        <Button variant="primary" onClick = {this.Suivant} style={{float :'right', margin:10}}>
                                                 Suivant
                                         </Button>
                                       
@@ -305,18 +313,20 @@ export class AddDefib extends Component {
                                    
                                 </Row>
                             </Card.Body>):(<Card.Body>
-                                <div>
+                                <div >
                                             <input
                                                 type="file"
                                                 id="file"
                                                 ref="fileUploader"
                                                 onChange={this.filePathset.bind(this)}
                                             />
-                                            <button
+                                            <Button
+                                                variant={'outline-dark'}
+                                                style={{float: 'right'}}
                                                 onClick={() => { this.readFile(); }}
                                              >
                                               Read File
-                                            </button>
+                                            </Button>
                                         </div>
                             </Card.Body>)}
                     </Card>) : 

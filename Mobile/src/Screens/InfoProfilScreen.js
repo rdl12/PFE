@@ -56,7 +56,7 @@ const InfoProfilScreen = ({navigation}) => {
                   />
                      <List.Item
                      title="Modifier mot de passe"
-                     left={props => <List.Icon {...props} icon={images.phone_icon} />}
+                     left={props => <List.Icon {...props} icon={images.edit_icon} />}
                      style={styles.list}
                      onPress = {() => navigation.navigate('ModifierPassword') }
                   />

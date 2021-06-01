@@ -26,8 +26,9 @@ class SamplePage extends React.Component {
         setTimeout(() => {this.setState({
             center:{ lat: this.props.Defib.latitude, lng: this.props.Defib.longitude }
         })
+        if(this.props.Defib.user){
         this.setState({user : this.props.Defib.user.email})
-        console.log(this.props.Defib.user.email)},200) 
+        console.log(this.props.Defib.user.email)}},1000) 
 
       
     }
@@ -76,7 +77,8 @@ class SamplePage extends React.Component {
             <Aux>
                       <Card>
                             <Card.Header>
-      <Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : {this.state.user} </Card.Title>
+                                {this.state.user ? (<Card.Title as="h5">Ce deffibrillateur a été ajouté par l'utilisateur : {this.state.user} </Card.Title>):
+                                (<Card.Title as="h5">Ce deffibrillateur a été ajouté directement par Administrateur {this.state.user} </Card.Title>)}
                                 <Button variant={'outline-info'} onClick = {this.Approuve} style={{float: 'right'}}>Submit</Button>
                                 <span className="d-block mt-0">valider ou rejeter ce defib en changeant son etat au dessous</span>
                             </Card.Header>

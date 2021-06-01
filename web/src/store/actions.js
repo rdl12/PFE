@@ -711,3 +711,47 @@ export const upload_csv = (object) => {
   });
 }
 }
+
+
+export const Delete_Subscription = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Subscription/delete/${id}`, {
+    method: 'DELETE',
+    
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Deleted Subscription" + JSON.stringify(responseData)
+    )
+})
+
+}
+}
+
+export const Modify_subs = (subs) => {
+  if (subs.user.authorities){
+    delete subs.user.authorities
+  }
+  console.log(subs)
+   return  fetch(`${API_URI}/Subscription/update`, {
+     method: 'PATCH', 
+     headers: {  // these could be different for your API call
+       Accept: 'application/json',
+       'Content-Type': 'application/json'
+ 
+     },
+     body: JSON.stringify(subs),
+     },
+   )
+   .then((response) => {
+     response.text().then((data) => {
+       console.log(data)
+      }
+      )
+   })
+  .catch((err) => {
+    alert("formation not posted,please retry");
+      console.log(err);
+  });
+}

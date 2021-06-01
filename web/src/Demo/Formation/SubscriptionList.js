@@ -1,8 +1,8 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card,Badge,Dropdown,DropdownButton,Form,Table,Tab,Tabs} from 'react-bootstrap';
+import {Row, Col, Card,Badge,Dropdown,DropdownButton,Button,Table,Tab,Tabs} from 'react-bootstrap';
 
-import { Fetch_Subscribed_people } from '../../store/actions';
+import { Fetch_Subscribed_people, Delete_Subscription } from '../../store/actions';
 import Aux from "../../hoc/_Aux";
 
 function SubscriptionList() {
@@ -11,10 +11,17 @@ function SubscriptionList() {
     const people_subbed = useSelector(state => state.personnes_inscrites)
     const [inscrits, setinscrits] = useState([])
 
+    const Delete = (id) => {
+        console.log("ggggg")
+        dispatch(Delete_Subscription(id))
+        //window.location.href = "/Formation/Inscrit"
+    }
+
      useEffect(() => {
         dispatch(Fetch_Subscribed_people())
         setinscrits(people_subbed)
      }, [people_subbed])
+
 
 
      let entreprise = typeof inscrits !== "undefined" && inscrits.filter((item) => item.entreprise !== null)
@@ -38,13 +45,15 @@ function SubscriptionList() {
                             </thead>
                             <tbody>
                                 {typeof users !== "undefined" &&  users.map(item => 
-                                <tr key = {item.id}>
+                                <tr key = {item.id} onClick={()=> Delete(item.id)}>
                                     <td>{item.user.firstName}</td>
                                     <td>{item.user.lastName}</td>
                                     <td>{item.user.email}</td>
                                     <td>{item.formation.nom}</td>
                                     <td>{item.date_inscription}</td>
-                                </tr>)
+                                    <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}}>supprimer</td>
+                                </tr>
+                                )
                                 }
                             </tbody>
                     </Table>    
@@ -64,13 +73,14 @@ function SubscriptionList() {
                         </thead>
                         <tbody>
                             {typeof entreprise !== "undefined" && entreprise.map(item => 
-                            <tr key = {item.id}>
+                            <tr key = {item.id} onClick={()=> Delete(item.id)}>
                                 <td>{item.user.firstName}</td>
                                 <td>{item.user.email}</td>
                                 <td>{item.entreprise.nom}</td>
                                 <td>{item.entreprise.telephone}</td>
                                 <td>{item.formation.nom}</td>
                                 <td>{item.date_inscription}</td>
+                                <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}}>supprimer</td>
                             </tr>)
                             }
                         </tbody>

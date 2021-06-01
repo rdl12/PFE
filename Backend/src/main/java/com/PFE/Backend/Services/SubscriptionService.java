@@ -1,6 +1,7 @@
 package com.PFE.Backend.Services;
 
 import java.util.List;
+import java.util.concurrent.Flow.Subscription;
 
 import org.springframework.stereotype.Service;
 
@@ -23,4 +24,11 @@ public class SubscriptionService {
     	SubsriptionRepo.save(subscription);
 
     }
+	public Subcription findbyId(long id) {
+		 return  SubsriptionRepo.findById(id);
+	}
+	public void delete(Subcription subcription) {
+		SubsriptionRepo.delete(subcription);
+		
+	}
 }
