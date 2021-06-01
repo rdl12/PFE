@@ -66,7 +66,7 @@ const MapStack = ({navigation}) => (
        <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
 
     </Stack.Navigator>
@@ -87,7 +87,7 @@ const MapStack = ({navigation}) => (
         <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
     
 

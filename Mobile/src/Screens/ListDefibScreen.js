@@ -62,9 +62,9 @@ class ListDefibScreen extends Component {
    
     componentDidMount(){
         requestLocationPermission()
-        setTimeout(()=>this.setState({marginBottom : 0}),10)
+        setTimeout(()=>this.setState({marginBottom : 0}),50)
         console.log(this.state.rayon)
-        setTimeout(()=> this.props.Fecth_Defib(this.state.coords,this.state.rayon),50)
+        setTimeout(()=> this.props.Fecth_Defib(this.state.coords,this.state.rayon),500)
     }
 
     getDetails(id,lat,long) {

@@ -1,16 +1,21 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { View,StyleSheet,Text,Image,SafeAreaView, ImageBackground,Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { COLORS, Colors, icons,images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useDispatch,useSelector } from 'react-redux';
+import moment from "moment";
+import frLocale from "moment/locale/fr";
 import { Fetch_Formation,Fetch_Products,Fetch_Categories,Fetch_ProductCategories,Fetch_stats_etat,Fetch_stats_prov } from '../redux/actions';
 
 const HomeScreen = ({navigation,route}) => {
   const dispatch = useDispatch()
   const LoginInfo = useSelector(state => state.loginReducer);
-  
+  moment.updateLocale('fr', [frLocale]) 
+  let currentDate = moment().format("dddd DD MMM")
+ 
+
   useEffect(() => {
       if(route.params){
           navigation.navigate('Notification',route.params)
@@ -24,9 +29,12 @@ const HomeScreen = ({navigation,route}) => {
   }, [route]);
     return (
        <SafeAreaView style = {styles.view}>
-           <ImageBackground source = {{uri:'https://www.condair-merchandising.com/pub/img/home-hero-wave.png'}} resizeMode='cover'  style={styles.background_image}>
+     
            <View style = {styles.menuConatiner}>
-                <View>
+           <View style = {styles.header}>
+             
+           </View>
+           <View>
                <TouchableOpacity onPress = {() => navigation.openDrawer()}>
                <Image 
                 style={styles.menu}
@@ -44,17 +52,18 @@ const HomeScreen = ({navigation,route}) => {
                 color="black" 
                 onPress = {() => navigation.navigate('chat')}  />):null}
            </View>
-         
-           </ImageBackground>
-           <ImageBackground source = {{uri:'https://cdn.pixabay.com/photo/2017/05/16/11/45/blue-waves-2317606_960_720.png'}} resizeMode='cover'  style={{flex:1}}>
-           <View style = {styles.container}>
+       <View style = {styles.bigContainer}>
+            <Text style={[styles.headerDate]}>
+                {currentDate.toUpperCase()}
+             </Text>
+       <View style = {styles.container}>
                <View style = {styles.imageContainer}>
                <TouchableOpacity onPress = {() => navigation.navigate('UrgenceScreen')}>
                 <Image 
                     style={{width:77,height:77,alignSelf:'center'}}
                     source={images.phone_icon}
                     resizeMode ='contain'
-                    tintColor='red'/>
+                    tintColor={COLORS.primary}/>
                 <Text style = {styles.text}> URGENCE </Text>
                </TouchableOpacity>
                </View>
@@ -76,7 +85,7 @@ const HomeScreen = ({navigation,route}) => {
                 <Image 
                     style={{width:77,height:77,alignSelf:'center'}}
                     source={images.instruction_icon}
-                    tintColor="#D2691E"/>
+                    tintColor={COLORS.primary}/>
                 <Text style = {styles.text}> Instruction </Text>
            </TouchableOpacity>
                </View>
@@ -85,13 +94,15 @@ const HomeScreen = ({navigation,route}) => {
            <Image 
             style={{width:77,height:77,alignSelf:'center'}}
             source={images.help_icon}
-            tintColor='green'/>
+            tintColor={COLORS.primary}/>
               <Text style = {styles.text}> HELP </Text>
            </TouchableOpacity>
             </View>
          
            </View>
-           </ImageBackground>
+       
+       </View>
+         
           
        </SafeAreaView>
     )
@@ -103,6 +114,19 @@ const styles = StyleSheet.create({
     background_image:{
         flex:0.3,
         width:windowWidth,
+      },
+
+      header:{
+        backgroundColor:COLORS.primary,
+        height:windowHeight*0.34,
+        width:windowWidth,
+        position:'absolute',
+        top:0,
+        borderBottomRightRadius:50,
+        borderBottomLeftRadius:50
+       
+
+        
       },
 
     logo:{
@@ -117,8 +141,15 @@ const styles = StyleSheet.create({
 
     view :{
       display:'flex',
-      backgroundColor:COLORS.white,
+      backgroundColor:'rgba(238,252,255,1)',
       flex:1,
+
+    },
+
+    bigContainer:{
+       display:'flex',
+        marginTop:windowHeight*0.13
+     
 
     },
     
@@ -127,18 +158,21 @@ const styles = StyleSheet.create({
         alignItems:'center',
         alignContent:'center',
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+    
     },
     imageContainer:{
         flex:0.5,
         borderWidth:1,
-        borderColor:COLORS.primary,
+        borderColor:COLORS.white,
         backgroundColor:COLORS.white,
         alignItems:'center',
         padding:10,
         marginBottom:0,
         margin:27,
-        borderRadius:10
+        borderRadius:10,
+        elevation:5
+        
     },
     text:{
         textAlign: 'center',
@@ -150,6 +184,16 @@ const styles = StyleSheet.create({
         borderTopWidth:1,
         marginTop:20
 
-    }
+    },
+    headerDate: {
+        fontSize: 14,
+        // width: 120,
+        paddingTop: 5,
+        marginLeft: 15,
+        marginBottom:0,
+        fontWeight: "400",
+        opacity: 1,
+        color:COLORS.white
+      },
      
     })

@@ -30,12 +30,6 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
             });
     }, [navigation])
    
-  let secourisme = formation.filter(
-    (formation) => formation.categorie.nom === 'secourisme' 
-  );
-  let Mannequin  = formation.filter(
-    (formation) => formation.categorie.nom === 'Mannequin formation' 
-  );
   
  
 
@@ -90,7 +84,7 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
       <ScrollView
       >
         {
-          categories.map(item => {
+          typeof categories !== "undefined" && categories.map(item => {
             let category = formation.filter(
               (formation) => formation.categorie.nom === item.nom
             );

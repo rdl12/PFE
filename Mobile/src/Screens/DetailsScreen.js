@@ -123,28 +123,7 @@ const DetailsScreen = ({route,navigation}) => {
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
 
-           {/* Header */}
-              <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
-                  <TouchableOpacity
-                      style={{ marginLeft: -8 }}
-                      onPress={() => navigation.goBack()}
-                  >
-                      <Image
-                          source={images.back_arrow}
-                          resizeMode="contain"
-                          style={{
-                              width: 30,
-                              height: 30,
-                              tintColor: COLORS.black
-                          }}
-                      />
-                  </TouchableOpacity>
-
-                  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Details</Text>
-                  </View>
-
-               </View>
+      
       
 
           {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
