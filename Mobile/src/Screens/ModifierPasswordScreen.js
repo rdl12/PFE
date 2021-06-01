@@ -27,13 +27,13 @@ const ModifierPasswordScreen = ({navigation}) => {
 
     const submit = () => {
       
-            dispatch(modifier_Password(nouvpassword,ancpassword,userEmail))
+            dispatch(modifier_Password(nouvpassword,ancpassword,userEmail,navigation))
         
       }
     return (
-        <View style = {{flex:1}}>
+        <SafeAreaView style = {{flex:5}}>
              {/* Navigation header */}
-             <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 }}>
+             <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3,backgroundColor:COLORS.primary, marginBottom:20 }}>
                   <TouchableOpacity
                       style={{ marginLeft: -8 }}
                       onPress={() => navigation.goBack()}
@@ -44,13 +44,13 @@ const ModifierPasswordScreen = ({navigation}) => {
                           style={{
                               width: 30,
                               height: 30,
-                              tintColor: COLORS.black
+                              tintColor: COLORS.WHITE
                           }}
                       />
                   </TouchableOpacity>
 
                   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Modifier Mot de Passe</Text>
+                      <Text style={{ ...FONTS.h2, color: COLORS.WHITE }}>Modifier Mot de Passe</Text>
                   </View>
 
               </View>
@@ -68,17 +68,17 @@ const ModifierPasswordScreen = ({navigation}) => {
 
           <Block safe flex middle >
             <Block style={styles.registerContainer}>
-              <Block flex={0.35} middle style={styles.socialConnect}>
+              <Block flex={0.6} middle style={styles.socialConnect}>
                     <Text bold color={COLORS.black} size={32}>
                    <Text color="#8898AA" size={18}> /  Reset Password</Text> 
                     </Text>
-                    <Icon name="unlock-alt" size={80}  resizeMode="contain" color={COLORS.darkgray} style={{alignSelf:'center'}}/>
+                    <Icon name="unlock-alt" size={80}  resizeMode="contain" color={COLORS.darkgray} style={{alignSelf:'center', marginTop:30}}/>
                    
               </Block>
               <Block flex>
                 <Block flex center>
                   <KeyboardAvoidingView
-                    style={{ flex: 1 }}
+                    style={{ flex: 0.8 }}
                     behavior="padding"
                     enabled
                   >
@@ -126,7 +126,7 @@ const ModifierPasswordScreen = ({navigation}) => {
           </Block>
    
       </Block>
-        </View>
+        </SafeAreaView>
     )
 }
 

@@ -636,7 +636,7 @@ export const Reset_Password = (email) =>{
   
 }
 
-export const modifier_Password = (password,ancpassword,email) =>{
+export const modifier_Password = (password,ancpassword,email,navigation) =>{
   let data = {
      "email":email,
      "password": password,
@@ -653,11 +653,12 @@ export const modifier_Password = (password,ancpassword,email) =>{
     })
     .then((response) => {
       response.text().then((data) => {
-      if(data === 'false'){
-        Alert.alert("mot de passe incorrecte");
+      if(data === 'true'){
+        Alert.alert("votre mot de passe a été changé");
+        navigation.navigate('Home')
       }
       else {
-        Alert.alert("mot de passe changed");
+        Alert.alert("mot de passe entré faux");
       }
       }
         )

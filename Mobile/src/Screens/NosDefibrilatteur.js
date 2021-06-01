@@ -104,13 +104,14 @@ const NosDefibrilatteur = ({navigation}) => {
             <View>
                     <Text style={{ fontWeight:'700',fontSize:15,color: COLORS.BLACK,marginTop:20,marginLeft:30 }}>DefibTech est le leader du mlarcher dans le domaine des defibrillateurs</Text>
                     <Image
-                        source={{uri : 'https://www.defibtech-aed.ch/wp-content/uploads/2018/07/logo.png'}}
+                        source={ images.defib_tech}
                         resizeMode="contain"
                         style={{
-                            width: windowWidth,
-                            height: 80,
+                            alignSelf:'center',
+                            width: windowWidth*0.8,
+                            height: 70,
                             marginTop:10,
-                            marginLeft:-20,
+                            marginBottom:10
                         }}
                     /> 
              </View>

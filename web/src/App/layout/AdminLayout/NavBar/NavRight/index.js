@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Dropdown,Badge} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from "react-router-dom";
-
+import {Link} from 'react-router-dom';
 import ChatList from './ChatList';
 import Aux from "../../../../../hoc/_Aux";
 import DEMO from "../../../../../store/constant";
@@ -30,13 +30,19 @@ class NavRight extends Component {
      
       }
 
-     logout = () => {
+    logout = () => {
       
        localStorage.clear()
        this.props.history.push("/auth/signin-1");
        
     }
-   
+
+    check = () => {
+
+    }
+
+    list = this.props.Notifs.filter((item) => item.etat === "non traiter")
+
     render() {
       
         return (
@@ -46,14 +52,14 @@ class NavRight extends Component {
                     <li>
                         <Dropdown alignRight={!this.props.rtlLayout}>
                             <Dropdown.Toggle variant={'link'} id="dropdown-basic">
-                            <Badge variant="danger" className="ml-5">{this.props.Notifs.length}</Badge>
+                            <Badge variant="danger" className="ml-5">{this.props.Notifs.filter((item) => item.etat === "non traiter").length}</Badge>
                             <i className="icon feather icon-bell"/>
                             </Dropdown.Toggle>
-                            <Dropdown.Menu alignRight className="notification">
+                            <Dropdown.Menu alignRight className="notification overflow-auto" style={{height: 300}}>
                                 <div className="noti-head">
                                     <h6 className="d-inline-block m-b-0">Notifications</h6>
                                     <div className="float-right">
-                                        <a href={DEMO.BLANK_LINK}>clear all</a>
+                                        <a href={DEMO.BLANK_LINK} >clear all</a>
                                     </div>
                                 </div>
                                 
@@ -62,9 +68,10 @@ class NavRight extends Component {
                                         <p className="m-b-0">NEW</p>
                                     </li>
                                 {typeof this.props.Notifs !== "undefined" &&
-                                 this.props.Notifs.map((item,index) => 
+                                 this.props.Notifs.filter((item) => item.etat === "non traiter").map((item,index) => 
                                  
-                                    <li className="notification" key = {index}>
+                                    <li className="notification" key = {index} style={{cursor:'pointer'}}>
+                                        <Link to={`/Formation/Detail/${item.formation.id}`}>
                                         <div className="media">
                                             <img className="img-radius" src={Avatar1} alt="Generic placeholder"/>
                                             <div className="media-body">
@@ -73,6 +80,7 @@ class NavRight extends Component {
                                                 <p>Inscrit dans la {item.formation.nom}</p>
                                             </div>
                                         </div>
+                                        </Link>
                                     </li>
                                  )}
                                    

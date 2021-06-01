@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import Aux from "../../hoc/_Aux";
-import {Delete_Formation, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation} from '../../store/actions'
+import {Delete_Formation, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation,Delete_Subscription,Modify_subs} from '../../store/actions'
 
 
 function FormationDetail() {
@@ -28,18 +28,24 @@ function FormationDetail() {
     const handleShow = () => setShow(true);
 
 
-    useEffect(() => {
-      dispatch(Fetch_Formation_ById(id))
-      dispatch(Fetch_Subscribed_people())
-      dispatch(Fetch_date_Formation(id))
+useEffect(() => {
+    dispatch(Fetch_Formation_ById(id))
+    dispatch(Fetch_Subscribed_people())
+    dispatch(Fetch_date_Formation(id))
 
-      setTimeout(() => { setFormation(detail)
+    setTimeout(() => { setFormation(detail)
         const filter_subbed =  people_subbed.filter(
           (sub) => sub.formation.nom === detail.nom 
         );
         setinscrits(filter_subbed)
 
     },200)
+
+    setTimeout(() => { 
+        {typeof inscrits !== "undefined" &&  inscrits.map((item) =>{ item.etat="Traité"
+         Modify_subs(item)})}
+
+    },500)
          
     }, [Formation])
 
@@ -49,6 +55,12 @@ function FormationDetail() {
     const Delete = () => {
         dispatch(Delete_Formation(id))
         window.location.href = "/Formation/list"
+    }
+
+    const Delete_subs = (id) => {
+        console.log("ggggg")
+        dispatch(Delete_Subscription(id))
+        //window.location.href = "/Formation/Inscrit"
     }
     
     const Save = () => {
@@ -130,13 +142,14 @@ function FormationDetail() {
                     </thead>
                     <tbody>
                         {typeof inscrits !== "undefined" &&  users.map(item => 
-                        <tr key = {item.id}>
+                        <tr key = {item.id}  onClick={()=> Delete_subs(item.id)}>
                             <td>{item.user.firstName}</td>
                             <td>{item.user.lastName}</td>
                             <td>{item.user.email}</td>
                             <td>{item.user.telephone}</td>
                             <td>{item.formation.nom}</td>
                             <td>{item.date_inscription}</td>
+                            <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}}>supprimer</td>
                         </tr>)
                         }
                     </tbody>
@@ -158,7 +171,7 @@ function FormationDetail() {
                     </thead>
                     <tbody>
                         {typeof inscrits !== "undefined" && Formation.nbr_entreprise !== 0 && entrprise.map(item => 
-                        <tr key = {item.id}>
+                        <tr key = {item.id}  onClick={()=> Delete_subs(item.id)}>
                             <td>{item.user.firstName}</td>
                             <td>{item.user.email}</td>
                             <td>{item.user.telephone}</td>
@@ -166,6 +179,7 @@ function FormationDetail() {
                             <td>{item.entreprise.telephone}</td>
                             <td>{item.formation.nom}</td>
                             <td>{item.date_inscription}</td>
+                            <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}}>supprimer</td>
                         </tr>
                         )
                         }

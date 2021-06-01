@@ -58,6 +58,7 @@ const himaya_logo = require("../../assets/images/himaya_logo.png");
 const individu_icon = require("../../assets/images/individu_icon.png");
 const entreprise_icon = require("../../assets/images/entreprise_icon.png");
 const book_icon = require("../../assets/images/book_icon.png");
+const defib_tech = require("../../assets/images/defib_tech.png");
 
 export default {
     Home_image,
@@ -119,7 +120,8 @@ export default {
     himaya_logo,
     individu_icon,
     entreprise_icon,
-    book_icon
+    book_icon,
+    defib_tech
 
 
 }

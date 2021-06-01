@@ -128,8 +128,8 @@ function FormationAdd() {
                        </Form.Group>
                         
                       </Form>
-                      <Button variant="primary" onClick = {submit}>
-                         Submit
+                      <Button variant="primary" onClick = {submit} style={{float : "right"}}>
+                         Ajouter
                      </Button>
                     </Card.Body>
             </Card>
@@ -167,7 +167,7 @@ function FormationAdd() {
                     Close
                 </Button>
                 <Button variant="primary" onClick={Save}>
-                    Save Changes
+                    Ajouter
                 </Button>
                 </Modal.Footer>
          </Modal>

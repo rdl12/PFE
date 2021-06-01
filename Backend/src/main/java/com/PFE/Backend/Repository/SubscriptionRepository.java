@@ -1,10 +1,12 @@
 package com.PFE.Backend.Repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.concurrent.Flow.Subscription;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.PFE.Backend.entities.Subcription;
 
 public interface SubscriptionRepository extends JpaRepository<Subcription,Long> {
-
+	
+	public Subcription findById(long Id);
 }
