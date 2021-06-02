@@ -9,9 +9,8 @@ import {
 } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
-
+import Dialog from "react-native-dialog";
 import { windowHeight, windowWidth } from '../utils/Dimentions';
-
 import { HelpAction } from '../redux/actions'
 import { useDispatch } from 'react-redux';
 
@@ -19,7 +18,9 @@ import { useDispatch } from 'react-redux';
 
 const LocationScreen = ({navigation}) => {
   const [lat, setlat] = useState('')
-  const [long, setlong] = useState('initialState')
+  const [long, setlong] = useState('')
+  const [success, setsucess] = useState(false)
+
   Geolocation.getCurrentPosition(data => {
         setlat(data.coords.latitude) ; 
         setlong(data.coords.longitude);  
@@ -34,7 +35,11 @@ const LocationScreen = ({navigation}) => {
       "lng":long,
       "radius":100.0
     }
-       HelpAction(object)
+   // HelpAction(object)
+    setsucess(!success)
+    setTimeout(() => {
+       setsucess(false)
+    }, 2000);
   }
 
 
@@ -42,7 +47,7 @@ const LocationScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
        {/* Header */}
-       <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
+       <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, }}>
                   <TouchableOpacity
                       style={{ marginLeft: -8 }}
                       onPress={() => navigation.goBack()}
@@ -97,6 +102,20 @@ const LocationScreen = ({navigation}) => {
           <Text style={{fontSize:20,color:COLORS.WHITE, letterSpacing:2}}>demande d'aide</Text>
         </TouchableOpacity>
       </View>
+      <Dialog.Container visible={success}>
+                    <Image
+                        source={images.book_icon}
+                        resizeMode="contain"
+                        style={{
+                            width: 300,
+                            height: 100,
+                        }}
+                    />
+                    <Dialog.Description>
+                    demande d'aide envoyé avec succes
+                    </Dialog.Description>
+                   
+      </Dialog.Container>
     </View>
   );
 };

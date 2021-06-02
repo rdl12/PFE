@@ -75,7 +75,7 @@ class AboutScreen extends Component {
     _renderHeader(section, index, isActive, sections) {
         return (
           <Animatable.View
-            style={{backgroundColor:COLORS.WHITE, padding:15,paddingTop:20,paddingBottom:20,marginBottom:10,  shadowColor: "#000",
+            style={{backgroundColor:COLORS.WHITE, padding:10,paddingTop:20,paddingBottom:20,marginBottom:10,  shadowColor: "#000",
              underlayColor:"#ffffff00",
                     shadowOffset: {
                     width: 0,
@@ -139,7 +139,7 @@ class AboutScreen extends Component {
                   </TouchableOpacity>
 
                   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>Statistique</Text>
+                      <Text style={{ ...FONTS.h2, color: COLORS.black }}>F.A.Q</Text>
                   </View>
 
                </View>
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
                 shadowRadius: 9.51,
                 
             elevation: 5,},
-    headerText :{...FONTS.h2, color: COLORS.black, alignSelf:'center'},
+    headerText :{...FONTS.h3, color: COLORS.black, alignSelf:'center'},
     content : { backgroundColor:COLORS.WHITE, padding:20, margin:10, backgroundColor: 'rgba(255,255,255,1)' },
     contentText : {...FONTS.h4, color: COLORS.black, alignSelf:'center', margin:5},
     

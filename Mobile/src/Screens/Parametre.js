@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react'
-import { View,Text,StyleSheet,Image,ScrollView,SafeAreaView} from 'react-native'
+import { View,Text,StyleSheet,Image,ScrollView,SafeAreaView,  PermissionsAndroid} from 'react-native'
 import {Avatar,Title,Caption,List,Switch } from 'react-native-paper';
 import { COLORS, Colors, icons,images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
@@ -12,7 +12,27 @@ const parametre = () => {
     const [IsEnabeld, setIsEnabeld] = useState(false)
     const location = useBackgroundGeolocationTracker(IsEnabeld); 
   
-  
+    if(isSwitchOn){
+        try {
+            const granted =  PermissionsAndroid.request(
+              PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
+              {
+                'title': 'Example App',
+                'message': 'Example App access to your location '
+              }
+            )
+            if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+              console.log("You can use the location")
+              //alert("You can use the location");
+            } else {
+              console.log("location permission denied")
+              alert("Location permission denied");
+            }
+          } catch (err) {
+            console.warn(err)
+          }
+        
+    }
     const onToggleSwitch = () => {
         setIsSwitchOn(!isSwitchOn)
         setIsEnabeld(!IsEnabeld)

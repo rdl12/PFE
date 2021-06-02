@@ -40,7 +40,7 @@ const HomeScreen = ({navigation,route}) => {
                 style={styles.menu}
                 source={images.menu_icon}
                 resizeMode ='contain'
-                tintColor={COLORS.black}/>
+                tintColor={COLORS.WHITE}/>
                 </TouchableOpacity>
                </View>
                {/* <Image 
@@ -49,12 +49,15 @@ const HomeScreen = ({navigation,route}) => {
                 /> */}
                 {LoginInfo.isLoggedIn ? (<Icon   name="comments" size={37}  
                 style={{display:'flex',flexDirection:'row'}} 
-                color="black" 
+                color="white" 
                 onPress = {() => navigation.navigate('chat')}  />):null}
            </View>
        <View style = {styles.bigContainer}>
             <Text style={[styles.headerDate]}>
-                {currentDate.toUpperCase()}
+                {currentDate.toUpperCase().split(' ')[0]}
+             </Text>
+             <Text style={[styles.footerDate]}>
+                {currentDate.toUpperCase().split(' ')[1]}{currentDate.toUpperCase().split(' ')[2]}{currentDate.toUpperCase().split(' ')[3]}
              </Text>
        <View style = {styles.container}>
                <View style = {styles.imageContainer}>
@@ -171,7 +174,7 @@ const styles = StyleSheet.create({
         marginBottom:0,
         margin:27,
         borderRadius:10,
-        elevation:5
+        elevation:8
         
     },
     text:{
@@ -186,11 +189,26 @@ const styles = StyleSheet.create({
 
     },
     headerDate: {
-        fontSize: 14,
+        fontSize: 40,
         // width: 120,
         paddingTop: 5,
-        marginLeft: 15,
-        marginBottom:0,
+        //marginLeft: 15,
+        alignSelf:'center',
+        marginTop:-80,
+        marginBottom:20,
+        fontWeight: "400",
+        opacity: 1,
+        color:COLORS.white
+      },
+
+      footerDate: {
+        fontSize: 20,
+        // width: 120,
+        paddingTop: 5,
+        //marginLeft: 15,
+        alignSelf:'center',
+        marginTop:-20,
+        marginBottom:20,
         fontWeight: "400",
         opacity: 1,
         color:COLORS.white
