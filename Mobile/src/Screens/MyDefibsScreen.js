@@ -14,10 +14,10 @@ class MyDefibsScreen extends Component{
             },
            
         }
-    }
+    } 
 
     componentDidMount(){
-        this.props.Fetch_Defib_User("ramirachid316@gmail.com")
+        this.props.Fetch_Defib_User(this.props.email)
         console.log(this.props.defibs.Defibrilatteur_user)
     }
 
@@ -76,7 +76,7 @@ class MyDefibsScreen extends Component{
                 <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
                   <TouchableOpacity
                       style={{ marginLeft: -8 }}
-                      onPress={() => this.props.navigation.goBack()}
+                      onPress={() => this.props.navigation.navigate('Profil')}
                   >
                       <Image
                           source={images.back_arrow}
@@ -112,16 +112,17 @@ class MyDefibsScreen extends Component{
    
 }
 const mapStateToProps = (state) => {
+    const { loginReducer } = state
     const { Fetch_Defib_User } = state
     const { Fecth_DefiById } = state
-    return {defibs : Fetch_Defib_User.Defibrilatteur_user}
+    return {defibs : Fetch_Defib_User.Defibrilatteur_user, email : loginReducer.userId}
   }
 const mapDispatchToProps = (dispatch) => {
 
     return {
         Adress: (state) => dispatch(Adress(state)),
         Fetch_Defib_User: (email) => dispatch(Fetch_Defib_User(email)),
-        Fecth_DefiById : (id) => dispatch(Fecth_DefiById(id))
+        Fecth_DefiById : (id) => dispatch(Fecth_DefiById(id)),
 
     }
 };

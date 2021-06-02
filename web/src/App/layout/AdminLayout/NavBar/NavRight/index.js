@@ -131,7 +131,7 @@ class NavRight extends Component {
                                     </a>
                                 </div>
                                 <ul className="pro-body">
-                                    <li><a href={DEMO.BLANK_LINK} className="dropdown-item"><i className="feather icon-user"/> Profile</a></li>
+                                    <li><Link to={`/Profil/ModifyPassword`} className="dropdown-item"><i className="feather icon-user"/> modifier mote de passe</Link></li>
                                     <li><a href={DEMO.BLANK_LINK} className="dropdown-item" onClick={() => {this.setState({listOpen: true});}}><i className="feather icon-mail"/> My Messages</a></li>
                                     <li ><a href={DEMO.BLANK_LINK} className="dropdown-item"  onClick = {() => this.logout()}><i className="feather icon-unlock" /> Deconnexion</a></li>
                                 </ul>

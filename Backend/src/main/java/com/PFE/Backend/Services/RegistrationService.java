@@ -27,10 +27,10 @@ public class RegistrationService {
 	  
 	  public  String register(@RequestBody RegistrationRequest request) {
 		  System.out.println("request :"+ request);
-		  boolean isValidEmail = emailValidator.test(request.getEmail());
+		  /*boolean isValidEmail = emailValidator.test(request.getEmail());
 	      if (!isValidEmail) {
 	            throw new IllegalStateException("email not valid");
-	        }
+	        }*/
 	      String token = appUserService.signUpUser(
 	                new AppUser(
 	                        request.getFirstName(),

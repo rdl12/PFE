@@ -755,3 +755,63 @@ export const Modify_subs = (subs) => {
       console.log(err);
   });
 }
+
+export const Reset_Password = (email) =>{
+  console.log(email)
+  return (dispatch) => {
+    return fetch(`${API_URI}/User/forgot-password/${email}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(email)
+    }).then((response)=>{
+      window.location.href='Home/auth/signin-1'
+    })
+    .catch((err) => {
+      alert("couldn't subscribe user ,please retry");
+      console.log(err);
+    });
+    
+  }
+  
+}
+
+export const modifier_Password = (password,ancpassword,email,navigation) =>{
+  let data = {
+     "email":email,
+     "password": password,
+     "ancienpassword":ancpassword
+  }
+  return (dispatch) => {
+    return fetch(`${API_URI}/User/Modify_Password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body:  JSON.stringify(data)
+    })
+    .then((response) => {
+      response.text().then((data) => {
+      if(data === 'true'){
+        alert("votre mot de passe a été changé");
+        localStorage.clear()
+        window.location.href='Home/auth/signin-1'
+      }
+      else {
+      alert("mot de passe entré faux");
+      }
+      }
+        )
+     })
+
+      .catch((err) => {
+      alert("couldn't post modify user ,please retry");
+      console.log(err);
+    });
+    
+  }
+  
+}

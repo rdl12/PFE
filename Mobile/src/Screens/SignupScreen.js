@@ -1,5 +1,5 @@
 import React ,{useState}  from 'react'
-import { View,Image,StyleSheet ,StatusBar,ImageBackground, KeyboardAvoidingView, TouchableOpacity} from 'react-native'
+import { View,Image,StyleSheet ,StatusBar,ImageBackground, KeyboardAvoidingView, TouchableOpacity, ScrollView} from 'react-native'
 import { useDispatch } from 'react-redux'
 import { Singup } from '../redux/actions';
 import { Block, Checkbox, Text, theme } from "galio-framework";
@@ -14,19 +14,21 @@ const SignupScreen = ({navigation}) => {
     const [email, setemail] = useState('');
     const [password, setPassword] = useState('');
     const [firstName, setfirstName] = useState('')
+    const [lasttName, setlastName] = useState('')
     const [Telephone, setTelephone] = useState('')
-    const [success, setsucess] = useState(false) 
+    const [success, setsucess] = useState(false)
+    const [success_sign, setsucess_sign] = useState(false)  
 
     const dispatch = useDispatch()
     const submit = () => {
       const object = {
           "firstName":firstName,
-          "lastName":"",
+          "lastName":lasttName,
           "email" : email,
           "telephone": Telephone,
           "password": password
       }
-      if(email== '' || password == '' || firstName == '' || telephone == '' || lastName == '' ){
+      if(email== '' || password == '' || firstName == '' || Telephone == ''  ){
         setsucess(!success)
         setTimeout(() => {
           setsucess(false)
@@ -34,7 +36,13 @@ const SignupScreen = ({navigation}) => {
       }
       else{
         dispatch(Singup(object))
+        setsucess_sign(!success_sign)
+       
       }
+    }
+    const ok = () =>{
+      setsucess_sign(false)
+      navigation.navigate('Login')
     }
      
     
@@ -47,37 +55,71 @@ const SignupScreen = ({navigation}) => {
                     </Dialog.Description>
                    
             </Dialog.Container>
+            <Dialog.Container visible={success_sign}>
+                    <Icon name="check-circle" size={80}  resizeMode="contain" color="green" style={{alignSelf:'center'}}/>
+                    <Dialog.Description>
+                             un email de verification vous a été envoyer
+                    </Dialog.Description>
+                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                                        <Dialog.Button label="Ok"  onPress={ok}/>
+                    </View>
+                   
+            </Dialog.Container>
         <StatusBar hidden />
 
           <Block safe flex middle>
             <Block style={styles.registerContainer}>
-            <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
-             
-              </ImageBackground>
+            
+              
               <Block flex>
-                <Block flex={0.06} center row>
-                    <Text bold color={COLORS.black} size={32}>
+              <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
+              <TouchableOpacity
+                      style={{ margin: 10, marginBottom:-30}}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.white
+                          }}
+                      />
+                  </TouchableOpacity>
+                <Block flex={0.25} center row>
+                  
+                    <Text bold color={COLORS.white} size={32}>
                       Sign Up <Text color="#8898AA" size={18}> /   Login </Text> 
                     </Text>
                 </Block>
+                
                 <Block flex center>
                   <KeyboardAvoidingView
-                    style={{ flex: 1 }}
+                    style={{ flex: 1, backgroundColor:COLORS.white, width:width, alignItems:'center' , borderTopLeftRadius : 50, borderTopRightRadius : 50, paddingTop:20 }}
                     behavior="padding"
                     enabled
                   >
+                    
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <ArInput
                         borderless
-                        placeholder="Name"
+                        placeholder="Email"
+                        onChangeText={(text) => setemail(text)}
+                      />
+                    </Block>
+                    <Block width={width * 0.8} style={{ marginBottom: 15 }}>
+                      <ArInput
+                        borderless
+                        placeholder="FirstName"
                         onChangeText={(text) => setfirstName(text)}
                       />
                     </Block>
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
                       <ArInput
                         borderless
-                        placeholder="Email"
-                        onChangeText={(text) => setemail(text)}
+                        placeholder="LastName"
+                        onChangeText={(text) => setlastName(text)}
                       />
                     </Block>
                     <Block width={width * 0.8} style={{ marginBottom: 15 }}>
@@ -140,7 +182,9 @@ const SignupScreen = ({navigation}) => {
                   </Block>
                       
                 </Block>
+                </ImageBackground>
               </Block>
+             
             </Block>
           </Block>
    
@@ -150,7 +194,7 @@ const SignupScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   background_image:{
-    flex:0.45,
+    flex:1,
     width:width,
   },
 

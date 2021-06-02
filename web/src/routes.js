@@ -34,6 +34,7 @@ const FormationDetail = React.lazy(() => import('./Demo/Formation/FormationDetai
 const ProduitList = React.lazy(() => import('./Demo/Produit/ProduitList'));
 const ProduitAdd = React.lazy(() => import('./Demo/Produit/ProduitAdd'));
 const ProduitDetail = React.lazy(() => import('./Demo/Produit/ProduitDetail'));
+const ModifyPassword = React.lazy(() => import('./Demo/Profil/ModifyPassword/ModifyPassword'));
 
 const routes = [
     { path: '/dashboard/default', exact: true, name: 'Default', component: DashboardDefault },
@@ -57,6 +58,7 @@ const routes = [
     { path: '/Produit/list', exact: true, name: 'Liste des produits', component: ProduitList },
     { path: '/Produit/Ajouter', exact: true, name: 'Ajout de produit', component: ProduitAdd },
     { path: '/Produit/Detail/:id', exact: true, name: 'detail de produit', component: ProduitDetail },
+    { path: '/Profil/ModifyPassword', exact: true, name: 'modifer mot de passe ', component: ModifyPassword },
 ];
 
 export default routes;
