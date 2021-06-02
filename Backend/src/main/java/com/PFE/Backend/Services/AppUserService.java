@@ -105,13 +105,13 @@ public class AppUserService implements UserDetailsService  {
 
 	public String ResetPassword(String email) {;
 		  String string = email.replaceAll("^\"|\"$", "");
+		  System.out.println(string);
 		  AppUser appUserOld = appUserRepository.findByEmail(string).get();
 		  String token = UUID.randomUUID().toString().substring(0, 7);
 		  String encodedPassword = bCryptPasswordEncoder
 	                .encode(token);
 		  appUserOld.setPassword(encodedPassword);
 		  appUserRepository.save(appUserOld);
-		  System.out.println("changed password");
 	      emailSender.send( email,buildEmail(email, token));
 	      
 	     return email;

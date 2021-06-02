@@ -4,17 +4,25 @@ import { useDispatch,useSelector } from 'react-redux';
 import { NavLink, Route } from 'react-router-dom';
 import Aux from "../../../hoc/_Aux";
 import Breadcrumb from "../../../App/layout/AdminLayout/Breadcrumb";
-import { Reset_Password } from '../../../store/actions';
+import { modifier_Password } from '../../../store/actions';
 
-function ResetPassword(){
+function ModifyPassword({navigation}){
 
-    const [username, setUsername] = useState('');
+
+    const [ancpassword, setancpassword] = useState('');
+    const [nouvpassword, setnouvpassword] = useState('');
     const [success, setsucess] = useState(false) 
     const dispatch = useDispatch()
+    let userEmail = localStorage.getItem('username');
+
+    
+
+   
 
     const submit = () => {
-         dispatch(Reset_Password(username))
-         console.log(username)
+        dispatch(modifier_Password(nouvpassword,ancpassword,userEmail,navigation))
+        
+        //this.props.history.push("/auth/signin-1");
       }
 
         return(
@@ -33,12 +41,15 @@ function ResetPassword(){
                                 <div className="mb-4">
                                     <i className="feather icon-user-plus auth-icon"/>
                                 </div>
-                                <h3 className="mb-4">Reset Password</h3>
+                                <h3 className="mb-4">Changer mot de passe</h3>
                                 <div className="input-group mb-3">
-                                    <input type="email" className="form-control" placeholder="Email" value = {username} onChange={e => setUsername(e.target.value)}/>
+                                    <input type="password" className="form-control" placeholder="Ancien mot de passe" value = {ancpassword} onChange={e => setancpassword(e.target.value)}/>
                                 </div>
-                                <button className="btn btn-primary shadow-2 mb-4" onClick={submit}>Réinitialiser</button>
-                               
+                                <div className="input-group mb-3">
+                                    <input type="password" className="form-control" placeholder="nouveau mot de passe" value = {nouvpassword} onChange={e => setnouvpassword(e.target.value)}/>
+                                </div>
+                                <button className="btn btn-primary shadow-2 mb-4" onClick={submit}>Changer</button>
+                                <p className="mb-0 text-muted">Vous avez déjà un compte? <NavLink to="/auth/signin-1">Login</NavLink></p>
                             </div>
                         </div>
                     </div>
@@ -47,4 +58,4 @@ function ResetPassword(){
         );
     }
 
-export default ResetPassword
+export default ModifyPassword
