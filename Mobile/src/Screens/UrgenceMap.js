@@ -29,7 +29,7 @@ const UrgenceMap = ({ navigation, route }) => {
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })    
     useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
-        setTimeout(()=>setmarginBottom(0),10)
+        setTimeout(()=>setmarginBottom(0),50)
         const {id} = route.params
         parent.setOptions({
             tabBarVisible: false,  

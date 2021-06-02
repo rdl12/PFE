@@ -213,6 +213,7 @@ class ListDefibScreen extends Component {
                  loadingEnabled = {true}
                  loadingIndicatorColor = {COLORS.blue}
                  showsTraffic ={true}
+                 showsMyLocationButton = {true}
                  
              
                >
