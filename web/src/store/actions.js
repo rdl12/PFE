@@ -162,8 +162,8 @@ return  (dispatch) => {
        if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
         dispatch(setLoginState({ userId: username })); // our action is called here
         //alert('logged in', username);
-        history.push('/dashboard/default')
         localStorage.setItem('username',username)
+        window.location.reload()
       } else {
          alert('Login Failed', 'Username or Password is incorrect');
       }

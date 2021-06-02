@@ -9,6 +9,7 @@ import Loader from './layout/Loader'
 import Aux from "../hoc/_Aux";
 import ScrollToTop from './layout/ScrollToTop';
 import routes from "../route";
+import route from "../route"
 import firebase from '../firebase'
 import { Fetch_Subscribed_people,Send_Notif } from '../store/actions';
 import 'firebase/messaging';
@@ -18,7 +19,7 @@ const AdminLayout = Loadable({
     loader: () => import('./layout/AdminLayout'),
     loading: Loader
 });
-
+const Signin1 = React.lazy(() => import('../Demo/Authentication/SignIn/SignIn1'));
 class App extends Component {
     componentDidMount(){
     const messaging = firebase.messaging()
@@ -52,8 +53,22 @@ class App extends Component {
     }
     render() {
      
-     
-        const menu = routes.map((route, index) => {
+      let menu;
+      if(localStorage.getItem('username') !== null){
+         menu = routes.map((route, index) => {
+             return (route.component) ? (
+                 <Route
+                     key={index}
+                     path={route.path}
+                     exact={route.exact}
+                     name={route.name}
+                     render={props => (
+                         <route.component {...props} />
+                     )} />
+             ) : (null);
+         });
+      }else{
+        menu = route.map((route, index) => {
           return (route.component) ? (
               <Route
                   key={index}
@@ -64,15 +79,17 @@ class App extends Component {
                       <route.component {...props} />
                   )} />
           ) : (null);
-        });
+      });
+      }
+  
 
         return (
             <Aux>
                 <ScrollToTop>
                     <Suspense fallback={<Loader/>}>
                         <Switch>
-                            {menu}
-                            <Route path="/" component={AdminLayout} />
+                          {menu}
+                         <Route path="/" component={AdminLayout} />
                         </Switch>
                     </Suspense>
                 </ScrollToTop>

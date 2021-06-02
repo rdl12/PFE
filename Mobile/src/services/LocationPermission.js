@@ -16,7 +16,7 @@ export async function requestLocationPermission()
       //alert("You can use the location");
     } else {
       console.log("location permission denied")
-      alert("Location permission denied");
+      //alert("Location permission denied");
     }
   } catch (err) {
     console.warn(err)

@@ -54,19 +54,24 @@ class AdminLayout extends Component {
         document.addEventListener('webkitfullscreenchange', this.fullScreenExitHandler);
         document.addEventListener('mozfullscreenchange', this.fullScreenExitHandler);
         document.addEventListener('MSFullscreenChange', this.fullScreenExitHandler);
-
-        const menu = routes.map((route, index) => {
-            return (route.component) ? (
-                <Route
-                    key={index}
-                    path={route.path}
-                    exact={route.exact}
-                    name={route.name}
-                    render={props => (
-                        <route.component {...props} />
-                    )} />
-            ) : (null);
-        });
+        let menu;
+         if(localStorage.getItem('username') != null){
+            menu = routes.map((route, index) => {
+                return (route.component) ? (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        exact={route.exact}
+                        name={route.name}
+                        render={props => (
+                            <route.component {...props} />
+                        )} />
+                ) : (null);
+            });
+         }else{
+             menu = null
+         }
+     
 
         return (
             <Aux>
