@@ -174,6 +174,10 @@ class ListDefibScreen extends Component {
         );
     
     render (){
+      
+         let markers_filtered = this.props.markers.filter(
+           (defib) => defib.etat.etat === 'validé'
+         );
         return (
             <View style = {{flex:2}}>
             <BaseMapSwitcher  />
@@ -241,7 +245,7 @@ class ListDefibScreen extends Component {
                         console.log(`Distance: ${result.distance} km`)
                         console.log(`Duration: ${result.duration} min.`)}}
                  />}
-            {this.props.markers && this.props.markers.map(marker => (
+            {markers_filtered && markers_filtered.map(marker => (
                     <Marker
                         key={marker.id}
                         coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
@@ -259,7 +263,7 @@ class ListDefibScreen extends Component {
 
             {this.state.isList ?(
             <FlatList
-               data = {this.props.markers}
+               data = {markers_filtered}
                renderItem={this.renderItem}
                keyExtractor={item => item.id.toString()}
                style={{flex: 0.5}}

@@ -40,6 +40,13 @@ public class SubscriptionController {
 	 @DeleteMapping(value = "/delete/{id}")
 	   public void Delete(@PathVariable long id ){
 		 Subcription subcription = subscriptionService.findbyId(id);
+		 Formation formation = subcription.getFormation();
+		 if(subcription.getEntreprise() == null  ) {
+			 formation.setNbr_inscrit(formation.getNbr_inscrit() - 1);
+		 }
+		 else {
+			 formation.setNbr_entreprise(formation.getNbr_entreprise() - 1);
+		 }
 		 subscriptionService.delete(subcription);
 	    }
 	 @PatchMapping("/update")//replace an existing Resource entirely  // @PatchMapping partial update
