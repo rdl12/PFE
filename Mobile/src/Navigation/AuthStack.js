@@ -93,7 +93,7 @@ const ProfilStack = ({navigation}) => (
        <Stack.Screen
         name="Details"
         component={DetailsScreen}
-        options={{headerShown: false}}
+        options={{headerShown: true}}
       />
 
     </Stack.Navigator>

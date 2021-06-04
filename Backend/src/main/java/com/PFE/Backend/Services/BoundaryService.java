@@ -28,4 +28,9 @@ public class BoundaryService {
 		 return  boundaryRepo.findById(id);
 	}
 
+	public void delete(Boundary boundary) {
+		boundaryRepo.delete(boundary);
+		
+	}
+
 }

@@ -15,6 +15,7 @@ import { LocalNotification } from './src/services/PushNotificationService';
 //import { getBoundaryData } from './src/services/TrackingService'
 import { API_URI } from './src/utils/constants/Api'
 import messaging from '@react-native-firebase/messaging';
+import { Delete_Boundary } from './src/redux/actions';
 
 const getBoundaryData = async () => {
   const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
@@ -29,6 +30,7 @@ const getBoundaryData = async () => {
   })
   Boundary.on(Events.ENTER, id => {
     LocalNotification(id)
+    Delete_Boundary(id)
     })
    
 

@@ -40,7 +40,8 @@ const FormationDetailsScreen = ({ navigation, route }) => {
      typeof date_formation !== 'undefined' && date_formation.forEach((day) => {
       newDaysObject[day.date.split('T')[0]] = {
           selected: true,
-          marked: true
+          marked: true,
+          selectedColor: (date.dateString ===day.date.split('T')[0] ?  'green' : 'blue')
       };
     });
 
@@ -97,8 +98,9 @@ const FormationDetailsScreen = ({ navigation, route }) => {
 
     const subscribe = () => {
         setVisible(!visible)
+        console.log(date)
         var subscribeData = {
-            "date_inscription" : new Date().toDateString(),
+            "date_inscription" : date.dateString,
             "formation" : formation,
             "user" : user.user
 
@@ -368,6 +370,7 @@ const FormationDetailsScreen = ({ navigation, route }) => {
                                             // Handler which gets executed when visible month changes in calendar. Default = undefined
                                             onMonthChange={(month) => {console.log('month changed', month)}}
                                             markedDates={newDaysObject}
+                                            
                                     />
                                     <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
                                         <Dialog.Button label="precedent"  onPress={() => status_fct()}/>

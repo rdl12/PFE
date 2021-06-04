@@ -43,7 +43,20 @@ const LoginScreen = ({navigation}) => {
           <Block safe flex middle >
             <Block style={styles.registerContainer}>
             <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
-             
+              <TouchableOpacity
+                      style={{ margin: 10, marginBottom:-30}}
+                      onPress={() => navigation.goBack()}
+                  >
+                      <Image
+                          source={images.back_arrow}
+                          resizeMode="contain"
+                          style={{
+                              width: 30,
+                              height: 30,
+                              tintColor: COLORS.white
+                          }}
+                      />
+                  </TouchableOpacity>
              </ImageBackground>
               <Block flex={0.35} middle style={styles.socialConnect}>
                     <Text bold color={COLORS.black} size={32}>
