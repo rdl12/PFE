@@ -33,6 +33,14 @@ const getBoundaryData = async () => {
    
 
  }
+ const checkToken = async () => {
+  const fcmToken = await messaging().getToken();
+  if (fcmToken) {
+     console.log(fcmToken);
+  } 
+ }
+ 
+ checkToken();
 
  const backgroundJob = {
   jobKey: "myJob",

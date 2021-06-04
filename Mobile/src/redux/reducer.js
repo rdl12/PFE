@@ -6,8 +6,9 @@ export const loginReducer = (state = initialState, action) => {
     case t.SET_LOGIN_STATE:
       return {
         ...state,
+         isLoggedIn: true, // we set this as true on login
         ...action.payload, // this is what we expect to get back from API call and login page input
-        isLoggedIn: true, // we set this as true on login
+      
       };
     default:
       return state;
@@ -281,3 +282,4 @@ export const Fetch_stats_prov = (state = stat_prov_defib ,action) => {
   }
 
 }
+

@@ -3,7 +3,7 @@ import {  Here_API_Key ,API_URI} from '../utils/constants/Api';
 import { Alert } from 'react-native';
 import {store} from './store'
 // this is what our action should look like which dispatches the "payload" to reducer
-const setLoginState = (loginData) => {
+export const setLoginState = (loginData) => {
   return {
     type: t.SET_LOGIN_STATE,
     payload: loginData,
@@ -82,6 +82,7 @@ export const Fetch_defib_byId = (id) => {
     payload: id
  }
 }
+
 
 const SetMapState = (maptype) => {
   return {

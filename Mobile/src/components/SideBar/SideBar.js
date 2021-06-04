@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity,Image } from 'react-native';
-import {useSelector} from 'react-redux'
+import { View, TouchableOpacity,Image, Alert } from 'react-native';
+import {useSelector,useDispatch} from 'react-redux'
 import {
     Avatar,
     Title,
@@ -15,11 +15,18 @@ import {
 import { COLORS, images} from '../../Constantes'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {setLoginState} from '../../redux/actions'
 
 export function SideBar(props) {
  
     const LoginInfo = useSelector(state => state.loginReducer);
-   
+    const dispatch = useDispatch()
+     const Logout = () => {
+        dispatch(setLoginState({ isLoggedIn: false,
+            userId: ''}))
+        props.navigation.navigate('Home')
+        Alert.alert("logged out");
+     }
     return (
         <View style={{flex:1,}}>
         <DrawerContentScrollView {...props} >
@@ -255,7 +262,7 @@ export function SideBar(props) {
                              )}
                         label="Logout"
                         labelStyle={{ fontSize:15,  fontFamily:'cochin', fontWeight: "bold",right:20}}
-                        onPress={() => {props.navigation.navigate("")}}
+                        onPress={Logout}
                     />):(<DrawerItem 
                     style={{marginBottom:10,}}
                     icon={() => (

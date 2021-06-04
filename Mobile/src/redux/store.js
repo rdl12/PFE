@@ -28,7 +28,8 @@ const rootReducer = combineReducers({
   Product_Category_Reducer:Product_Category_Reducer,
   Fetch_Date_formation:Fetch_Date_formation,
   Fetch_stats_prov:Fetch_stats_prov,
-  Fetch_stats_etat:Fetch_stats_etat
+  Fetch_stats_etat:Fetch_stats_etat,
+ 
 
   
 });

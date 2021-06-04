@@ -1,13 +1,21 @@
 import React, { useEffect,useState } from 'react'
-import { View,StyleSheet,Image,SafeAreaView, ImageBackground, ScrollView, Text, } from 'react-native'
+import { View,StyleSheet,Image,SafeAreaView, ImageBackground, ScrollView, Text,Alert } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import {windowHeight,windowWidth} from '../utils/Dimentions'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
 import {Avatar,Title,Caption,List,Switch } from 'react-native-paper';
+import {setLoginState} from '../redux/actions'
 
 const ProfilScreen = ({navigation}) => {
     const LoginInfo = useSelector(state => state.loginReducer);
+    const dispatch = useDispatch()
+    const Logout = () => {
+        dispatch(setLoginState({ isLoggedIn: false,
+            userId: ''}))
+        navigation.navigate('Home')
+        Alert.alert("logged out");
+     }
     return (
        
        <SafeAreaView style = {styles.view}>
@@ -76,7 +84,7 @@ const ProfilScreen = ({navigation}) => {
                   />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress = {() => navigation.navigate('MyDefibs')} >
+            <TouchableOpacity onPress = {Logout} >
                  <List.Item
                     title="Deconnexion"
                      left={props => <List.Icon {...props} icon={images.login_icon} />}
