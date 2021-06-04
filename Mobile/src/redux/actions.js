@@ -673,3 +673,19 @@ export const modifier_Password = (password,ancpassword,email,navigation) =>{
   }
   
 }
+
+export const Delete_Boundary = (id) => {
+  return (dispatch) => {
+    return fetch(`${API_URI}/Boundary/delete/${id}`, {
+    method: 'DELETE',
+    
+  })
+.then((responseData) => {
+    console.log(
+        
+        "Deleted Boundary" + JSON.stringify(responseData)
+    )
+})
+
+}
+}

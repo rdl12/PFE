@@ -39,6 +39,12 @@ const LoginStack = ({navigation}) => (
         options={{headerShown: false}}
       />
 
+      <Stack.Screen
+        name="ResetPassword"
+        component={ResetPasswordScreen}
+        options={{headerShown: false}}
+      />
+
 
     </Stack.Navigator>
   );
@@ -159,11 +165,7 @@ const MapStack = ({navigation}) => (
         component={AboutScreen}
         options={{headerShown: false}}
         />
-        <Stack.Screen
-        name="ResetPassword"
-        component={ResetPasswordScreen}
-        options={{headerShown: false}}
-        />
+        
         
         
   
