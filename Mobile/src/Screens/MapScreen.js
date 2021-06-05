@@ -56,7 +56,7 @@ class MapScreen extends Component{
                             {...props}
                         /> ),
       });
-        setTimeout(()=>this.setState({marginBottom : 0}),10)
+        setTimeout(()=>this.setState({marginBottom : 0}),50)
         setTimeout(()=>this.props.Fecth_Defib(this.state.coords,1),100)
 
       
@@ -157,6 +157,7 @@ class MapScreen extends Component{
                 draggable
                 onDragEnd={(e) => this.getMarkerCordinate(e)}
                 coordinate = {this.state.coords}
+                pinColor={COLORS.primary}
                  
             />) : null }
            </MapView>

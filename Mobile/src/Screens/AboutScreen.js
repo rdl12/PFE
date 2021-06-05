@@ -84,6 +84,7 @@ const SECTIONS = [
 class AboutScreen extends Component {
     state = {
       activeSections: [],
+      activeSections_achat: [],
     };
 
     componentDidMount(){
@@ -163,11 +164,14 @@ class AboutScreen extends Component {
     _updateSections = (activeSections) => {
       this.setState({ activeSections });
     };
+    _updateSections_achat = (activeSections_achat) => {
+      this.setState({ activeSections_achat });
+    };
     
   
     render() {
       return (
-        <SafeAreaView >
+        <SafeAreaView style={{backgroundColor:COLORS.WHITE}}>
             <ScrollView >
                {/* Header */}
                <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
@@ -230,11 +234,11 @@ class AboutScreen extends Component {
                     <Text style={styles.titre}> Achat d'un defibrillateur :</Text>
                     <Accordion
                         sections={SECTIONS_achat}
-                        activeSections={this.state.activeSections}
+                        activeSections={this.state.activeSections_achat}
                         //renderSectionTitle={this._renderSectionTitle}
                         renderHeader={this._renderHeader}
                         renderContent={this._renderContent}
-                        onChange={this._updateSections}
+                        onChange={this._updateSections_achat}
                     />
                </View>
             </ScrollView>
@@ -248,7 +252,7 @@ class AboutScreen extends Component {
 export default AboutScreen
 
 const styles = StyleSheet.create({
-    titre : {...FONTS.h2,fontWeight:'bold', color: COLORS.primary, alignSelf:'center', margin:10},
+    titre : {...FONTS.h3,fontWeight:'bold', color: COLORS.primary, alignSelf:'center', margin:10},
     header :{ backgroundColor:COLORS.WHITE, padding:20, margin:10,  shadowColor: "#000",
                 shadowOffset: {
                 width: 0,

@@ -144,7 +144,7 @@ const StatistiqueScreen = ({navigation}) => {
             <Card style={styles.card} >
               <Card.Content style={{flexDirection:'row', alignContent:'center'}} >
                 <Icon name="medkit" size={30}  style={{marginLeft:10}} color = {COLORS.PRIMARY} />
-                <Text style={{ ...FONTS.h4, color: COLORS.black, marginLeft:13, marginTop:6 }}>Nombre de defibrillateurs : 1111  </Text>
+                <Text style={{ ...FONTS.h4, color: COLORS.black, marginLeft:13, marginTop:6 }}>Nombre de defibrillateurs : 17  </Text>
               </Card.Content>
             </Card>
 

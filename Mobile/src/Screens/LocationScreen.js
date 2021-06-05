@@ -35,7 +35,7 @@ const LocationScreen = ({navigation}) => {
       "lng":long,
       "radius":100.0
     }
-   // HelpAction(object)
+    HelpAction(object)
     setsucess(!success)
     setTimeout(() => {
        setsucess(false)
