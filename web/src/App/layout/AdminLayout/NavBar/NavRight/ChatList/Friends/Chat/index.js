@@ -32,10 +32,10 @@ const Chat = (props) => {
         
         e.preventDefault();
         let object = 
-            {"user": {"name": "admin", "_id": 2, "avatar": ""}, 
+            {"user": {"name": "admin", "_id": 2, "avatar": "https://www.himaya.ma/pub/media/logo/websites/1/Himaya_Logo.png"}, 
             "createdAt": new Date(),
             "_id": "lkanfewnfao233",
-            "messages": [{"type":2,"message":Message}]
+            "messages": [{"type":2,"message":Message,"date":new Date()}]
             }
           
              arr.push(object.messages[0])

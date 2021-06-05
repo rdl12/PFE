@@ -42,11 +42,11 @@ const ChatScreen = ({navigation}) => {
            arr.push({
              _id: Math.random(),
              text: msg.message,
-             createdAt: doc.data().createdAt.toDate(),
+             createdAt: msg.date.toDate(),
              user: {
                _id:  msg.type,
                name: doc.data().user.name,
-               avatar: doc.data().user.avatar,
+               avatar: images.himaya_logo,
              },
            })
            
@@ -93,7 +93,7 @@ const ChatScreen = ({navigation}) => {
           .collection('userChat')
           .doc(messages[0].user.name)
           .update({
-            messages: firestore.FieldValue.arrayUnion({"type":1,"message":messages[0].text})
+            messages: firestore.FieldValue.arrayUnion({"type":1,"message":messages[0].text, "date":new Date()}) 
           })
           .then(() => {
             console.log('added'); 
@@ -107,6 +107,7 @@ const ChatScreen = ({navigation}) => {
             _id: messages[0]._id,
             createdAt: new Date(),
             messages:[{
+              date :new Date() ,
               message:messages[0].text,
               type:1
             }],
