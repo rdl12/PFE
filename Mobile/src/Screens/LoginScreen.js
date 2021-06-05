@@ -30,7 +30,7 @@ const LoginScreen = ({navigation}) => {
     }
     return (
     
-      <Block flex middle  style = {{backgroundColor:COLORS.white}}>
+      <Block flex safe middle  style = {{backgroundColor:COLORS.white}}>
             <Dialog.Container visible={success}>
                     <Icon name="times-circle" size={80}  resizeMode="contain" color="red" style={{alignSelf:'center'}}/>
                     <Dialog.Description>
@@ -44,7 +44,7 @@ const LoginScreen = ({navigation}) => {
             <Block style={styles.registerContainer}>
             <ImageBackground source = {images.login_background} resizeMode='cover'  style={styles.background_image}>
               <TouchableOpacity
-                      style={{ margin: 10, marginBottom:-30}}
+                      style={{ margin: 20, marginBottom:-30}}
                       onPress={() => navigation.goBack()}
                   >
                       <Image

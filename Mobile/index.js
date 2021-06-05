@@ -30,7 +30,7 @@ const getBoundaryData = async () => {
   })
   Boundary.on(Events.ENTER, id => {
     LocalNotification(id)
-    Delete_Boundary(id)
+    //Delete_Boundary(id)
     })
    
 

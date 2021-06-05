@@ -178,7 +178,7 @@ const DetailsScreen = ({route,navigation}) => {
               )}
                 <Card.Content>
                     <View>
-                      <Paragraph style={styles.para}>{Get_Defib.Defibrilatteur.telephone}</Paragraph>
+                      <Paragraph style={styles.para}>(+212) {Get_Defib.Defibrilatteur.telephone}</Paragraph>
                     </View>
                </Card.Content>
              </Card>

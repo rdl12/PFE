@@ -18,19 +18,19 @@ const NosDefibrilatteur = ({navigation}) => {
         id:'1',
         nom:'Defibrillateur Lifeline AUTO Defibtech',
         image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/3/-/3-174-8ef0f.jpg',
-        desription:'test'
+        desription:"Doté d’un seul bouton pour sa mise en marche, ce défibrillateur est très simple d’utilisation, puisqu'il suffit de suivre les instructions vocales. Parce que nous ne sommes pas tous des professionels de la santé, ce défibrillateur analyse automatiquement le rythme cardiaque de la victime et délivre de lui-même le choc ... uniquement si celui-ci est nécessaire."
     },
     {
         id:'2',
         nom:'Defibrillateur Lifeline View',
         image:'https://www.himaya.ma/pub/media/catalog/product/cache/682518d3a1b7519d2d6a6055134df333/1/-/1-175-bcf39.jpg',
-        desription:'test'
+        desription:"il vous guide notamment pour les consignes de sécurité, la pose des électrodes, la réalisation du massage cardiaque...Très robuste et très léger, ce défibrillateur dispose aussi d’une interface de maintenance intégrée.Le VIEW reflète l’engagement de Defibtech dans l’excellence et l’innovation."
     },
     {
         id:'3',
         nom:'Défibrillateur Lifeline ECG',
         image:'https://www.defibtech.ma/img/produits/181-9b46c.png',
-        desription:"test"
+        desription:"Il vous guide notamment pour les consignes de sécurité, la pose des électrodes, la réalisation du massage cardiaque...Très robuste et très léger, ce défibrillateur dispose aussi d’une interface de maintenance intégrée.Le VIEW reflète l’engagement de Defibtech dans l’excellence et l’innovation."
     },
 ])
     const [AccessDefib, setSecours] = useState([{
