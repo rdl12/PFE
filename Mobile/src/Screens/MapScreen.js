@@ -1,4 +1,4 @@
-import { View,Image,TouchableOpacity, Button} from 'react-native'
+import { View,Image,TouchableOpacity, Button, BackHandler} from 'react-native'
 import React,{Component} from 'react'
 import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
@@ -13,10 +13,13 @@ import ListDefib from '../components/ListDefib/ListDefib';
 import Dialog from "react-native-dialog";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
+import HomeScreen from './HomeScreen';
 
 class MapScreen extends Component{
     constructor(props){
+        
         super(props);
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
         this.state = {
             initialregion:{
                 latitude:33.5731104,
@@ -48,6 +51,7 @@ class MapScreen extends Component{
           { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })    
     }
     componentDidMount(){
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
         const parent = this.props.navigation.dangerouslyGetParent();
         parent.setOptions({
             tabBarVisible: false,  
@@ -57,11 +61,12 @@ class MapScreen extends Component{
                         /> ),
       });
         setTimeout(()=>this.setState({marginBottom : 0}),50)
-        setTimeout(()=>this.props.Fecth_Defib(this.state.coords,1),100)
+        setTimeout(()=>this.props.Fecth_Defib(this.state.coords,1),500)
 
       
     }
     componentWillUnmount(){
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
         const parent = this.props.navigation.dangerouslyGetParent();
         parent.setOptions({
             tabBarVisible: true,
@@ -70,6 +75,12 @@ class MapScreen extends Component{
                          {...props}
                      />),
         });
+    }
+
+    handleBackButtonClick = () => {
+        this.props.navigation.navigate('Home');
+        //BackHandler.exitApp();
+        return true;
     }
     
     ReturnState = () => {
@@ -133,7 +144,7 @@ class MapScreen extends Component{
                     longitude : this.state.coords.longitude,
                     latitudeDelta : 0.008,
                     longitudeDelta : 0.016
-                  },2000),3000)
+                  },2000),1000)
              }
              mapType = {this.props.maptype}
              showsUserLocation = {!this.state.btn_add_state}

@@ -85,6 +85,9 @@ class AboutScreen extends Component {
     state = {
       activeSections: [],
       activeSections_achat: [],
+      activeSections_defib: [],
+      activeSections_maintenance: [],
+      activeSections_utilisation: [],
     };
 
     componentDidMount(){
@@ -122,16 +125,15 @@ class AboutScreen extends Component {
     _renderHeader(section, index, isActive, sections) {
         return (
           <Animatable.View
-            style={{backgroundColor:COLORS.WHITE, padding:10,paddingTop:20,paddingBottom:20,marginBottom:10,  shadowColor: "#000",
-             underlayColor:"#ffffff00",
+          underlayColor={COLORS.WHITE}
+            style={{backgroundColor:COLORS.WHITE, padding:10,paddingTop:20,paddingBottom:20, shadowColor: "#000",
                     shadowOffset: {
                     width: 0,
                     height: 7,
                     },
                     shadowOpacity: 0.43,
                     shadowRadius: 9.51,
-                    
-                    elevation: 5,
+                    elevation: 7,
                     backgroundColor: (isActive ? 'rgba(255,255,255,1)' : COLORS.lightGray4) }}
             duration={300}
             transition="backgroundColor">
@@ -163,6 +165,15 @@ class AboutScreen extends Component {
   
     _updateSections = (activeSections) => {
       this.setState({ activeSections });
+    };
+    _updateSections_defib = (activeSections_defib) => {
+      this.setState({ activeSections_defib });
+    };
+    _updateSections_maintenance = (activeSections_maintenance) => {
+      this.setState({ activeSections_maintenance });
+    };
+    _updateSections_utilisation = (activeSections_utilisation) => {
+      this.setState({ activeSections_utilisation });
     };
     _updateSections_achat = (activeSections_achat) => {
       this.setState({ activeSections_achat });
@@ -207,29 +218,29 @@ class AboutScreen extends Component {
                     <Text style={styles.titre}> L'utilité d'un defibrillateur :</Text>
                     <Accordion
                         sections={SECTIONS_defib}
-                        activeSections={this.state.activeSections}
+                        activeSections={this.state.activeSections_defib}
                         //renderSectionTitle={this._renderSectionTitle}
                         renderHeader={this._renderHeader}
                         renderContent={this._renderContent}
-                        onChange={this._updateSections}
+                        onChange={this._updateSections_defib}
                     />
                     <Text style={styles.titre}> Facilité d'utilisation :</Text>
                     <Accordion
                         sections={SECTIONS_utilisation}
-                        activeSections={this.state.activeSections}
+                        activeSections={this.state.activeSections_utilisation}
                         //renderSectionTitle={this._renderSectionTitle}
                         renderHeader={this._renderHeader}
                         renderContent={this._renderContent}
-                        onChange={this._updateSections}
+                        onChange={this._updateSections_utilisation}
                     />
                     <Text style={styles.titre}> Maintenance :</Text>
                     <Accordion
                         sections={SECTIONS_maintenance}
-                        activeSections={this.state.activeSections}
+                        activeSections={this.state.activeSections_maintenance}
                         //renderSectionTitle={this._renderSectionTitle}
                         renderHeader={this._renderHeader}
                         renderContent={this._renderContent}
-                        onChange={this._updateSections}
+                        onChange={this._updateSections_maintenance}
                     />
                     <Text style={styles.titre}> Achat d'un defibrillateur :</Text>
                     <Accordion
@@ -252,7 +263,7 @@ class AboutScreen extends Component {
 export default AboutScreen
 
 const styles = StyleSheet.create({
-    titre : {...FONTS.h3,fontWeight:'bold', color: COLORS.primary, alignSelf:'center', margin:10},
+    titre : {...FONTS.h4,fontWeight:'bold', color: COLORS.primary, margin:10},
     header :{ backgroundColor:COLORS.WHITE, padding:20, margin:10,  shadowColor: "#000",
                 shadowOffset: {
                 width: 0,
@@ -262,7 +273,7 @@ const styles = StyleSheet.create({
                 shadowRadius: 9.51,
                 
             elevation: 5,},
-    headerText :{...FONTS.h3, color: COLORS.black, alignSelf:'center'},
+    headerText :{...FONTS.h4, color: COLORS.black, alignSelf:'center'},
     content : { backgroundColor:COLORS.WHITE, padding:20, margin:10, backgroundColor: 'rgba(255,255,255,1)' },
     contentText : {...FONTS.h4, color: "#696969", alignSelf:'center', margin:5, fontFamily:'cochin'},
     

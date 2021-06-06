@@ -7,7 +7,7 @@ import CustomTabBar from '../components/TabBar/CustomTabBar'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import { HomeScreen, ProfilScreen,MapScreen,ListDefibScreen, DetailsScreen, UrgenceScreen,AddDefibScreen,MyDefibsScreen,StatistiqueScreen,
   FormationDetailsScreen,ChatScreen, MapDetails,InfoProfilScreen,LocationScreen,TutorialScreen,UrgenceMap,FormationScreen,Parametre,
-  ProductsScreen,NosDefibrilatteur,AboutScreen, ModifierPasswordScreen } from '../Screens';
+  ProductsScreen,NosDefibrilatteur,AboutScreen, ModifierPasswordScreen, ProductDetails } from '../Screens';
 
 
 const Stack = createStackNavigator();
@@ -77,24 +77,7 @@ const ProfilStack = ({navigation}) => (
         options={{headerShown: false}}
       />
       
-      <Stack.Screen
-        name="MapScreen"
-        component={MapScreen}
-        options={{headerShown: true}}
-      />
-
-      
-      <Stack.Screen
-        name="AddDefib"
-        component={AddDefibScreen}
-        options={{headerShown: false}}
-      />
-
-       <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{headerShown: true}}
-      />
+     
 
     </Stack.Navigator>
   );
@@ -179,6 +162,11 @@ const ProfilStack = ({navigation}) => (
         component={ProductsScreen}
         options={{headerShown: false}}
         />
+        <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetails}
+        options={{headerShown: false}}
+      /> 
           <Stack.Screen
         name="NosDefib"
         component={NosDefibrilatteur}

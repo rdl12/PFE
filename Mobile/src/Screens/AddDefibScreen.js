@@ -40,14 +40,7 @@ const AddDefibScreen = ({navigation}) => {
       console.log("adress:"+Modal_State)
       console.log(LoginInfo.userId)
       console.log(user)
-      return () =>
-          parent.setOptions({
-               tabBarVisible: true,
-               tabBarButton: (props) => (
-                        <TabBarCustomButton 
-                            {...props}
-                        />),
-           });
+      
        
       }, [Modal_State, navigation])
   
@@ -163,7 +156,7 @@ const AddDefibScreen = ({navigation}) => {
                    
             </Dialog.Container>
           <Modals modalOpen = {Modal_State.isModalOpen} isElectrode = {Modal_State.isElectrode}/>
-          <Header title = "Ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.openDrawer()}/>
+          <Header title = "Ajouter un defibrilateur" Submit={submit} onPress = {() => navigation.goBack()}/>
           <ScrollView style={{flex:1, marginTop:15}}>
       
           <Input

@@ -56,24 +56,7 @@ const MapStack = ({navigation}) => (
         options={{headerShown: false}}
       />
       
-      <Stack.Screen
-        name="MapScreen"
-        component={MapScreen}
-        options={{headerShown: true}}
-      />
-
-      
-      <Stack.Screen
-        name="AddDefib"
-        component={AddDefibScreen}
-        options={{headerShown: false}}
-      />
-
-       <Stack.Screen
-        name="Details"
-        component={DetailsScreen}
-        options={{headerShown: true}}
-      />
+    
 
     </Stack.Navigator>
   );
@@ -111,7 +94,7 @@ const MapStack = ({navigation}) => (
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Help"
