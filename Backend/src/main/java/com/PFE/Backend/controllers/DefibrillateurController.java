@@ -1,8 +1,10 @@
 package com.PFE.Backend.controllers;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
 
 import org.locationtech.jts.geom.Point;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -65,7 +67,7 @@ public class DefibrillateurController {
 	        return defibrillateurService.findByUser(user);
 	    }
 	 @PostMapping(value = "/add")
-	    public void save(@RequestBody   Defibrillateur defibrillateur){
+	    public void save(@RequestBody   Defibrillateur defibrillateur) {
 	        
 		    defibrillateur.setDate(LocalDateTime.now());
 	        Etat s = new Etat(1,"signalé");
@@ -75,6 +77,7 @@ public class DefibrillateurController {
 	        System.out.println(""+geom);
 	        defibrillateur.setGeom(geom);
 	        defibrillateur.setEtat(s);
+	        defibrillateur.setPhoto("data:image/png;base64,"+defibrillateur.getPhoto());
 	        defibrillateurService.save(defibrillateur);
 	    }
 	

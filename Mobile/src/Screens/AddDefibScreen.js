@@ -19,6 +19,7 @@ const AddDefibScreen = ({navigation}) => {
     const [Telephone, setTel] = useState("")
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
+    const [ImageEncoded, setImageEncoded] = useState("")
     const Adresse = useSelector(state => state.AdresseReducer);
     const Modal_State = useSelector(state => state.Modal_State);
     const AccessibiliteState = useSelector(state => state.get_Accessibilite);
@@ -49,7 +50,7 @@ const AddDefibScreen = ({navigation}) => {
         "description" : Description,
         "latitude" : Adresse.lat,
         "longitude" : Adresse.long,
-        "photo" : imageSource,
+        "photo" : ImageEncoded,
         "etat":{
           id : 1,
           etat : 'signalé'
@@ -90,9 +91,11 @@ const AddDefibScreen = ({navigation}) => {
     }
     const imageCameraLaunch = () => {
       let options = {
+         includeBase64: true,
       storageOptions: {
           skipBackup: true,
           path: 'images',
+         
       },
       };
   
@@ -108,16 +111,20 @@ const AddDefibScreen = ({navigation}) => {
           alert(response.customButton);
         } else {
           const source = { uri: response.uri };
+          const imageEncoded = {base64 : response.base64}
           setImageSource(source.uri);
+          setImageEncoded(imageEncoded.base64)
           
         }
       });
     }
     const imageGalleryLaunch = () => {
             let options = {
+              includeBase64: true,
             storageOptions: {
                 skipBackup: true,
                 path: 'images',
+              
             },
             };
   
@@ -135,7 +142,11 @@ const AddDefibScreen = ({navigation}) => {
                     let source = { uri: response.uri };
             
                     // ADD THIS
+                    const imageEncoded = {base64 : response.base64}
                     setImageSource(source.uri);
+                    setImageEncoded(imageEncoded.base64)
+                    console.log("imageEncoded")
+                    console.log(imageEncoded.base64)
                   }
               
             
