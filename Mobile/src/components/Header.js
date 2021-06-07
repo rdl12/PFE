@@ -10,7 +10,7 @@ export default function Header({ title, navigation,Submit,onPress ,isRetour}) {
         <SafeAreaView style={styles.header}>
           <TouchableOpacity onPress =  {onPress} style = {{  elevation:2,}} >
          {!isRetour ? (<Image
-                  source={images.menu_icon}
+                  source={images.back_arrow}
                   style={{
                     width: 30,
                     height: 30,
