@@ -1,11 +1,32 @@
 import * as t from './actionTypes';
 import {  Here_API_Key ,API_URI} from '../utils/constants/Api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import {store} from './store'
-// this is what our action should look like which dispatches the "payload" to reducer
+
+
+
+
+export const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('@storage_Key', value)
+  } catch (e) {
+    // saving error
+  }
+}
+export const getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('@storage_Key')
+    return value
+  } catch(e) {
+    // error reading value
+  }
+}
+
+
 export const setLoginState = (loginData) => {
   return {
-    type: t.SET_LOGIN_STATE,
+    type: t.SET_LOGIN_STATE,      
     payload: loginData,
   };
 };
@@ -150,7 +171,8 @@ export const login = (loginInput,navigation) => {
     })
     .then((response) =>
     {if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
-      dispatch(setLoginState({ userId: username }));
+      storeData("true")
+      dispatch(setLoginState({ userId: username}));
        navigation.navigate('Home')
       Alert.alert('logged in', username);
     } else {

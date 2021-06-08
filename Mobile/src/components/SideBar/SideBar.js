@@ -11,6 +11,8 @@ import {
     DrawerContentScrollView,
     DrawerItem,DrawerItemList
 } from '@react-navigation/drawer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {storeData} from '../../redux/actions'
 
 import { COLORS, images} from '../../Constantes'
 import styles from './styles'
@@ -22,8 +24,8 @@ export function SideBar(props) {
     const LoginInfo = useSelector(state => state.loginReducer);
     const dispatch = useDispatch()
      const Logout = () => {
-        dispatch(setLoginState({ isLoggedIn: false,
-            userId: ''}))
+        storeData("false")
+        dispatch(setLoginState({ isLoggedIn: false, userId: ''}))
         props.navigation.navigate('Home')
         Alert.alert("logged out");
      }

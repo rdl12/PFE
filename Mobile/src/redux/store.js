@@ -1,5 +1,7 @@
 import thunk from 'redux-thunk';
 import { createStore, combineReducers, applyMiddleware ,compose} from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly'; // this is for debugging with React-Native-Debugger, you may leave it out
 import { loginReducer,AdresseReducer,MapReducer,Fecth_Defib_in_100 ,
   Get_Defib,Modal_State,Add_Defib,get_Accessibilite,Fetch_User,
@@ -34,7 +36,16 @@ const rootReducer = combineReducers({
   
 });
 
+const persistenceConfigs = {
+  key: "key", // whatever you want to keep as your key
+  storage:AsyncStorage,
+  whitelist: ["loginReducer"]
+};
+const persistedReducer = persistReducer(persistenceConfigs, rootReducer);
+
 export const store = createStore(
-  rootReducer,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(thunk)),
 );
+
+export const persistedStore = persistStore(store);

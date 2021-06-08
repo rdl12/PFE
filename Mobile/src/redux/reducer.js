@@ -1,5 +1,7 @@
 import { initialState ,AdresseState,MapState,defibMarkers,defib,ModalState,DefibPosted,accessibilite,user, defib_user,token_registration,modified_defib, formation, formationDetails , Boundary, products, categories, product_categories, date_formation, stat_etat_defib, stat_prov_defib } from './initialState';
 import * as t from './actionTypes';
+import {getData} from "./actions"
+
 
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
