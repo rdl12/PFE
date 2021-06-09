@@ -103,7 +103,8 @@ class Dashboard extends React.Component {
                             <h6 className='mb-4'>defibrillateurs recemment signalé</h6>
                             <div className="row d-flex align-items-center">
                                 <div className="col-9">
-                                    <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${this.props.Stats[3][1]} defibrillateurs` } </h3>
+                                    {this.props.Stats[3] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${this.props.Stats[3][1]} defibrillateurs` } </h3>):
+                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs</h3>)}
                                 </div> 
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>
@@ -118,7 +119,8 @@ class Dashboard extends React.Component {
                             <h6 className='mb-4'>defibrillateurs en cours de traitement</h6>
                             <div className="row d-flex align-items-center">
                                 <div className="col-9">
-                                    <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/> {`${this.props.Stats[0][1]} defibrillateurs` }</h3>
+                                    {this.props.Stats[4] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/> {`${this.props.Stats[4][1]} defibrillateurs` }</h3>):
+                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/> 0 defibrillateurs</h3>)}
                                 </div>
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>
@@ -133,7 +135,8 @@ class Dashboard extends React.Component {
                             <h6 className='mb-4'>defibrillateurs modifiés</h6>
                             <div className="row d-flex align-items-center">
                                 <div className="col-9">
-                                    <h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> {`${this.props.Stats[1][1]} defibrillateurs` }</h3>
+                                    {this.props.Stats[1] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> {`${this.props.Stats[1][1]} defibrillateurs` }</h3>):
+                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> 0 defibrillateurs </h3>)}
                                 </div>
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>

@@ -62,6 +62,7 @@ function FormationAdd() {
     setDescription("")
     setnbrmax("")
     setImage("")
+    
     dispatch({type: actionTypes.SHOW_TOAST,show:true})
    
    }
@@ -89,7 +90,7 @@ function FormationAdd() {
 
                         <Form.Group controlId="formBasicTelephone">
                         <Form.Label>Description</Form.Label>
-                        <Form.Control type="email" placeholder="Description" value={Description} onChange={e => setDescription(e.target.value)}/>
+                        <Form.Control as="textarea" placeholder="Description" value={Description} onChange={e => setDescription(e.target.value)}/>
                         </Form.Group>
 
                         <Form.Group controlId="Categories">
