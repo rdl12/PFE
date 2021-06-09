@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import Aux from "../../hoc/_Aux";
-import {Delete_Formation, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation,Delete_Subscription,Modify_subs} from '../../store/actions'
+import {Delete_Formation,Add_Date, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation,Delete_Subscription,Modify_subs} from '../../store/actions'
 
 
 function FormationDetail() {
@@ -42,8 +42,9 @@ useEffect(() => {
     },200)
 
     setTimeout(() => { 
-        {typeof inscrits !== "undefined" &&  inscrits.map((item) =>{ item.etat="Traité"
-         Modify_subs(item)})}
+        {typeof inscrits !== "undefined" &&  inscrits.map((item) =>{ if (item.etat!="Traité")
+        {item.etat="Traité"
+         Modify_subs(item)}})}
 
     },500)
          
@@ -64,6 +65,19 @@ useEffect(() => {
     }
     
     const Save = () => {
+        dateAdded.map(item =>{
+            console.log(item)
+            let object = {
+               "date":item,
+               "formation":Formation
+                 
+            }
+            dispatch(Add_Date(object))
+          })
+          
+          
+            
+          
       console.log('save')
     }
 
@@ -142,14 +156,14 @@ useEffect(() => {
                     </thead>
                     <tbody>
                         {typeof inscrits !== "undefined" &&  users.map(item => 
-                        <tr key = {item.id}  onClick={()=> Delete_subs(item.id)}>
+                        <tr key = {item.id}  >
                             <td>{item.user.firstName}</td>
                             <td>{item.user.lastName}</td>
                             <td>{item.user.email}</td>
                             <td>{item.user.telephone}</td>
                             <td>{item.formation.nom}</td>
                             <td>{item.date_inscription}</td>
-                            <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}}>supprimer</td>
+                            <td key = "supprimer" value={item.id} style={{cursor:"pointer", color:'red', fontSize:'bold'}} onClick={()=> Delete_subs(item.id)}>supprimer</td>
                         </tr>)
                         }
                     </tbody>

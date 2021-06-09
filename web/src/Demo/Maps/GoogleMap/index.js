@@ -1,12 +1,12 @@
 import React from 'react';
-import {Row, Col, Card, Form, Table, Button, Alert} from 'react-bootstrap';
+import {Row, Col, Card, Form, Table, Button, Alert,Dropdown,DropdownButton,Pagination, Badge} from 'react-bootstrap';
 import {Map, Marker, GoogleApiWrapper, InfoWindow, Polyline, Polygon}  from 'google-maps-react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
 import Aux from "../../../hoc/_Aux";
-import {Fetch_Defib_Valide} from "../../../store/actions";
+import {Fetch_Defib_Valide,Fetch_Defib_ByVille} from "../../../store/actions";
 
-import defib_icon from '../../../assets/images/pin/medical2.png';
+import defib_icon from '../../../assets/images/pin/pin_1.png';
 const polygon = [
     { lat: 21.2105052, lng: 72.8653491 },
     { lat: 21.2206445, lng: 72.8704506 },
@@ -24,8 +24,24 @@ class GoogleMap extends React.Component {
         showlist_value : "voir Lise des defib",
         showlist_icon : "feather icon-list text-c-black f-20",
         showalert : false,
+        ville:null,
+        page:1,
+        index:0,
+        number_per_page:5
 
     };
+    PaginationHandler = (page) =>{
+        console.log(page)
+        this.setState({page:page,index:page*this.state.number_per_page-this.state.number_per_page})
+    }
+
+    remove_filter_ville = () =>{
+        
+        this.props.Fetch_Defib_Valide(2)
+        
+        this.setState({ville:null})
+      
+    }
 
     showlist = () =>{
         this.setState({showlist:!this.state.showlist})
@@ -45,12 +61,8 @@ class GoogleMap extends React.Component {
             activeMarker: marker,
             selectedPlace: props,
             showingInfoWindow: true,
-            showalert : true
         });
-       this.map.listeners.recenter.j.center.lat(props.position.lat)
-       this.map.listeners.recenter.j.center.lng(props.position.lng)
-        console.log(this.map)
-        console.log(props)
+       
         
     }
 
@@ -111,6 +123,24 @@ class GoogleMap extends React.Component {
 
     render() {
         const { position } = this.state;
+        const { 
+            Defib,
+         } = this.props;
+       
+         
+         let defib_filtred  = Defib.slice(this.state.index,this.state.index+this.state.number_per_page)
+         let ville = [...new Set(Defib.map(
+           item => item.ville
+       ))];
+       let active = this.state.page;
+       let activeItems = [];
+       for (let number = 1; number <= Defib.length/this.state.number_per_page+1; number++) {
+           activeItems.push(
+               <Pagination.Item key={number} active={number === active} onClick = {() => this.PaginationHandler(number)}>
+                   {number}
+               </Pagination.Item>
+           );
+       }
 
         return (
             
@@ -120,23 +150,45 @@ class GoogleMap extends React.Component {
                            
                             <Card.Header>
                                 <Card.Title as="h5">Carte des defibrillateurs en marche actuelle</Card.Title>
+                                
+                                {this.state.showlist ?  (
+                                        <DropdownButton
+                                                title='filtrer par ville'
+                                                variant='primary'
+                                                drop='left'
+                                                id={`dropdown-variants-primary`}
+                                                style = {{float:'right'}}
+                                        >
+                                            {typeof ville !== "undefined" &&  ville.map((item,index) => 
+                                                <Dropdown.Item key= {index} eventKey={index}  onSelect = {(e) => {
+                                                        this.props.Fetch_Defib_ByVille(ville[e])
+                                                        this.setState({ville:ville[e]})
+                                                        console.log(ville[e])
+                                                        }}
+                                                > 
+                                                    <Form.Check
+                                                        custom
+                                                        type="radio"
+                                                        label={item}
+                                                        value = {item}
+                                                        name="supportedRadios"
+                                                        id="supportedRadio3"
+                                                        checked = {this.state.ville === ville[index]}
+                                                        
+                                                    />
+                                                </Dropdown.Item>)
+                                            }  
+                                                <Dropdown.Divider />
+                                        </DropdownButton>
+                                    ): null}
                                 <Button variant={'outline-dark'} onClick = {this.showlist} style={{float: 'right'}}><i className={this.state.showlist_icon} />{this.state.showlist_value}</Button>
                             </Card.Header>
                             <Card.Body>
+                            {this.state.ville !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.ville}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter_ville}/></Badge>): null }
                             
-                                <div style={{height: window.innerHeight/1.35, width: '100%'}}>
+                                <div style={{height: window.innerHeight/1.5, width: '100%'}}>
                                     
-                                {!this.state.showlist ?  (
-                                        <Alert show={this.state.showalert} variant="success" className="h-6 w-95 row">
-                                            <Alert.Heading className="col col-lg-3">How's it going?!</Alert.Heading>
-                                            <p className="col col-lg-7"></p>
-                                            <div className="d-flex justify-content-end px-10">
-                                            <Button onClick={() =>  this.setState({ showalert : false})} variant="outline-success">
-                                                Close me y'all!
-                                            </Button>
-                                            </div>
-                                      </Alert>
-                                    ): null}
+                               
 
                                     {!this.state.showlist ?(
                                        
@@ -170,6 +222,7 @@ class GoogleMap extends React.Component {
                                         </InfoWindow>
                                     </Map>
                                     ):(
+                                        <div>
                                         <Table striped responsive>
                                         <thead>
                                         <tr>
@@ -182,22 +235,49 @@ class GoogleMap extends React.Component {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                 {typeof this.props.Defib !== "undefined" &&  this.props.Defib.map(item => 
+                                 {typeof defib_filtred  !== "undefined" &&  defib_filtred .map(item => 
                                   <tr key = {item.id}>
                                   <td>{item.nom}</td>
                                   <td>{item.date}</td>
                                   <td className="f-16">{item.etat.etat}</td>
                                   <td>{item.ville}</td>
                                   <td><NavLink to={`/sample-page/${item.id}`}>Details</NavLink></td>
-                              </tr>)
+                              </tr>
+                              
+                              )
                                  }
                                       
                                         </tbody>
-                                    </Table>
+                                        </Table>
+                                        <hr/>
+                                        <Row >
+                                            <Col  sm={10}>
+                                                <Pagination >
+                                                    <Pagination.First />
+                                                        <Pagination.Prev />
+                                                            {activeItems}
+                                                        <Pagination.Next />
+                                                    <Pagination.Last />
+                                                </Pagination>
+                                                </Col>
+                                            <Col  sm={2}>
+                                                <Form.Control as="select"  onChange = {(e) =>{this.setState({number_per_page:e.target.value})}} >
+                                                <option  key={'choisir'} value='choisissez le nombre d element par page'> {this.state.number_per_page} </option>
+                                                <option  key={1} value={5}> 5 </option>
+                                                <option  key={2} value={10}> 10 </option>
+                                                <option  key={3} value={20}> 20 </option>
+                                                <option  key={4} value={30}> 30 </option>
+                                            </Form.Control>
+                                            </Col>
+                                     </Row>
+                                    
+                                    </div>
                                     )}
                                     
                                 </div>
+                              
                             </Card.Body>
+                           
                         </Card>
                    
                     {/* <Col xl={6}>
@@ -244,6 +324,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         Fetch_Defib_Valide: (state) => dispatch(Fetch_Defib_Valide(state)),
+        Fetch_Defib_ByVille: (state) => dispatch(Fetch_Defib_ByVille(state)),
     }
 };
 

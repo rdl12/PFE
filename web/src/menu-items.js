@@ -153,12 +153,12 @@ export default {
             type: 'group',
             icon: 'icon-pages',
             children: [
-                // {
-                //     id: 'charts',
-                //     title: 'Ajouter Produit',
-                //     type: 'item',
-                //     icon: 'feather icon-plus',
-                //     url: '/Produit/Ajouter'
+                //  {
+                //   id: 'charts',
+                //      title: 'Ajouter Produit',
+                //      type: 'item',
+                //      icon: 'feather icon-plus',
+                //      url: '/Produit/Ajouter'
                 // },
                 {
                     id: 'list',

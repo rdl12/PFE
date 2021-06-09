@@ -18,7 +18,7 @@ class BootstrapTable extends React.Component {
        ville:null,
        page:1,
        index:0,
-       number_per_page:3
+       number_per_page:5
 
     };
 
@@ -66,12 +66,12 @@ class BootstrapTable extends React.Component {
             (defib) => defib.etat.etat === 'signalé' || defib.etat.etat === 'modifié' || defib.etat.etat === 'en cours de traitement' 
           );
           let defib_filtred  = page_arr.slice(this.state.index,this.state.index+this.state.number_per_page)
-          let ville = [...new Set(Defib.map(
+          let ville = [...new Set(page_arr.map(
             item => item.ville
         ))];
         let active = this.state.page;
         let activeItems = [];
-        for (let number = 1; number <= 5; number++) {
+        for (let number = 1; number <= page_arr.length/this.state.number_per_page+1; number++) {
             activeItems.push(
                 <Pagination.Item key={number} active={number === active} onClick = {() => this.PaginationHandler(number)}>
                     {number}
@@ -194,8 +194,8 @@ class BootstrapTable extends React.Component {
                                 </Table>
                                     <hr/>
                                 <Row>
-                                     <Col  sm={8}>
-                                        <Pagination  style = {{float:'right'}}>
+                                     <Col  sm={10}>
+                                        <Pagination  >
                                             <Pagination.First />
                                                 <Pagination.Prev />
                                                     {activeItems}
@@ -203,9 +203,9 @@ class BootstrapTable extends React.Component {
                                             <Pagination.Last />
                                         </Pagination>
                                         </Col>
-                                    <Col  sm={4}>
-                                        <Form.Control as="select"  onChange = {(e) =>{this.setState({number_per_page:e.target.value})}} style = {{float:'right'}} sm={4}>
-                                        <option  key={'choisir'} value='choisissez le nombre d element par page'> nombre d'element par page  </option>
+                                    <Col  sm={2} >
+                                        <Form.Control as="select"  onChange = {(e) =>{this.setState({number_per_page:e.target.value})}} >
+                                        <option  key={'choisir'} value='choisissez le nombre d element par page'> {this.state.number_per_page}  </option>
                                         <option  key={1} value={5}> 5 </option>
                                         <option  key={2} value={10}> 10 </option>
                                         <option  key={3} value={20}> 20 </option>
