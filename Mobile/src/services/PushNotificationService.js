@@ -55,7 +55,7 @@ export const LocalNotification = (data) => {
       title: "Help", // (optional)
       message: "Arret cardiaque à porximité", // (required)
       vibrate: true,
-      userInfo:data,
+      //userInfo:data,
       vibration: 300,
       playSound: true,
       soundName: 'default',

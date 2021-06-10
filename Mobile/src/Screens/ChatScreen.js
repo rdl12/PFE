@@ -100,6 +100,7 @@ const ChatScreen = ({navigation}) => {
           });
         
         } else {
+        
           firestore()
           .collection('userChat')
           .doc(messages[0].user.name)

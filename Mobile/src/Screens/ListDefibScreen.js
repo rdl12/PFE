@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
 import Geolocation from 'react-native-geolocation-service';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
-import { COLORS, images} from '../Constantes'
+import { COLORS, images} from '../Constantes' 
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
