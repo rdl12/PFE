@@ -160,10 +160,17 @@ return  (dispatch) => {
       response.text().then((data) => {
         console.log(data)})
        if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
-        dispatch(setLoginState({ userId: username })); // our action is called here
-        //alert('logged in', username);
-        localStorage.setItem('username',username)
-        window.location.reload()
+           fetch(`${API_URI}/User/find/${username}`,{method: 'GET'}) .then((response) => {
+            response.json().then((data1) => {
+              console.log("-------------------------------")
+              console.log(data1.appUserRole)
+              if(data1.appUserRole === "ADMIN")
+                    {console.log(response)
+                    dispatch(setLoginState({ userId: username })); // our action is called here
+                    //alert('logged in', username);
+                    localStorage.setItem('username',username)
+                    window.location.reload()}
+              else{ alert('Login Failed, Vous etes pas un administrateur');}})})
       } else {
          alert('Login Failed', 'Username or Password is incorrect');
       }

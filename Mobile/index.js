@@ -10,29 +10,47 @@ import Boundary, {Events} from 'react-native-boundary';
 import {store,persistedStore } from './src/redux/store';
 import { LocalNotification } from './src/services/PushNotificationService';
 import { PersistGate } from 'redux-persist/integration/react';
-
+import Geolocation from 'react-native-geolocation-service';
+import * as geolib from 'geolib';
 import App from './App';
 import {name as appName} from './app.json';
 import { API_URI } from './src/utils/constants/Api'
 import { Delete_Boundary } from './src/redux/actions';
 
-
+ 
 
 const getBoundaryData = async () => {
+  Geolocation.getCurrentPosition(data => {
+
+    lat = data.coords.latitude; 
+    lng = data.coords.longitude;                             
+   
+}, (error) => alert(error.message),
+{ enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })  
     const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
     let storage = store.getState().loginReducer
     if(storage.isLoggedIn){
       const BoundaryData = await response.json()
-      await Boundary.off(Events.ENTER)
-      console.log(BoundaryData)
+     // await Boundary.off(Events.ENTER)
+      //console.log(BoundaryData)
+      console.log(lat)
       BoundaryData.map((boundary) => {
         boundary.id=boundary.id.toString()
-        Boundary.add(boundary)
-        .then(() => console.log('success!'))
-        .catch((e) => console.log(e));
+        //Boundary.add(boundary)
+        
+          console.log(lat)
+          if(geolib.getPreciseDistance(
+            { latitude: lat, longitude: lng },
+            { latitude: boundary.lat, longitude: boundary.lng })<100)
+              {
+                LocalNotification(boundary.id)
+               // Delete_Boundary(boundary.id)
+              }
+   
+       
       })
       Boundary.on(Events.ENTER, id => {
-        LocalNotification(id)
+        //LocalNotification(id)
         //Delete_Boundary(id)
         })
     }

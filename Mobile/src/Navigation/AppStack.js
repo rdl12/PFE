@@ -55,6 +55,11 @@ const MapStack = ({navigation}) => (
         component={ListDefibScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: true}}
+      />
       
     
 
