@@ -224,7 +224,7 @@ export class AddDefib extends Component {
 
                                             <Form.Group controlId="formBasicDescription">
                                             <Form.Label>Description</Form.Label>
-                                            <Form.Control type="email" placeholder="description" value={this.state.Description} onChange={e => this.setState({Description:e.target.value})}/>
+                                            <Form.Control as="textarea" type="email" placeholder="description" value={this.state.Description} onChange={e => this.setState({Description:e.target.value})}/>
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicMarque">
@@ -260,13 +260,13 @@ export class AddDefib extends Component {
                                                 id="inconnue"
                                                 onChange={e => this.setState({Access:e.target.value})}
                                             />
-                                            <ImageUploader
+                                            {/* <ImageUploader
                                                 withIcon={true}
                                                 buttonText='Choose images'
                                                 onChange={this.onDrop}
                                                 imgExtension={['.jpg', '.gif', '.png', '.gif']}
                                                 maxFileSize={5242880}
-                                            />
+                                            /> */}
                                              
                                         
                                         </Form.Group>
