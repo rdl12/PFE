@@ -13,7 +13,7 @@ import Dialog from "react-native-dialog";
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import { HelpAction } from '../redux/actions'
 import { useDispatch } from 'react-redux';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 const LocationScreen = ({navigation}) => {
@@ -35,7 +35,7 @@ const LocationScreen = ({navigation}) => {
       "lng":long,
       "radius":100.0
     }
-    HelpAction(object)
+    //HelpAction(object)
     setsucess(!success)
     setTimeout(() => {
        setsucess(false)
@@ -103,14 +103,7 @@ const LocationScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <Dialog.Container visible={success}>
-                    <Image
-                        source={images.book_icon}
-                        resizeMode="contain"
-                        style={{
-                            width: 300,
-                            height: 100,
-                        }}
-                    />
+                    <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22" style={{alignSelf:'center'}}/>
                     <Dialog.Description>
                     demande d'aide envoyé avec succes
                     </Dialog.Description>
