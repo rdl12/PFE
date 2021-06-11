@@ -29,22 +29,18 @@ const getBoundaryData = async () => {
 { enableHighAccuracy: true, timeout: 20000, maximumAge: 3600000 })  
     const response = await fetch(`${API_URI}`+'/Boundary/find/all',{method: 'GET'})
     let storage = store.getState().loginReducer
-    if(storage.isLoggedIn){
+    if(storage.isLoggedIn && storage.isSecouriste  ){
       const BoundaryData = await response.json()
      // await Boundary.off(Events.ENTER)
       //console.log(BoundaryData)
-      console.log(lat)
       BoundaryData.map((boundary) => {
         boundary.id=boundary.id.toString()
         //Boundary.add(boundary)
-        
-          console.log(lat)
-          if(geolib.getPreciseDistance(
-            { latitude: lat, longitude: lng },
-            { latitude: boundary.lat, longitude: boundary.lng })<100)
+        let distance = geolib.getPreciseDistance({ latitude: lat, longitude: lng },{ latitude: boundary.lat, longitude: boundary.lng })
+          if(distance<100)
               {
-                LocalNotification(boundary.id)
-               // Delete_Boundary(boundary.id)
+                LocalNotification(boundary)
+                Delete_Boundary(boundary.id)
               }
    
        

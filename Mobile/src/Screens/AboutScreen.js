@@ -10,7 +10,7 @@ import * as Animatable from 'react-native-animatable';
 const SECTIONS = [
     {
       title: 'Qui somme nous ?',
-      content: "'Lorem ipsum hhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhh hhhhhhhhhhhhhhhhhhhhhhhhhhh ...'",
+      content: "DefibMaghreb a été créée par Cyrille Chicheportiche dans le but d'apporter à toute entreprise, quel que soit sa taille ou son activité, une offre globale pour améliorer la sécurité et les conditions de travail des salariés. Depuis 2010, nous diversifions notre activité pour répondre encore plus largement aux demandes de nos clients. Au fil des années, DefibMaghreb est devenu un acteur leader sur le marché de la Prévention, Santé et Sécurité au Travail. Spécialisé dans la distribution de produits de sécurité et les formations de sécurité, DefibMaghreb est la référence au Maroc pour trouver tous les articles pour travailler en sécurité et protéger l’environnement.",
     },
     {
       title: "C'est quoi un defibrillateur ?",

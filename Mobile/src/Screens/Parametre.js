@@ -5,20 +5,26 @@ import { COLORS, Colors, icons,images} from '../Constantes'
 import { windowHeight, windowWidth } from '../utils/Dimentions';
 import useBackgroundGeolocationTracker from '../components/BgTracking';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import BackgroundJob from 'react-native-background-job';
+import {useSelector,useDispatch} from 'react-redux'
+import {setLoginState} from '../redux/actions'
+
 
 const parametre = () => {
 
-    const [isSwitchOn, setIsSwitchOn] = React.useState(false);
-    const [IsEnabeld, setIsEnabeld] = useState(false)
+    const isSwitchOn = useSelector(state => state.loginReducer.isSecouriste);
+    const IsEnabeld = useSelector(state => state.loginReducer.TrackEnabled);
     const location = useBackgroundGeolocationTracker(IsEnabeld); 
+    const dispatch = useDispatch()
+   
   
     if(isSwitchOn){
         try {
             const granted =  PermissionsAndroid.request(
               PermissionsAndroid.PERMISSIONS.ACCESS_BACKGROUND_LOCATION,
               {
-                'title': 'Example App',
-                'message': 'Example App access to your location '
+                'title': 'Defib App',
+                'message': 'Defib App wants to access  your location '
               }
             )
             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -26,7 +32,6 @@ const parametre = () => {
               //alert("You can use the location");
             } else {
               console.log("location permission denied")
-              alert("Location permission denied");
             }
           } catch (err) {
             console.warn(err)
@@ -34,11 +39,11 @@ const parametre = () => {
         
     }
     const onToggleSwitch = () => {
-        setIsSwitchOn(!isSwitchOn)
-        setIsEnabeld(!IsEnabeld)
-        
+      dispatch(setLoginState({ isSecouriste:!isSwitchOn,TrackEnabled:!IsEnabeld}))
     };
 
+    useEffect(() => {
+    }, [isSwitchOn])
     return (
         <SafeAreaView style={styles.screen}>
               <List.Item

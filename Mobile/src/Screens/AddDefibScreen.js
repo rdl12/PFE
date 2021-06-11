@@ -38,11 +38,6 @@ const AddDefibScreen = ({navigation}) => {
                           /> ),
         });
       dispatch(Fetch_User(LoginInfo.userId))
-      console.log("adress:"+Modal_State)
-      console.log(LoginInfo.userId)
-      console.log(user)
-      
-       
       }, [Modal_State, navigation])
   
     const submit = () =>{
@@ -67,7 +62,7 @@ const AddDefibScreen = ({navigation}) => {
         
         
       }
-       dispatch(Add_Defib_Posted(defib))
+      // dispatch(Add_Defib_Posted(defib))
        setsucess(!success)
        setTimeout(() => {
           setsucess(false)

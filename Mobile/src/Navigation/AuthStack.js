@@ -15,6 +15,7 @@ const Tab = createBottomTabNavigator();
 
 const ProfilStack = ({navigation}) => (
     <Stack.Navigator>
+      
        <Stack.Screen
         name="Profil"
         component={ProfilScreen}

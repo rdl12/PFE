@@ -1,5 +1,7 @@
 export const initialState = {
     isLoggedIn: false,
+    isSecouriste:false,
+    TrackInabled:false,
     userId: '',
     token: '',
     refreshToken: '',
@@ -84,3 +86,4 @@ export const date_formation = []
 export const stat_etat_defib = []
 
 export const  stat_prov_defib = []
+

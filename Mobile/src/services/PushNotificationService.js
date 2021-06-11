@@ -9,7 +9,7 @@ export const LocalNotification = (data) => {
     },
     onNotification: function (notification) {
      // console.log("NOTIFICATION:", notification);
-      Navigation.navigate('Home',{id:data})
+      Navigation.navigate('Home',{boundary:data})
     
   
     },

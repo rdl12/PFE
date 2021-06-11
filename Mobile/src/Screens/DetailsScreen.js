@@ -352,7 +352,7 @@ add_to_photo:{
     height:100 ,
     width:100,
    margin:15,
-   tintColor : '#0000FF'},
+   },
 
 icon:{width: 20,  height: 10, padding:0}
 

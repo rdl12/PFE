@@ -16,8 +16,9 @@ const UrgenceMap = ({ navigation, route }) => {
      const [identifiers, setIdentifiers] = useState([])
      const [DistanceTravel, setDistanceTravel] = useState(0)
      const [TimeTravel, setTimeTravel] = useState(0)
-     const coords = useSelector(state => state.Boundary_Reducer.Boundary)
+     //const coords = useSelector(state => state.Boundary_Reducer.Boundary)
      const [showDirections, setshowDirections] = useState(true)
+     const {boundary} = route.params
      const [origin, setorigin] = useState({latitude:0,longitude:0})
      const [marginBottom , setmarginBottom ] = useState(1)
      const dispatch = useDispatch()
@@ -30,7 +31,7 @@ const UrgenceMap = ({ navigation, route }) => {
     useEffect(() => {
         const parent = navigation.dangerouslyGetParent();
         setTimeout(()=>setmarginBottom(0),50)
-        const {id} = route.params
+       
         parent.setOptions({
             tabBarVisible: false,  
             tabBarButton: (props) => (
@@ -38,10 +39,7 @@ const UrgenceMap = ({ navigation, route }) => {
                             {...props}
                         /> ),
       });
-        setIdentifiers(parseFloat(id))
-        if(identifiers.length != 0){
-            dispatch(Fetch_By_id(identifiers))
-        }
+       
         return () =>
         parent.setOptions({
              tabBarVisible: true,
@@ -50,10 +48,10 @@ const UrgenceMap = ({ navigation, route }) => {
                           {...props}
                       />),
          });
-    }, [identifiers])
+    }, [boundary])
     return (
         <View style = {{flex:1}}>
-       {  coords === undefined ? ( <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />) 
+       {  boundary === undefined ? ( <ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />) 
        : ( <View style = {{flex:1}}>
            <MapView style = {{flex:1,  marginBottom : marginBottom,}}
                 //ref={mapView}
@@ -63,15 +61,15 @@ const UrgenceMap = ({ navigation, route }) => {
                 showsMyLocationButton = {true}
                 showsTraffic ={false}
                 initialRegion={{
-                    latitude:coords.lat,
-                    longitude :coords.lng,
+                    latitude:boundary.lat,
+                    longitude :boundary.lng,
                     latitudeDelta : 0.0008,
                     longitudeDelta : 0.0016
                     }}
                 >
         <Marker
-            key={coords.id}
-            coordinate={{latitude : coords.lat, longitude : coords.lng }}
+            key={boundary.id}
+            coordinate={{latitude : boundary.lat, longitude : boundary.lng }}
             color = 'red'
           
            // anchor={{ x: 0, y: 0}}
@@ -83,7 +81,7 @@ const UrgenceMap = ({ navigation, route }) => {
            </Marker>
        {!showDirections ? ( <MapViewDirections
             origin={origin}
-            destination={{latitude:coords.lat,longitude:coords.lng}}
+            destination={{latitude:boundary.lat,longitude:boundary.lng}}
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={4}
             mode = 'WALKING'
@@ -94,7 +92,7 @@ const UrgenceMap = ({ navigation, route }) => {
                 }}
         /> ) :( <MapViewDirections
             origin={origin}
-            destination={{latitude:coords.lat,longitude:coords.lng}}
+            destination={{latitude:boundary.lat,longitude:boundary.lng}}
             apikey={GOOGLE_MAPS_APIKEY}
             strokeWidth={0}
             mode = 'WALKING'

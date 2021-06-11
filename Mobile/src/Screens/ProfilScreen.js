@@ -23,7 +23,7 @@ const ProfilScreen = ({navigation}) => {
        <View style={{ flexDirection: 'row', paddingHorizontal: SIZES.radius, height: 60, alignItems: 'center',elevation:3 ,backgroundColor:COLORS.WHITE, marginBottom:20}}>
                   <TouchableOpacity
                       style={{ marginLeft: -8 }}
-                      onPress={() => navigation.goBack()}
+                      onPress={() => navigation.navigate('Home')}
                   >
                       <Image
                           source={images.back_arrow}
@@ -46,10 +46,11 @@ const ProfilScreen = ({navigation}) => {
             <View style={styles.top}>
                        <Avatar.Image 
                             source={{
-                                uri: 'https://png.pngtree.com/element_our/png_detail/20181124/businessman-vector-icon-png_246587.jpg'
+                                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTFHi1tfpZag3I3e9LC5L7CzUDaTPuZyHayA&usqp=CAU'
                             }}
                             size={120}
                             style={{alignSelf:'center',backgroundColor:COLORS.white,borderRadius:40}}
+                            tintColor = {COLORS.PRIMARY}
                         />
                         <View style={{alignContent:'center',marginTop:8}}>
                             <Title style={styles.titleDrawer}>Bonjour</Title> 
