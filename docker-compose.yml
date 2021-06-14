@@ -3,7 +3,6 @@ services:
   #Backend/springBoot
   backend:
     container_name: backend-container
-    image: rdl123/backend-container
     build: ./Backend
     ports:
       - "9090:9090"
@@ -11,7 +10,7 @@ services:
       - postgresqldb
    #Database Postgres/postgis
   postgresqldb:
-    image: rdl123/db
+    image: starefossen/pgrouting
     ports:
       - "5432:5432"
     environment:
@@ -22,7 +21,6 @@ services:
   web:
     build: ./web
     container_name: web
-    image: rdl123/pfe_web
     ports:
       - "3000:80"
     depends_on:
