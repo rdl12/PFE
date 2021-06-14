@@ -62,7 +62,7 @@ const AddDefibScreen = ({navigation}) => {
         
         
       }
-      // dispatch(Add_Defib_Posted(defib))
+       dispatch(Add_Defib_Posted(defib))
        setsucess(!success)
        setTimeout(() => {
           setsucess(false)
@@ -155,7 +155,7 @@ const AddDefibScreen = ({navigation}) => {
       <SafeAreaView style={{flex:1,justifyContent:'center',backgroundColor:COLORS.white}}>
         
             <Dialog.Container visible={success}>
-                    <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22"/>
+                    <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22" style={{alignSelf:'center'}}/>
                     <Dialog.Description>
                              Defibrillateur ajouté avec succés avec succes
                     </Dialog.Description>

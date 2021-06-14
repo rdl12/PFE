@@ -292,7 +292,7 @@ const TutorialScreen = ({navigation}) => {
 const styles = StyleSheet.create({
     card :{
 
-         maxHeight:windowHeight/1.35,
+         maxHeight:windowHeight/1.5,
          shadowColor: "#000",
          shadowOffset: {
            width: 0,
