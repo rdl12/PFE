@@ -22,10 +22,10 @@ const AdminLayout = Loadable({
 const Signin1 = React.lazy(() => import('../Demo/Authentication/SignIn/SignIn1'));
 class App extends Component {
     componentDidMount(){
-    const messaging = firebase.messaging()
-    messaging.getToken({vapidKey: "BA9z8X5UkHmlGtvL7aA9idguQhwn3XNXPWeSUm3Bfb-Gtm3IQ0tmhsFVreoDTgP4sYJEp6kT84CP0mhyC25TLro"})
-    .then((currentToken) => {
-     if (currentToken) {
+    // const messaging = firebase.messaging()
+    // messaging.getToken({vapidKey: "BA9z8X5UkHmlGtvL7aA9idguQhwn3XNXPWeSUm3Bfb-Gtm3IQ0tmhsFVreoDTgP4sYJEp6kT84CP0mhyC25TLro"})
+    // .then((currentToken) => {
+   //  if (currentToken) {
       const ref = firebase.firestore().collection("NotifLauncher")
       ref.onSnapshot((querySnapShot) => {
           querySnapShot.forEach((doc) =>{
@@ -35,22 +35,23 @@ class App extends Component {
                 (sub) => sub.etat === 'non traiter' 
               );
               console.log(sub_filtered)
-              this.props.Send_Notif(currentToken,sub_filtered)
+              this.props.Send_Notif(sub_filtered)
             }, 1000);
            
            
           })
       })
-     } else {
-       console.log('No registration token available. Request permission to generate one.');
-     }
-   }).catch((err) => {
-     console.log('An error occurred while retrieving token. ', err);
-     // catch error while creating client token
-   })
+     } 
+  //    else {
+  //      console.log('No registration token available. Request permission to generate one.');
+  //    }
+  //  }).catch((err) => {
+  //    console.log('An error occurred while retrieving token. ', err);
+  //    // catch error while creating client token
+  //  })
   
   
-    }
+  //   }
     render() {
      
       let menu;
@@ -108,7 +109,7 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     Fetch_Subscribed_people: () => dispatch(Fetch_Subscribed_people()),
-    Send_Notif: (token,sub) => dispatch(Send_Notif(token,sub))
+    Send_Notif: (sub) => dispatch(Send_Notif(sub))
    
   }
 };

@@ -551,31 +551,10 @@ export const Fetch_user_chat = () =>{
 }
 }
  export const Send_Notif = (token,sub) =>{
-   console.log(sub)
-   var object = {
-    "to" : token
-    , 
-    "notification": {
-    "body": "Firebase Cloud Message"
-  }
-  }
-  return (dispatch) => {
-    return fetch("https://fcm.googleapis.com/fcm/send", {
-    method: 'POST',  
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'key=AAAA6QTcTe8:APA91bEGqDG0C9On_iy8t4ly43OHzFruMJIE814q7zodWZfqgn_Mp8GM9URyYFOVeCBkmayU4PaMyfnI5PR4zGEMeoUUy1Spy3sdH9bIFgu2V6PXOKPmrNwc8_4d7Furr_bED4acjNVC'       
-    },
-    body:  JSON.stringify(object)
-  })
-.then((responseData) => {
-    console.log(
-        "notification sent -> " + JSON.stringify(responseData)
-    )
-    dispatch(setFilteredFor({filtered:sub}))
-})
 
-}
+  return (dispatch) => {
+    return dispatch(setFilteredFor({filtered:sub}))
+  }
  }
 
  export const Fetch_Defib_ByVille = (ville) =>{
