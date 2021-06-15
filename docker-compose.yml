@@ -3,6 +3,7 @@ services:
   #Backend/springBoot
   backend:
     container_name: backend-container
+    image: rdl123/backend-container
     build: ./Backend
     ports:
       - "9090:9090"
@@ -10,9 +11,11 @@ services:
       - postgresqldb
    #Database Postgres/postgis
   postgresqldb:
-    image: starefossen/pgrouting
+    image: rdl123/db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_PASSWORD=123456789
       - POSTGRES_USER=postgres
@@ -21,7 +24,10 @@ services:
   web:
     build: ./web
     container_name: web
+    image: rdl123/pfe_web
     ports:
       - "3000:80"
     depends_on:
       - backend
+volumes: 
+  pgdata:
