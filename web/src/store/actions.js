@@ -550,7 +550,7 @@ export const Fetch_user_chat = () =>{
     return dispatch(Set_Chat_State({user_chat:users}))
 }
 }
- export const Send_Notif = (token,sub) =>{
+ export const Send_Notif = (sub) =>{
 
   return (dispatch) => {
     return dispatch(setFilteredFor({filtered:sub}))

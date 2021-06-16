@@ -27,14 +27,16 @@ class App extends Component {
     // .then((currentToken) => {
    //  if (currentToken) {
       const ref = firebase.firestore().collection("NotifLauncher")
+    
       ref.onSnapshot((querySnapShot) => {
           querySnapShot.forEach((doc) =>{
             this.props.Fetch_Subscribed_people()
             setTimeout(() => {
-              let sub_filtered = typeof this.props.subs !== "undefined" && this.props.subs.filter(
+              console.log(this.props.subs)
+              let sub_filtered =  this.props.subs.filter(
                 (sub) => sub.etat === 'non traiter' 
               );
-              typeof sub_filtered !== "undefined" && this.props.Send_Notif(sub_filtered)
+              this.props.Send_Notif(sub_filtered)
             }, 1000);
            
            
