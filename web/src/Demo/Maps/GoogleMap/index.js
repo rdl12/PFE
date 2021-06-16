@@ -186,12 +186,9 @@ class GoogleMap extends React.Component {
                             <Card.Body>
                             {this.state.ville !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.ville}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter_ville}/></Badge>): null }
                             
-                                <div style={{height: window.innerHeight/1.5, width: '100%'}}>
-                                    
-                               
-
+                                
                                     {!this.state.showlist ?(
-                                       
+                                       <div style={{height: window.innerHeight/1.5, width: '100%'}}>
                                         <Map
                                         ref={(map) => { this.map = map; }}
                                         centerAroundCurrentLocation
@@ -221,6 +218,7 @@ class GoogleMap extends React.Component {
                                             </div>
                                         </InfoWindow>
                                     </Map>
+                                     </div>
                                     ):(
                                         <div>
                                         <Table striped responsive>
@@ -274,7 +272,7 @@ class GoogleMap extends React.Component {
                                     </div>
                                     )}
                                     
-                                </div>
+                               
                               
                             </Card.Body>
                            

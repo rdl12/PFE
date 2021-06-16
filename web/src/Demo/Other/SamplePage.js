@@ -48,6 +48,8 @@ class SamplePage extends React.Component {
             this.props.Defib.etat.etat = 'en cours de traitement'
         }
         this.props.Modify_defib(this.props.Defib)
+        setTimeout(()=>{window.location.href = "/tables/bootstrap"},1500)
+        //window.location.href = "/tables/bootstrap"
     }
     onMarkerClick = (props, marker) =>
     this.setState({

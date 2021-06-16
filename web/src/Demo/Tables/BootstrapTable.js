@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Card, Table,Badge,Dropdown,DropdownButton,Form,Pagination} from 'react-bootstrap';
+import {Row, Col, Card, Table,Badge,Dropdown,DropdownButton,Form,Pagination,Spinner} from 'react-bootstrap';
 import {NavLink} from 'react-router-dom';
 
 import Aux from "../../hoc/_Aux";
@@ -165,9 +165,11 @@ class BootstrapTable extends React.Component {
                             <span className="d-block mt-0">appuyer sur detail pour pouvoir valider ou rejetter un defibrillateur</span>
 
                             </Card.Header>
-                            <Card.Body>
+                       {defib_filtred.length === 0 ?(<Spinner animation="border" variant="primary" style={{margin:20, alignSelf:'center'}}/>):
+                            (<Card.Body>
                                 {this.state.etat !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.etat}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter}/></Badge>): null }
                                 {this.state.ville !== null ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{this.state.ville}<i className="feather icon-x text-c-black f-20 ml-3" onClick={this.remove_filter_ville}/></Badge>): null }
+                            
                                 <Table striped responsive>
                                     <thead>
                                     <tr>
@@ -180,7 +182,7 @@ class BootstrapTable extends React.Component {
                                     </tr>
                                     </thead>
                                     <tbody>
-                             {typeof defib_filtred !== "undefined" &&  defib_filtred.map(item => 
+                             {defib_filtred.map(item => 
                               <tr key = {item.id}>
                               <td>{item.nom}</td>
                               <td>{item.date}</td>
@@ -214,7 +216,7 @@ class BootstrapTable extends React.Component {
                                     </Col>
                                </Row>
             
-                            </Card.Body>
+                            </Card.Body>)}
                         </Card>
                     </Col>
                 </Row>
