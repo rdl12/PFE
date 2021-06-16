@@ -18,82 +18,36 @@ class Dashboard extends React.Component {
         this.props.Fetch_stats_etat();
         this.props.Fetch_stats_prov();
         this.props.Fetch_stats_formation();
+       
         setTimeout(() => {
-           
+           console.log('stats')
+           console.log(this.props.Stats)
             const sumArray = (array) => {
                 const newArray = [];
                 array.forEach(sub => {newArray.push(sub[1])});
                 return newArray;
              }
-            const array1 = sumArray(this.props.Stats_Prov)
+            const array1 = this.props.Stats_Prov.length != 0 && sumArray(this.props.Stats_Prov)
              const reducer = (accumulator, currentValue) => accumulator + currentValue;
-             this.setState({
+             this.props.Stats_Prov.length != 0 && this.setState({
                  somme:array1.reduce(reducer)
              })
 
           }, 1000);
     }
     render() {
-        const tabContent = (
-            <Aux>
-               
-                <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Silje Larsen</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green"/>3784</span>
-                </div>
-            </div>
-            <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Julie Vad</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green"/>3544</span>
-                </div>
-            </div>
-            <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar3} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Storm Hanse</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red"/>2739</span>
-                </div>
-            </div>
-            <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar1} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Frida Thomse</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red"/>1032</span>
-                </div>
-            </div>
-            <div className="media friendlist-box align-items-center justify-content-center m-b-20">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar2} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Silje Larsen</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-up f-22 m-r-10 text-c-green"/>8750</span>
-                </div>
-            </div>
-            <div className="media friendlist-box align-items-center justify-content-center">
-                <div className="m-r-10 photo-table">
-                    <a href={DEMO.BLANK_LINK}><img className="rounded-circle" style={{width: '40px'}} src={avatar3} alt="activity-user"/></a>
-                </div>
-                <div className="media-body">
-                    <h6 className="m-0 d-inline">Storm Hanse</h6>
-                    <span className="float-right d-flex  align-items-center"><i className="fa fa-caret-down f-22 m-r-10 text-c-red"/>8750</span>
-                </div>
-            </div>
-        </Aux>
-    );
+         let statSignale;
+         let statTraitement;
+         let statModifie;
+        this.props.Stats.length != 0  && this.props.Stats.map(item=>{
+           if(item[0] === 'en cours de traitement' ){statTraitement = item[1]}
+           if(item[0] === 'modifié' ){statModifie = item[1]}
+           if(item[0] === 'signalé' ){statSignale = item[1]}
 
+        })
+
+ 
+        
     return (
         <Aux>
              { this.props.Stats.length != 0  && this.props.Stats_Prov.length != 0 ? (   <Row>
@@ -103,8 +57,8 @@ class Dashboard extends React.Component {
                             <h6 className='mb-4'>defibrillateurs recemment signalé</h6>
                             <div className="row d-flex align-items-center">
                                 <div className="col-9">
-                                    {this.props.Stats[4] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${this.props.Stats[3][1]} defibrillateurs` } </h3>):
-                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs</h3>)}
+                         {typeof statSignale !== "undefined"? (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${statSignale} defibrillateurs` } </h3>):
+                        (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs  </h3>)}
                                 </div> 
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>
@@ -118,10 +72,10 @@ class Dashboard extends React.Component {
                         <Card.Body>
                             <h6 className='mb-4'>defibrillateurs en cours de traitement</h6>
                             <div className="row d-flex align-items-center">
-                                <div className="col-9">
-                                    {this.props.Stats[4] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/> {`${this.props.Stats[4][1]} defibrillateurs` }</h3>):
-                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-refresh-cw text-c-red f-30 m-r-5"/> 0 defibrillateurs</h3>)}
-                                </div>
+                            <div className="col-9">
+                         {typeof statTraitement !== "undefined"? (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${statTraitement} defibrillateurs` } </h3>):
+                        (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs  </h3>)}
+                                </div> 
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>
                                 <div className="progress-bar progress-c-theme2" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
@@ -134,10 +88,10 @@ class Dashboard extends React.Component {
                         <Card.Body>
                             <h6 className='mb-4'>defibrillateurs modifiés</h6>
                             <div className="row d-flex align-items-center">
-                                <div className="col-9">
-                                    {this.props.Stats[1] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> {`${this.props.Stats[1][1]} defibrillateurs` }</h3>):
-                                     (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-alert-circle text-c-green f-30 m-r-5"/> 0 defibrillateurs </h3>)}
-                                </div>
+                            <div className="col-9">
+                         {typeof statModifie !== "undefined"? (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${statModifie} defibrillateurs` } </h3>):
+                        (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs  </h3>)}
+                                </div> 
                             </div>
                             <div className="progress m-t-30" style={{height: '7px'}}>
                                 <div className="progress-bar progress-c-theme" role="progressbar" style={{width: '100%'}} aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"/>
