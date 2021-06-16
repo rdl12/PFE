@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { Adress ,Fetch_Defib_User,Fecth_DefiById} from '../redux/actions'
 import {  View,TouchableOpacity, Button, FlatList,Image,Modal,Text,Pressable, SafeAreaView } from 'react-native'
+import { ActivityIndicator} from 'react-native-paper';
 
 class MyDefibsScreen extends Component{
     constructor(props){
@@ -18,7 +19,6 @@ class MyDefibsScreen extends Component{
 
     componentDidMount(){
         this.props.Fetch_Defib_User(this.props.email)
-        console.log(this.props.defibs.Defibrilatteur_user)
     }
 
     getDetails(id,lat,long) {
@@ -95,13 +95,13 @@ class MyDefibsScreen extends Component{
 
                </View>
 
-                     
-                    <FlatList
+                    {this.props.defibs.length ===0 ? (<ActivityIndicator size="large" animating = {true}  style = {{flex : 1,justifyContent:'center' ,alignItems:'center'}} />)
+                    :(<FlatList
                        data = {this.props.defibs}
                        renderItem={this.renderItem}
                        keyExtractor={item => item.id.toString()}
                        style={{flex: 0.5}}
-                    />  
+                    />) } 
         
         
                 </SafeAreaView>

@@ -9,6 +9,7 @@ import Dialog from "react-native-dialog";
 import {useSelector,useDispatch} from 'react-redux'
 import {Modify_defib, ModalState,Fetch_defib_byId} from '../redux/actions'
 import {windowWidth,windowHeight} from '../utils/Dimentions'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const DetailsScreen = ({route,navigation}) => {
     const {isEdit} = route.params;
@@ -25,6 +26,7 @@ const DetailsScreen = ({route,navigation}) => {
     const [Description, setDescription] = useState('')
     const [Marque, setMarque] = useState('')
     const [Accessibilite, setAccessibilite] = useState('')
+    const [success, setsucess] = useState(false)
     const dispatch = useDispatch();
     const mapView = React.createRef();
   
@@ -87,7 +89,12 @@ const DetailsScreen = ({route,navigation}) => {
          Get_Defib.Defibrilatteur.etat.etat = 'modifié'
          Get_Defib.Defibrilatteur.etat.id = 4
          console.log(Adresse.addrese)
-         setTimeout(() =>  Modify_defib(Get_Defib.Defibrilatteur),1000)
+         setTimeout(() => { Modify_defib(Get_Defib.Defibrilatteur)
+                            setsucess(!success)},1000)
+         setTimeout(() => {
+            setsucess(false)
+            navigation.navigate('MyDefibs')
+          }, 2000);
     }
   
     useEffect(() => {
@@ -123,7 +130,13 @@ const DetailsScreen = ({route,navigation}) => {
     return (
         <SafeAreaView style = {{backgroundColor:Colors.white,flex : 1}}>
 
-      
+         <Dialog.Container visible={success}>
+                    <Icon name="check-circle" size={80}  resizeMode="contain" color="#228B22" style={{alignSelf:'center'}}/>
+                    <Dialog.Description>
+                             Defibrillateur modifié avec succés avec succes
+                    </Dialog.Description>
+                   
+            </Dialog.Container>
       
 
           {Get_Defib.Defibrilatteur.latitude === undefined || id === undefined ? (
