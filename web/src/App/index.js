@@ -34,8 +34,7 @@ class App extends Component {
               let sub_filtered = typeof this.props.subs !== "undefined" && this.props.subs.filter(
                 (sub) => sub.etat === 'non traiter' 
               );
-              console.log(sub_filtered)
-              this.props.Send_Notif(sub_filtered)
+              typeof sub_filtered !== "undefined" && this.props.Send_Notif(sub_filtered)
             }, 1000);
            
            
