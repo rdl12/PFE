@@ -68,6 +68,7 @@ const StatistiqueScreen = ({navigation}) => {
     })
 
     useEffect(() => {
+      setdata([])
         typeof stat_prov_defib !== undefined && Object.values(stat_prov_defib).map(item =>  nbr_defib.push(item[1]))
         setnbrs(nbr_defib.reduce((a, b) => a + b, 0))
         const parent = navigation.dangerouslyGetParent();

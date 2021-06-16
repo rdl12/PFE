@@ -1,5 +1,5 @@
 import React ,{useState}  from 'react'
-import {StyleSheet ,StatusBar, KeyboardAvoidingView,TouchableOpacity,Image,ImageBackground} from 'react-native'
+import {StyleSheet ,StatusBar, KeyboardAvoidingView,TouchableOpacity,Image,ImageBackground,View} from 'react-native'
 import { Block, Text } from "galio-framework";
 import Dialog from "react-native-dialog";
 import { useDispatch } from 'react-redux';
@@ -9,25 +9,46 @@ import ArButton  from '../components/Button/Button'
 import {windowWidth as width ,windowHeight as height} from '../utils/Dimentions'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Reset_Password } from '../redux/actions';
+import { set } from 'react-native-reanimated';
 
 
 
 const ResetPasswordScreen = ({navigation}) => {
     const [username, setUsername] = useState('');
-    const [success, setsucess] = useState(false) 
+    const [success, setsucess] = useState(false)
+    const [wrong, setwrong] = useState(false) 
     const dispatch = useDispatch()
 
     const submit = () => {
-         dispatch(Reset_Password(username))
+      if(username!=''){
+        dispatch(Reset_Password(username))
+        setsucess(true)
+      }
+      else {
+        setwrong(true)
+      }
       }
     return (
    
           <Block flex middle  style = {{backgroundColor:COLORS.white}}>
-            <Dialog.Container visible={success}>
+            <Dialog.Container visible={wrong}>
                     <Icon name="times-circle" size={80}  resizeMode="contain" color="red" style={{alignSelf:'center'}}/>
                     <Dialog.Description>
                              Veuiller entrer toutes vos informations 
                     </Dialog.Description>
+                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                         <Dialog.Button label="Ok"  onPress={() =>  setwrong(false)}/>
+                    </View>
+                   
+            </Dialog.Container>
+            <Dialog.Container visible={success}>
+                    
+                    <Dialog.Description>
+                             un email vous a été envoyer, vous y trouverez votre nouveau mot de passe ,penser a le changer apres LOGIN.
+                    </Dialog.Description>
+                    <View style={{display:'flex', flexDirection:'row', justifyContent:'space-evenly', marginTop:10}}>
+                         <Dialog.Button label="Ok" color='blue' size={50}  onPress={() =>  setsucess(false)}/>
+                    </View>
                    
             </Dialog.Container>
         <StatusBar hidden />
