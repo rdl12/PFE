@@ -222,6 +222,9 @@ export const Fecth_DefiById = (id) => {
 }
 
 export const Modify_defib = (defib) => {
+  if (defib.user.authorities){
+    delete defib.user.authorities
+  }
   console.log(defib)
  return (dispatch) => {
    return  fetch(`${API_URI}/Defibrillateur/update`, {

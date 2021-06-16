@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
                             <h6 className='mb-4'>defibrillateurs recemment signalé</h6>
                             <div className="row d-flex align-items-center">
                                 <div className="col-9">
-                                    {this.props.Stats[3] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${this.props.Stats[3][1]} defibrillateurs` } </h3>):
+                                    {this.props.Stats[4] !== undefined ?(<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> {`${this.props.Stats[3][1]} defibrillateurs` } </h3>):
                                      (<h3 className="f-w-300 d-flex align-items-center m-b-0"><i className="feather icon-plus text-c-green f-30 m-r-5"/> 0 defibrillateurs</h3>)}
                                 </div> 
                             </div>
