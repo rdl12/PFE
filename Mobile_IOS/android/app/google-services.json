@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1000808926703",
+    "project_id": "pfedefib",
+    "storage_bucket": "pfedefib.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000808926703:android:1f3e99f74045a9581a7a1a",
+        "android_client_info": {
+          "package_name": "com.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000808926703-g9dcm859e43pdef7ku8k8bdc3rh4474f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiaYloGHA8BTJ59dFV5nu7sLeV7pnlVe4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1000808926703-g9dcm859e43pdef7ku8k8bdc3rh4474f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
