@@ -53,9 +53,17 @@ function ProduitList() {
          "desription":Description,
           "categorie":categorie_filterd[0]
        }
-       dispatch(Add_Product(object))
-       handleClose()
-       window.location.reload(false)
+       
+       if(Nom=="" || categorie_filterd[0] == undefined)
+         {
+            alert('veuiller entrer au moins le nom et la categorie du produit')
+         }
+      else {
+         dispatch(Add_Product(object))
+         handleClose()
+         window.location.reload(false)
+      }
+       
       }
       const change = (e) => {
          setCategorieChoosed(e.target.value)
@@ -98,7 +106,7 @@ function ProduitList() {
                     </Form.Group>
                     <Form.Group controlId="formBasicNom">
                     <Form.Label>Description</Form.Label>
-                    <Form.Control type="email" placeholder="description" value={Description}  onChange={e => setDescription(e.target.value)}/>
+                    <Form.Control as='textarea' type="email" placeholder="description" value={Description}  onChange={e => setDescription(e.target.value)}/>
                     </Form.Group>
                     <Form.Group controlId="Categories">
                         <Form.Label>Categorie</Form.Label>

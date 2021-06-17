@@ -74,10 +74,8 @@ useEffect(() => {
             }
             dispatch(Add_Date(object))
           })
-          
-          
-            
-          
+          handleClose()
+      
       console.log('save')
     }
 
@@ -226,7 +224,7 @@ useEffect(() => {
                         value={value}
                         defaultValue = {[new Date(2021, 24, 5),new Date(2021, 5, 24)]}
                         onClickDay = {(value) => {  
-                            console.log(dateAdded)
+                            console.log(value)
                             dateAdded.push(value)}  }
                     />
                 </Col>
@@ -239,7 +237,7 @@ useEffect(() => {
                  {typeof dateAdded !== "undefined" &&  dateAdded.map((item,index) => {
                    
                    return <Badge key = {index} variant="success" className="mb-1 f-20 p-3" style={{borderRadius:20}}>
-                    {item.getDate()}-{item.getDay()}-{item.getFullYear()}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dateAdded.pop(index)}/>
+                    {item.getDate()}-{item.getMonth()+1}-{item.getFullYear()} <i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dateAdded.pop(index)}/>
                        </Badge>
                }) }
                 </Col>

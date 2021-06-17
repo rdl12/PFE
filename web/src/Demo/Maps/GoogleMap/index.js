@@ -20,6 +20,7 @@ class GoogleMap extends React.Component {
         selectedPlace: {},
         showingInfoWindow: false,
         position: null,
+        center:{ lat: 0, lng: 0 },
         showlist : false,
         showlist_value : "voir Lise des defib",
         showlist_icon : "feather icon-list text-c-black f-20",
@@ -83,8 +84,9 @@ class GoogleMap extends React.Component {
     componentDidMount() {
         this.renderAutoComplete();
         this.props.Fetch_Defib_Valide(2)
-        console.log(this.props.Defib)
-        console.log(this.state)
+        setTimeout(() => {this.setState({
+            center:{ lat: 33, lng: -7.30 }
+        })},200) 
       
     }
 
@@ -191,11 +193,11 @@ class GoogleMap extends React.Component {
                                        <div style={{height: window.innerHeight/1.5, width: '100%'}}>
                                         <Map
                                         ref={(map) => { this.map = map; }}
-                                        centerAroundCurrentLocation
+                                        center={this.state.center}
                                         className="map"
                                         google={this.props.google}
                                         onClick={this.onMapClicked}
-                                        zoom={12}>
+                                        zoom={6}>
 
                            {this.props.Defib && this.props.Defib.map(marker => (
                                         <Marker

@@ -29,6 +29,12 @@ function SubscriptionList() {
         setindex(page*number_per_page-number_per_page)
     }
 
+    const E_PaginationHandler = (page) =>{
+        console.log(page)
+        setEpage(page)
+        setEindex(page*number_per_page-number_per_page)
+    }
+
      useEffect(() => {
         dispatch(Fetch_Subscribed_people())
         setinscrits(people_subbed)
@@ -41,6 +47,7 @@ function SubscriptionList() {
      let users_filtred  = users.slice(index,index+number_per_page)
      let entreprise_filtred  = entreprise.slice(Eindex,Eindex+Enumber_per_page)
      let active = page;
+     let Eactive = Epage;
      let activeItems = [];
      let EactiveItems = [];
     for (let number = 1; number <= users.length/number_per_page+1; number++) {
@@ -53,7 +60,7 @@ function SubscriptionList() {
     
     for (let number = 1; number <= entreprise.length/Enumber_per_page+1; number++) {
             EactiveItems.push(
-                <Pagination.Item key={number} active={number === active} onClick = {() => PaginationHandler(number)}>
+                <Pagination.Item key={number} active={number === Eactive} onClick = {() => E_PaginationHandler(number)}>
                     {number}
                 </Pagination.Item>
             );

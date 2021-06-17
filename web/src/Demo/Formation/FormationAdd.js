@@ -56,14 +56,20 @@ function FormationAdd() {
         "image":Image,
         "categorie":categorie_filterd[0],
     }
-    dispatch(Add_Formation(formation,arrDate))
-    history.push('/Formation/Ajouter');
-    setNom("")
-    setDescription("")
-    setnbrmax("")
-    setImage("")
+    if(Nom=="" || categorie_filterd[0] == undefined)
+    {
+       alert('veuiller entrer au moins le nom et la categorie de la formation')
+    }
+    else {
+        dispatch(Add_Formation(formation,arrDate))
+        history.push('/Formation/Ajouter');
+        setNom("")
+        setDescription("")
+        setnbrmax("")
+        setImage("")
+       dispatch({type: actionTypes.SHOW_TOAST,show:true})
+    }
     
-    dispatch({type: actionTypes.SHOW_TOAST,show:true})
    
    }
    const change = (e) => {
