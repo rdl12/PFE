@@ -124,12 +124,13 @@ function FormationAdd() {
                                 <Calendar
                                     onChange={onChange}
                                     value={value}
-                                    onClickDay = {(value) => {  arrDate.push(value)}  }
+                                    onClickDay = {(value) => {console.log(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())
+                                           arrDate.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
                                     style = {{margin:0}}
                                 />
                             </Col>
                             <Col  xs={6}>    { arrDate.map((item,index) => {
-                            return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{item.getDate()}/{item.getDay()}/{item.getFullYear()}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>arrDate.pop(index)}/></Badge>
+                            return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{item.split('T')[0]}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>arrDate.pop(index)}/></Badge>
                            }) }</Col>
                         </Row>
                        </Form.Group>
