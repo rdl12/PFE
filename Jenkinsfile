@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
               dir("Backend/"){
-               sh 'mvn install -DskipTests'
+               sh 'mvnw install -DskipTests'
               }
             }
         }
