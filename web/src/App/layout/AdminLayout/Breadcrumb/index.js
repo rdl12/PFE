@@ -66,7 +66,7 @@ class Breadcrumb extends Component {
             );
 
             if(this.state.item.breadcrumbs !== false) {
-                breadcrumb = (
+                breadcrumb = ( 
                     <div className="page-header">
                         <div className="page-block">
                             <div className="row align-items-center">

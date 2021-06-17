@@ -629,6 +629,7 @@ export const Delete_Formation = (id) => {
 }
 
 export const Add_Date = (date) => {
+  
   return (dispatch) => {
     return fetch(`${API_URI}/DateFormation/addDate`, {
     method: 'POST',
