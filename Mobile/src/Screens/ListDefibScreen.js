@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import BaseMapSwitcher from '../components/BaseMapSwitcher/BaseMapSwitcher';
 import Geolocation from 'react-native-geolocation-service';
 import {windowWidth,windowHeight} from '../utils/Dimentions'
-import { COLORS, images} from '../Constantes' 
+import {FONTS, COLORS, SIZES, images} from '../Constantes'
 import { connect } from 'react-redux';
 import { Adress ,Fecth_Defib,Fecth_DefiById} from '../redux/actions'
 import MapViewDirections from 'react-native-maps-directions';
@@ -14,6 +14,7 @@ import ListDefib from '../components/ListDefib/ListDefib';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import  {requestLocationPermission} from '../services/LocationPermission'
+
 
 class ListDefibScreen extends Component {
     constructor(props){
@@ -261,13 +262,23 @@ class ListDefibScreen extends Component {
                 
             </MapView>
 
-            {this.state.isList ?(
-            <FlatList
-               data = {markers_filtered}
-               renderItem={this.renderItem}
-               keyExtractor={item => item.id.toString()}
-               style={{flex: 0.5}}
-            />  ):null}
+            {this.state.isList  ?(
+            <View style={{flex:1}}>
+        {this.state.rayon.length === 0 ?(<FlatList
+                    data = {markers_filtered}
+                    renderItem={this.renderItem}
+                    keyExtractor={item => item.id.toString()}
+                    
+                    />):
+                (
+                    <View style={{flex:1, justifyContent:'center',backgroundColor:COLORS.white}}>
+                        <Icon name="exclamation" size={70}  resizeMode="contain" color="red" style={{alignSelf:'center', margin:10,marginTop:-15}}/>
+                        <Text style={{...FONTS.h3, color: COLORS.black,textAlign:'center'}}>Aucun defibrillateur n'a été trouvé dans un rayoun de 100 m </Text>
+                        <Text style={{...FONTS.h3, color: COLORS.black,textAlign:'center'}}>Essayer d'alergir le rayon de recherche en haut</Text>
+                    </View>
+                )} 
+            </View>
+             ):null}
 
             </View>
         )
