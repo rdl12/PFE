@@ -64,7 +64,7 @@ const AddDefibScreen = ({navigation}) => {
       }
        dispatch(Add_Defib_Posted(defib))
        setsucess(!success)
-       setTimeout(() => {
+       setTimeout(() => { 
           setsucess(false)
           navigation.navigate('MyDefibs')
         }, 2000);

@@ -88,7 +88,10 @@ import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
             let category = formation.filter(
               (formation) => formation.categorie.nom === item.nom
             );
-            return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230}/>
+            if (category.length != 0)
+            {
+              return <List key = {item.id} formations={category} title={item.nom} navigation={navigation} BOOKW = {170} BOOKH = {230}/>
+            }
           }
             )
         } 
