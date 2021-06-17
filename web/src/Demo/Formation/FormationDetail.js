@@ -24,7 +24,10 @@ function FormationDetail() {
     const [Formation, setFormation] = useState(null)
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () =>{
+        setdateAdded([])
+        setShow(false)
+    };
     const handleShow = () => setShow(true);
 
 
@@ -222,10 +225,10 @@ useEffect(() => {
                     <Calendar
                         onChange={onChange}
                         value={value}
-                        defaultValue = {[new Date(2021, 24, 5),new Date(2021, 5, 24)]}
+                        
                         onClickDay = {(value) => {  
-                            console.log(value)
-                            dateAdded.push(value)}  }
+                            console.log(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())
+                            dateAdded.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
                     />
                 </Col>
                 <Col  xs={6}>    {typeof arrDate !== "undefined" &&  arrDate.map((item,index) => {
@@ -237,7 +240,7 @@ useEffect(() => {
                  {typeof dateAdded !== "undefined" &&  dateAdded.map((item,index) => {
                    
                    return <Badge key = {index} variant="success" className="mb-1 f-20 p-3" style={{borderRadius:20}}>
-                    {item.getDate()}-{item.getMonth()+1}-{item.getFullYear()} <i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dateAdded.pop(index)}/>
+                    {item.split('T')[0]} <i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>dateAdded.pop(index)}/>
                        </Badge>
                }) }
                 </Col>
