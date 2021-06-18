@@ -21,7 +21,7 @@ const Signin1 = () => {
         setTimeout(() => {
             let username = localStorage.getItem('username');
             if (username !== null){
-                history.push('/dashboard/default')
+                history.push('/dashboard')
             }
         }, 50);
        
