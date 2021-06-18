@@ -48,7 +48,7 @@ useEffect(() => {
 
     },500)
          
-    }, [Formation])
+    }, [Formation,arrDate])
 
     const Modify = () => {
         handleShow()
