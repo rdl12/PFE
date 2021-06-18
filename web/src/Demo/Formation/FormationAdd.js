@@ -56,14 +56,20 @@ function FormationAdd() {
         "image":Image,
         "categorie":categorie_filterd[0],
     }
-    dispatch(Add_Formation(formation,arrDate))
-    history.push('/Formation/Ajouter');
-    setNom("")
-    setDescription("")
-    setnbrmax("")
-    setImage("")
+    if(Nom=="" || categorie_filterd[0] == undefined)
+    {
+       alert('veuiller entrer au moins le nom et la categorie de la formation')
+    }
+    else {
+        dispatch(Add_Formation(formation,arrDate))
+        history.push('/Formation/Ajouter');
+        setNom("")
+        setDescription("")
+        setnbrmax("")
+        setImage("")
+       dispatch({type: actionTypes.SHOW_TOAST,show:true})
+    }
     
-    dispatch({type: actionTypes.SHOW_TOAST,show:true})
    
    }
    const change = (e) => {
@@ -118,12 +124,13 @@ function FormationAdd() {
                                 <Calendar
                                     onChange={onChange}
                                     value={value}
-                                    onClickDay = {(value) => {  arrDate.push(value)}  }
+                                    onClickDay = {(value) => {console.log(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())
+                                           arrDate.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
                                     style = {{margin:0}}
                                 />
                             </Col>
                             <Col  xs={6}>    { arrDate.map((item,index) => {
-                            return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{item.getDate()}/{item.getDay()}/{item.getFullYear()}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>arrDate.pop(index)}/></Badge>
+                            return <Badge key = {index} variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20}}>{item.split('T')[0]}<i className="feather icon-x text-c-black f-20 ml-3" onClick={()=>arrDate.pop(index)}/></Badge>
                            }) }</Col>
                         </Row>
                        </Form.Group>
