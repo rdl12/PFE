@@ -92,7 +92,7 @@ export default {
                     title: 'Liste Defibrilatteur',
                     type: 'item',
                     icon: 'feather icon-server',
-                    url: '/tables/bootstrap'
+                    url: '/table'
                 }
             ]
         },
