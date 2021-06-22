@@ -23,6 +23,24 @@ export const getData = async () => {
   }
 }
 
+export const Upload_image = (data) => {
+  return fetch(`${API_URI}/upload`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'multipart/form-data',
+    },
+    body: data,
+  
+})
+.then((responseData) => {
+  console.log(
+      
+      "image succes" + JSON.stringify(responseData)
+  )
+})
+
+
+}
 
 export const setLoginState = (loginData) => {
   return {

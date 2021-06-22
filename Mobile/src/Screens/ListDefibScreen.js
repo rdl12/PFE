@@ -251,8 +251,8 @@ class ListDefibScreen extends Component {
                         key={marker.id}
                         coordinate={{latitude : marker.latitude, longitude : marker.longitude }}
                         title={marker.nom}
-                        description={marker.description}>
-                            <Icon name="thumb-tack" size={35} color='red'   />
+                        description={marker.description}
+                        pinColor={COLORS.primary}>
                     </Marker>
                         
                                

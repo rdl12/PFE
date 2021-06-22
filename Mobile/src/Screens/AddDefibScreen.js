@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Avatar, Button, Card, Title, Paragraph, IconButton  } from 'react-native-paper';
 import {images,COLORS} from '../Constantes'
 import { useDispatch } from 'react-redux';
-import {ModalState,Add_Defib_Posted,AccessibiliteState,Fetch_User} from '../redux/actions'
+import {ModalState,Add_Defib_Posted,AccessibiliteState,Fetch_User,Upload_image} from '../redux/actions'
 import TabBarCustomButton from '../components/TabBar/TabBarCustomButton'
 import Dialog from "react-native-dialog";
 
@@ -20,6 +20,9 @@ const AddDefibScreen = ({navigation}) => {
     const [Description, setDescription] = useState("")
     const [imageSource, setImageSource] = useState(null);
     const [ImageEncoded, setImageEncoded] = useState("")
+    const [uri, seturi] = useState("")
+    const [type, settype] = useState("")
+    const [data, setdata] = useState("")
     const Adresse = useSelector(state => state.AdresseReducer);
     const Modal_State = useSelector(state => state.Modal_State);
     const AccessibiliteState = useSelector(state => state.get_Accessibilite);
@@ -41,11 +44,20 @@ const AddDefibScreen = ({navigation}) => {
       }, [Modal_State, navigation])
   
     const submit = () =>{
+      const imageData = new FormData();
+                        imageData.append('name', 'File');
+                        imageData.append('File', {
+                            uri: uri,
+                            type: type,
+                            name: Adresse.lat+"/"+Adresse.long+".jpg",
+                            data: data
+                        });
+     Upload_image(imageData)
      let defib = {  
         "description" : Description,
         "latitude" : Adresse.lat,
         "longitude" : Adresse.long,
-        "photo" : ImageEncoded,
+        "photo" : Adresse.lat+"/"+Adresse.long+".jpg",
         "etat":{
           id : 1,
           etat : 'signalé'
@@ -63,6 +75,9 @@ const AddDefibScreen = ({navigation}) => {
         
       }
        dispatch(Add_Defib_Posted(defib))
+       
+        
+       
        setsucess(!success)
        setTimeout(() => { 
           setsucess(false)
@@ -86,7 +101,6 @@ const AddDefibScreen = ({navigation}) => {
     }
     const imageCameraLaunch = () => {
       let options = {
-         includeBase64: true,
       storageOptions: {
           skipBackup: true,
           path: 'images',
@@ -106,9 +120,9 @@ const AddDefibScreen = ({navigation}) => {
           alert(response.customButton);
         } else {
           const source = { uri: response.uri };
-          const imageEncoded = {base64 : response.base64}
-          setImageSource(source.uri);
-          setImageEncoded(imageEncoded.base64)
+          seturi(response.uri)
+          setdata(response.data)
+          settype(response.type)
           
         }
       });
@@ -136,12 +150,12 @@ const AddDefibScreen = ({navigation}) => {
                   } else {
                     let source = { uri: response.uri };
             
-                    // ADD THIS
-                    const imageEncoded = {base64 : response.base64}
                     setImageSource(source.uri);
-                    setImageEncoded(imageEncoded.base64)
-                    console.log("imageEncoded")
-                    console.log(imageEncoded.base64)
+                    
+                    seturi(response.uri)
+                    setdata(response.data)
+                    settype(response.type)
+                    
                   }
               
             
