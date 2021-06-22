@@ -9,6 +9,8 @@ services:
       - "9090:9090"
     depends_on:
       - postgresqldb
+    volumes:
+      - ./ImageStorage:/home/ImageStorage
    #Database Postgres/postgis
   postgresqldb:
     image: rdl123/db
