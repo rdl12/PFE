@@ -1,5 +1,6 @@
 ### STAGE 1: Build ###
 FROM node:12.18.3-alpine3.12 AS build
+RUN mkdir ImageStorage
 WORKDIR /web
 ENV PATH /web/node_modules/.bin:$PATH
 COPY package.json ./
