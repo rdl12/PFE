@@ -77,7 +77,7 @@ public class DefibrillateurController {
 	        System.out.println(""+geom);
 	        defibrillateur.setGeom(geom);
 	        defibrillateur.setEtat(s);
-	        defibrillateur.setPhoto("");
+	        defibrillateur.setPhoto("/ImageStorage/"+defibrillateur.getPhoto());
 	        defibrillateurService.save(defibrillateur);
 	    }
 	
