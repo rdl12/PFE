@@ -10,7 +10,7 @@ services:
     depends_on:
       - postgresqldb
     volumes:
-      - ./ImageStorage:/ImageStorage/
+      - imageStorage:/ImageStorage/
    #Database Postgres/postgis
   postgresqldb:
     image: rdl123/db
@@ -33,3 +33,4 @@ services:
       - backend
 volumes: 
   pgdata:
+  imageStorage:  
