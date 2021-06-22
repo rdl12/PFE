@@ -49,7 +49,7 @@ const AddDefibScreen = ({navigation}) => {
                         imageData.append('File', {
                             uri: uri,
                             type: type,
-                            name: Adresse.lat+"/"+Adresse.long+".jpg",
+                            name: Adresse.lat+"i"+Adresse.long+".jpg",
                             data: data
                         });
      Upload_image(imageData)
