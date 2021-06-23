@@ -8,7 +8,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 import Aux from "../../hoc/_Aux";
-import {Delete_Formation,Add_Date, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation,Delete_Subscription,Modify_subs} from '../../store/actions'
+import {Delete_Formation,Add_Date, Fetch_Formation_ById,Fetch_Subscribed_people,Fetch_date_Formation,Delete_DateFormation,Delete_Subscription,Modify_subs,Set_Formation_byId} from '../../store/actions'
 
 
 function FormationDetail() {
@@ -32,17 +32,19 @@ function FormationDetail() {
 
 
 useEffect(() => {
+    console.log(id)
     dispatch(Fetch_Formation_ById(id))
     dispatch(Fetch_Subscribed_people())
     dispatch(Fetch_date_Formation(id))
+    console.log(detail)
 
-    setTimeout(() => { setFormation(detail)
+    if(detail != {}) { setFormation(detail)
         const filter_subbed =  people_subbed.filter(
           (sub) => sub.formation.nom === detail.nom 
         );
         setinscrits(filter_subbed)
 
-    },200)
+    }
 
     setTimeout(() => { 
         {typeof inscrits !== "undefined" &&  inscrits.map((item) =>{ if (item.etat!="Traité")
@@ -50,9 +52,10 @@ useEffect(() => {
          Modify_subs(item)}})}
 
     },500)
-   
+
+   return () => {dispatch(Set_Formation_byId({formationDetail:{}}))}
          
-    }, [Formation,arrDate])
+    }, [])
 
     const Modify = () => {
         handleShow()
@@ -88,13 +91,13 @@ useEffect(() => {
     
     return (
         <div>
-          {Formation ? 
+          {detail !== {}? 
           (<div className="row">
-               <img className="col-sm4" src={Formation.image} width ="200" height = "250"/>
+               <img className="col-sm4" src={detail.image} width ="200" height = "250"/>
                <div className="col-sm" style ={{margin:20, marginTop : 0}} >
-                    <h3 className="font-weight-bold" > {Formation.nom}</h3>
+                    <h3 className="font-weight-bold" > {detail.nom}</h3>
                     <Card style={{padding:10}}>
-                        <p className="font-italic" >{Formation.desription}</p>
+                        <p className="font-italic" >{detail.desription}</p>
                     </Card>
                 </div>
                 <div className="col-sm4">
@@ -105,7 +108,7 @@ useEffect(() => {
                                         <i className="feather icon-user-check f-30 text-c-green"/>
                                     </div>
                                     <div className="col">
-                                        <h3 className="f-w-300">{Formation.nbr_inscrit} / {Formation.nbr_max}</h3>
+                                        <h3 className="f-w-300">{detail.nbr_inscrit} / {detail.nbr_max}</h3>
                                         <span className="d-block text-uppercase">Nombre d'inscription (Individu)</span>
                                     </div>
                                 </div>
@@ -116,7 +119,7 @@ useEffect(() => {
                                         <i className="feather icon-briefcase f-30 text-c-blue"/>
                                     </div>
                                     <div className="col">
-                                        <h3 className="f-w-300">{Formation.nbr_entreprise}</h3>
+                                        <h3 className="f-w-300">{detail.nbr_entreprise}</h3>
                                         <span className="d-block text-uppercase">Nombre d'inscription (Entreprise)</span>
                                     </div>
                                 </div>
@@ -141,7 +144,7 @@ useEffect(() => {
           </div>
           ) 
           : null}
-          {Formation ? 
+          {detail !== {} ? 
           (<Tabs defaultActiveKey="home">
     <Tab eventKey="home" title="Individus">
             <Table striped responsive>
@@ -186,7 +189,7 @@ useEffect(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {typeof inscrits !== "undefined" && Formation.nbr_entreprise !== 0 && entrprise.map(item => 
+                        {typeof inscrits !== "undefined" && detail.nbr_entreprise !== 0 && entrprise.map(item => 
                         <tr key = {item.id}  onClick={()=> Delete_subs(item.id)}>
                             <td>{item.user.firstName}</td>
                             <td>{item.user.email}</td>

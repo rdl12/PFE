@@ -62,7 +62,7 @@ const Set_Product_Categories = (data) => {
       payload: data,
     };
   };
-  const Set_Formation_byId = (Formation) => {
+  export const Set_Formation_byId = (Formation) => {
     return {
       type: t.FETCH_FORMATION_BYID,
       payload: Formation,
