@@ -32,7 +32,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - imageStorage:/ImageStorage/
+      - imageStorage:/usr/share/nginx/html/ImageStorage/
 volumes: 
   pgdata:
   imageStorage:  

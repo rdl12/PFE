@@ -4,7 +4,6 @@ WORKDIR /web
 ENV PATH /web/node_modules/.bin:$PATH
 COPY package.json ./
 COPY package-lock.json ./
-RUN mkdir ImageStorage
 RUN npm install
 COPY . .
 RUN  npm run build
@@ -12,6 +11,7 @@ RUN  npm run build
 ### STAGE 2: Run ###
 FROM nginx:1.17.1-alpine
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+RUN mkdir /usr/share/nginx/html/ImageStorage
 COPY --from=build /web/build /usr/share/nginx/html
 
 #fire up nginx
