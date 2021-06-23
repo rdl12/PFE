@@ -325,7 +325,7 @@ const DetailsScreen = ({route,navigation}) => {
                             style = {styles.add_to_photo}  />   ) 
                         : (
                         <Image
-                            source={{ uri: Get_Defib.Defibrilatteur.photo }}
+                            source={{ uri: `http://37.187.38.86:3000${Get_Defib.Defibrilatteur.photo}` }}
                             style = {styles.add_to_photo}  
                             resizeMode='contain'  />  )}
                     </View>
