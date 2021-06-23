@@ -136,7 +136,7 @@ class GoogleMap extends React.Component {
        ))];
        let active = this.state.page;
        let activeItems = [];
-       for (let number = 1; number <= Defib.length/this.state.number_per_page+1; number++) {
+       for (let number = 1; number <= Math.ceil(Defib.length/this.state.number_per_page+1); number++) {
            activeItems.push(
                <Pagination.Item key={number} active={number === active} onClick = {() => this.PaginationHandler(number)}>
                    {number}
