@@ -44,20 +44,11 @@ const AddDefibScreen = ({navigation}) => {
       }, [Modal_State, navigation])
   
     const submit = () =>{
-      const imageData = new FormData();
-                        imageData.append('name', 'File');
-                        imageData.append('File', {
-                            uri: uri,
-                            type: type,
-                            name: Adresse.lat+"i"+Adresse.long+".jpg",
-                            data: data
-                        });
-     Upload_image(imageData)
-     let defib = {  
+      let defib = {  
         "description" : Description,
         "latitude" : Adresse.lat,
         "longitude" : Adresse.long,
-        "photo" : Adresse.lat+"/"+Adresse.long+".jpg",
+        "photo" : Adresse.lat+"i"+Adresse.long+".jpg",
         "etat":{
           id : 1,
           etat : 'signalé'
@@ -74,7 +65,17 @@ const AddDefibScreen = ({navigation}) => {
         
         
       }
-       dispatch(Add_Defib_Posted(defib))
+      const imageData = new FormData();
+                        imageData.append('name', 'File');
+                        imageData.append('File', {
+                            uri: uri,
+                            type: type,
+                            name: Adresse.lat+"i"+Adresse.long+".jpg",
+                            data: data
+                        });
+    dispatch(Add_Defib_Posted(defib))
+     Upload_image(imageData)
+ 
        
         
        

@@ -50,6 +50,7 @@ useEffect(() => {
          Modify_subs(item)}})}
 
     },500)
+   
          
     }, [Formation,arrDate])
 
