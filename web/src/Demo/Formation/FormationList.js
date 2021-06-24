@@ -26,7 +26,7 @@ function FormationList() {
                <Card.Title as="h5"> Liste des Formations </Card.Title>
                </Card.Header>
                   
-                 {categories.length !== 0 ?( <Card.Body className='border-bottom' >
+                 {categories.length !== 0 && formation !== undefined ?( <Card.Body className='border-bottom' >
                  <div className="row" >
                                 {
                               categories.map(item => {

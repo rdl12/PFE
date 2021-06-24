@@ -81,7 +81,7 @@ function ProduitList() {
                      <Button variant={'outline-info'} style = {{float:'right'}} onClick = {handleShow}><UcFirst text='Ajouter Produit'/></Button>
                      </Card.Header>
             
-                        {produits_categories.length !== 0 ? (<Card.Body className='border-bottom' >
+                        {produits_categories.length !== 0 && produits !== undefined ? (<Card.Body className='border-bottom' >
                         <div className="row" >
                      
                            {
