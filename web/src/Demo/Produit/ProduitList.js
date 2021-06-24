@@ -32,7 +32,7 @@ function ProduitList() {
        useEffect(() => {
           dispatch(Fetch_Produits())
           dispatch(Fetch_Product_Categories())
-       }, [])
+       }, [produits])
 
        const SaveCategory = () => {
          setShow2(false)
