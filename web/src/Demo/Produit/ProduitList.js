@@ -8,6 +8,7 @@ import Aux from "../../hoc/_Aux";
 import UcFirst from "../../App/components/UcFirst";
 import {Fetch_Produits,Fetch_Product_Categories,Add_Product,add_CategoryProduct} from '../../store/actions'
 import { Link } from 'react-router-dom';
+import List from '../Formation/List'
 
 
 function ProduitList() {
@@ -82,16 +83,20 @@ function ProduitList() {
             
                         <Card.Body className='border-bottom' >
                         <div className="row" >
-                     {produits.length != 0  && produits.map((item) =>
-                     <Link to={`/Produit/Detail/${item.id}`} style={{ textDecoration: 'none' }} Key = {item.id}>
-                     <div style={{margin:10}} class="col-sm">
-                           <img src={item.image} width="200" height="200"  style = {{borderRadius:20}}/>
-                           <p className="font-weight-bold" style={{margin:3, width:200}}>{item.nom}</p>
+                     
+                           {
+                              typeof produits_categories !== "undefined" && produits_categories.map(item => {
+                                 let produits_categories = produits.filter(
+                                       (produit) => produit.categorie.nom === item.nom
+                                       );
+                                       if (produits_categories.length != 0)
+                                       {
+                                       return <List key = {item.id} items={produits_categories} title={item.nom} to='/Produit/Detail/' width='200' height='200'  />
+                                       }
+                                    }
+                                       )
+                                 } 
                         </div>
-                        </Link>
-                           )
-                           }
-                  </div>
                 </Card.Body>
                </Card>
                

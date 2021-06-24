@@ -72,7 +72,7 @@ export class Etape2 extends Component {
                                     <ListGroup.Item>
                                               <Row>
                                                  <Col>
-                                                    <Image src={this.props.photo}style={{height: '150px', width: '100%', borderWidth:1}}></Image>
+                                                    <Image src={this.props.photo} style={{height: '150px', width: '100%', borderWidth:1}}></Image>
                                                  </Col>
                                                  <Col>
                                                     <Card.Title>Tel</Card.Title>
