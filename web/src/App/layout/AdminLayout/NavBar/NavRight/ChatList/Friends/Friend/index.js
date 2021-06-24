@@ -6,7 +6,7 @@ import avatar2 from '../../../../../../../../assets/images/user/avatar-2.jpg';
 const images = require.context('../../../../../../../../assets/images/user', true);
 
 const friend = (props) => {
-    console.log(props.data)
+    
     
     let timeClass = ['d-block'];
     if (props.data.status) {

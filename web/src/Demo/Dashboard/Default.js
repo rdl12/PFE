@@ -20,8 +20,6 @@ class Dashboard extends React.Component {
         this.props.Fetch_stats_formation();
        
         setTimeout(() => {
-           console.log('stats')
-           console.log(this.props.Stats)
             const sumArray = (array) => {
                 const newArray = [];
                 array.forEach(sub => {newArray.push(sub[1])});

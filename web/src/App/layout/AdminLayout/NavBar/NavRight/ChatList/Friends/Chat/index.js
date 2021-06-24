@@ -50,9 +50,7 @@ const Chat = (props) => {
         .update({
             messages: firebase.firestore.FieldValue.arrayUnion(object.messages[0])
           })
-       .then(() => {
-         console.log('added'); 
-         });
+      
 
          setMessage("")
     }

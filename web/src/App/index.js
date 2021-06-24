@@ -32,7 +32,6 @@ class App extends Component {
           querySnapShot.forEach((doc) =>{
             this.props.Fetch_Subscribed_people()
             setTimeout(() => {
-              console.log(this.props.subs)
               let sub_filtered =  this.props.subs.filter(
                 (sub) => sub.etat === 'non traiter' 
               );
@@ -43,16 +42,7 @@ class App extends Component {
           })
       })
      } 
-  //    else {
-  //      console.log('No registration token available. Request permission to generate one.');
-  //    }
-  //  }).catch((err) => {
-  //    console.log('An error occurred while retrieving token. ', err);
-  //    // catch error while creating client token
-  //  })
-  
-  
-  //   }
+
     render() {
      
       let menu;

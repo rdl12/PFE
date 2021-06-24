@@ -30,7 +30,7 @@ class AdminLayout extends Component {
         if (username !== null){
             this.setState({ user:username.substring(0,10) });
         }
-        console.log(this.state.user)
+        
     },200) 
     
       }

@@ -28,7 +28,7 @@ class SamplePage extends React.Component {
         })
         if(this.props.Defib.user){
         this.setState({user : this.props.Defib.user.email})
-        console.log(this.props.Defib.user.email)}},1000) 
+        }},1000) 
 
       
     }

@@ -8,7 +8,7 @@ import defib_icon from '../../assets/images/pin/medical.png';
 export class Etape2 extends Component {
     constructor(props){
         super(props)
-        console.log(this.props)
+   
     }
     state = {
         activeMarker: {},
@@ -22,8 +22,6 @@ export class Etape2 extends Component {
     };
     componentDidMount() {
 
-        console.log(this.props)
-        // console.log(this.props.Defib)
          setTimeout(() => {this.setState({
              center:{ lat: this.props.coords.lat, lng: this.props.coords.lng }
          })},200) 

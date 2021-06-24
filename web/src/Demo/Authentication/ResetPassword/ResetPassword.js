@@ -14,7 +14,7 @@ function ResetPassword(){
 
     const submit = () => {
          dispatch(Reset_Password(username))
-         console.log(username)
+        
       }
 
         return(

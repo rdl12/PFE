@@ -32,7 +32,7 @@ class GoogleMap extends React.Component {
 
     };
     PaginationHandler = (page) =>{
-        console.log(page)
+      
         this.setState({page:page,index:page*this.state.number_per_page-this.state.number_per_page})
     }
 
@@ -165,7 +165,7 @@ class GoogleMap extends React.Component {
                                                 <Dropdown.Item key= {index} eventKey={index}  onSelect = {(e) => {
                                                         this.props.Fetch_Defib_ByVille(ville[e])
                                                         this.setState({ville:ville[e]})
-                                                        console.log(ville[e])
+                                                        
                                                         }}
                                                 > 
                                                     <Form.Check

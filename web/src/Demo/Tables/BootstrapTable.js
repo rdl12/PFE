@@ -24,7 +24,7 @@ class BootstrapTable extends React.Component {
 
     componentDidMount(){
         this.props.Fetch_Defib()
-        console.log(this.props)
+       
        
     }
 
@@ -52,7 +52,7 @@ class BootstrapTable extends React.Component {
     }
 
     PaginationHandler = (page) =>{
-        console.log(page)
+     
         this.setState({page:page,index:page*this.state.number_per_page-this.state.number_per_page})
     }
       

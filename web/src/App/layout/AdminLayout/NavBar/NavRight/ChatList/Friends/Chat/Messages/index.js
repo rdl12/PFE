@@ -5,9 +5,6 @@ import DEMO from "../../../../../../../../../store/constant";
 const images = require.context('../../../../../../../../../assets/images/user', true);
 
 const messages = (props) => {
-    console.log('props')
-    console.log(props)
-    console.log('props')
     let image = '';
    
     if (props.message && props.message.type != 2) {
