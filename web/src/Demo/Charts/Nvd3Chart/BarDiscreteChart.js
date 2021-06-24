@@ -17,7 +17,7 @@ class BarDiscreteChart extends React.Component {
 
    componentDidMount(){
     setTimeout(() => {
-        console.log(Array.from(this.props.data).length )
+      
         for (let pas = 0; pas < Array.from(this.props.data).length; pas++) {
             datum[0].values.push( {label: this.props.data[pas][0] , value: this.props.data[pas][1]})
           }

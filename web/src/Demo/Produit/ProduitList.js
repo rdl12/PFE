@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Modal,Tabs} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button, Spinner,Modal,Tabs} from 'react-bootstrap';
 
 
 
@@ -81,11 +81,11 @@ function ProduitList() {
                      <Button variant={'outline-info'} style = {{float:'right'}} onClick = {handleShow}><UcFirst text='Ajouter Produit'/></Button>
                      </Card.Header>
             
-                        <Card.Body className='border-bottom' >
+                        {produits_categories.length !== 0 ? (<Card.Body className='border-bottom' >
                         <div className="row" >
                      
                            {
-                              typeof produits_categories !== "undefined" && produits_categories.map(item => {
+                               produits_categories.map(item => {
                                  let produits_categories = produits.filter(
                                        (produit) => produit.categorie.nom === item.nom
                                        );
@@ -97,7 +97,8 @@ function ProduitList() {
                                        )
                                  } 
                         </div>
-                </Card.Body>
+                </Card.Body>):
+                (<Spinner animation="border" variant="primary" style={{margin:20, display:'flex',alignSelf:'center' ,justifyContent:'center'}}/>)}
                </Card>
                
             <Modal show={show} onHide={handleClose}>

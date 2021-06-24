@@ -104,7 +104,7 @@ function FormationAdd() {
                         <Form.Control as="select" onChange = {(e) => change(e)} >
                             <option  key={'choisir'} value='choisissez votre categorie'> choisissez la categorie de la formation  </option>
                              {Categories.map((item) => <option  key={item.id} value={item.nom}> {item.nom} </option>)}
-                             <option  key={'ajouter'} value='Ajouter Categorie' onClick={() => console.log('hello')} > Ajouter Categorie </option>
+                             <option  key={'ajouter'} value='Ajouter Categorie' > Ajouter Categorie </option>
                         </Form.Control>
                         </Form.Group>
 
@@ -124,8 +124,7 @@ function FormationAdd() {
                                 <Calendar
                                     onChange={onChange}
                                     value={value}
-                                    onClickDay = {(value) => {console.log(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())
-                                           arrDate.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
+                                    onClickDay = {(value) => {arrDate.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
                                     style = {{margin:0}}
                                 />
                             </Col>

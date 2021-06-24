@@ -32,11 +32,11 @@ function FormationDetail() {
 
 
 useEffect(() => {
-    console.log(id)
+ 
     dispatch(Fetch_Formation_ById(id))
     dispatch(Fetch_Subscribed_people())
     dispatch(Fetch_date_Formation(id))
-    console.log(detail)
+   
 
     if(detail != {}) { setFormation(detail)
         const filter_subbed =  people_subbed.filter(
@@ -66,14 +66,14 @@ useEffect(() => {
     }
 
     const Delete_subs = (id) => {
-        console.log("ggggg")
+      
         dispatch(Delete_Subscription(id))
         //window.location.href = "/Formation/Inscrit"
     }
     
     const Save = () => {
         dateAdded.map(item =>{
-            console.log(item)
+            
             let object = {
                "date":item,
                "formation":Formation
@@ -83,7 +83,7 @@ useEffect(() => {
           })
           handleClose()
       
-      console.log('save')
+      
     }
 
     let entrprise = inscrits.filter((item) => item.entreprise !== null)
@@ -231,7 +231,7 @@ useEffect(() => {
                         value={value}
                         
                         onClickDay = {(value) => {  
-                            console.log(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())
+                           
                             dateAdded.push(new Date(value.getTime() - (value.getTimezoneOffset() * 60000)).toISOString())}  }
                     />
                 </Col>

@@ -136,7 +136,7 @@ const AddDefibPosted = (defib) => {
 
 export const login = (loginInput,history) => {
 const { username ,password} = loginInput;
-console.log(loginInput)
+
 var formBody = [];
 for (var property in loginInput) {
   var encodedKey = encodeURIComponent(property);
@@ -145,7 +145,7 @@ for (var property in loginInput) {
 }
 formBody = formBody.join("&");
 return  (dispatch) => {  
-    //console.log(dispatch)// don't forget to use dispatch here!
+    
     return  fetch(`${API_URI}/login`, {
     method: 'POST', 
     headers: {  // these could be different for your API call
@@ -158,14 +158,13 @@ return  (dispatch) => {
     .then((response) =>
     { 
       response.text().then((data) => {
-        console.log(data)})
+        })
        if (response.url === `${API_URI}/success_login`) { // response success checking logic could differ
            fetch(`${API_URI}/User/find/${username}`,{method: 'GET'}) .then((response) => {
             response.json().then((data1) => {
-              console.log("-------------------------------")
-              console.log(data1.appUserRole)
+              
               if(data1.appUserRole === "ADMIN")
-                    {console.log(response)
+                    {
                     dispatch(setLoginState({ userId: username })); // our action is called here
                     //alert('logged in', username);
                     localStorage.setItem('username',username)
@@ -178,7 +177,7 @@ return  (dispatch) => {
       
       .catch((err) => {
       alert('Login Failed', 'Some error occured, please retry');
-      console.log(err);
+      
       });
 };
 };
@@ -189,7 +188,7 @@ export const Fetch_Defib = () =>{
     return fetch(`${API_URI}/Defibrillateur/find/all`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
-              console.log(data)
+              
               dispatch(Set_Defib_State({defib : data}))
             }
               )
@@ -197,7 +196,7 @@ export const Fetch_Defib = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+           
           });
   }
 }
@@ -216,7 +215,7 @@ export const Fecth_DefiById = (id) => {
            })
            .catch((err) => {
           alert("couldn't fetch defib ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -225,7 +224,7 @@ export const Modify_defib = (defib) => {
   if (defib.user.authorities){
     delete defib.user.authorities
   }
-  console.log(defib)
+ 
  return (dispatch) => {
    return  fetch(`${API_URI}/Defibrillateur/update`, {
      method: 'PATCH', 
@@ -239,7 +238,7 @@ export const Modify_defib = (defib) => {
    )
    .then((response) => {
      response.text().then((data) => {
-       console.log(data)
+    
        //dispatch(Set_Defib_State({defib : data}))
       }
       )
@@ -247,7 +246,7 @@ export const Modify_defib = (defib) => {
    })
   .catch((err) => {
     alert("defib not posted,please retry");
-      console.log(err);
+      
   });
 }
 }
@@ -264,13 +263,13 @@ export const Adress = (coords) =>{
       response.json().then((data) => {
         let arr = data.items[0].address
         let arr1 = data.items[0].position
-        console.log(arr)
+       
         dispatch(Fetch_Adress({ addrese: arr.label , pays: arr.countryName , ville: arr.city , province: arr.state ,codePostal: arr.postalCode , lat:arr1.lat ,long:arr1.lng  }))
     });
     })
     .catch((err) => {
       alert('Some error occured, please retry');
-      console.log(err);
+      
     });
   }
 }
@@ -287,10 +286,7 @@ export const Add_Defib_Posted = (defib) => {
       body:  JSON.stringify(defib)
     })
   .then((responseData) => {
-      console.log(
-          "POST Response",
-          "Response Body -> " + JSON.stringify(responseData)
-      )
+      
       dispatch(AddDefibPosted({defibPosted : defib}))
   })
   }
@@ -301,14 +297,14 @@ export const Fetch_Defib_Valide = (id) =>{
     return fetch(`${API_URI}/Defibrillateur/find/etat/${id}`,{method: 'GET'})
            .then((response) => {
             response.json().then((data) => {
-              console.log(data)
+           
               dispatch(Defib_valide({defib : data}))
             }
               )
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+           
           });
   }
 }
@@ -324,7 +320,7 @@ export const Fetch_stats_etat = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -340,7 +336,7 @@ export const Fetch_stats_prov = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -356,7 +352,7 @@ export const Fetch_Subscribed_people = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch subscribed people ,please retry to refresh the page");
-            console.log(err);
+           
           });
   }
 }
@@ -401,7 +397,7 @@ export const Fetch_Categories = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch categories ,please retry to refresh the page");
-            console.log(err);
+            
           });
   }
 }
@@ -417,7 +413,7 @@ export const Fetch_Formations = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch formation ,please retry to refresh the page");
-            console.log(err);
+           
           });
   }
 }
@@ -433,7 +429,7 @@ export const Fetch_Formation_ById = (id) =>{
            })
            .catch((err) => {
             alert("couldn't fetch Formation ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -448,12 +444,7 @@ export const add_Category = (category) => {
     },
     body:  JSON.stringify(category)
   })
-.then((responseData) => {
-    console.log(
-        
-        "Added Category" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -469,7 +460,7 @@ export const Fetch_stats_formation = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+           
           });
   }
 }
@@ -484,7 +475,7 @@ export const Fetch_Produits = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch products ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -500,7 +491,7 @@ export const Fetch_Produit_ById = (id) =>{
            })
            .catch((err) => {
             alert("couldn't fetch Product detail ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -516,7 +507,7 @@ export const Fetch_Product_Categories = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch categories ,please retry to refresh the page");
-            console.log(err);
+           
           });
   }
 }
@@ -531,11 +522,7 @@ export const Add_Product = (product) =>{
     },
     body:  JSON.stringify(product)
   })
-.then((responseData) => {
-    console.log(
-        "Product Added -> " + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -571,7 +558,7 @@ export const Fetch_user_chat = () =>{
            })
            .catch((err) => {
             alert("couldn't fetch defib ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -586,12 +573,7 @@ export const add_CategoryProduct = (category) => {
     },
     body:  JSON.stringify(category)
   })
-.then((responseData) => {
-    console.log(
-        
-        "Added Category" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -602,12 +584,7 @@ export const Delete_Product = (id) => {
     method: 'DELETE',
     
   })
-.then((responseData) => {
-    console.log(
-        
-        "Deleted Product" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -618,12 +595,7 @@ export const Delete_Formation = (id) => {
     method: 'DELETE',
     
   })
-.then((responseData) => {
-    console.log(
-        
-        "Deleted formation" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -639,11 +611,7 @@ export const Add_Date = (date) => {
     },
     body:  JSON.stringify(date)
   })
-.then((responseData) => {
-    console.log(
-        "Added date" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -660,7 +628,7 @@ export const Fetch_date_Formation = (id) =>{
            })
            .catch((err) => {
             alert("couldn't fetch date formation ,please retry");
-            console.log(err);
+            
           });
   }
 }
@@ -671,12 +639,7 @@ export const Delete_DateFormation = (id) => {
     method: 'DELETE',
     
   })
-.then((responseData) => {
-    console.log(
-        
-        "Deleted date" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -692,12 +655,10 @@ export const upload_csv = (object) => {
     },
     body:  JSON.stringify(object)
   })
-  .then((response) => {
-    console.log('added')
-   })
+ 
    .catch((err) => {
     alert("couldn't post data defib ,please retry");
-    console.log(err);
+    
   });
 }
 }
@@ -709,12 +670,7 @@ export const Delete_Subscription = (id) => {
     method: 'DELETE',
     
   })
-.then((responseData) => {
-    console.log(
-        
-        "Deleted Subscription" + JSON.stringify(responseData)
-    )
-})
+
 
 }
 }
@@ -723,7 +679,7 @@ export const Modify_subs = (subs) => {
   if (subs.user.authorities){
     delete subs.user.authorities
   }
-  console.log(subs)
+  
    return  fetch(`${API_URI}/Subscription/update`, {
      method: 'PATCH', 
      headers: {  // these could be different for your API call
@@ -736,18 +692,18 @@ export const Modify_subs = (subs) => {
    )
    .then((response) => {
      response.text().then((data) => {
-       console.log(data)
+       
       }
       )
    })
   .catch((err) => {
     alert("formation not posted,please retry");
-      console.log(err);
+      
   });
 }
 
 export const Reset_Password = (email) =>{
-  console.log(email)
+  
   return (dispatch) => {
     return fetch(`${API_URI}/User/forgot-password/${email}`, {
       method: 'POST',
@@ -761,7 +717,7 @@ export const Reset_Password = (email) =>{
     })
     .catch((err) => {
       alert("couldn't subscribe user ,please retry");
-      console.log(err);
+      
     });
     
   }
@@ -799,7 +755,7 @@ export const modifier_Password = (password,ancpassword,email,navigation) =>{
 
       .catch((err) => {
       alert("couldn't post modify user ,please retry");
-      console.log(err);
+     
     });
     
   }

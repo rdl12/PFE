@@ -60,10 +60,10 @@ export class AddDefib extends Component {
         e.stopPropagation();
         e.preventDefault();
         var file = e.target.files[0];
-        console.log(file);
+      
         this.setState({ file });
     
-        console.log(this.state.file);
+       
       }
     
     readFile() {
@@ -81,7 +81,7 @@ export class AddDefib extends Component {
           /* Convert array of arrays */
           const data = XLSX.utils.sheet_to_csv(ws, { header: 1 });
           /* Update state */
-         // console.log("Data>>>" + data);// shows that excel data is read
+       
           this.convertToJson(data); // shows data in json format
         };
         reader.readAsBinaryString(f);
@@ -104,7 +104,7 @@ export class AddDefib extends Component {
           result.push(obj);
         }
         result.map(item => this.props.upload_csv(item))
-        console.log(result)
+        
       }
     
     onDrop = (picture) => {
@@ -112,7 +112,7 @@ export class AddDefib extends Component {
             pictures: this.state.pictures.concat(picture),
         });
 
-        console.log(this.state.pictures)
+        
     }
 
     Suivant = () => {
@@ -155,8 +155,7 @@ export class AddDefib extends Component {
      }
      componentDidMount() {
 
-        console.log(this.props)
-        // console.log(this.props.Defib)
+      
          setTimeout(() => {this.setState({
              center:{ lat: 30, lng: -7.20 }
          })},200) 

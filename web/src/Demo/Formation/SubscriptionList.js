@@ -18,19 +18,19 @@ function SubscriptionList() {
     const [Enumber_per_page, setEnumber_per_page] = useState(5)
 
     const Delete = (id) => {
-        console.log("ggggg")
+        
         dispatch(Delete_Subscription(id))
         //window.location.href = "/Formation/Inscrit"
     }
 
     const PaginationHandler = (page) =>{
-        console.log(page)
+      
         setpage(page)
         setindex(page*number_per_page-number_per_page)
     }
 
     const E_PaginationHandler = (page) =>{
-        console.log(page)
+       
         setEpage(page)
         setEindex(page*number_per_page-number_per_page)
     }

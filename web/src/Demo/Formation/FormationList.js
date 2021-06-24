@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Image , FormControl, DropdownButton, Dropdown,Tab,Tabs} from 'react-bootstrap';
+import {Row, Col, Card, Spinner} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -20,27 +20,30 @@ function FormationList() {
        dispatch(Fetch_Categories())
     }, [])
     return (
-        <Aux>
+        <Aux> 
         <Card>
                <Card.Header>
                <Card.Title as="h5"> Liste des Formations </Card.Title>
                </Card.Header>
-                  <Card.Body className='border-bottom' >
-                  <div className="row" >
-             {
-          typeof categories !== "undefined" && categories.map(item => {
-            let category = formation.filter(
-              (formation) => formation.categorie.nom === item.nom
-            );
-            if (category.length != 0)
-            {
-              return <List key = {item.id} items={category} title={item.nom} to='/Formation/Detail/' width='200' height='200'  />
-            }
-          }
-            )
-        } 
-        </div>
-        </Card.Body>
+                  
+                 {categories.length !== 0 ?( <Card.Body className='border-bottom' >
+                 <div className="row" >
+                                {
+                              categories.map(item => {
+                                let category = formation.filter(
+                                  (formation) => formation.categorie.nom === item.nom
+                                );
+                                if (category.length != 0)
+                                {
+                                  return <List key = {item.id} items={category} title={item.nom} to='/Formation/Detail/' width='200' height='200'  />
+                                }
+                              }
+                                )
+                            } 
+                </div>
+                </Card.Body>):
+                (<Spinner animation="border" variant="primary" style={{margin:20, display:'flex',alignSelf:'center' ,justifyContent:'center'}}/>)}
+        
       </Card>
                
         </Aux>
