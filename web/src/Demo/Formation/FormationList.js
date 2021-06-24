@@ -18,7 +18,7 @@ function FormationList() {
     useEffect(() => {
        dispatch(Fetch_Formations())
        dispatch(Fetch_Categories())
-    }, [])
+    }, [formation])
     return (
         <Aux> 
         <Card>
