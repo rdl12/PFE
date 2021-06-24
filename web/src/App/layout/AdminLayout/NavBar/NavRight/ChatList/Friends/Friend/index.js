@@ -33,20 +33,23 @@ const friend = (props) => {
     if (props.data.createdAt.seconds) {
        let minutes =  props.data.createdAt.seconds/(3600*24)
         //time = <small className={timeClass.join(' ')}>{minutes} ago</small>;
-        time = props.data.createdAt.toDate().toDateString()
+        time = props.data.createdAt.toDate()
         const date = new Date(time);
+        console.log(date)
         const currentDate = new Date();
+        console.log("-------------------")
+        console.log(currentDate)
         const diffTime = Math.abs(date - currentDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
         const diffMinutes = Math.ceil(diffTime / (1000 * 60 )); 
         const diffHoures = Math.ceil(diffTime / (1000 * 60 * 60 )); 
         const diffSeconds = Math.ceil(diffTime / 1000); 
         time = (diffDays - 1).toString() + " jours"
-       if(diffDays -1 === 0){
-           time = (diffHoures - 24).toString() + " Heures"
-           if(diffHoures - 24 === 0){
-               time = (diffMinutes-1410).toString() + " Minutes"
-               if(diffMinutes - 1410 === 0){
+       if(diffDays - 1  === 0){
+           time = (diffHoures).toString() + " Heures"
+           if(diffHoures - 1 === 0){
+               time = (diffMinutes).toString() + " Minutes"
+               if(diffMinutes - 1 === 0){
                 time = diffSeconds.toString() + "Secondes"
                 
                }
