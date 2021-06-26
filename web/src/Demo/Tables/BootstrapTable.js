@@ -18,7 +18,7 @@ class BootstrapTable extends React.Component {
        ville:null,
        page:1,
        index:0,
-       number_per_page:5
+       number_per_page:5 
 
     };
 
