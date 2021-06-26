@@ -495,6 +495,36 @@ export const Fetch_Produit_ById = (id) =>{
           });
   }
 }
+export const FetchProductsByCategorie = (category) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Product/find/categorie/${category.id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Product_ById({produits : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch Product detail ,please retry");
+            
+          });
+  }
+}
+export const FetchFormationByCategorie = (category) =>{
+  return (dispatch) => {
+    return fetch(`${API_URI}/Formation/find/Categorie/${category.id}`,{method: 'GET'})
+           .then((response) => {
+            response.json().then((data) => {
+              dispatch(Set_Formation({formations : data}))
+            }
+              )
+           })
+           .catch((err) => {
+            alert("couldn't fetch Product detail ,please retry");
+            
+          });
+  }
+}
 
 export const Fetch_Product_Categories = () =>{
   return (dispatch) => {

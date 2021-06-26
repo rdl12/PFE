@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.PFE.Backend.Repository.ProductRepository;
 import com.PFE.Backend.entities.Formation;
 import com.PFE.Backend.entities.Product;
+import com.PFE.Backend.entities.ProductCategory;
 
 import lombok.AllArgsConstructor;
 @Service
@@ -26,6 +27,10 @@ private final ProductRepository ProductRepo;
 
 	public void delete(Product product) {
 		ProductRepo.delete(product);
+	}
+
+	public List<Product> findbyCategorie(ProductCategory categorie) {
+		return ProductRepo.findByCategorie(categorie);
 	}
 
 }

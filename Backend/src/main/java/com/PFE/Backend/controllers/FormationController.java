@@ -41,6 +41,11 @@ public class FormationController {
 		    Categorie categorie =  categorieService.findByNom(nom);
 	        return  formationservice.findByCategorie(categorie);
 	    }
+	 @GetMapping(value = "/find/Categorie/{id}")
+	    public List<Formation>  findbyCategorie(@PathVariable long id ){
+		    Categorie categorie =  categorieService.findById(id);
+	        return  formationservice.findByCategorie(categorie);
+	    }
 	 @GetMapping(value = "/find/{id}")
 	    public Formation findById(@PathVariable long id  ){
 	        return  formationservice.findbyId(id);

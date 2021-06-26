@@ -28,4 +28,8 @@ public class CategorieService {
 	    	categorieRepo.save(category);
 		
 	}
+
+		public Categorie findById(long id) {
+			 return categorieRepo.findById(id);
+		}
 }

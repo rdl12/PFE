@@ -221,6 +221,18 @@ export const reducer = (state = initialState, action) => {
             ...action.payload
 
         };
+        case actionTypes.FetchProductsByCategorie:
+        return {
+            ...state,
+            ...action.payload
+
+        };
+        case actionTypes.FETCH_FORMATION_BYCATEGORY:
+            return {
+                ...state,
+                ...action.payload
+    
+            };
         default:
             return state;
     }

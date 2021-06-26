@@ -18,6 +18,9 @@ public class ProductCategorieService {
     public List<ProductCategory> findAll() {
         return categorieRepo.findAll();
     }
+    public ProductCategory findById(long id) {
+    	return categorieRepo.findById(id);
+    }
     public void save(ProductCategory category) {
     	categorieRepo.save(category);
 	

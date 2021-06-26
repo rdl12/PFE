@@ -1,12 +1,12 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Form, Button, Spinner,Modal,Tabs} from 'react-bootstrap';
+import {Row, Col, Card, Form, Button,Dropdown,DropdownButton,Spinner,Modal,Badge} from 'react-bootstrap';
 
 
 
 import Aux from "../../hoc/_Aux";
 import UcFirst from "../../App/components/UcFirst";
-import {Fetch_Produits,Fetch_Product_Categories,Add_Product,add_CategoryProduct} from '../../store/actions'
+import {Fetch_Produits,Fetch_Product_Categories,Add_Product,add_CategoryProduct,FetchProductsByCategorie} from '../../store/actions'
 import { Link } from 'react-router-dom';
 import List from '../Formation/List'
 
@@ -23,12 +23,17 @@ function ProduitList() {
     const [CategorieChoosed, setCategorieChoosed] = useState("")
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false)
+    const [category,setCategory] = useState("")
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleClose2 = () => setShow2(false);
     const handleShow2 = () => setShow2(true);
    
+    const remove_filter = () =>{
+      dispatch(Fetch_Produits())
+      dispatch(Fetch_Product_Categories())
+  }
        useEffect(() => {
           dispatch(Fetch_Produits())
           dispatch(Fetch_Product_Categories())
@@ -79,14 +84,40 @@ function ProduitList() {
                      <Card.Header>
                      <Card.Title as="h5"> Liste des Produits </Card.Title>
                      <Button variant={'outline-info'} style = {{float:'right'}} onClick = {handleShow}><UcFirst text='Ajouter Produit'/></Button>
+                     <DropdownButton
+                                title='filtrer par Categorie'
+                                variant='primary'
+                                drop='left'
+                                id={`dropdown-variants-primary`}
+                                style = {{float:'right'}}
+                            >
+                        {typeof produits_categories !== "undefined" &&  produits_categories.map((item,index) => 
+                        <Dropdown.Item key= {index} eventKey={index}  onSelect = {(e) => {
+                           dispatch(FetchProductsByCategorie(produits_categories[e]))
+                           setCategory(produits_categories[e])
+                              }} > <Form.Check
+                              custom
+                              type="radio"
+                              label={item.nom}
+                              value = {item.nom}
+                              name="supportedRadios"
+                              id="supportedRadio3"
+                             checked = {category === produits_categories[index]}
+                           
+                        />
+                     </Dropdown.Item>)
+                  }
+                 <Dropdown.Divider />
+            </DropdownButton>
                      </Card.Header>
             
-                        {produits_categories.length !== 0 && produits !== undefined ? (<Card.Body className='border-bottom' >
+                        {produits_categories.length !== 0 && produits.length !== 0 ? (<Card.Body className='border-bottom' >
+                       
                         <div className="row" >
                      
                            {
                                produits_categories.map(item => {
-                                 let produits_categories = produits.filter(
+                                 let produits_categories = typeof produits !== "undefined" &&  produits.filter(
                                        (produit) => produit.categorie.nom === item.nom
                                        );
                                        if (produits_categories.length != 0)

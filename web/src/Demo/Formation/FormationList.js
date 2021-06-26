@@ -1,11 +1,11 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Row, Col, Card, Spinner} from 'react-bootstrap';
+import {Form, Col, Card,Dropdown,DropdownButton, Spinner} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
 import Aux from "../../hoc/_Aux";
-import {Fetch_Formations,Fetch_Categories} from '../../store/actions'
+import {Fetch_Formations,Fetch_Categories,FetchFormationByCategorie} from '../../store/actions'
 import List from './List'
 
 
@@ -13,6 +13,7 @@ function FormationList() {
  const dispatch = useDispatch()
  const formation = useSelector(state => state.formations)
  const categories = useSelector(state => state.categories)
+ const [category,setCategory] = useState("")
 
 
     useEffect(() => {
@@ -24,6 +25,31 @@ function FormationList() {
         <Card>
                <Card.Header>
                <Card.Title as="h5"> Liste des Formations </Card.Title>
+               <DropdownButton
+                                title='filtrer par Categorie'
+                                variant='primary'
+                                drop='left'
+                                id={`dropdown-variants-primary`}
+                                style = {{float:'right'}}
+                            >
+                        {typeof categories !== "undefined" &&  categories.map((item,index) => 
+                        <Dropdown.Item key= {index} eventKey={index}  onSelect = {(e) => {
+                           dispatch(FetchFormationByCategorie(categories[e]))
+                           setCategory(categories[e])
+                              }} > <Form.Check
+                              custom
+                              type="radio"
+                              label={item.nom}
+                              value = {item.nom}
+                              name="supportedRadios"
+                              id="supportedRadio3"
+                             checked = {category === categories[index]}
+                           
+                        />
+                     </Dropdown.Item>)
+                  }
+                 <Dropdown.Divider />
+            </DropdownButton>
                </Card.Header>
                   
                  {categories.length !== 0 && formation !== undefined ?( <Card.Body className='border-bottom' >

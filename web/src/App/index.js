@@ -11,7 +11,7 @@ import ScrollToTop from './layout/ScrollToTop';
 import routes from "../route";
 import route from "../route"
 import firebase from '../firebase'
-import { Fetch_Subscribed_people,Send_Notif } from '../store/actions';
+import { Fetch_Subscribed_people,Send_Notif,Fetch_Produits,Fetch_Product_Categories } from '../store/actions';
 import 'firebase/messaging';
 
 
@@ -31,6 +31,8 @@ class App extends Component {
       ref.onSnapshot((querySnapShot) => {
           querySnapShot.forEach((doc) =>{
             this.props.Fetch_Subscribed_people()
+            this.props.Fetch_Produits()
+            this.props.Fetch_Product_Categories()
             setTimeout(() => {
               let sub_filtered =  this.props.subs.filter(
                 (sub) => sub.etat === 'non traiter' 
@@ -100,6 +102,8 @@ const mapDispatchToProps = (dispatch) => {
 
   return {
     Fetch_Subscribed_people: () => dispatch(Fetch_Subscribed_people()),
+    Fetch_Produits: () => dispatch(Fetch_Produits()),
+    Fetch_Product_Categories: () => dispatch(Fetch_Product_Categories()),
     Send_Notif: (sub) => dispatch(Send_Notif(sub))
    
   }
