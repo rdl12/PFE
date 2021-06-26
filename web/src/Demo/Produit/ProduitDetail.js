@@ -41,8 +41,10 @@ function ProduitDetail({navigation}) {
                                     <div className="col">
                                   
                                         <Button variant="primary"  onClick = {() => {
-                                        dispatch(Delete_Product(id))
-                                        window.location.href = "/Produit/list"
+                                            console.log('ggggg')
+                                        Delete_Product(id)
+                                        //setTimeout(window.location.href = "/Produit/list",300)
+                                        
                                     }}>
                                             supprimer
                                     </Button>

@@ -62,7 +62,7 @@ useEffect(() => {
     }
     const Delete = () => {
         dispatch(Delete_Formation(id))
-        window.location.href = "/Formation/list"
+        
     }
 
     const Delete_subs = (id) => {

@@ -20,7 +20,7 @@ function ProduitList() {
     const [Image, setImage] = useState('')
     const produits = useSelector(state => state.produits)
     const produits_categories = useSelector(state => state.product_categories)
-    const [CategorieChoosed, setCategorieChoosed] = useState("")
+    const [CategorieChoosed, setCategorieChoosed] = useState(null)
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false)
     const [category,setCategory] = useState("")
@@ -33,6 +33,7 @@ function ProduitList() {
     const remove_filter = () =>{
       dispatch(Fetch_Produits())
       dispatch(Fetch_Product_Categories())
+      setCategory("")
   }
        useEffect(() => {
           dispatch(Fetch_Produits())
@@ -110,6 +111,8 @@ function ProduitList() {
                  <Dropdown.Divider />
             </DropdownButton>
                      </Card.Header>
+                     
+                     {category !== "" ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20, width:'fit-content',margin:10}}>{category.nom}<i className="feather icon-x text-c-black f-20 ml-3" onClick={remove_filter}/></Badge>): null }
             
                         {produits_categories.length !== 0 && produits.length !== 0 ? (<Card.Body className='border-bottom' >
                        
