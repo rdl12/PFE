@@ -76,7 +76,7 @@ useEffect(() => {
             
             let object = {
                "date":item,
-               "formation":Formation
+               "formation":detail
                  
             }
             dispatch(Add_Date(object))
