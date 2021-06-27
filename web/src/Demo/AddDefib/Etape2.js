@@ -183,5 +183,5 @@ export class Etape2 extends Component {
 
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyCE0nvTeHBsiQIrbpMVTe489_O5mwyqofk'
+    apiKey: 'AIzaSyCAXByHgTu3VsmaVPADC6xuw5tivT8mPtY&region=MA'
 })(Etape2);
