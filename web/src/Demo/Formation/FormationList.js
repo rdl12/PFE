@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import {Form, Col, Card,Dropdown,DropdownButton, Spinner} from 'react-bootstrap';
+import {Form, Col, Card,Dropdown,DropdownButton, Spinner, Badge} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
@@ -15,7 +15,11 @@ function FormationList() {
  const categories = useSelector(state => state.categories)
  const [category,setCategory] = useState("")
 
-
+    const remove_filter = () =>{
+          dispatch(Fetch_Formations())
+          dispatch(Fetch_Categories())
+          setCategory("")
+    }
     useEffect(() => {
        dispatch(Fetch_Formations())
        dispatch(Fetch_Categories())
@@ -51,7 +55,8 @@ function FormationList() {
                  <Dropdown.Divider />
             </DropdownButton>
                </Card.Header>
-                  
+               {category !== "" ? (<Badge variant="light" className="mb-1 f-20 p-3" style={{borderRadius:20, width:'fit-content',margin:10}}>{category.nom}<i className="feather icon-x text-c-black f-20 ml-3" onClick={remove_filter}/></Badge>): null }
+            
                  {categories.length !== 0 && formation !== undefined ?( <Card.Body className='border-bottom' >
                  <div className="row" >
                                 {

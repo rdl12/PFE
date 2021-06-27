@@ -609,14 +609,11 @@ export const add_CategoryProduct = (category) => {
 }
 
 export const Delete_Product = (id) => {
-  return (dispatch) => {
     return fetch(`${API_URI}/Product/delete/${id}`, {
     method: 'DELETE',
     
-  })
+  }).then((response) => { window.location.href = "/Produit/list"})
 
-
-}
 }
 
 export const Delete_Formation = (id) => {
@@ -624,8 +621,7 @@ export const Delete_Formation = (id) => {
     return fetch(`${API_URI}/Formation/delete/${id}`, {
     method: 'DELETE',
     
-  })
-
+  }).then(()=>{window.location.href = "/Formation/list"})
 
 }
 }
