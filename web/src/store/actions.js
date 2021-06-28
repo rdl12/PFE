@@ -718,10 +718,10 @@ export const Delete_Subscription = (id) => {
     return fetch(`${API_URI}/Subscription/delete/${id}`, {
     method: 'DELETE',
     
-  })
+  }).then(()=>{window.location.reload(false)})
 
 
-}
+} 
 }
 
 export const Modify_subs = (subs) => {

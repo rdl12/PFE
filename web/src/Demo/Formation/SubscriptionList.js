@@ -37,13 +37,13 @@ function SubscriptionList() {
 
      useEffect(() => {
         dispatch(Fetch_Subscribed_people())
-        setinscrits(people_subbed)
-     }, [people_subbed])
+        
+     }, [])
 
 
 
-     let entreprise = typeof inscrits !== "undefined" && inscrits.filter((item) => item.entreprise !== null)
-     let users = typeof inscrits !== "undefined" && inscrits.filter((item) => item.entreprise === null)
+     let entreprise = typeof people_subbed !== "undefined" && people_subbed.filter((item) => item.entreprise !== null)
+     let users = typeof people_subbed !== "undefined" && people_subbed.filter((item) => item.entreprise === null)
      let users_filtred  = users.slice(index,index+number_per_page)
      let entreprise_filtred  = entreprise.slice(Eindex,Eindex+Enumber_per_page)
      let active = page;

@@ -43,12 +43,7 @@ useEffect(() => {
 
     }
 
-    setTimeout(() => { 
-        {typeof inscrits !== "undefined" &&  inscrits.map((item) =>{ if (item.etat!="Traité")
-        {item.etat="Traité"
-         Modify_subs(item)}})}
-
-    },500)
+    
 
    return () => {dispatch(Set_Formation_byId({formationDetail:{}}))}
          
@@ -85,6 +80,9 @@ useEffect(() => {
         const filter_subbed =  people_subbed.filter(
           (sub) => sub.formation.nom === detail.nom 
         );
+        {typeof filter_subbed !== "undefined" &&  filter_subbed.map((item) =>{ if (item.etat!="Traité")
+        {item.etat="Traité"
+         Modify_subs(item)}})}
         let entrprise = filter_subbed.filter((item) => item.entreprise !== null)
         let users = filter_subbed.filter((item) => item.entreprise === null)
 
