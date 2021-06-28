@@ -21,7 +21,6 @@ function FormationDetail() {
     const [dateAdded, setdateAdded] = useState([])
     const [inscrits, setinscrits] = useState([])
     const [Description, setDescription] = useState("")
-    const [Formation, setFormation] = useState(null)
     const [show, setShow] = useState(false);
 
     const handleClose = () =>{
@@ -36,9 +35,7 @@ useEffect(() => {
     dispatch(Fetch_Formation_ById(id))
     dispatch(Fetch_Subscribed_people())
     dispatch(Fetch_date_Formation(id))
-   
-
-    if(detail != {}) { setFormation(detail)
+    if(detail != {}) { 
         const filter_subbed =  people_subbed.filter(
           (sub) => sub.formation.nom === detail.nom 
         );
@@ -85,9 +82,13 @@ useEffect(() => {
       
       
     }
+        const filter_subbed =  people_subbed.filter(
+          (sub) => sub.formation.nom === detail.nom 
+        );
+        let entrprise = filter_subbed.filter((item) => item.entreprise !== null)
+        let users = filter_subbed.filter((item) => item.entreprise === null)
 
-    let entrprise = inscrits.filter((item) => item.entreprise !== null)
-    let users = inscrits.filter((item) => item.entreprise === null)
+    
     
     return (
         <div>
@@ -160,7 +161,7 @@ useEffect(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {typeof inscrits !== "undefined" &&  users.map(item => 
+                        {typeof users !== "undefined" &&  users.map(item => 
                         <tr key = {item.id}  >
                             <td>{item.user.firstName}</td>
                             <td>{item.user.lastName}</td>
@@ -189,7 +190,7 @@ useEffect(() => {
                         </tr>
                     </thead>
                     <tbody>
-                        {typeof inscrits !== "undefined" && detail.nbr_entreprise !== 0 && entrprise.map(item => 
+                        {typeof entrprise !== "undefined" && detail.nbr_entreprise !== 0 && entrprise.map(item => 
                         <tr key = {item.id}  onClick={()=> Delete_subs(item.id)}>
                             <td>{item.user.firstName}</td>
                             <td>{item.user.email}</td>
@@ -208,7 +209,7 @@ useEffect(() => {
     </Tabs>) 
           : null}
 
-    {Formation ? (  <Modal
+    {detail ? (  <Modal
         show={show}
         onHide={handleClose}
         dialogClassName="modal-90w"
@@ -219,7 +220,7 @@ useEffect(() => {
         <Modal.Body>
         <Form.Group controlId="formBasicNom">
             <Form.Label>Description</Form.Label>
-      <Form.Control as="textarea" rows={9} value={Formation.desription}  onChange={e => setDescription(e.target.value)}/>
+      <Form.Control as="textarea" rows={9} value={detail.desription}  onChange={e => setDescription(e.target.value)}/>
             </Form.Group>
 
             <Form.Group controlId="formBasicTelephone">
