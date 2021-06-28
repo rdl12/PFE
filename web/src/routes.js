@@ -35,7 +35,7 @@ const ProduitList = React.lazy(() => import('./Demo/Produit/ProduitList'));
 const ProduitAdd = React.lazy(() => import('./Demo/Produit/ProduitAdd'));
 const ProduitDetail = React.lazy(() => import('./Demo/Produit/ProduitDetail'));
 const ModifyPassword = React.lazy(() => import('./Demo/Profil/ModifyPassword/ModifyPassword'));
-
+const Notification = React.lazy(() => import('./Demo/Notification/SendNotification'));
 const routes = [
     { path: '/dashboard', exact: true, name: 'Default', component: DashboardDefault },
     { path: '/basic/button', exact: true, name: 'Basic Button', component: UIBasicButton },
@@ -59,6 +59,7 @@ const routes = [
     { path: '/Produit/Ajouter', exact: true, name: 'Ajout de produit', component: ProduitAdd },
     { path: '/Produit/Detail/:id', exact: true, name: 'detail de produit', component: ProduitDetail },
     { path: '/Profil/ModifyPassword', exact: true, name: 'modifer mot de passe ', component: ModifyPassword },
+    { path: '/Notification', exact: true, name: 'envoyer une notification ', component: Notification },
 ];
 
 export default routes;

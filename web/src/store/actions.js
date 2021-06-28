@@ -607,6 +607,29 @@ export const add_CategoryProduct = (category) => {
 
 }
 }
+export const send_Notification = (notif) => {
+  let Notification = {
+    "registration_ids" : notif.tokens_arr,
+    "notification": {
+    "body": notif.body
+  }
+  }
+  return (dispatch) => {
+    return fetch(`https://fcm.googleapis.com/fcm/send`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      "Authorization": "key=AAAA6QTcTe8:APA91bEGqDG0C9On_iy8t4ly43OHzFruMJIE814q7zodWZfqgn_Mp8GM9URyYFOVeCBkmayU4PaMyfnI5PR4zGEMeoUUy1Spy3sdH9bIFgu2V6PXOKPmrNwc8_4d7Furr_bED4acjNVC"
+    },
+    body:  JSON.stringify(Notification)
+  })
+  .then((response) => console.log(response))
+
+
+}
+}
+
 
 export const Delete_Product = (id) => {
     return fetch(`${API_URI}/Product/delete/${id}`, {
